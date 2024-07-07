@@ -1,0 +1,390 @@
+
+<style>
+.hover-animation:hover {
+  background-color: black;
+  color: white;
+  /* transition: transform 0.3s ease-in-out; */
+  /* transform: scale(1.1); */
+}
+
+</style>
+<section class="page-header"  >
+  <div class="container" *ngIf="selectedSample">
+    <div class="row justify-content-center">
+      <div class="col-lg-8 col-xl-8">
+        <div class="title-block">
+          <ul class="header-bradcrumb justify-content-center">
+            <li><a href="/">Home</a></li>
+            <li class="active" aria-current="page">Our Samples</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<div class="samples-section" style="background: #f1f1f1 " *ngIf="selectedSample">
+  
+  
+  <div class="wrapper _wrapper">
+    <div class="row" style="justify-content: space-between">
+      <div class="col-lg-9 col-sm-12 col-md-8">
+        <div style="margin-left: 5px;" >
+          <div><strong>
+            {{selectedSample?.Title}}
+          </strong>
+        </div>
+        </div>
+        <section class="sample-details"  >
+          <div  >
+            <a
+              href="javascript:;"
+              class="btn btn-quote"
+              (click)="handleShowModal()"
+              >Order this Assignment Now:
+              <span class="price" style="text-decoration: line-through;">£{{ selectedSample?.Price }}</span></a
+            >
+            <p  class="parchi"  >100% Pass and No Plagiarism Guaranteed</p>
+          </div>
+          
+          <div style="width: 100%;">
+            <!-- <h1>{{selectedSample?.Title}}</h1> -->
+          <!-- <div
+            id="test_service"
+            class="service-content"
+            [innerHTML]="getSafeHtml(selectedSample?.Description.join())"
+          ></div> -->
+          <div id="test_service" class="service-content" [innerHTML]="selectedSample?.Description.join()"></div>
+
+        </div>
+        
+
+        <div style="text-align: left;">
+          <a href="javascript:;" class="btn btn-quote" (click)="handleShowModal()" style="left: 0;">
+              Order this Assignment Now:
+              <span class="price" style="text-decoration: line-through;">£{{ selectedSample?.Price }}</span>
+          </a>
+          <p class="parchi" style="text-align: left;">100% Pass and No Plagiarism Guaranteed</p>
+      </div>
+      
+        </section>
+      </div>      <!-- Portfolio item slider start -->
+      <!-- this colimn should not scroll when scrolling the left side -->
+      <div class="col-lg-3 col-md-4 col-sm-12 col-xs-12" >
+        <div class="sample-sidebar" style="position: sticky; top: 0;">
+          <div class="mu-blog-sidebar">
+            <img
+              src="../../../assets/images/banner/paypal-checkout.png"
+              width="100%"
+              alt="paypal checkout"
+              class="lazyloaded width-100 pb-2"
+            />
+            <!-- International house, 12 Constance Street, Royal Docks, London, E16 2DQ,  United Kingdom -->
+            <div class="example-sample-hero text-center">
+              <p class="lead">
+                <i class="fa fa-home fa-5x"></i> <br />International house 12
+                constance street,Royal Docks,<br />
+                London E16 2DQ ,
+                United kingdom
+              </p>
+              <p class="btn btn-lg btn-border text-white">
+                UK Registered Company
+              </p>
+              <div class="mu-social-media p-2">
+                <a class="mu-whatsapp" href="#0"
+                  ><i class="fa fa-whatsapp"></i
+                ></a>
+                <a class="mu-google-plus" href="#0"
+                  ><i class="fa fa-comments"></i
+                ></a>
+                <a class="mu-youtube" href="#0"
+                  ><i class="fa fa-envelope"></i
+                ></a>
+                <a href="#0"><i class="fa fa-facebook"></i></a>
+                <a class="mu-twitter" href="javascript:;"
+                  ><i class="fa fa-twitter"></i
+                ></a>
+              </div>
+            </div>
+            <div class="example-sample-hero text-center">
+              <h3 class="text-white ">
+                <i class="fa fa-graduation-cap fa-4x"></i><br />100% Pass
+                Guarantee
+              </h3>
+            </div>
+            <div class="example-sample-hero text-center">
+              <h2 class="heading">STILL NOT CONVINCED?</h2>
+              <p class="lead">
+                We've produced some samples of what you can expect from our
+                Academic Writing Service - these are created by our writers to
+                show you the kind of high-quality work you'll receive. Take a
+                look for yourself!
+              </p>
+              <p>
+                <a style="color: #fff" href="#0" class="btn btn-lg btn-border"
+                  ><i class="fa fa-angle-left"></i> View Our Samples</a
+                >
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Modal -->
+<div
+  class="modal show fade"
+  id="exampleModal"
+  tabindex="-1"
+  aria-labelledby="exampleModalLabel"
+  *ngIf="showModal"
+  style="display: block !important;"
+>
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">
+          We write, we don’t plagiarise! Every answer is different no matter how
+          many orders we get for the same assignment. Your answer will be 100%
+          plagiarism-free, custom written, unique and different from every other
+          student.
+        </h5>
+        <button
+          type="button"
+          class="btn-close"
+          data-bs-dismiss="modal"
+          aria-label="Close"
+          (click)="showModal=false"
+        ></button>
+      </div>
+      <form [formGroup]="orderForm">
+      <div class="modal-body">
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label><i class="fa fa-user"></i> Full Name</label>
+              <!-- formControlName="firstName" -->
+              <input
+                [ngClass]="{'is-invalid': orderForm.get('firstName')?.invalid && orderForm.get('firstName')?.touched}"
+                formControlName="firstName" [ngClass]="{'is-invalid': orderForm.get('firstName')?.invalid && orderForm.get('firstName')?.touched}"
+                type="text"
+                style="text-transform: capitalize"
+                placeholder="Full Name*"
+                aria-invalid="false"
+                class="form-control"
+                id="sprytextfield1"
+                size="1"
+                required=""
+                style="
+                height: 45px;
+                border: 1px solid black;
+                "
+              />
+            </div>
+          </div>
+          <div class="col-md-6">
+            <div class="form-group">
+              <label><i class="fa fa-envelope"></i> Email address</label>
+              <!-- formControlName="email" -->
+              <input
+                type="email"
+                class="form-control"
+                id="email"
+                placeholder="Email*"
+                [ngClass]="{'is-invalid': orderForm.get('email')?.invalid && orderForm.get('email')?.touched}"
+                formControlName="email" [ngClass]="{'is-invalid': orderForm.get('email')?.invalid && orderForm.get('email')?.touched}"
+                required=""
+                style="
+                height: 45px;
+                border: 1px solid black;
+                "
+              />
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group">
+              <label><i class="fa fa-phone"></i> Phone Number </label>
+              <!-- formControlName="contactPhone" -->
+              <input
+                type="tel"
+                class="form-control"
+                id="contact_phone"
+                [ngClass]="{'is-invalid': orderForm.get('contactPhone')?.invalid && orderForm.get('contactPhone')?.touched}"
+                formControlName="contactPhone" [ngClass]="{'is-invalid': orderForm.get('contactPhone')?.invalid && orderForm.get('contactPhone')?.touched}"
+                placeholder="Phone Number*"
+                required=""
+                style="
+                height: 45px;
+                border: 1px solid black;
+                "
+              />
+              <div
+                data-lastpass-icon-root="true"
+                style="
+                  position: relative !important;
+                  height: 0px !important;
+                  width: 0px !important;
+                  float: left !important;
+                "
+              ></div>
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-group">
+              <label><i class="fa fa-file-word-o"> </i> No. of Words </label>
+              <!-- formControlName="pageWords" -->
+              <input
+                type="tel"
+                class="form-control"
+                id="nwords"
+                [ngClass]="{'is-invalid': orderForm.get('pageWords')?.invalid && orderForm.get('pageWords')?.touched}"
+                formControlName="pageWords" [ngClass]="{'is-invalid': orderForm.get('pageWords')?.invalid && orderForm.get('contactPhone')?.touched}"
+                placeholder="No. Of Words*"
+                required=""
+                style="
+                height: 45px;
+                border: 1px solid black;
+                "
+              />
+            </div>
+          </div>
+          <div class="col-md-3">
+            <div class="form-group">
+              <label><i class="fa fa-calendar"></i> Deadline</label>
+              <select class="form-control" formContolName="deadline"
+              style="
+                height: 45px;
+                border: 1px solid black;
+                "
+              >
+                <option value="24 Hours delivery">24 Hours Delivery</option>
+                <option value="2 days delivery">2 days delivery</option>
+                <option value="3 days delivery">3 days delivery</option>
+                <option value="4 days delivery">4 days delivery</option>
+                <option value="5 days delivery">5 days delivery</option>
+                <option value="6 days delivery">6 days delivery</option>
+                <option value="7 days delivery">7 days delivery</option>
+                <option value="8 days delivery">8 days delivery</option>
+                <option value="9 days delivery">9 days delivery</option>
+                <option value="10 days delivery">10 days delivery</option>
+              </select>
+            </div>
+          </div>
+        </div>
+        <div class="row">
+          <div class="col-md-6">
+            <div class="form-group ta-left">
+              <p class="ta-left fw-bolder">
+                Supporting Documents
+              </p>
+              <input
+                type="file"
+                formControlName="fileUrl"
+                (change)="onFileSelected($event)"
+                value="yes"
+                id="night_call_0"
+                required=""
+              />
+            </div>
+            <div class="form-group ta-left">
+              <p class="ta-left fw-bolder">
+                I agree to receive phone calls from you at night in case of
+                emergency
+              </p>
+              <input
+                type="radio"
+                formControlName="terms"
+                value="yes"
+                id="night_call_0"
+                style="height: 17px; width: 5%"
+                required=""
+              />
+              Yes
+              <input
+                type="radio"
+                formControlName="terms"
+                value="no"
+                id="night_call_1"
+                style="height: 17px; width: 5%"
+                required=""
+              />
+              No
+            </div>
+            
+          </div>
+          <div class="col-md-2 text-left">
+            <div class="form-group">
+              <div class="totalcost">Total Cost:</div>
+              <div class="pricefresh buttony" style="text-decoration: line-through;">£ {{ selectedSample?.Price }}</div>
+            </div>
+          </div>
+          <div class="col-md-3 text-left">
+            <div class="form-group">
+              <div class="totalcost">Discounted Price:</div>
+              <div class="pricefresh">
+                £ {{ selectedSample?.DiscountPrice }}
+                <span class="spany">(Inc. all taxes)</span>
+              </div>
+              <input
+                name="discount"
+                type="text"
+                class="form-control inputyy"
+                placeholder="✔️ Discount Applied"
+                disabled=""
+                style="
+                height: 45px;
+                border: 1px solid black;
+                "
+              />
+            </div>
+          </div>
+          <p class="ta-left fw-bolder">
+            Please share your assignment brief and supporting material (if
+            any) via email here at:
+            <a href="mailto:support@proassignments.co.uk" class="linkoo"
+              >{{'support@proassignments.co.uk'}}</a
+            >
+            after completing this order process.
+          </p>
+        </div>
+        <input type="hidden" name="webname" value="AE" />
+        <input type="hidden" name="websiteID" value="1" />
+        <input type="hidden" name="slug1" value="new-samples" />
+        <input
+          type="hidden"
+          name="slug"
+          value="lo1-explain-the-role-of-reflection-in-health-and-social-care-practice"
+        />
+      </div>
+
+      <div class="modal-footer">
+          <div class="row">
+            <div class="col-md-10">
+              <p class="text-justify privy">
+                <strong>Important Note: </strong>Your order at Proassignment is
+                protected by Consumer Law UK; also, we use 3rd party merchant support
+                “PayPal” for all online transactions to provide you with the most
+                protected online buying experience.
+              </p>
+            </div>
+            <div class="col-md-2">
+              <input
+                type="submit"
+                (click)="submitOrder($event)"
+                name="preview"
+                id="preview"
+                value="Submit Order & Checkout"
+                class="btnfreshi float-end hover-animation"
+                formaction=""
+              />
+            </div>
+          </div>
+      </div>
+    </form>
+    </div>
+  </div>
+</div>

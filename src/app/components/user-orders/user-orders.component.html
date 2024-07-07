@@ -1,0 +1,46 @@
+
+
+<style>
+    .odr-detail:hover{
+        color: rgb(125, 197, 219);
+    }
+</style>
+<div class="text-center fw-bold fs-3 text-primary">My orders</div>
+<table style="margin-top: 20px;" class="table table-borderless table-hover" *ngIf="!showDeilas">
+    <thead class="bg-primary">
+        <tr class="table-borderless">
+            <th>Order ID</th>
+            <th>Topic</th>
+            <th>Order Date</th>
+            <th>Payment Status</th>
+            <th style="width: 300px">Option
+            </th>
+        </tr>
+    </thead>
+    <tbody class="bg-light">
+        <tr style="height: 70px;border-bottom: 1px solid lightgray;" *ngFor="let order of orders;let i=index;">
+            <td>PA - {{  order.Id}}</td>
+            <td>{{order.Topic}}</td>
+            <td>{{formatDatabaseTimestamp(order.created_at)}}</td>
+            <td>{{order.PaidStatus}}</td>
+            <td>
+                <span class="odr-detail">
+                <i class="fa fa-info-circle" style="cursor: pointer;" aria-hidden="true" (click)="showOrderDetails(order)">
+                        Order Details
+                    </i>
+                </span>
+               
+                <!-- <i style="display: block;" class="fa fa-commenting" aria-hidden="true">
+                <span class="ms-1">Conversation</span>
+
+                </i> -->
+            </td>
+
+        </tr>
+        <tr *ngIf="orders.length === 0">
+            <td colspan="5" style="text-align: center;">No Orders</td>
+        </tr>
+    </tbody>
+</table>
+
+<app-order-details [selectedOrderForDetails]="selectedOrder" *ngIf="showDeilas"></app-order-details>

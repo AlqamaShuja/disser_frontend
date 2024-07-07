@@ -1,0 +1,11 @@
+.two-column-list {
+    display: flex;
+    flex-wrap: wrap;
+}
+  
+.title {
+    flex: 0 0 50%;
+    padding: 10px;
+    border: 1px solid #ccc;
+}
+  

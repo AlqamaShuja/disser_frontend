@@ -1,0 +1,93 @@
+<div class="container-fluid" style="width: 90%">
+    
+    <div class="">
+        <div class="card p-3" *ngIf="addCategories">
+            <a href="javascript:;" style="width: 100px;" (click)="addCategories=!addCategories"><i class="fa fa-arrow-left" style="font-size: 27px;"></i></a>
+            <a href="" class="navbar-brand">
+                <strong>Home</strong>/
+                MANAGE CATEGORY
+            </a>
+            <form class=""  [formGroup]="categoryForm">
+                <label class="fw-lighter p-2">Catogery Name</label>
+                <input 
+                class="form-control" 
+                type="text" 
+                formControlName="catogeryName"
+                placeholder="Catogery Name"
+                style="
+                height: 45px;
+                border: 1px solid rgb(77, 75, 75);
+                "
+                />
+                <label class="fw-lighter p-2">Main Id</label>
+                <input 
+                class="form-control"
+                style="
+                height: 45px;
+                border: 1px solid rgb(77, 75, 75);"
+                type="text" 
+                placeholder="Main Id"
+                formControlName="mainId" />
+                
+                <label class="fw-lighter p-2">Price</label>
+
+                <input class="form-control" type="text" formControlName="price" 
+                style="
+                height: 45px;
+                border: 1px solid rgb(77, 75, 75);"
+                placeholder="price"
+                />
+
+                <label class="fw-lighter p-2">Categery Id</label>
+                
+                <input class="form-control" type="text" formControlName="categeryId" 
+                style="
+                height: 45px;
+                border: 1px solid rgb(77, 75, 75);
+                "
+                placeholder="Category Id"
+                />
+                <input type="submit" (click)="submitForm('add')" *ngIf="!selectedCategories" value="SUBMIT" class="btn btn-primary" />
+                <input type="submit" (click)="submitForm('edit')" *ngIf="selectedCategories" value="UPDATE" class="btn btn-primary" />
+              </form>
+        </div>
+
+        <div class="card p-3" *ngIf="!addCategories">
+
+            <button class="btn btn-primary w-25 p-3 rounded-0 mb-5 fw-bold" (click)="showAddService()">
+                Insert Type of Category
+            </button>
+    
+
+                <div class="card-body p-0">
+                    <table class="table table-striped table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <th>S no</th>
+                                <th>Category Name </th>
+                                <th>Category Price </th>
+                                <th width="300">Option
+                                </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr *ngFor="let category of categories">
+                                <td>{{category.Id}}.</td>
+                                <td>{{category.catogeryName}}</td>
+                                <td>{{category.price}}</td>
+                                <td>
+                                    <button (click)="showAddService(category)" class="btn-sm btn-primary m-2">Edit
+                                    </button>
+                                    <button (click)="deleteService(category.Id)" class="btn-sm btn-danger m-2">Delete
+                                    </button>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+           
+
+        </div>
+    </div>
+</div>

@@ -1,0 +1,52 @@
+
+<style>
+
+.bg-light li {
+    transition: color 0.3s, padding-left 0.3s;
+    padding-left: 0;
+    color: black;
+}
+
+.cole:hover {
+    color: blue;
+    padding-left: 10px;
+    font-weight: 600;
+}
+.cole{
+  font-weight: 500;
+  color: black;
+}
+</style>
+<section class="page-header">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8 col-xl-8">
+        <div class="title-block">
+          <h1>Sitemap</h1>
+          <ul class="header-bradcrumb justify-content-center">
+            <li><a href="/">Home</a></li>
+            <li class="active" aria-current="page">Sitemap</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="about-3 section-padding">
+    <div class="container" style="background: whitesmoke;padding: 30px;">
+      <div class="row">
+        <div class="col-xl-12 col-lg-12">
+          <ul style="list-style: circle;" class="bg-light">
+            <li><a routerLink="/" class="cole">Home</a></li>
+            <li><a routerLink="/about" class="cole">About Us</a></li>
+            <li><a  routerLink="/contactus" class="cole">Contact Us</a></li>
+            <li><a  routerLink="/order" class="cole">Order now</a></li>
+            <li><a  routerLink="/blogs" class="cole">Blogs</a></li>
+            <li *ngFor="let sample of samples" ><a  class="cole" routerLink="/{{sample.Slug}}">{{sample.Title}}</a></li>
+            <li *ngFor="let blog of blogs"><a  class="cole" routerLink="/{{blog.pageSlug}}">{{blog.pageTitle}}</a></li>
+            <li *ngFor="let service of services"><a  class="cole" routerLink="/{{service.pageSlug}}">{{service.pageTitle}}</a></li>
+          </ul>
+      </div>
+  </div>
+  </div>
+  </section>

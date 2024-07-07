@@ -1,0 +1,32 @@
+<app-header *ngIf="!isAdmin"></app-header>
+<div class="" *ngIf="isAdmin && isAdminLogin">
+    <div class="row">
+        <div class="col-lg-2 col-md-1">
+            <app-sidebar></app-sidebar>
+        </div>
+        <div class="col-lg-10 col-md-12 col-sm-12 gray-bg">
+            <router-outlet></router-outlet>
+
+        </div>
+    </div>
+
+</div>
+<div *ngIf="isAdmin && !isAdminLogin">
+    <div class="loader3">
+        <span></span>
+        <span></span>
+    </div>
+    <router-outlet></router-outlet>
+</div>
+<div *ngIf="!isAdmin">
+    
+    <router-outlet></router-outlet>
+    <div class="col-md-12 text-center" *ngIf="loadingService.isLoading()">
+        <div class="loader3">
+            <span></span>
+            <span></span>
+        </div>
+    </div>
+<app-cta></app-cta>
+<app-footer [services]="services"></app-footer>
+</div>

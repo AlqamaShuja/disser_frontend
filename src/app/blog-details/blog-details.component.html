@@ -1,0 +1,27 @@
+<section class="page-header">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 col-xl-8">
+                <div class="title-block">
+                    <h1>{{selectedBlog?.pageTitle}}</h1>
+                    <ul class="header-bradcrumb justify-content-center">
+                        <li><a href="/">Home</a></li>
+                        <li class="active" aria-current="page">Blogs</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+<div class="page-wrapper">
+    <div class="container">
+        <div class="row">
+            <!-- <div class="col-lg-12 col-xl-12" [innerHTML]="getSafeHtml(selectedBlog?.pageDescription)"> -->
+                <div class="col-lg-12 col-xl-12" [innerHTML]="selectedBlog?.pageDescription">
+                
+            </div>
+        </div>
+    </div>
+    
+</div>

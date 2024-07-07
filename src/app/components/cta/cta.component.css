@@ -1,0 +1,11 @@
+#order_btn:hover{
+    background-color: white;
+    color: #84cff6;
+    transform: scale(1.1);
+}
+
+#convo_btn:hover{
+    background-color: white;
+    color: #84cff6;
+    transform: scale(1.1);
+}

@@ -1,0 +1,185 @@
+<div
+  class="wrapper wrapper-content animated fadeInRight gray-bg"
+  *ngIf="!updateOrder"
+>
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+      <a href="#" class="navbar-brand">
+        <strong>Home</strong>/ CURRENT ORDER
+      </a>
+      <button
+        type="button"
+        class="navbar-toggler"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarCollapse"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </div>
+  </nav>
+
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="ibox float-e-margins">
+        <div class="ibox-title">
+          <div class="ibox-tools" style="visibility: hidden">
+            <a class="collapse-link">
+              <i class="fa fa-chevron-up"></i>
+            </a>
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+              <i class="fa fa-wrench"></i>
+            </a>
+          </div>
+        </div>
+        <div class="ibox-content">
+          <div class=""></div>
+
+          <div class="table-responsive">
+            <table
+              class="table table-striped table-bordered table-hover dataTables-example"
+            >
+              <tbody>
+                <tr>
+                  <th>Paper Topic *</th>
+                  <td>
+                    {{ selectedOrderForDetails.TopicCategory }}
+                  </td>
+                </tr>
+                <tr>
+                  <th>Download Files</th>
+                  <td>
+                    <a
+                      href="{{ selectedOrderForDetails.suportingDoc }}"
+                      target="_blank"
+                      ><input
+                        type="button"
+                        value="Download File"
+                        class="form-control"
+                    /></a>
+                  </td>
+                </tr>
+                <tr>
+                  <th>Type of Writing Service</th>
+                  <td>
+                    {{ selectedOrderForDetails.TypeofWritingService }}
+                  </td>
+                </tr>
+
+                <tr>
+                  <th>Type of Help Require*</th>
+                  <td>
+                    {{ selectedOrderForDetails.TypeofHelpRequire }}
+                  </td>
+                </tr>
+                <tr>
+                  <th>Topic Category</th>
+                  <td>
+                    {{ selectedOrderForDetails.TopicCategory }}
+                  </td>
+                </tr>
+                <tr>
+                  <th># of sources Refrences</th>
+                  <td>
+                    {{ selectedOrderForDetails.SourceReferences }}
+                  </td>
+                </tr>
+                <tr>
+                  <th># of Presentation Slides</th>
+                  <td>
+                    {{ selectedOrderForDetails.PresentationSlides }}
+                  </td>
+                </tr>
+                <tr>
+                  <th>Software Service</th>
+                  <td>{{ selectedOrderForDetails.SoftwareService }}</td>
+                </tr>
+                <tr>
+                  <th>Writing Style of citation</th>
+                  <td>{{ selectedOrderForDetails.WritingStyle }}</td>
+                </tr>
+                <tr>
+                  <th>Preferred Language Level</th>
+                  <td>{{ selectedOrderForDetails.WritingStyle }}</td>
+                </tr>
+                <tr>
+                  <th>Required No. of page / words</th>
+                  <td>{{ selectedOrderForDetails.NumberOfWordsPages }}</td>
+                </tr>
+                <tr>
+                  <th>Line Spacing</th>
+                  <td>
+                    {{ selectedOrderForDetails.LineSpacing }} Line Spacing
+                  </td>
+                </tr>
+                <tr>
+                  <th>Education Level</th>
+                  <td>{{ selectedOrderForDetails.EducationLevel }}</td>
+                </tr>
+                <tr>
+                  <th>Paper Standard</th>
+                  <td>{{ selectedOrderForDetails.PaperStandard }}</td>
+                </tr>
+                <tr>
+                  <th>Deadline</th>
+                  <td>{{ selectedOrderForDetails.DeadLine }}</td>
+                </tr>
+                <tr>
+                  <th>Your Topic</th>
+                  <td>{{ selectedOrderForDetails.Topic }}</td>
+                </tr>
+                <tr>
+                  <th>Detail Instructions</th>
+                  <td>
+                    {{ selectedOrderForDetails.DetailInstructions }}
+                  </td>
+                </tr>
+                <tr>
+                  <th>
+                    Payment Method <span class="text-danger">PayPal</span>
+                  </th>
+                  <th>
+                    Referred By: <span class="text-danger">Search Engine</span>
+                  </th>
+                </tr>
+                <tr>
+                  <th>
+                    Payment Status <span class="text-danger">UnPaid</span>
+                  </th>
+                  <th>
+                    Writer Status <span class="text-danger">Current </span>
+                  </th>
+                </tr>
+                <tr>
+                  <th>
+                    Order Status
+                    <span class="text-danger"
+                      >{{ selectedOrderForDetails.Status }}
+                    </span>
+                  </th>
+                  <th>Order Date <span class="text-danger"></span></th>
+                </tr>
+              </tbody>
+            </table>
+            <!-- panel start -->
+            <a (click)="updateOrderDetails()">EDIT</a> &nbsp;
+            <a href="#">EDIT Final Amount</a>
+            <div class="panel panel-success">
+              <div class="panel-heading text-center">
+                <h3>TOTAL: GBP {{ selectedOrderForDetails.GrossAmount }}</h3>
+                <h3>Discount:0 GBP (Code Used: )</h3>
+                <h3>
+                  Grand Total: GBP {{ selectedOrderForDetails.GrossAmount }}
+                </h3>
+              </div>
+            </div>
+            <!-- panel end -->
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<app-update-order
+  [selectedOrderForDetails]="selectedOrderForDetails"
+  *ngIf="updateOrder"
+></app-update-order>

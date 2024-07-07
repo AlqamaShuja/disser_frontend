@@ -1,0 +1,165 @@
+<div class="col-3" style="margin-left: 85%;top: 50px">
+  <button class="btn-sm btn-primary" (click)="convertHTMLtoPDF()">Print Invoice</button>
+</div>
+<div id="invoice-details" *ngIf="invoice">
+<div style="margin: 5% 5% 0% 5%; padding: 2%; border: 2px solid #f0f0f0">
+  <div>
+    <h3>Proassignments UK</h3>
+    <p class="lead">
+      <i class="fa fa-home fa-5x"></i> <br />International house 12
+      constance street,Royal Docks,<br />
+      London E16 2DQ ,
+      United kingdom
+    </p>
+    <br />
+  </div>
+  <div>
+    <i class="fa fa-envelope" aria-hidden="true"></i>
+    support@proassignments.co.uk<br />
+    <i class="fa fa-whatsapp" aria-hidden="true"></i> +44 75 8665 4894
+    <i class="fa fa-phone" aria-hidden="true"></i> ++44 75 8665 4894<br />
+    <i class="fa fa-globe" aria-hidden="true"></i>
+    https://www.proassignments.co.uk/ <br /><br />
+  </div>
+  <div>
+    Invoice#: &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;PA -
+    {{ invoice?.Id }}<br />
+    Invoice Date: &nbsp;&nbsp;{{convertDate(invoice.created_at)}}
+  </div>
+  <div style="width: 75%; margin-left: 25%;">
+    <div
+      style="
+        background-color: rgb(3, 146, 242);
+        height: 40px;
+        padding-top: 5px;
+        color: #fff;
+        align-items: center;
+        text-align: center;
+        width: 45%;
+        margin-left: 15%;
+      "
+    >
+      <h4>{{ invoice?.PaidStatus }}</h4>
+    </div>
+    <br />
+    <div style="width: 100%;display: flex; justify-content: space-evenly">
+    <div
+      style="
+        border: 2px solid #f0f0f0;
+        width: 65%;
+        align-items: center;
+        text-align: center;
+        border-radius: 5px;
+        margin-top: -8px;
+        color: white;
+        background-color: #204887;
+      "
+    >
+      Amount Due:<br />
+      <strong> £{{ invoice?.GrossAmount }}</strong>
+    </div>
+    <div style="width: 20%;">
+      <button class="btn-sm btn-warning" id="payNow" (click)="redirectToCheckout(invoice)">Pay Now</button>
+    </div>
+  </div>
+  </div>
+</div>
+<div style="margin: 0% 5% 5% 5%; padding: 2%; border: 2px solid #f0f0f0">
+  <hr />
+  <div>
+    <div>
+      <h5>Bill To:</h5>
+      <strong>{{ invoice.Name }}</strong
+      ><br />
+      <p><i class="fa fa-phone" aria-hidden="true"></i> {{ invoice.Phone }}</p>
+      <p>
+        <i class="fa fa-envelope" aria-hidden="true"></i>
+        {{ invoice.Email }}
+      </p>
+    </div>
+    <div>
+      <table style="width: 100%">
+        <thead
+          style="
+            border-top: 2px solid #f0f0f0;
+            border-bottom: 2px solid #f0f0f0;
+            height: 50px;
+            text-align: center;
+          "
+        >
+          <tr>
+            <th>Description</th>
+            <th>No. of Words / Pages</th>
+            <th>Turnitin Report</th>
+            <th>Payment Method</th>
+          </tr>
+        </thead>
+        <tbody style="text-align: center; height: 80px">
+          <tr>
+            <td>{{ invoice.Topic }}</td>
+            <td>{{ invoice.NumberOfWordsPages }}</td>
+            <td>Included</td>
+            <td>{{ invoice.PaidStatus == "Unpaid" ? "-" : "PayPal" }}</td>
+          </tr>
+        </tbody>
+      </table>
+      <p
+        style="
+          margin-left: 50%;
+          display: flex;
+          justify-content: space-around;
+          border-top: 2px solid #f0f0f0;
+          height: 50px;
+          align-items: center;
+          text-align: center;
+          padding-top: 20px;
+        "
+      >
+        <strong>Total:</strong> £{{ invoice.Balance}}
+      </p>
+      <p
+        style="
+          margin-left: 50%;
+          display: flex;
+          justify-content: space-around;
+          border-top: 2px solid #f0f0f0;
+          height: 50px;
+          align-items: center;
+          text-align: center;
+          padding-top: 20px;
+        "
+      >
+        <strong>Amount Paid:</strong> £{{
+          invoice.Balance - invoice.GrossAmount 
+        }}
+      </p>
+      <p
+        style="
+          margin-left: 50%;
+          display: flex;
+          justify-content: space-around;
+          border-top: 2px solid #f0f0f0;
+          height: 50px;
+          align-items: center;
+          text-align: center;
+          padding-top: 20px;
+        "
+      >
+        <strong>Balance Due:</strong> £{{ invoice.GrossAmount }}
+      </p>
+      <hr />
+    </div>
+  </div>
+  <div>
+    <p>
+      <strong>Important Note:</strong>&nbsp;Your order at ProAssignments UK is
+      protected by Consumer Law UK; also, we use 3rd party merchant support
+      “PayPal” for all online transactions to provide you with the most
+      protected online buying experience
+    </p>
+  </div>
+  <div style="margin-left: 80%">
+    Powered by <img src="../../assets/paypal.svg" style="height: 60px" />
+  </div>
+</div>
+</div>

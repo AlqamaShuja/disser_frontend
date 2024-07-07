@@ -1,0 +1,33 @@
+.is-invalid {
+    border-color: red; /* Change border color */
+    background-color: #ffeeee; /* Change background color */
+    color: #ff0000; /* Change text color */
+  }
+
+  input{
+    text-transform: capitalize;
+    font-size: 12px;
+    height: 45px;
+    border: 1px solid;
+    background: #fff;
+  }
+  select{
+    text-transform: capitalize;
+    font-size: 12px;
+    height: 45px;
+    border: 1px solid;
+    background: #fff;
+  }
+
+  textarea{
+    text-transform: capitalize;
+    font-size: 12px;
+
+    border: 1px solid;
+    background: #fff;
+  }
+
+  input[type="checkbox"]{
+    height: 12px !important;
+    margin-right: 2px;
+  }

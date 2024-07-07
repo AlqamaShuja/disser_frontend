@@ -1,0 +1,94 @@
+<div class="mt-5 container-fluid " style="width: 90%">
+    <div class="row">
+        <div class="">
+            <div class="">
+
+                <div class="card p-3" *ngIf="addService">
+
+                    
+                    <a href="javascript:;" style="width: 100px;" (click)="addService=!addService"><i class="fa fa-arrow-left" style="font-size: 27px;"></i></a>
+                    <form class="" *ngIf="addService"   [formGroup]="servicesForm">
+                        <label class="fw-lighter p-2">Title</label>
+                        <input 
+                        class="form-control" 
+                        type="text" 
+                        formControlName="pageTitle"
+                        placeholder="Title"
+                        style="
+                        height: 45px;
+                        border: 1px solid rgb(77, 75, 75);
+                        "
+                        />
+                        <label class="fw-lighter p-2">Slug</label>
+                        <input class="form-control" type="text" formControlName="pageSlug" 
+                        placeholder="Slug"
+                        style="
+                        height: 45px;
+                        border: 1px solid rgb(77, 75, 75);
+                        "
+                        />
+                        <label class="fw-lighter p-2">Meta Keyword</label>
+                        <input class="form-control" type="text" formControlName="keywords" 
+                        placeholder="Meta Keyword"
+                        style="
+                        height: 45px;
+                        border: 1px solid rgb(77, 75, 75);
+                        "
+                        />
+                        <label class="fw-lighter p-2">Meta Description</label>
+                        <input class="form-control" type="text" formControlName="metaDescription" 
+                        placeholder="Meta Description"
+                        style="
+                        height: 45px;
+                        border: 1px solid rgb(77, 75, 75);
+                        "
+                        />
+                        <p><label for="w3review">Description</label></p>
+                        <angular-editor [placeholder]="'Enter text here...'" formControlName="description" ></angular-editor>
+                        <input type="submit" (click)="submitForm('add')" *ngIf="!selectedBlogs" value="SUBMIT" class="btn btn-primary" />
+                        <input type="submit" (click)="submitForm('edit')" *ngIf="selectedBlogs" value="UPDATE" class="btn btn-primary" />
+                      </form>
+                </div>
+
+                <div class="card p-3" *ngIf="!addService">
+
+
+                    <button class="btn btn-primary w-25 p-3 rounded-0 mb-5 fw-bold" (click)="showAddService()">
+                        Insert Type of Writing Blog
+                    </button>
+
+
+
+                    <div class="card-body p-0">
+                        <table class="table table-striped table-bordered table-hover">
+                            <thead>
+                                <tr>
+                                    <th>S no</th>
+                                    <th>Title</th>
+                                    <th>Keywords</th>
+                                    <th width="300">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr *ngFor="let blog of blogs;let i = index">
+                                    <td>{{i+1}}</td>
+                                    <td>{{blog.pageTilte}}</td>
+                                    <td>{{blog.metaKeyWord}}</td>
+                                    <td>
+                                        <button (click)="showAddService(blog)" class="btn-sm btn-primary m-2">Edit
+                                            </button>
+                                            <button (click)="deleteService(blog.pagesID)" class="btn-sm btn-danger m-2">Delete
+                                            </button>
+                                    </td>
+
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

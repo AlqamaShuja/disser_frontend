@@ -1,0 +1,102 @@
+<div class="">
+  <div class="">
+    <div class="card p-3">
+      <form class="" *ngIf="addTextPage">
+        <label class="fw-lighter p-2">Title</label>
+        <input class="form-control" type="text" name="name" value="" />
+        <label class="fw-lighter p-2">Slug</label>
+        <input class="form-control" type="text" name="name" value="" />
+        <label class="fw-lighter p-2">Meta Keyword</label>
+        <input class="form-control" type="text" name="name" value="" />
+        <label class="fw-lighter p-2">Meta Description</label>
+        <input class="form-control" type="text" name="name" value="" />
+        <p><label for="w3review">Description</label></p>
+
+        <textarea name="w3review" rows="4" cols="50">
+At w3schools.com you will learn how to make a website. They offer free tutorials in all web development technologies.
+</textarea
+        >
+      </form>
+
+      <!-- home and manage pages form close -->
+
+      <div class="card-body p-0" *ngIf="!addTextPage">
+        <button
+          class="btn btn-primary w-25 p-3 rounded-0 mb-5 fw-bold"
+          (click)="onClickAddTextPage()"
+        >
+          Insert Text-Page
+        </button>
+        <table class="table table-striped table-bordered table-hover">
+          <thead>
+            <tr>
+              <th>S no</th>
+              <th>Text Pages Title</th>
+              <th style="width: 300px">Option</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>1.</td>
+              <td>Update software</td>
+              <td>
+                <button style="width: 51px; height: 55px" class="btn p-3 ms-1">
+                  <i
+                    class="fa fa-pencil-square-o text-dark fs-3"
+                    aria-hidden="true"
+                  ></i>
+                </button>
+                <button style="width: 51px; height: 55px" class="btn p-3 ms-1">
+                  <i
+                    style="color: red"
+                    class="fa fa-trash-o fs-3"
+                    aria-hidden="true"
+                  ></i>
+                </button>
+              </td>
+            </tr>
+            <tr>
+              <td>2.</td>
+              <td>Clean database</td>
+              <td>
+                <button style="width: 51px; height: 55px" class="btn p-3 ms-1">
+                  <i
+                    class="fa fa-pencil-square-o text-dark fs-3"
+                    aria-hidden="true"
+                  ></i>
+                </button>
+                <button style="width: 51px; height: 55px" class="btn p-3 ms-1">
+                  <i
+                    style="color: red"
+                    class="fa fa-trash-o fs-3"
+                    aria-hidden="true"
+                  ></i>
+                </button>
+              </td>
+            </tr>
+
+            <tr>
+              <td>3.</td>
+              <td>Cron job running</td>
+              <td>
+                <button style="width: 51px; height: 55px" class="btn p-3 ms-1">
+                  <i
+                    class="fa fa-pencil-square-o text-dark fs-3"
+                    aria-hidden="true"
+                  ></i>
+                </button>
+                <button style="width: 51px; height: 55px" class="btn p-3 ms-1">
+                  <i
+                    style="color: red"
+                    class="fa fa-trash-o fs-3"
+                    aria-hidden="true"
+                  ></i>
+                </button>
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </div>
+</div>

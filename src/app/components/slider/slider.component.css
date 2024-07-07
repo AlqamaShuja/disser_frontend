@@ -1,0 +1,25 @@
+.image-slider {
+    width: 100%;
+    overflow: hidden;
+  }
+  
+  .slide {
+    display: none;
+    text-align: center;
+  }
+  
+  .slide img {
+    max-width: 100%;
+    height: auto;
+  }
+  
+  .active {
+    display: block;
+  }
+
+  .custom-bullet {
+    list-style: none;
+    color: #fff; /* Set text color */
+}
+
+

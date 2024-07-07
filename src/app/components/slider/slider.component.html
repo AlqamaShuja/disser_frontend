@@ -1,0 +1,27 @@
+<div class="banner-style-3 banner-padding" [style.backgroundImage]="'url(' + slides[currentIndex].imageUrl + ')'">
+  <div class="container">
+    <div class="row align-items-center justify-content-center">
+      <div>
+        <div class="banner-content text-center" *ngIf="!slides[currentIndex].showAboutUs">
+          <h1>{{ slides[currentIndex].heading }}</h1>
+          <p>{{ slides[currentIndex].text }}</p>
+
+          <div style="display: flex; justify-content: space-around; width: 60%; margin: 0 auto">
+            <button id="convo_btn" class="btn btn-main rounded mr-2" (click)="onStartConversation()">Contact Us</button>
+            <a href="https://api.whatsapp.com/send?phone=447407692800&amp;text=Hi%E2%80%9A%20Assignment%20Experts" target="_blank" class="btn btn-main rounded mr-2">Order Now</a>
+          </div>
+        </div>
+
+        <div class="banner-content text-center" *ngIf="slides[currentIndex].showAboutUs">
+          <span class="subheading">About Us</span>
+          <h1>{{ slides[currentIndex].heading }}</h1>
+          <p>{{ slides[currentIndex].text }}</p>
+          <a routerLink="/order" class="btn btn-main rounded">Order Now</a>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <button (click)="previousSlide()">Previous</button>
+  <button (click)="nextSlide()">Next</button>
+</div>

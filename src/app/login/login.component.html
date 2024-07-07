@@ -1,0 +1,62 @@
+<div
+  class="container-fluid gx-0 d-flex justify-content-center align-items-center flex-column flex-wrap"
+>
+  <div class="curved">
+    <div class="fs-1 text-center user-registration">User Login</div>
+  </div>
+  <div
+    class="container-fluid p-2 d-flex justify-content-center align-items-center flex-column"
+  >
+    <div class="wrapper" style="margin-bottom: 0px;" >
+      <form autocomplete="off" data-toggle="validator" [formGroup]="loginForm">
+        <div class="row">
+          <div class="col-sm-12 mt-3">
+            <input
+              type="email"
+              class="form-control p-2"
+              placeholder="E-mail address*"
+              formControlName="email"
+              aria-label="Email"
+            />
+          </div>
+          <div class="col-sm-12 mt-3">
+            <input
+              type="password"
+              class="form-control p-2"
+              placeholder="Password* (5 to 20 Characters)*"
+              formControlName="password"
+              aria-label="Password"
+            />
+          </div>
+          <p style="color: red;" *ngIf="loginError">Email or password is incorrect!</p>
+        </div>
+
+        <div class="row mt-3">
+          <div class="col-sm-12">
+            <button
+              class="btn btn-primary login-button p-2"
+              style="width: 100% !important"
+              (click)="onSubmit()"
+            >
+              LOGIN
+            </button>
+            <!-- <asl-google-signin-button type='standard' size='large' (click)="onSignIn()"></asl-google-signin-button> -->
+
+          </div>
+
+          <div class="col-12 text-center mt-3"  >
+            <i class="fa fa-user text-primary" aria-hidden="true"
+              ><a class="ms-1" routerLink="/register">Create an account </a></i
+            >
+            <span> | </span>
+            <span
+              ><i class="fa fa-lock text-primary" aria-hidden="true">
+                <a class="ms-1" routerLink="/register">Forgot password ?</a>
+              </i>
+            </span>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

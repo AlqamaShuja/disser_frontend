@@ -1,0 +1,19 @@
+<!-- dashboard.component.html -->
+
+<div class="container-fluid" style="width: 90%;">
+
+  <div class="row justify-content-between mt-5">
+    <div *ngFor="let status of getOrderStatuses()" class="col-12 col-md-6 col-lg-3 mb-4">
+      <div class="small-box" [ngClass]="getStatusClass(status)">
+        <div class="inner">
+          <h3>{{ orderCounts[status] || 0 }}</h3>
+          <p>{{ status }} Orders</p>
+        </div>
+        <div class="icon">
+          <i class="ion ion-bag"></i>
+        </div>
+        <a routerLink="/admin/orders" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+      </div>
+    </div>
+  </div>
+</div>

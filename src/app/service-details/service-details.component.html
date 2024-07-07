@@ -1,0 +1,119 @@
+<section class="page-header">
+    <div class="container">
+        <div class="row justify-content-center">
+            <div class="col-lg-8 col-xl-8">
+                <div class="title-block">
+                    <!-- <h1>{{selectedBlog?.pageTitle}}</h1> -->
+                    <ul class="header-bradcrumb justify-content-center">
+                        <li><a href="/">Home</a></li>
+                        <li class="active" aria-current="page">Services</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+
+<div class="samples-section" style="background: #f1f1f1 " *ngIf="selectedService">
+  
+ 
+    <div class="wrapper _wrapper">
+      <div class="row" style="justify-content: space-between">
+        <div class="col-lg-9 col-sm-12 col-md-8">
+          <div style="margin-left: 5px;" >
+            <h3>{{selectedService[0]?.metaDescription}}</h3>
+          </div>
+          <section class="sample-details"  >
+            
+            <!-- <div  style="border: 1px solid red">
+              <a
+                href="javascript:;"
+                class="btn btn-quote"
+                >Order this Assignment Now:
+                <span class="price" style="text-decoration: line-through;">£{{ 100 }}</span></a
+              >
+              <p  class="parchi"  >100% Pass and No Plagiarism Guaranteed</p>
+            </div> -->
+            
+            <div style="width: 100%;">
+              <!-- <h1>{{selectedService[0]?.metaDescription}}</h1> -->
+            <div
+              id="test_service"
+              class="service-content"
+              [innerHTML]="selectedService[0]?.pageDescription"
+              ></div>
+              <!-- [innerHTML]="getSafeHtml(selectedService[0]?.pageDescription)" -->
+          </div>
+          </section>
+           <!-- (click)="handleShowModal()" -->
+        </div>      <!-- Portfolio item slider start -->
+        <!-- this colimn should not scroll when scrolling the left side -->
+        <div class="col-lg-3 col-md-4 col-sm-12 col-xs-12" >
+          <div class="sample-sidebar" style="position: sticky; top: 0;">
+            <div class="mu-blog-sidebar">
+              <img
+                src="../../../assets/images/banner/paypal-checkout.png"
+                width="100%"
+                loading="lazy"
+                alt="paypal checkout"
+                class="lazyloaded width-100 pb-2"
+                />
+                <!-- class="lazyloaded width-100 pb-2" -->
+              <div class="example-sample-hero text-center">
+                <p class="lead">
+                  <i class="fa fa-home fa-5x"></i> <br />International house 12
+                  constance street,Royal Docks,<br />
+                  London E16 2DQ ,
+                  United kingdom
+                </p>
+                <p class="btn btn-lg btn-border text-white">
+                  UK Registered Company
+                </p>
+                <div class="mu-social-media">
+                  <a class="mu-whatsapp" href="#0"
+                    ><i class="fa fa-whatsapp"></i
+                  ></a>
+                  <a class="mu-google-plus" href="#0"
+                    ><i class="fa fa-comments"></i
+                  ></a>
+                  <a class="mu-youtube" href="#0"
+                    ><i class="fa fa-envelope"></i
+                  ></a>
+                  <a href="#0"><i class="fa fa-facebook"></i></a>
+                  <a class="mu-twitter" href="javascript:;"
+                    ><i class="fa fa-twitter"></i
+                  ></a>
+                </div>
+              </div>
+              <div class="example-sample-hero text-center">
+                <h3 class="text-white">
+                  <i class="fa fa-graduation-cap fa-4x"></i><br />100% Pass
+                  Guarantee
+                </h3>
+              </div>
+              <div class="example-sample-hero text-center">
+                <h2 class="heading">STILL NOT CONVINCED?</h2>
+                <p class="lead">
+                  We've produced some samples of what you can expect from our
+                  Academic Writing Service - these are created by our writers to
+                  show you the kind of high-quality work you'll receive. Take a
+                  look for yourself!
+                </p>
+                <p>
+                  <a style="color: #fff" href="#0" class="btn btn-lg btn-border"
+                    ><i class="fa fa-angle-left"></i> View Our Samples</a
+                  >
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+<!-- <div class="samples-section" style="background : #f1f1f1;">
+    <div class="wrapper _wrapper">
+    </div> -->
+<!-- </div> -->

@@ -1,0 +1,1016 @@
+<div ng-include src="'/views/admin/sidebar/sidebar.html'"></div>
+<div class="wrapper wrapper-content animated fadeInRight gray-bg">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+      <a href="#" class="navbar-brand"> <strong>Home</strong>/ ORDER DETAIL </a>
+      <button
+        type="button"
+        class="navbar-toggler"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarCollapse"
+      >
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </div>
+  </nav>
+  <div class="row">
+    <div class="col-lg-12">
+      <div class="ibox float-e-margins">
+        <div class="ibox-title">
+          <div class="ibox-tools" style="visibility: hidden">
+            <a class="collapse-link">
+              <i class="fa fa-chevron-up"></i>
+            </a>
+            <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+              <i class="fa fa-wrench"></i>
+            </a>
+          </div>
+        </div>
+        <div class="table-responsive">
+          <form [formGroup]="updateOrderForm">
+            <table
+              class="table table-striped table-bordered table-hover dataTables-example"
+            >
+              <tbody>
+                <tr>
+                  <th>Email</th>
+                  <td>
+                    <input
+                      id="email"
+                      formControlName="email"
+                      value="yousifxgh@gmail.com"
+                      class="form-control"
+                    />
+                  </td>
+                </tr>
+                <tr>
+                  <th>Words / Page</th>
+                  <td>
+                    <select
+                      formControlName="farmaish"
+                      id="farmaish"
+                      class="form-control"
+                    >
+                      <option selected="" value="words">words</option>
+
+                      <option value="pages">Pages</option>
+                      <option value="words">Words</option>
+                    </select>
+                  </td>
+                </tr>
+                <tr>
+                  <th>Number of Words / Pages</th>
+                  <td>
+                    <input
+                      formControlName="page_words"
+                      type="text"
+                      class="form-control"
+                      id="page_words"
+                      size="40"
+                      value="3900"
+                    />
+                  </td>
+                </tr>
+                <tr>
+                  <th>Your Topic</th>
+                  <td>
+                    <textarea
+                      formControlName="your_topic"
+                      cols="45"
+                      rows="2"
+                      class="form-control"
+                      id="your_topic"
+                    >
+Summative Assessment for Contemporary Developments in Employment Relations (5DER/08)</textarea
+                    >
+                  </td>
+                </tr>
+                <tr>
+                  <th>Detail Instructions</th>
+                  <td>
+                    <textarea
+                      formControlName="detail_instructions"
+                      cols="45"
+                      rows="4"
+                      class="form-control"
+                      id="detail_instructions"
+                    >
+Slides Attached</textarea
+                    >
+                  </td>
+                </tr>
+                <tr>
+                  <th>Type of Writing Service</th>
+                  <td>
+                    <select
+                      formControlName="writing_service"
+                      id="writing_service"
+                      class="form-control"
+                    >
+                      <option selected="" value="2166">Assignment</option>
+
+                      <option value="2065">Admission Essay</option>
+
+                      <option value="2100">Analytical Essay</option>
+
+                      <option value="2129">Annotated Bibliography</option>
+
+                      <option value="2140">Application letter</option>
+
+                      <option value="2152">Argumentative Essay</option>
+
+                      <option value="2164">Article Critique</option>
+
+                      <option value="2165">Article Review</option>
+
+                      <option value="2166">Assignment</option>
+
+                      <option value="2167">Autobiographies</option>
+
+                      <option value="2168">Blogs</option>
+
+                      <option value="2169">Book/Movie Review</option>
+
+                      <option value="2170">Business Plan</option>
+
+                      <option value="2171">Case Study</option>
+
+                      <option value="2172">Copywriting</option>
+
+                      <option value="2173">Coursework</option>
+
+                      <option value="2174">Cover Letter</option>
+
+                      <option value="2175">Creative Writing</option>
+
+                      <option value="2176">Critical Writing</option>
+
+                      <option value="2177">Curriculum Vitae</option>
+
+                      <option value="2320">Database Creation</option>
+
+                      <option value="2321">Dissertation</option>
+
+                      <option value="2322">
+                        Dissertation Chapter - Abstract
+                      </option>
+
+                      <option value="2323">
+                        Dissertation Chapter - Analysis
+                      </option>
+
+                      <option value="2324">
+                        Dissertation Chapter - Conclusion
+                      </option>
+
+                      <option value="2325">
+                        Dissertation Chapter - Discussion
+                      </option>
+
+                      <option value="2326">
+                        Dissertation Chapter - Hypothesis
+                      </option>
+
+                      <option value="2327">
+                        Dissertation Chapter - Introduction
+                      </option>
+
+                      <option value="2328">
+                        Dissertation Chapter - Literature Review
+                      </option>
+
+                      <option value="2329">
+                        Dissertation Chapter - Methodology
+                      </option>
+
+                      <option value="2330">
+                        Dissertation Chapter - Recommendation
+                      </option>
+
+                      <option value="2331">
+                        Dissertation Chapter - Results
+                      </option>
+
+                      <option value="2332">Dissertation Proposal</option>
+
+                      <option value="2333">Essay</option>
+
+                      <option value="2334">Exam Questions</option>
+
+                      <option value="2335">Expository Essay</option>
+
+                      <option value="2336">Forum Post</option>
+
+                      <option value="2337">Ghost Writing</option>
+
+                      <option value="2338">Info graphics</option>
+
+                      <option value="2339">Lab Report</option>
+
+                      <option value="2340">Literature Writing</option>
+
+                      <option value="2341">Marketing Proposal</option>
+
+                      <option value="2342">Multiple Choice Questions</option>
+
+                      <option value="2343">Newsletter</option>
+
+                      <option value="2344">Online Assignment</option>
+
+                      <option value="2345">Other</option>
+
+                      <option value="2346">Personal Statement</option>
+
+                      <option value="2347">Persuasive Essay</option>
+
+                      <option value="2348">Portfolio Creation</option>
+
+                      <option value="2349">Presentation or Speech</option>
+
+                      <option value="2350">Press Release</option>
+
+                      <option value="2351">Problem Solving</option>
+
+                      <option value="2352">Programming</option>
+
+                      <option value="2353">Project</option>
+
+                      <option value="2354">Reaction Paper</option>
+
+                      <option value="2355">Report</option>
+
+                      <option value="2356">Research Paper</option>
+
+                      <option value="2357">Research Proposal</option>
+
+                      <option value="2358">Resume Writing</option>
+
+                      <option value="2359">Software Development</option>
+
+                      <option value="2360">Term Paper</option>
+
+                      <option value="2361">Thesis Proposal</option>
+
+                      <option value="2362">Thesis Statement</option>
+
+                      <option value="2363">Travelogue Writing</option>
+
+                      <option value="2364">Video Creation</option>
+
+                      <option value="2365">Web content</option>
+
+                      <option value="2366">Website Development</option>
+
+                      <option value="5038">Reflective</option>
+
+                      <option value="5044">Letter</option>
+
+                      <option value="5090">Thesis</option>
+
+                      <option value="5096">Article Writing</option>
+
+                      <option value="5169">CIPD Assignment</option>
+
+                      <option value="5173">TEFL Assignment</option>
+
+                      <option value="5179">NVQs Assignment</option>
+
+                      <option value="5187">HNC Assignment</option>
+
+                      <option value="5189">HND Assignment</option>
+
+                      <option value="5191">NCFE Assignment</option>
+
+                      <option value="5197">CMI Assignment</option>
+
+                      <option value="5205">BTEC Assignment</option>
+
+                      <option value="5215">IWFM Assignment</option>
+                    </select>
+                  </td>
+                </tr>
+                <tr>
+                  <th>Type of Help Require</th>
+                  <td>
+                    <select
+                      formControlName="help_require"
+                      id="help_require"
+                      class="form-control"
+                    >
+                      <option selected="" value="4225">
+                        Research &amp; Writing
+                      </option>
+
+                      <option value="4225">Research &amp; Writing</option>
+
+                      <option value="4226">Research Only</option>
+
+                      <option value="4228">Paraphrasing</option>
+
+                      <option value="4229">Editing</option>
+
+                      <option value="4230">Rewriting</option>
+
+                      <option value="4231">Proofreading</option>
+
+                      <option value="4232">Formatting</option>
+
+                      <option value="4233">Drafting</option>
+
+                      <option value="4234">Other</option>
+                    </select>
+                  </td>
+                </tr>
+                <tr>
+                  <th>Line Spacing</th>
+                  <td>
+                    <select
+                      formControlName="line_space"
+                      id="line_space"
+                      class="form-control"
+                    >
+                      <option value="1">1.0 Line Spacing</option>
+
+                      <option value="1.5">1.5 Line Spacing</option>
+                      
+                      <option value="2">2.0 Line Spacing</option>
+                    </select>
+                  </td>
+                </tr>
+                <tr>
+                  <th>Software Service</th>
+                  <td>
+                    <select
+                      formControlName="soft_service"
+                      id="soft_service"
+                      class="form-control"
+                    >
+                      <option value="Microsoft Word">Microsoft Word</option>
+
+                      <option value="Dot Net">Dot Net</option>
+
+                      <option value="SPSS">SPSS</option>
+
+                      <option value="Microsoft Access">Microsoft Access</option>
+
+                      <option value="Microsoft Project Management">Microsoft Project Management</option>
+
+                      <option value="MATLAB">MATLAB</option>
+
+                      <option value="MINITAB">MINITAB</option>
+
+                      <option value="Microsoft Word">Microsoft Word</option>
+
+                      <option value="LaTeX">LaTeX</option>
+
+                      <option value="EViews">EViews</option>
+
+                      <option value="STATISTICA">STATISTICA</option>
+
+                      <option value="Microsoft Excel">Microsoft Excel</option>
+
+                      <option value="STATA">STATA</option>
+
+                      <option value="Microsoft PowerPoint">Microsoft PowerPoint</option>
+
+                      <option value="CAD">CAD</option>
+
+                      <option value="ANOVA">ANOVA</option>
+                    </select>
+                  </td>
+                </tr>
+                <tr>
+                  <th>Topic Category</th>
+                  <td>
+                    <select
+                      formControlName="topic"
+                      id="topic"
+                      class="form-control"
+                    >
+                      <option selected="" value="2925">Human Resource</option>
+
+                      <option value="2367">Auditing</option>
+
+                      <option value="2368">Australian Studies</option>
+
+                      <option value="2369">Banking</option>
+
+                      <option value="2370">Behavioral Science</option>
+
+                      <option value="2371">Bioinformatics</option>
+
+                      <option value="2372">Biological Science</option>
+
+                      <option value="2373">Biology</option>
+
+                      <option value="2374">Biomechanics</option>
+
+                      <option value="2375">Biomedical engineering</option>
+
+                      <option value="2376">Biotechnology</option>
+
+                      <option value="2377">Botany</option>
+
+                      <option value="2877">Business Ethics</option>
+
+                      <option value="2878">Business Intelligence</option>
+
+                      <option value="2879">Business Management</option>
+
+                      <option value="2880">Business Studies</option>
+
+                      <option value="2881">Career Management</option>
+
+                      <option value="2882">Celtic Studies</option>
+
+                      <option value="2883">Chemical Engineering</option>
+
+                      <option value="2884">Chemistry</option>
+
+                      <option value="2885">Chinese Studies</option>
+
+                      <option value="2886">Civics</option>
+
+                      <option value="2887">Civil engineering</option>
+
+                      <option value="2888">Classic English Literature</option>
+
+                      <option value="2889">Communication</option>
+
+                      <option value="2890">Community Studies</option>
+
+                      <option value="2891">Computational Science</option>
+
+                      <option value="2892">Computer Engineering</option>
+
+                      <option value="2893">Computer Science</option>
+
+                      <option value="2894">Criminology</option>
+
+                      <option value="2895">Cultural Studies</option>
+
+                      <option value="2896">Design &amp; Technology</option>
+
+                      <option value="2897">Digital Cultures</option>
+
+                      <option value="2898">Drama Studies</option>
+
+                      <option value="2899">Economics</option>
+
+                      <option value="2900">Education</option>
+
+                      <option value="2901">Electrical Engineering</option>
+
+                      <option value="2902">Electronic Engineering</option>
+
+                      <option value="2903">
+                        Engineering &amp; Construction
+                      </option>
+
+                      <option value="2904">Environmental Engineering</option>
+
+                      <option value="2905">Environmental Science</option>
+
+                      <option value="2906">Ethics</option>
+
+                      <option value="2907">European Studies</option>
+
+                      <option value="2908">
+                        Family &amp; Consumer Science
+                      </option>
+
+                      <option value="2909">Fashion</option>
+
+                      <option value="2910">Film &amp; Theater Studies</option>
+
+                      <option value="2911">Finance</option>
+
+                      <option value="2912">Financial Law</option>
+
+                      <option value="2913">Food Science</option>
+
+                      <option value="2914">Foreign Affairs</option>
+
+                      <option value="2915">French Studies</option>
+
+                      <option value="2916">Gene Technology</option>
+
+                      <option value="2917">Genetics</option>
+
+                      <option value="2918">Geography</option>
+
+                      <option value="2919">Geology</option>
+
+                      <option value="2920">Geoscience</option>
+
+                      <option value="2921">Germanic Studies</option>
+
+                      <option value="2922">Health Care</option>
+
+                      <option value="2923">Histology</option>
+
+                      <option value="2924">History</option>
+
+                      <option value="2925">Human Resource</option>
+
+                      <option value="2926">Immunobiology</option>
+
+                      <option value="2927">Indonesian Studies</option>
+
+                      <option value="2928">Informatics</option>
+
+                      <option value="2929">Information Science</option>
+
+                      <option value="2930">
+                        Information System Management
+                      </option>
+
+                      <option value="2931">
+                        Informational Literary Studies
+                      </option>
+
+                      <option value="2932">International Relation</option>
+
+                      <option value="2933">International Studies</option>
+
+                      <option value="2934">Italian Studies</option>
+
+                      <option value="2935">Japanese Studies</option>
+
+                      <option value="2936">Korean Studies</option>
+
+                      <option value="2937">Law</option>
+
+                      <option value="2938">Legal Management</option>
+
+                      <option value="2939">Library Management</option>
+
+                      <option value="2940">Linguistic</option>
+
+                      <option value="2941">Logic &amp; Programming</option>
+
+                      <option value="2942">Management</option>
+
+                      <option value="2943">Marketing</option>
+
+                      <option value="2944">Mathematics</option>
+
+                      <option value="2945">Mechanical Engineering</option>
+
+                      <option value="2946">Media Studies</option>
+
+                      <option value="2947">Medical Studies</option>
+
+                      <option value="2948">Medicine/Pharmacy</option>
+
+                      <option value="2949">Meteorology</option>
+
+                      <option value="2950">Military Science</option>
+
+                      <option value="2951">Modern Language</option>
+
+                      <option value="2952">Modern Studies</option>
+
+                      <option value="2953">Music</option>
+
+                      <option value="2954">Natural Science</option>
+
+                      <option value="2955">Neuroscience</option>
+
+                      <option value="2956">Nursing</option>
+
+                      <option value="2957">Nutrition</option>
+
+                      <option value="2958">Other</option>
+
+                      <option value="2959">Pathology</option>
+
+                      <option value="2960">Performance Studies</option>
+
+                      <option value="2961">Personal Management</option>
+
+                      <option value="2962">Personnel &amp; Development</option>
+
+                      <option value="2963">Pharmacology</option>
+
+                      <option value="2964">Photography</option>
+
+                      <option value="2965">Physical Education</option>
+
+                      <option value="2966">Physics</option>
+
+                      <option value="2967">Plant Science</option>
+
+                      <option value="2968">Political Economy</option>
+
+                      <option value="2969">Political Science</option>
+
+                      <option value="2970">Project Management</option>
+
+                      <option value="2971">Psychology</option>
+
+                      <option value="2972">Public administration</option>
+
+                      <option value="2973">Public Policy</option>
+
+                      <option value="2974">Public Relation</option>
+
+                      <option value="2975">Real Estate/Property</option>
+
+                      <option value="2976">Religious Studies</option>
+
+                      <option value="2977">Social Studies</option>
+
+                      <option value="2978">Sociology</option>
+
+                      <option value="2979">Software Engineering</option>
+
+                      <option value="2980">Soil Science</option>
+
+                      <option value="2981">Space Science</option>
+
+                      <option value="2982">Special Education</option>
+
+                      <option value="2983">
+                        Sports Management &amp; Studies
+                      </option>
+
+                      <option value="2984">Statistics</option>
+
+                      <option value="2985">System Biology</option>
+
+                      <option value="2986">Taxonomy</option>
+
+                      <option value="2987">Technology</option>
+
+                      <option value="2988">Theology</option>
+
+                      <option value="2989">Tourism Studies</option>
+
+                      <option value="2990">Urban Studies</option>
+
+                      <option value="2991">Visual Arts</option>
+
+                      <option value="2992">Web &amp; High Tech</option>
+
+                      <option value="2993">Wildlife Science</option>
+
+                      <option value="2994">Women &amp; Gender Studies</option>
+
+                      <option value="2995">World Affairs</option>
+
+                      <option value="2996">World Literature</option>
+
+                      <option value="2997">World politics</option>
+
+                      <option value="2998">Zoology</option>
+
+                      <option value="3669">Accounting</option>
+
+                      <option value="3670">Accounting Law</option>
+
+                      <option value="3671">Advertisement Studies</option>
+
+                      <option value="3672">Agriculture</option>
+
+                      <option value="3673">American Studies</option>
+
+                      <option value="3674">Anatomy</option>
+
+                      <option value="3675">Anglo Saxon History</option>
+
+                      <option value="3676">Anthropology</option>
+
+                      <option value="3677">Applied Science</option>
+
+                      <option value="3678">Art &amp; Architecture</option>
+
+                      <option value="3679">Asian Studies</option>
+
+                      <option value="3680">Astronomy</option>
+
+                      <option value="5082">Letter</option>
+
+                      <option value="5084">
+                        Innovation and commercialisation
+                      </option>
+
+                      <option value="5089">Global Health</option>
+
+                      <option value="5122">Energy</option>
+
+                      <option value="5168">Construction</option>
+
+                      <option value="5214">Social Care</option>
+                    </select>
+                  </td>
+                </tr>
+                <tr>
+                  <th># of Presentation Slides</th>
+                  <td>
+                    <select
+                      formControlName="pre_slide"
+                      id="pre_slide"
+                      class="form-control"
+                    >
+                      <option selected="" value=""></option>
+                      <option value="0">0</option>
+
+                      <option value="1">1</option>
+
+                      <option value="2">2</option>
+
+                      <option value="3">3</option>
+
+                      <option value="4">4</option>
+
+                      <option value="5">5</option>
+
+                      <option value="6">6</option>
+
+                      <option value="7">7</option>
+
+                      <option value="8">8</option>
+
+                      <option value="9">9</option>
+
+                      <option value="10">10</option>
+
+                      <option value="11">11</option>
+
+                      <option value="12">12</option>
+
+                      <option value="13">13</option>
+
+                      <option value="14">14</option>
+
+                      <option value="15">15</option>
+
+                      <option value="16">16</option>
+
+                      <option value="17">17</option>
+
+                      <option value="18">18</option>
+
+                      <option value="19">19</option>
+
+                      <option value="20">20</option>
+                    </select>
+                  </td>
+                </tr>
+
+                <tr>
+                  <th># of sources Refrences</th>
+                  <td>
+                    <input
+                      formControlName="sources_ref"
+                      type="text"
+                      class="form-control"
+                      id="price"
+                      size="40"
+                      value="30"
+                    />
+                  </td>
+                </tr>
+                <tr>
+                  <th>Writing Style Of Citations</th>
+                  <td>
+                    <select
+                      formControlName="writing_style"
+                      id="writing_style"
+                      class="form-control"
+                    >
+                      <option value="Harvard">Harvard</option>
+
+                      <option value="NON">NON</option>
+
+                      <option value="APA">APA</option>
+
+                      <option value="AMA">AMA</option>
+
+                      <option value="APSA">APSA</option>
+
+                      <option value="ASA">ASA</option>
+
+                      <option value="CBE">CBE</option>
+
+                      <option value="Cambridge">Cambridge</option>
+
+                      <option value="MLA">MLA</option>
+
+                      <option value="Chicago">Chicago/Turabian</option>
+
+                      <option value="Harvard">Harvard</option>
+
+                      <option value="Oxford">Oxford</option>
+
+                      <option value="Vancouver">Vancouver</option>
+
+                      <option value="MHRA">MHRA</option>
+
+                      <option value="IEEE">IEEE</option>
+
+                      <option value="Other">Other</option>
+
+                      <option value="OSCOLA">OSCOLA</option>
+                    </select>
+                  </td>
+                </tr>
+                <tr>
+                  <th>Preferred Language Level</th>
+                  <td>
+                    <select
+                      formControlName="language_style"
+                      id="language_style"
+                      class="form-control"
+                    >
+                      <option value="English (UK )">English (UK )
+
+                      </option>
+
+                      <option value="English (UK )">English (UK )
+
+                      </option>
+
+                      <option value="English (USA)">English (USA)
+
+                      </option>
+
+                      <option value="ESL (English as a Second Language)">ESL (English as a Second Language)
+                      </option>
+
+                      <option value="ESOL (English for Speakers of Other Languages)">ESOL (English for Speakers of Other Languages)
+                      </option>
+
+                      <option value="EFL (English as a Foreign Language)">EFL (English as a Foreign Language)
+                      </option>
+                    </select>
+                  </td>
+                </tr>
+                <tr>
+                  <th>Education Level</th>
+                  <td>
+                    <select
+                      formControlName="edu_level"
+                      id="edu_level"
+                      class="form-control"
+                    >
+                      <option selected="" value="250">Graduate</option>
+
+                      <option value="248">GCSE/ A Levels</option>
+
+                      <option value="249">Under Graduate</option>
+
+                      <option value="250">Graduate</option>
+
+                      <option value="552">Masters</option>
+
+                      <option value="553">PH.D Doctorate</option>
+
+                      <option value="554">Post Graduate</option>
+
+                      <option value="555">Freshman</option>
+
+                      <option value="556">Sophomore</option>
+
+                      <option value="557">Senior</option>
+
+                      <option value="559">Diploma</option>
+
+                      <option value="560">Other</option>
+                    </select>
+                  </td>
+                </tr>
+                <tr>
+                  <th>Paper Standard</th>
+                  <td>
+                    <select
+                      formControlName="paper_stnd"
+                      id="edu_level"
+                      class="form-control"
+                    >
+
+                      <option value="318">Guaranteed 1st Class Standard</option>
+                    </select>
+                  </td>
+                </tr>
+                <tr>
+                  <th>Deadline</th>
+                  <td>
+                    <select
+                      formControlName="deadline"
+                      id="edu_level"
+                      class="form-control"
+                    >
+                      <option selected="" value="3925">5 Days Delivery</option>
+
+                      <option value="3912">90 Days Delivery</option>
+
+                      <option value="3913">60 Days Delivery</option>
+
+                      <option value="3914">45 Days Delivery</option>
+
+                      <option value="3915">40 Days Delivery</option>
+
+                      <option value="3916">30 Days Delivery</option>
+
+                      <option value="3917">25 Days Delivery</option>
+
+                      <option value="3918">20 Days Delivery</option>
+
+                      <option value="3919">15 Days Delivery</option>
+
+                      <option value="3920">10 Days Delivery</option>
+
+                      <option value="3921">9 Days Delivery</option>
+
+                      <option value="3922">8 Days Delivery</option>
+
+                      <option value="3923">7 Days Delivery</option>
+
+                      <option value="3924">6 Days Delivery</option>
+
+                      <option value="3925">5 Days Delivery</option>
+
+                      <option value="3926">4 Days Delivery</option>
+
+                      <option value="3927">3 Days Delivery</option>
+
+                      <option value="3928">48 Hours Urgent Delivery</option>
+
+                      <option value="5131">24 Hours Urgent Delivery</option>
+
+                      <option value="5132">12 Hours Urgent Delivery</option>
+
+                      <option value="5133">6 Hours Urgent Delivery</option>
+                    </select>
+                  </td>
+                </tr>
+                <tr>
+                  <th>Before Discount</th>
+                  <td>
+                    <input
+                      formControlName="price"
+                      type="text"
+                      class="form-control"
+                      id="price"
+                      size="40"
+                      value="272"
+                    />
+                  </td>
+                </tr>
+                <tr>
+                  <th>Discount Code</th>
+                  <td>
+                    <input
+                      formControlName="dCode"
+                      type="text"
+                      class="form-control"
+                      id="dCode"
+                      size="40"
+                      value=""
+                    />
+                  </td>
+                </tr>
+                <tr>
+                  <th>Gross Amount</th>
+                  <td>
+                    <input
+                      formControlName="gamount"
+                      type="text"
+                      class="form-control"
+                      id="gamount"
+                      size="40"
+                      value="179"
+                    />
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="5">
+                    <input
+                      type="hidden"
+                      formControlName="id"
+                      id="id"
+                      value="10942"
+                    />
+                  </td>
+                </tr>
+                <tr>
+                  <td colspan="5">
+                    <input
+                      name="Submit"
+                      class="btn btn-primary"
+                      type="submit"
+                      id="Submit"
+                      value="Update"
+                    />
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

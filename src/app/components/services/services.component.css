@@ -1,0 +1,179 @@
+.line-height{
+
+    line-height: 2rem;
+    font-size: 15px;
+}
+
+
+
+.sub-heading{
+
+    font-size: 12px;
+    letter-spacing: 2px;
+    display: inline-block;
+    text-transform: uppercase;
+    font-weight: 600;
+    color:#063e82;
+}
+
+
+.heading-service{
+    font-size: 40px;
+    line-height: 50px;
+}
+
+.purple-circle{
+
+    border-radius: 55%;
+    background-color: #015ABD;
+    width: 60px;
+    height: 60px;
+    text-align: center;
+    
+}
+
+
+.pink-circle{
+
+    border-radius: 55%;
+    background-color: 
+    #F14D5D
+    ;
+    width: 60px;
+    height: 60px;
+    text-align: center;
+}
+
+
+
+.blue-circle{
+
+    border-radius: 55%;
+    background-color: 
+    #6610f2
+
+    ;
+    width: 60px;
+    height: 60px;
+    text-align: center;
+}
+
+
+
+
+
+.white-circle{
+
+    border-radius: 55%;
+    width: 100px;
+    height: 100px;
+    text-align: center;
+    
+}
+
+
+
+/* 
+
+.align-bottom {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+} */
+
+
+.margin-top-breathtaking{
+
+    margin-top: 100px;
+}
+
+.position-absolute{
+
+   background-repeat: no-repeat;
+   background-position: center;
+    /* background-image: url('../../assets/hero_area_image.png'); */
+    width: 80%;
+}
+
+.margin-t-hundread{
+
+    margin-top: 100px;
+}
+
+
+.relative{
+
+    position: relative;
+}
+
+
+.absolute{
+
+    position: absolute;
+    top: 15px;
+    left: 77%;
+    right: 0px auto;
+}
+.position{
+
+    position: relative;
+}
+
+.margin-top-assignment{
+    
+
+    margin-top: 250px;
+}
+
+
+.card{
+    border: none;
+}
+
+.margin-service-img{
+
+    margin-top: 80px;
+}
+.margin-learning{
+
+    margin-top: 100px;
+}
+
+
+p {
+    font-family: var(--theme-secondary-font);
+    line-height: 30px;
+    font-size: 16px;
+    color: #77838F;
+}
+
+.card{
+
+    border:1px solid lightgray;
+    transition: box-shadow .3s;
+
+    ;
+    
+
+}
+
+
+.card:hover{
+
+    box-shadow: 0 0 50px rgba(33,33,33,.2); 
+
+}
+
+
+
+.width-analysis{
+
+    height: 262px;
+}
+
+
+.fa{
+
+    color: #f14d5d;
+}

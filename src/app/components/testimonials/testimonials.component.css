@@ -1,0 +1,106 @@
+/* .slider {
+    overflow: hidden;
+    width: 100%;
+    height: 600px;
+    position: relative;
+}
+figure {
+    width: 200%;
+    height: 100%;
+    position: relative;
+    top: 0;
+    left: 0;
+    margin: 0;
+    transition: all 1s linear;
+    animation: 4s slidy infinite;
+}
+.slide {
+    width: 50%;
+    height: 100%;
+    float: left;
+    position: relative;
+}
+.slide img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+@keyframes slidy {
+    0% {
+        left: 0;
+    }
+    20% {
+        left: 0;
+    }
+    25% {
+        left: -100%;
+    }
+    45% {
+        left: -100%;
+    }
+    50% {
+        left: -100%;
+    }
+    70% {
+        left: -100%;
+    }
+    75% {
+        left: -100%;
+    }
+    95% {
+        left: -100%;
+    }
+    100% {
+        left: 0;
+    }
+} */
+
+
+.carousel-container {
+    width: 300px; /* Carousel width */
+    overflow: hidden;
+    position: relative;
+}
+
+.carousel {
+    display: flex;
+    transition: transform 0.5s ease-in-out;
+}
+
+.card {
+    width: 400px; /* Card width */
+    height: 150px; /* Card height */
+    background-color: #ccc;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-right: 10px; /* Spacing between cards */
+}
+
+
+
+
+
+
+.custom-carousel-indicators {
+    display: flex;
+    justify-content: center;
+    margin-top: 10px;
+}
+
+.custom-carousel-indicators button {
+    background-color: gray; /* Blue color for dots */
+    width: 10px;
+    height: 10px;
+    border: none;
+    border-radius: 50%;
+    margin: 0 5px;
+    cursor: pointer;
+    outline: none;
+}
+
+.custom-carousel-indicators button.active {
+    background-color: #0056b3; /* Active dot color */
+}

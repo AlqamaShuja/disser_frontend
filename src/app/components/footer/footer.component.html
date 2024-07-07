@@ -1,0 +1,132 @@
+<footer class="text-center text-lg-start" style="padding: 180px 5px 20px 10px; bottom: 0; width: 100%; background-color: rgba(0, 0, 0, 0.2);">
+  <div class="container-fluid" style="width: 90%; margin: 0 auto;">
+    <div class="row">
+      <!-- Logo div -->
+      <div class="col-lg-3 col-md-6 mb-4" style="padding: 10px; border-radius: 5px;">
+        <a routerLink="/" style="cursor: pointer;">
+          <img src="../../../assets//images/logo pro (2).png" alt="" style="width: 200px;">
+        </a>
+        <p style="font-size: 12px; line-height: 1.4;">
+          Dissertation Writing UK is renowned for quality writing in London | Leeds | Liverpool | Birmingham | Oxford | Croydon | Manchester | Sheffield | Leicester | Luton
+        </p>
+        <hr style="border-top: 1px solid #000; width: 100%;">
+        <div class="mu-social-media">
+          <style>
+            .social-icon {
+              font-size: 20px;
+              color: #fff;
+              transition: transform 0.2s, opacity 0.2s;
+            }
+        
+            .social-icon:hover {
+              transform: scale(1.6);
+              opacity: 1;
+            }
+          </style>
+        
+          <a href="https://www.facebook.com/profile.php?id=61557650182728" target="_blank">
+            <i class="fa fa-facebook social-icon"></i>
+          </a>
+          <a  class="mu-whatsapp "  href="https://api.whatsapp.com/send?phone=447407692800&amp;text=Hi%E2%80%9A%20Assignment%20Experts" target="_blank">
+            <i class="fa fa-whatsapp social-icon"></i>
+          </a>
+          <a style="height: 50px; width: 50px;" class="mu-whatsapp my-floatoo floatoo" href="https://api.whatsapp.com/send?phone=447407692800&amp;text=Hi%E2%80%9A%20Assignment%20Experts" target="_blank">
+            <i style="font-size: 40px;" class="fa fa-whatsapp social-icon"></i>
+        </a>        
+          <!-- <a class="mu-twitter" href="https://www.twitter.com/" target="_blank">
+            <i class="fa fa-twitter social-icon"></i>
+          </a> -->
+          <!-- <a class="mu-google-plus" href="javascript:;" value="open chat" onclick="if (!window.__cfRLUnblockHandlers) return false; MyLiveChat.InlineChatDoExpand()">
+            <i class="fa fa-comments social-icon"></i>
+          </a> -->
+          <!-- <a class="mu-youtube" href="https://www.assignmentexperts.co.uk/ae/contact/">
+            <i class="fa fa-envelope social-icon"></i>
+          </a> -->
+        </div>
+        
+        
+        
+        
+      </div>
+
+      <!-- Company Info -->
+      <div class="col-lg-3 col-md-6 mb-4" style="padding: 10px; border-radius: 5px;">
+        <h5 class="text-uppercase">Company</h5>
+        <ul class="list-unstyled" style="margin: 0; padding: 0;">
+          <li *ngFor="let link of companyLinks" class="footerContent" style="margin-bottom: 5px; padding: 0; font-size: 12px; font-weight: 500;">
+            <a routerLink="{{ link.url }}" class="text-dark" style="text-decoration: none; display: block; padding: 0;">
+              <span class="underline-on-hover"
+               style=" padding-bottom: 0%;">
+               {{ link.title }}</span>
+              <hr style="border-top: 1px solid #ccc; width: 100%; margin: 0;">
+            </a>
+          </li>
+        </ul>
+      </div>
+      
+      
+      
+
+      <!-- Services Column 1 -->
+      <div class="col-lg-3 col-md-6 mb-4" style="padding: 10px; border-radius: 5px;">
+        <h5 class="text-uppercase">Services</h5>
+        <ul class="list-unstyled" style="margin: 0; padding: 0;">
+          <li *ngFor="let service of getSevenServices(0, 7)"
+          class="footerContent" 
+          style="margin-bottom: 5px; padding: 0; font-size: 12px; font-weight: 500;">
+            <a routerLink="/services/{{service.pageSlug}}"
+             class="text-dark " 
+             style="text-decoration: none; display: block; padding: 0;">
+              <span class="underline-on-hover">
+                {{service.pageTitle}}
+
+              </span> 
+            </a>
+            <hr style="border-top: 1px solid #ccc; width: 100%; margin: 0;">
+          </li>
+        </ul>
+      </div>
+
+      <!-- Contact Information -->
+      <div class="col-lg-3 col-md-6 mb-4" style="padding: 10px; border-radius: 5px;">
+        <h5 class="text-uppercase">Contact Information</h5>
+        <ul class="list-unstyled" style="margin: 0; padding: 0; font-size: 12px; font-weight: 500;">
+          <li style="margin-bottom: 5px; padding: 0;">
+            <i class="fa fa-home fa-lg mr-2"></i>{{ contactInfo.address }}          </li>
+          <hr style="border-top: 1px solid #ccc; width: 100%; margin: 0;">
+          <li style="margin-bottom: 5px; padding: 0;">
+            <i class="fa fa-envelope mr-2"></i>
+            <a
+                class="text-decoration-none ms-2 "
+                href="https://mail.google.com/mail/u/0/#search/info%40smartedultd.co.uk"
+              >
+              {{ contactInfo.email }}
+              </a>
+          </li>
+          <hr style="border-top: 1px solid #ccc; width: 100%; margin: 0;">
+          <li style="margin-bottom: 5px; padding: 0;">
+            <i class="fa fa-phone mr-2"></i>
+            <a
+            
+                class="text-decoration-none ms-2 text-black"
+                href="https://api.whatsapp.com/send?phone=447586654894&amp;text=Hi%E2%80%9A%20Pro%20Assignments"
+              >
+              {{ contactInfo.phone }}
+                <!--+447407692800 -->
+              </a>
+          </li>
+        </ul>
+      </div>
+   
+      
+    </div>
+  </div>
+
+  <!-- Payment Methods -->
+  <div class="text-right p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+    <div class="payment-methods">
+      <img 
+      src="https://www.assignmentexperts.co.uk/images/apple-pay-google-pay-master-card-bank-min.png" width="350" height="65" class="lazyloaded pb-2 text-center" alt="payment accepting method" />
+    </div>
+  </div>
+</footer>

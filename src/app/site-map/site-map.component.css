@@ -1,0 +1,8 @@
+a{
+    color: #999;
+}
+
+a:hover{
+    color: black;
+    text-decoration: underline;
+}

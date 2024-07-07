@@ -1,0 +1,7 @@
+<div class="row p-5 m-5">
+  <div class="two-column-list">
+    <div *ngFor="let service of services" class="title">
+      <a routerLink="/services/{{service.pageSlug}}" style="color: black;">{{ service.pageTitle }}</a>
+    </div>
+  </div>
+</div>

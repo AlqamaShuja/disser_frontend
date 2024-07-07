@@ -1,0 +1,32 @@
+<div class="vh-100 d-flex justify-content-center align-items-center">
+    <div class="container">
+        <div class="row d-flex justify-content-center">
+            <div class="col-12 col-md-8 col-lg-6">
+                <div class="card bg-white">
+                    <div class="card-body p-5">
+                        <form class="mb-3 " [formGroup]="adminForm">
+                            <div class="mb-3">
+                                <img class="admin-login-logo" src="../../../assets/images/logo pro (2).png">
+                                <p class=" mb-5 admin_panel_text">
+                                    Welcome to Dissertation Writing
+                                </p>
+                                <p class="admin_panel_text">Admin Panel</p>
+                            </div>
+                            <div class="mb-3">
+                                <label for="email" class="form-label" >User Name</label>
+                                <input type="text" class="form-control" id="email" placeholder="admin" formControlName="email">
+                            </div>
+                            <div class="mb-3">
+                                <label for="password" class="form-label">Password</label>
+                                <input  formControlName="password" type="password" class="form-control" id="password" placeholder="*******">
+                            </div>
+                            <div class="d-grid">
+                                <button class="btn btn-outline-dark" type="button" (click)="login();">Login</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

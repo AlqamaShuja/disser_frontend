@@ -1,0 +1,59 @@
+<section>
+    <div class="container mb-30">
+        <div class="row">
+            <div class="col-md-4">
+                <h2>Contact Us</h2>
+                <div class="row proboxy" style="margin-bottom: 0em;">
+                    <div class="col-md-2">
+                        <i class="fa fa-whatsapp fa-3x proccessicon"></i>
+                    </div>
+                    <div class="col-md-10">
+                        <p class="procontent pt-10">	+447407692800</p>
+                    </div>
+                </div>
+                <div class="row proboxy" style="margin-bottom: 0em;">
+                    <div class="col-md-2">
+                        <i class="fa fa-phone fa-3x proccessicon"></i>
+                    </div>
+
+                    <div class="col-md-10">
+                        <p class="procontent pt-10">	+447407692800 </p>
+                    </div>
+
+                </div>
+                <div class="row proboxy" style="margin-bottom: 0em;">
+                    <div class="col-md-2">
+                        <i class="fa fa-envelope fa-3x proccessicon"></i>
+                    </div>
+
+                    <div class="col-md-10">
+                        <p class="procontent pt-10">support@proassignments.co.uk</p>
+                    </div>
+
+
+                </div>
+            </div>
+            <div class="col-md-3">
+                <img src="https://www.assignmentbank.co.uk/images/qrcode.png" width="100%">
+            </div>
+            <div class="col-md-5">
+                <span style="font-size:18px;font-weight:600;">Order ID:</span>
+                <span style="padding-left: 23%; font-size:18px;">PA - {{orderDetails?.Id}}</span>
+                <hr>
+                <span style="font-size:18px;font-weight:600;"># of Words/Pages:</span>
+                <span style="padding-left: 5%; font-size:18px;">{{orderDetails?.NumberOfWordsPages   }}</span>
+                <hr>
+                <!-- <span style="font-size:18px;font-weight:600;">Details:</span>
+                <span style="padding-left: 27%; font-size:18px;">{{orderDetails?.DetailInstructions}}</span>
+                <hr> -->
+                <span style="font-size:18px;font-weight:600;">Total:</span>
+                <span style="padding-left: 31%; font-size:18px;">£{{orderDetails?.GrossAmount}}</span>
+                <hr>
+                <br>
+                <div style="display: flex; justify-content: center;">
+                    <ngx-paypal [config]="payPalConfig"></ngx-paypal>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>

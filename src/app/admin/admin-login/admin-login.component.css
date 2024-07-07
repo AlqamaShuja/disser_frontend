@@ -1,0 +1,12 @@
+.admin-login-logo {
+    object-fit: contain;
+    width: 250px;
+    text-align: center;
+    margin-left: 20%;
+    margin-bottom: 30px;
+}
+
+.admin_panel_text {
+    text-align: center;
+    line-height: 0px !important;
+}

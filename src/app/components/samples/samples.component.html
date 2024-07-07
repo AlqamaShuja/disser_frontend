@@ -1,0 +1,35 @@
+<section class="category-section" *ngIf="samples.length > 0">
+    <!-- data-aos="fade-down"
+    data-aos-easing="linear"
+    data-aos-duration="3000" -->
+    <div  class="container-fluid" style="max-width:80%;margin:0 auto">
+        <div class="row justify-content-center">
+            <div class="col-xl-8">
+                <div class="section-heading mb-70 text-center">
+                    <span class="subheading">Our Samples</span>
+                    <h2 class="font-lg">It is a long established fact that a reader will be distracted.</h2>
+                </div>
+            </div>
+        </div>
+
+        <div class="row" >
+            <p-carousel [value]="samples" [numVisible]="3" [circular]="false" [responsiveOptions]="responsiveOptions"
+        [showIndicators]="false" [autoplayInterval]="5000">
+        <ng-template let-sample pTemplate="item">
+            <div class="rounded surface-border border-round m-2 text-center py-5 px-3 bg-white">
+                <div class="single-course-category style-1 bg-shade">
+                    <div>
+                        <img src="assets/wordpng.png" style="width: 40px;">
+                    </div>
+                    <div class="course-cat-content">
+                        <h4 class="course-cat-title">
+                            <a routerLink="/{{sample.Slug}}">{{sample.Title}}</a>
+                        </h4>
+                    </div>
+                </div>
+            </div>
+        </ng-template>
+    </p-carousel>
+        </div>
+    </div>
+</section>
