@@ -1,27 +1,67 @@
+<style>
+  .banner-style-3 {
+    background-color: #242961; /* Set background color */
+    position: relative; /* To position the buttons absolutely */
+    padding: 20px; /* Adjust padding as needed */
+    min-height: 600px; /* Set minimum height, adjust as needed */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .prev-button, .next-button {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 2rem; /* Adjust size as needed */
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    cursor: pointer;
+  }
+  .prev-button {
+    left: 20px; /* Adjust left position as needed */
+    
+  }
+  .next-button {
+    right: 20px; /* Adjust right position as needed */
+  }
+  .banner-content {
+    text-align: center;
+  }
+  .arrow-back{
+    border: 1px solid #242961;
+    background-color: #242961;
+    padding: 6px;
+  }
+</style>
+
 <div class="banner-style-3 banner-padding" [style.backgroundImage]="'url(' + slides[currentIndex].imageUrl + ')'">
   <div class="container">
-    <div class="row align-items-center justify-content-center">
-      <div>
-        <div class="banner-content text-center" *ngIf="!slides[currentIndex].showAboutUs">
+    <div class="row align-items-center justify-content-center" >
+      <div >
+        <div class="banner-content" *ngIf="!slides[currentIndex].showAboutUs" >
           <h1>{{ slides[currentIndex].heading }}</h1>
           <p>{{ slides[currentIndex].text }}</p>
 
-          <div style="display: flex; justify-content: space-around; width: 60%; margin: 0 auto">
-            <button id="convo_btn" class="btn btn-main rounded mr-2" (click)="onStartConversation()">Contact Us</button>
-            <a href="https://api.whatsapp.com/send?phone=447407692800&amp;text=Hi%E2%80%9A%20Assignment%20Experts" target="_blank" class="btn btn-main rounded mr-2">Order Now</a>
+          <div style="display: flex;  width: 60%; margin: 0 auto">
+            
+            <button id="convo_btn" class="btn  rounded mr-1" style="background-color: #242961; color: white;" (click)="onStartConversation()">Contact Us</button>
+            <button id="convo_btn" class="btn  rounded mr-1" style="background: transparent; color: white; border: 1px solid white;" (click)="onStartConversation()">About Us</button>
+
+            <!-- <a href="https://api.whatsapp.com/send?phone=4564654654&amp;text=Hi%E2%80%9A%20Assignment%20Experts" target="_blank" class="btn btn-main rounded mr-2">Order Now</a> -->
           </div>
         </div>
 
-        <div class="banner-content text-center" *ngIf="slides[currentIndex].showAboutUs">
+        <div class="banner-content" *ngIf="slides[currentIndex].showAboutUs">
           <span class="subheading">About Us</span>
-          <h1>{{ slides[currentIndex].heading }}</h1>
+          <h2  >{{ slides[currentIndex].heading }}</h2>
           <p>{{ slides[currentIndex].text }}</p>
-          <a routerLink="/order" class="btn btn-main rounded">Order Now</a>
+          <a routerLink="/order" class="btn rounded" style="background-color: #242961; color: white;">Order Now</a>
         </div>
       </div>
     </div>
   </div>
 
-  <button (click)="previousSlide()">Previous</button>
-  <button (click)="nextSlide()">Next</button>
+  <button class="prev-button arrow-back"   (click)="previousSlide()">&#60;</button>
+  <button class="next-button arrow-back" (click)="nextSlide()">&#62;</button>
 </div>

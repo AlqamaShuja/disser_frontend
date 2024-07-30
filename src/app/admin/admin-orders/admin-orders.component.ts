@@ -15,6 +15,7 @@ export class AdminOrdersComponent {
   orderBalance: any;
   pin: string = '';
   isSample: boolean = false;
+  currentOrderSelection: string = 'Current';
   constructor(
     private orderService: OrderService,
     private globalService: GlobalService,
@@ -39,7 +40,7 @@ export class AdminOrdersComponent {
       this.changeOrderFilterStatus(1);
     });
 
-    this.orderService.deteletsideBarNotification('orders').subscribe((res)=>{
+    this.orderService.deteletsideBarNotification('orders').subscribe((res) => {
       console.log(res)
     })
   }
@@ -49,8 +50,8 @@ export class AdminOrdersComponent {
     this.router.navigate(['/admin/order-details']);
   }
 
-  sendInvoice(order: any,flag:any): void {
-    this.orderService.sendInvoice(order.Id,flag).subscribe(
+  sendInvoice(order: any, flag: any): void {
+    this.orderService.sendInvoice(order.Id, flag).subscribe(
       (res) => {
         console.log(res);
         alert('Email sent');
@@ -67,7 +68,7 @@ export class AdminOrdersComponent {
       console.log(res);
     });
   }
-  
+
   updateOrderStatusWriter(id: number, writerID: any): void {
     const payload = { id: id, writer: writerID };
     this.orderService.updateOrderStatusWriter(payload).subscribe((res) => {
@@ -101,31 +102,37 @@ export class AdminOrdersComponent {
         this.filteredOrders = this.orders.filter(
           (element) => element.Status === 'New'
         );
+        this.currentOrderSelection = 'Current';
         break;
       case 2:
         this.filteredOrders = this.orders.filter(
           (element) => element.Status === 'Completed'
         );
+        this.currentOrderSelection = 'Completed';
         break;
       case 3:
         this.filteredOrders = this.orders.filter(
           (element) => element.Status === 'Revision'
         );
+        this.currentOrderSelection = 'Revision';
         break;
       case 4:
         this.filteredOrders = this.orders.filter(
           (element) => element.Status === 'Cancel'
         );
+        this.currentOrderSelection = 'Cancel';
         break;
       case 5:
         this.filteredOrders = this.orders.filter(
           (element) => element.PaidStatus === 'Unpaid'
         );
+        this.currentOrderSelection = 'Unpaid';
         break;
       default:
         this.filteredOrders = this.orders.filter(
           (element) => element.Status === 'New'
         );
+        this.currentOrderSelection = 'Current';
         break;
     }
     this.filteredOrders;
@@ -134,7 +141,7 @@ export class AdminOrdersComponent {
   formatDatabaseTimestamp(databaseTimestamp: string): string {
     // Convert the database timestamp to a JavaScript Date object
     const date = new Date(databaseTimestamp);
-  
+
     // Options for formatting the date and time
     const options: Intl.DateTimeFormatOptions = {
       year: 'numeric',
@@ -145,14 +152,14 @@ export class AdminOrdersComponent {
       second: '2-digit',
       hour12: true, // Use 12-hour format with AM/PM
     };
-  
+
     // Format the date using Intl.DateTimeFormat
     const formattedDate = new Intl.DateTimeFormat('en-US', options).format(date);
-  
+
     // Extract the day of the month and add "th," "st," or "nd" as appropriate
     const day = date.getDate();
     let daySuffix = 'th';
-  
+
     if (day === 1 || day === 21 || day === 31) {
       daySuffix = 'st';
     } else if (day === 2 || day === 22) {
@@ -160,22 +167,27 @@ export class AdminOrdersComponent {
     } else if (day === 3 || day === 23) {
       daySuffix = 'rd';
     }
-  
+
     // Replace 'th' in the formatted date with the appropriate suffix
     const formattedDateWithSuffix = formattedDate.replace(/th/g, daySuffix);
-  
+
     return formattedDateWithSuffix;
   }
-  updateOrderPaidStatusChanged(id:any,status:any):void{
+  updateOrderPaidStatusChanged(id: any, status: any): void {
     const payload = { id: id, PaidStatus: status };
     this.orderService.updateOrderPaidStatus(payload).subscribe((res) => {
       console.log(res);
     });
   }
-  updateGrossAmount(id:any,amount:any):void{
+
+  updateGrossAmount(id: any, amount: any): void {
     const payload = { id: id, GrossAmount: amount };
     this.orderService.updateGrossAmount(payload).subscribe((res) => {
       console.log(res);
     });
+  }
+
+  updatePaymentMethod(orderId: number, paymentMethod: string) {
+    // Implement the logic to update the payment method
   }
 }

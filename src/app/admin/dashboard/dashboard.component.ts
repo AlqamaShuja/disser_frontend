@@ -1,5 +1,3 @@
-// dashboard.component.ts
-
 import { Component, OnInit } from '@angular/core';
 import { OrderService } from '../../services/order.service';
 import { GlobalService } from '../../services/global.service';
@@ -16,7 +14,7 @@ export class DashboardComponent implements OnInit {
   constructor(private orderService: OrderService, private globalService: GlobalService) {}
 
   ngOnInit(): void {
-    this.getOrders();
+    this.getOrders(); 
   }
 
   getOrders(): void {
@@ -47,6 +45,9 @@ export class DashboardComponent implements OnInit {
       if (order.Status in this.orderCounts) {
         this.orderCounts[order.Status]++;
       }
+      else {
+        this.orderCounts[order.Status] = 1;
+      }
     });
 
     console.log('Order counts:', this.orderCounts);
@@ -55,6 +56,7 @@ export class DashboardComponent implements OnInit {
   getStatusClass(status: string): string {
     switch (status) {
       case 'New':
+        // return 'bg-darkBlue';
         return 'bg-info';
       case 'Complete':
         return 'bg-success';

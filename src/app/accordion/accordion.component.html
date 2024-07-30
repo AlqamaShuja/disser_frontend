@@ -1,0 +1,43 @@
+<style>
+    .card-header .btn {
+  color: white;
+  font-size: 18px;
+}
+
+.card-header .btn:hover {
+  color: #242691;
+  background-color: white;
+}
+
+</style>
+
+
+<div class="accordion" id="accordionExample">
+    <div class="card" *ngFor="let item of items; let i = index">
+      <div class="card-header" [id]="'heading' + i" style="background-color: #242961;">
+        <h2 class="mb-0">
+          <button
+            class="btn btn-block text-left"
+            type="button"
+            (click)="toggle(i)"
+            [attr.aria-expanded]="isExpanded(i)"
+            [attr.aria-controls]="'collapse' + i"
+          >
+            {{ item.title.toUpperCase() }}
+          </button>
+        </h2>
+      </div>
+      <div
+        [id]="'collapse' + i"
+        class="collapse"
+        [class.show]="isExpanded(i)"
+        [attr.aria-labelledby]="'heading' + i"
+        [attr.data-parent]="'#accordionExample'"
+      >
+        <div class="card-body">
+          {{ item.content }}
+        </div>
+      </div>
+    </div>
+  </div>
+  

@@ -1,16 +1,15 @@
 <app-header *ngIf="!isAdmin"></app-header>
-<div class="" *ngIf="isAdmin && isAdminLogin">
+<!-- <div class="" *ngIf="isAdmin && isAdminLogin">
     <div class="row">
         <div class="col-lg-2 col-md-1">
             <app-sidebar></app-sidebar>
         </div>
         <div class="col-lg-10 col-md-12 col-sm-12 gray-bg">
             <router-outlet></router-outlet>
-
         </div>
     </div>
+</div> -->
 
-</div>
 <div *ngIf="isAdmin && !isAdminLogin">
     <div class="loader3">
         <span></span>
@@ -18,8 +17,8 @@
     </div>
     <router-outlet></router-outlet>
 </div>
+
 <div *ngIf="!isAdmin">
-    
     <router-outlet></router-outlet>
     <div class="col-md-12 text-center" *ngIf="loadingService.isLoading()">
         <div class="loader3">
@@ -27,6 +26,37 @@
             <span></span>
         </div>
     </div>
-<app-cta></app-cta>
+<!-- <app-cta></app-cta> -->
 <app-footer [services]="services"></app-footer>
 </div>
+
+
+
+
+
+    <div style="display: flex; height: 100vh !important;" *ngIf="isAdmin && isAdminLogin">
+        <div style="">
+            <app-admin-sidebar *ngIf="isAdmin && isAdminLogin && isSidebarOpen" [isSidebarOpen]="isSidebarOpen"></app-admin-sidebar>
+        </div> 
+            
+        <div class="overflow-auto" style="" [ngStyle]="mainComponentSt">
+            <app-admin-header></app-admin-header> 
+            <div class="" style="background-color: white; height: calc(100vh - 60px); overflow: auto;">
+                <router-outlet></router-outlet>
+            </div>
+        </div>
+    </div>
+ 
+
+
+<!-- <div class="d-flex" style="min-width: 100vw; min-height: 100vh;">
+    <div style="">
+        <app-admin-sidebar *ngIf="isAdmin && isAdminLogin"></app-admin-sidebar>
+    </div>
+    <div class="" style="border: 3px solid green;">
+        <div class="" style="background-color: brown; width: 100%; height: 20px;">Hello</div>
+        <div class="col-lg-10 col-md-12 col-sm-12 gray-bg">
+            <router-outlet></router-outlet>
+        </div>
+    </div>
+</div> -->

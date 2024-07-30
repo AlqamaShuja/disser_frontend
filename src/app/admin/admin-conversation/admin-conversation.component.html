@@ -1,0 +1,47 @@
+<div class="container mt-2">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+          <div href="#" class="navbar-brand" style="cursor: pointer;">
+            <a href="/admin/orders" class="fw-bold order-link">Order </a>/ Conversation
+          </div>
+        </div>
+    </nav>
+    <div class="card my-card">
+      <div class="card-header text-white">
+        <h5 class="text-white">Send Your Message</h5>
+      </div>
+      <div class="card-body">
+        <form (ngSubmit)="sendMessage()">
+          <div class="form-group mb-3">
+            <label for="messageFor" class="form-label">Message for</label>
+            <select id="messageFor" class="form-select" [(ngModel)]="messageFor" name="messageFor" required>
+              <option value="" disabled>Select One</option>
+              <option *ngFor="let option of messageOptions" [value]="option.value">{{ option.label }}</option>
+            </select>
+          </div>
+          <div class="form-group mb-3">
+            <label for="description" class="form-label">Description</label>
+            <textarea id="description" class="form-control" [(ngModel)]="description" name="description" rows="4" required></textarea>
+          </div>
+          <div class="form-group mb-3">
+            <label for="amount" class="form-label">Amount</label>
+            <input type="number" id="amount" class="form-control" [(ngModel)]="amount" name="amount" required />
+          </div>
+          <div class="form-group mb-3">
+            <label for="file1" class="form-label">Upload file</label>
+            <input type="file" id="file1" class="form-control" (change)="onFileSelected($event, 1)" />
+          </div>
+          <div class="form-group mb-3">
+            <label for="file2" class="form-label">Upload file</label>
+            <input type="file" id="file2" class="form-control" (change)="onFileSelected($event, 2)" />
+          </div>
+          <div class="form-group mb-3">
+            <label for="file3" class="form-label">Upload file</label>
+            <input type="file" id="file3" class="form-control" (change)="onFileSelected($event, 3)" />
+          </div>
+          <button type="submit" class="btn btn-success btn-submit">Send Message</button>
+        </form>
+      </div>
+    </div>
+</div>
+  

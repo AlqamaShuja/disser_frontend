@@ -1,137 +1,129 @@
-<style>
-  .new-lnk{
-    color:white;
-    font-weight: 500;
-  }
-  .new-lnk:hover{
-    color: black !important;
-  }
-</style>
-<header class="gy-0">
-  <!-- Sidebar -->
-  <nav
-    id="sidebarMenu"
-    class="collapse d-lg-block sidebar collapse "
-    style="background-color: rgb(47, 84, 100); "
-    [ngClass]="{ show: isNavbarOpen }"
-  >
-    <div class="position-sticky" >
-      <div class="list-group list-group-flush mx-3">
-        <div style="margin-left: 25px;">
-
-          <img src="../../../assets/admin.png" width="100px"  />
-        </div>
-        <a
+<!-- [ngClass]="{ show: isNavbarOpen }" -->
+<!-- style="" -->
+<nav
+[ngStyle]="showSidebar"
+>
+  <div class="">
+    <div class="list-group list-group-flush mx-3" style="margin-top: 10px;">
+      <div style="background-color: #FFF6E9 !important; border-radius: 10px;" class="d-flex justify-content-center mt-2 mt-lg-0">
+        <img src="../../../assets/admin_logo.png" width="210px" />
+      </div>
+      <a
         href="/"
-        class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none"
-        >
-          <svg class="bi me-2" width="40" height="32">
-            <use xlink:href="#bootstrap"></use>
-          </svg>
-          <span class="fs-4">Admin</span>
-        </a>
-        <hr />
-        <ul class="nav-pills flex-column mb-auto">
-          <li  >
-            <a routerLink="/admin" 
-            class="nav-link new-lnk"  aria-current="">
+        class="w-100 d-flex align-items-center justify-content-center mb-2 mb-md-0 me-md-auto text-white text-decoration-none"
+      >
+        <span class="fs-5 mt-2">Admin</span>
+      </a>
+      <hr />
+      <ul class="nav-pills flex-column mb-auto">
+        <li [ngClass]="selectedClass('Dashboard')">
+          <a routerLink="/admin" class="nav-link new-lnk" (click)="selectItem('Dashboard')" aria-current="">
             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <rect x="3" y="3" width="7" height="7" rx="1" ry="1"/>
               <rect x="14" y="3" width="7" height="7" rx="1" ry="1"/>
               <rect x="3" y="14" width="7" height="7" rx="1" ry="1"/>
               <rect x="14" y="14" width="7" height="7" rx="1" ry="1"/>
             </svg>
-              Dashboard
-            </a>
-          </li>
-          <li>
-            <a routerLink="/admin/orders" class="nav-link new-lnk">
-              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="4" y="2" width="16" height="20" rx="2" ry="2"/>
-                <line x1="9" y1="2" x2="9" y2="22"/>
-                <line x1="15" y1="2" x2="15" y2="22"/>
-              </svg>
-              Orders<span class="float-end" style="color: blue;" *ngIf="noOfOrders !== 0">({{noOfOrders}})</span>
-            </a>
-          </li>
-          <li>
-            <a routerLink="/admin/sample-orders" class="nav-link new-lnk">
-              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M6 12h12M8 9h8M8 15h8M12 4v16"/>
-              </svg>
-              Sample Orders<span class="float-end" style="color: blue;" *ngIf="noOfOrders !== 0">({{noOfOrders}})</span>
-            </a>
-          </li>
-          <li>
-            <a routerLink="/admin/category" class="nav-link new-lnk">
-              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
-              </svg>
-              Catogeries
-            </a>
-          </li>
-          <li>
-            <a routerLink="/admin/samples" class="nav-link new-lnk">
-              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="4" y="4" width="16" height="16" rx="2" ry="2"/>
-                <circle cx="12" cy="12" r="3"/>
-              </svg>
-              Samples
-            </a>
-          </li>
-          <li>
-            <a routerLink="/admin/services" class="nav-link new-lnk">
-              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
-                <line x1="8" y1="3" x2="8" y2="21"/>
-                <line x1="16" y1="3" x2="16" y2="21"/>
-                <line x1="3" y1="8" x2="21" y2="8"/>
-                <line x1="3" y1="16" x2="21" y2="16"/>
-              </svg>
-              Services
-            </a>
-            <a routerLink="/admin/blogs" class="nav-link new-lnk">
-              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M4 5a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V5z"/>
-                <line x1="9" y1="12" x2="15" y2="12"/>
-                <line x1="9" y1="16" x2="15" y2="16"/>
-                <line x1="9" y1="8" x2="15" y2="8"/>
-              </svg>
-              Blogs
-            </a>
-            <a routerLink="/admin/testimonials" class="nav-link new-lnk">
+            Dashboard
+          </a>
+        </li>
+        <li [ngClass]="selectedClass('Orders')">
+          <a routerLink="/admin/orders" class="nav-link new-lnk" (click)="selectItem('Orders')">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="4" y="2" width="16" height="20" rx="2" ry="2"/>
+              <line x1="9" y1="2" x2="9" y2="22"/>
+              <line x1="15" y1="2" x2="15" y2="22"/>
+            </svg>
+            Orders<span class="float-end" style="color: blue;" *ngIf="noOfOrders !== 0">({{noOfOrders}})</span>
+          </a>
+        </li>
+        <li [ngClass]="selectedClass('Sample Orders')">
+          <a routerLink="/admin/sample-orders" class="nav-link new-lnk" (click)="selectItem('Sample Orders')">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M6 12h12M8 9h8M8 15h8M12 4v16"/>
+            </svg>
+            Sample Orders<span class="float-end" style="color: blue;" *ngIf="noOfOrders !== 0">({{noOfOrders}})</span>
+          </a>
+        </li>
+        <li [ngClass]="selectedClass('Categories')">
+          <a routerLink="/admin/category" class="nav-link new-lnk" (click)="selectItem('Categories')">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+            </svg>
+            Categories
+          </a>
+        </li>
+        <li [ngClass]="selectedClass('Samples')">
+          <a routerLink="/admin/samples" class="nav-link new-lnk" (click)="selectItem('Samples')">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="4" y="4" width="16" height="16" rx="2" ry="2"/>
+              <circle cx="12" cy="12" r="3"/>
+            </svg>
+            Samples
+          </a>
+        </li>
+        <li [ngClass]="selectedClass('Services')">
+          <a routerLink="/admin/services" class="nav-link new-lnk" (click)="selectItem('Services')">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="3" y="3" width="18" height="18" rx="2" ry="2"/>
+              <line x1="8" y1="3" x2="8" y2="21"/>
+              <line x1="16" y1="3" x2="16" y2="21"/>
+              <line x1="3" y1="8" x2="21" y2="8"/>
+              <line x1="3" y1="16" x2="21" y2="16"/>
+            </svg>
+            Services
+          </a>
+        </li>
+        <li [ngClass]="selectedClass('Blogs')">
+          <a routerLink="/admin/blogs" class="nav-link new-lnk" (click)="selectItem('Blogs')">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <path d="M4 5a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v14a2 2 0 0 1-2 2H6a2 2 0 0 1-2-2V5z"/>
+              <line x1="9" y1="12" x2="15" y2="12"/>
+              <line x1="9" y1="16" x2="15" y2="16"/>
+              <line x1="9" y1="8" x2="15" y1="8"/>
+            </svg>
+            Blogs
+          </a>
+        </li>
+        <li [ngClass]="selectedClass('Testimonials')">
+          <a routerLink="/admin/testimonials" class="nav-link new-lnk" (click)="selectItem('Testimonials')">
             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <rect x="4" y="2" width="16" height="20" rx="2" ry="2"/>
               <line x1="12" y1="2" x2="12" y2="22"/>
               <line x1="4" y1="6" x2="20" y2="6"/>
               <line x1="4" y1="14" x2="20" y2="14"/>
             </svg>
-
-              Testimonials
-            </a>
-            <a routerLink="/admin/manage-client" class="nav-link new-lnk">
-              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <circle cx="12" cy="12" r="10"/>
-                <line x1="8" y1="12" x2="16" y2="12"/>
-                <line x1="12" y1="8" x2="12" y2="16"/>
-              </svg>
-              Manage Clients
-            </a>
-            <a routerLink="/admin/inquiries" class="nav-link new-lnk">
-              <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <rect x="9" y="9" width="6" height="6"/>
-                <line x1="9" y1="1" x2="9" y2="4"/>
-                <line x1="15" y1="1" x2="15" y2="4"/>
-                <line x1="3" y1="3" x2="4" y2="4"/>
-                <line x1="3" y1="9" x2="4" y2="9"/>
-                <line x1="3" y1="15" x2="4" y2="15"/>
-                <line x1="15" y1="3" x2="20" y2="4"/>
-                <line x1="15" y1="9" x2="20" y2="9"/>
-                <line x1="15" y1="15" x2="20" y2="15"/>
-              </svg>
-              Inquiries
-            </a>
-            <a routerLink="/admin/change-password" class="nav-link new-lnk" >
+            Testimonials
+          </a>
+        </li>
+        <li [ngClass]="selectedClass('Manage Clients')">
+          <a routerLink="/admin/manage-client" class="nav-link new-lnk" (click)="selectItem('Manage Clients')">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <circle cx="12" cy="12" r="10"/>
+              <line x1="8" y1="12" x2="16" y2="12"/>
+              <line x1="12" y1="8" x2="12" y2="16"/>
+            </svg>
+            Manage Clients
+          </a>
+        </li>
+        <li [ngClass]="selectedClass('Inquiries')">
+          <a routerLink="/admin/inquiries" class="nav-link new-lnk" (click)="selectItem('Inquiries')">
+            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="9" y="9" width="6" height="6"/>
+              <line x1="9" y1="1" x2="9" y2="4"/>
+              <line x1="15" y1="1" x2="15" y2="4"/>
+              <line x1="3" y1="3" x2="4" y2="4"/>
+              <line x1="3" y1="9" x2="4" y2="9"/>
+              <line x1="3" y1="15" x2="4" y2="15"/>
+              <line x1="15" y1="3" x2="20" y2="4"/>
+              <line x1="15" y1="9" x2="20" y2="9"/>
+              <line x1="15" y1="15" x2="20" y2="15"/>
+            </svg>
+            Inquiries
+          </a>
+        </li>
+        <li [ngClass]="selectedClass('Change Password')">
+          <a routerLink="/admin/change-password" class="nav-link new-lnk" (click)="selectItem('Change Password')">
             <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
               <circle cx="12" cy="12" r="10"/>
               <rect x="3" y="12" width="18" height="10"/>
@@ -139,91 +131,57 @@
               <line x1="17" y1="15" x2="17" y2="18"/>
               <line x1="7" y1="15" x2="7" y2="18"/>
             </svg>
-
-              Change Password
-            </a>
-            <a
-              href="javascript:;"
-              (click)="logout()"
-              class="nav-link new-lnk"
-            >
-            <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <path d="M17 18a5 5 0 1 1-10 0M12 2v4M12 14v4M5 5l2-2M5 5L3 3M19 19l2-2M19 19l-2-2"/>
-            </svg>
-
-              Log Out
-            </a>
-          </li>
-        </ul>
-
-        <div class="dropdown">
-          <div
-            style="height: 300px; width: 100px"
-            class="d-flex flex-column justify-content-end"
+            Change Password
+          </a>
+        </li>
+        <li>
+          <a
+            href="javascript:;"
+            (click)="logout()"
+            class="nav-link new-lnk"
           >
-            <a
-              href="#"
-              class="d-flex align-items-center text-decoration-none dropdown-toggle"
-              id="dropdownUser1"
-              data-bs-toggle="dropdown"
-              aria-expanded="false"
-            >
-              <img
-                src="https://github.com/mdo.png"
-                alt=""
-                width="32"
-                height="32"
-                class="rounded-circle me-2"
-              />
-              <strong>mdo</strong>
-            </a>
-            <ul
-              class="dropdown-menu dropdown-menu-dark text-small shadow"
-              aria-labelledby="dropdownUser1"
-            >
-              <li><a class="dropdown-item" href="#">New project...</a></li>
-              <li><a class="dropdown-item" href="#">Settings</a></li>
-              <li><a class="dropdown-item" href="#">Profile</a></li>
-              <li><hr class="dropdown-divider" /></li>
-              <li><a class="dropdown-item" href="#">Sign out</a></li>
-            </ul>
-          </div>
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M17 18a5 5 0 1 1-10 0M12 2v4M12 14v4M5 5l2-2M5 5L3 3M19 19l2-2M19 19l-2-2"/>
+          </svg>
+            Log Out
+          </a>
+        </li>
+      </ul>
+
+      <div class="dropdown">
+        <div
+          style="height: 300px; width: 100px"
+          class="d-flex flex-column justify-content-end"
+        >
+          <a
+            href="#"
+            class="d-flex align-items-center text-decoration-none dropdown-toggle"
+            id="dropdownUser1"
+            data-bs-toggle="dropdown"
+            aria-expanded="false"
+          >
+            <img
+              src="https://github.com/mdo.png"
+              alt=""
+              width="32"
+              height="32"
+              class="rounded-circle me-2"
+            />
+            <strong>mdo</strong>
+          </a>
+          <ul
+            class="dropdown-menu dropdown-menu-dark text-small shadow"
+            aria-labelledby="dropdownUser1"
+          >
+            <li><a class="dropdown-item" href="#">New project...</a></li>
+            <li><a class="dropdown-item" href="#">Settings</a></li>
+            <li><a class="dropdown-item" href="#">Profile</a></li>
+            <li><hr class="dropdown-divider" /></li>
+            <li><a class="dropdown-item" href="#">Sign out</a></li>
+          </ul>
         </div>
-        <hr />
       </div>
+      <hr />
     </div>
-  </nav>
-  <!-- Sidebar -->
-
-  <!-- Navbar -->
-  <nav
-    id="main-navbar"
-    class="navbar-expand-lg navbar-light bg-white fixed-top"
-  >
-    <!-- Container wrapper -->
-    <div class="container-fluid">
-      <!-- Toggle button -->
-      <button
-        class="navbar-toggler"
-        type="button"
-        data-mdb-toggle="collapse"
-        data-mdb-target="#sidebarMenu"
-        aria-controls="sidebarMenu"
-        aria-expanded="false"
-        aria-label="Toggle navigation"
-        (click)="toggleNavbar()"
-      >
-        <i class="fa fa-bars" aria-hidden="true"></i>
-      </button>
-    </div>
-    <!-- Container wrapper -->
-  </nav>
-  <!-- Navbar -->
-</header>
-<!--Main Navigation-->
-
-<!--Main layout-->
-<main style="margin-top: 58px">
-  <div class="container pt-4"></div>
-</main>
-<!--Main layout-->
+  </div>
+</nav>

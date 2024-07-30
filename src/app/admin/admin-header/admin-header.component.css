@@ -1,0 +1,67 @@
+
+
+.navbar {
+    /* border-bottom: 1px solid #ccc; */
+    /* padding: 10px; */
+}
+.btn {
+    font-size: 14px;
+}
+.badge {
+    font-size: 12px;
+}
+
+
+.task-revision-btn {
+    color: #0d6efd;
+    border: 0;
+    outline: none;
+    background: none;
+    padding: 5px 10px;
+    border-radius: 10px;
+    transition: all 0.2s ease-in;
+}
+
+.task-revision-btn:hover {
+    background-color: #035ee6;
+    color: #FFF;
+}
+
+.back-det__payment__email-btn {
+    color: #FFF;
+    background-color: #FFB200;
+    border: 0;
+    outline: none;
+    padding: 5px 10px;
+    border-radius: 10px;
+    transition: all 0.2s ease-in;
+}
+
+.back-det__payment__email-btn:hover {
+    background-color: #FFF;
+    color: #FFB200;
+    border: 1px solid #FFB200;
+}
+
+.message-icon {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+}
+
+.message-icon .message-icon-counter {
+    position: absolute;
+    top: -5px;
+    right: -5px;
+    background-color: #FFB200;
+    border-radius: 100%;
+    padding: 2px;
+    width: 15px;
+    height: 15px;
+    font-size: 11px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

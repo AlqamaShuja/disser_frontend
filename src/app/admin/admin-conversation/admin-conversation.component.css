@@ -1,0 +1,28 @@
+.container {
+    /* max-width: 900px; */
+    /* margin: 0 auto; */
+    padding: 20px;
+}
+  
+.my-card {
+    margin: 10px;
+}
+
+.card-header {
+    background-color: rgb(37, 67, 54);
+    color: white;
+    padding: 20px 10px;
+}
+  
+.form-group {
+    margin-bottom: 1rem;
+}
+  
+.btn-submit {
+    background-color: rgb(37, 67, 54);
+    color: white;
+}
+
+.order-link {
+    color: black !important;
+}

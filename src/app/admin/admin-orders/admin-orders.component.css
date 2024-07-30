@@ -88,3 +88,22 @@ button, input, optgroup, select, textarea{
   background-color: rgb(0 100 255 / 58%);
   color: #fff;
 }
+
+
+.btn-submit {
+  padding: 5px 10px;
+  border-radius: 4px;
+  color: #fff;
+}
+
+.btn-writer {
+  padding: 5px 10px;
+  border-radius: 4px;
+  color: #fff;
+  background-color: #346952 !important;
+  text-decoration: none;
+}
+
+.btn-writer:hover {
+  background-color: #162e24 !important;
+}

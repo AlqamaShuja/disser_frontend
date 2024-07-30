@@ -67,6 +67,10 @@ import { DashboardComponent } from './admin/dashboard/dashboard.component';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { fas } from '@fortawesome/free-solid-svg-icons';
+import { AdminHeaderComponent } from './admin/admin-header/admin-header.component';
+import { AdminTasklistComponent } from './admin-tasklist/admin-tasklist.component';
+import { AccordionComponent } from './accordion/accordion.component';
+
 library.add(fas);
 const modules = {};
 @NgModule({
@@ -118,7 +122,10 @@ const modules = {};
     SiteMapComponent,
     ServiceListComponent,
     PageNotFoundComponent,
-    DashboardComponent
+    DashboardComponent,
+    AdminHeaderComponent,
+    AdminTasklistComponent,
+    AccordionComponent
   ],
   imports: [
     BrowserModule,

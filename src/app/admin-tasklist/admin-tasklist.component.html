@@ -1,0 +1,141 @@
+
+
+<div class="table-container">
+    <div class="button-container">
+      <div class="">
+        <button class="btn home" (click)="filterOrders('home')">Home</button>
+        <button class="btn extremely-urgent" (click)="filterOrders('extremely-urgent')">Extremely Urgent</button>
+        <button class="btn first-priority" (click)="filterOrders('first-priority')">1st Priority</button>
+        <button class="btn second-priority" (click)="filterOrders('second-priority')">2nd Priority</button>
+        <button class="btn crossed" (click)="filterOrders('crossed')">Crossed</button>
+        <button class="btn no-urgency" (click)="filterOrders('no-urgency')">No Urgency</button>
+      </div>
+      <div class="">
+        <button class="btn processed">Processed</button>
+        <button class="btn delivered-by-writer">Delivered by Writer</button>
+      </div>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>Serial #</th>
+          <th>Order ID</th>
+          <th>Deadline</th>
+          <th>Word Count</th>
+          <th>Paper Type</th>
+          <th>Final Deadline</th>
+          <th>Writer</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let order of filteredOrders">
+          <td>{{ order.serial }}</td>
+          <td>{{ order.orderId }}</td>
+          <td>{{ order.deadline }}</td>
+          <td>{{ order.wordCount }}</td>
+          <td>{{ order.paperType }}</td>
+          <td>{{ order.finalDeadline }}</td>
+          <td>{{ order.writer }}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+  
+
+  
+
+
+
+
+
+
+
+
+<!-- <div class="table-container">
+    <div class="button-container">
+      <div class="">
+        <button class="btn home" (click)="filterOrders('home')">Home</button>
+        <button class="btn extremely-urgent" (click)="filterOrders('extremely-urgent')">Extremely Urgent</button>
+        <button class="btn first-priority" (click)="filterOrders('first-priority')">1st Priority</button>
+        <button class="btn second-priority" (click)="filterOrders('second-priority')">2nd Priority</button>
+        <button class="btn crossed" (click)="filterOrders('crossed')">Crossed</button>
+        <button class="btn no-urgency" (click)="filterOrders('no-urgency')">No Urgency</button>
+      </div>
+      <div class="">
+        <button class="btn processed">Processed</button>
+        <button class="btn delivered-by-writer">Delivered by Writer</button>
+      </div>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>Serial #</th>
+          <th>Order ID</th>
+          <th>Deadline</th>
+          <th>Word Count</th>
+          <th>Paper Type</th>
+          <th>Final Deadline</th>
+          <th>Writer</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let order of filteredOrders">
+          <td>{{ order.serial }}</td>
+          <td>{{ order.orderId }}</td>
+          <td>{{ order.deadline }}</td>
+          <td>{{ order.wordCount }}</td>
+          <td>{{ order.paperType }}</td>
+          <td>{{ order.finalDeadline }}</td>
+          <td>{{ order.writer }}</td>
+        </tr>
+      </tbody>
+    </table>
+</div> -->
+  
+
+
+
+
+
+
+<!-- <div class="table-container">
+    <div class="button-container">
+        <div class="">
+            <button class="btn home">Home</button>
+            <button class="btn extremely-urgent">Extremely Urgent</button>
+            <button class="btn first-priority">1st Priority</button>
+            <button class="btn second-priority">2nd Priority</button>
+            <button class="btn crossed">Crossed</button>
+            <button class="btn no-urgency">No Urgency</button>
+        </div>
+        <div class="">
+            <button class="btn processed">Processed</button>
+            <button class="btn delivered-by-writer">Delivered by Writer</button>
+        </div>
+    </div>
+    <table>
+      <thead>
+        <tr>
+          <th>Serial #</th>
+          <th>Order ID</th>
+          <th>Deadline</th>
+          <th>Word Count</th>
+          <th>Paper Type</th>
+          <th>Final Deadline</th>
+          <th>Writer</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let order of orders">
+          <td>{{ order.serial }}</td>
+          <td>{{ order.orderId }}</td>
+          <td>{{ order.deadline }}</td>
+          <td>{{ order.wordCount }}</td>
+          <td>{{ order.paperType }}</td>
+          <td>{{ order.finalDeadline }}</td>
+          <td>{{ order.writer }}</td>
+        </tr>
+      </tbody>
+    </table>
+</div>
+   -->

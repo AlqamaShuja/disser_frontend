@@ -1,6 +1,6 @@
-<section class="page-header" *ngIf="!orderRecieved">
+<!-- <section class="page-header" *ngIf="!orderRecieved">
   <div class="container">
-    <div class="row justify-content-center">
+    <div class="row justify-content-center" style="border: 1px solid red;">
       <div class="col-lg-8 col-xl-8">
         <div class="title-block">
           <h1>Order Now</h1>
@@ -12,16 +12,29 @@
       </div>
     </div>
   </div>
-</section>
+</section> -->
+
 
 <!-- About Section Start -->
-<section class="about-3 section-padding" *ngIf="!orderRecieved">
-  <div class="container" style="background: whitesmoke;padding: 30px;">
-    <div class="row">
-      <div class="col-xl-12 col-lg-12">
-        <app-order-form [categories]="categories" (orderEvent)="submitOrder($event)"></app-order-form>
+
+<section class="pt-2" *ngIf="!orderRecieved" style="margin: 0 auto; background-color: whitesmoke;" >
+  <section style="margin: 0 auto; width: 70%;">
+    <nav aria-label="">
+      <ol class="breadcrumb justify-content-lefy" style="background-color: transparent;" >
+        <li class="breadcrumb-item"><a href="/">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Order</li>
+      </ol>
+    </nav>
+  </section>
+  <div style="margin: 0 auto; width: 70%; background-color: whitesmoke;">
+
+    <div class="container-fluid" style="padding: 30px;">
+      <div class="row">
+        <div class="col-xl-12 col-lg-12">
+          <app-order-form [categories]="categories" (orderEvent)="submitOrder($event)"></app-order-form>
+        </div>
+      </div>
     </div>
-</div>
-</div>
+  </div>
 </section>
 <app-checkout *ngIf="orderRecieved" [orderDetails]="orderDetails"></app-checkout>

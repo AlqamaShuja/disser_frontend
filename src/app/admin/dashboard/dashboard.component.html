@@ -1,10 +1,35 @@
-<!-- dashboard.component.html -->
+
 
 <div class="container-fluid" style="width: 90%;">
+  <div class="row justify-content-center gap-4 mt-5">
+    <div *ngFor="let status of getOrderStatuses()" class="col-12 col-sm-6 col-md-6 col-lg-3 mb-4 d-flex align-items-stretch">
+      <div class="card text-white w-100" [ngClass]="getStatusClass(status)">
+        <div class="card-body d-flex flex-column">
+          <div class="inner">
+            <h3>{{ orderCounts[status] || 0 }}</h3>
+            <p>{{ status }} Orders</p>
+          </div>
+          <div class="icon">
+            <i class="ion ion-bag"></i>
+          </div>
+        </div>
+        <div class="card-footer mt-auto">
+          <a routerLink="/admin/orders" class="text-white">More info <i class="fas fa-arrow-circle-right"></i></a>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
 
-  <div class="row justify-content-between mt-5">
-    <div *ngFor="let status of getOrderStatuses()" class="col-12 col-md-6 col-lg-3 mb-4">
-      <div class="small-box" [ngClass]="getStatusClass(status)">
+
+<!-- <div class="container-fluid" style="width: 90%;">
+
+  <div class="row justify-content-center gap-4 mt-5">
+    <div *ngFor="let status of getOrderStatuses()" class="col-12 col-md-6 col-lg-3 mb-4 border-1">
+      <div class="small-box" 
+        [ngClass]="getStatusClass(status)"
+        [ngStyle]="getStatusStyle(status)"
+      >
         <div class="inner">
           <h3>{{ orderCounts[status] || 0 }}</h3>
           <p>{{ status }} Orders</p>
@@ -16,4 +41,4 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->

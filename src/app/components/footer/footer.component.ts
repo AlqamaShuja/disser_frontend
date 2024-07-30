@@ -45,19 +45,25 @@ export class FooterComponent {
   companyLinks = [
     { title: 'Home', url: '/' },
     { title: 'About Us', url: '/about' },
-    { title: 'Blogs', url: '/blogs' },
-    { title: 'Contact Us', url: '/contactus' },
-    { title: 'Recent Queries', url: '/samples' },
-    { title: 'Our Services', url: '/services' },
-    { title: 'Sitemap', url: '/sitemap' },
+    // blogs
+    { title: 'Blogs', url: '/' },
+    // contactus
+    { title: 'Contact Us', url: '/' },
+    // samples
+    { title: 'Recent Queries', url: '/' },
+    // services
+    { title: 'Our Services', url: '/' },
+    // sitemap
+    { title: 'Sitemap', url: '/' },
     // Add more links as needed
   ];
 
+  // address: `Smart Edu LTD, International House, 12
+  // Constance Street, Royal Docks, London, E16 2DQ, United Kingdom`,
   contactInfo = {
-    address: `Smart Edu LTD, International House, 12
-    Constance Street, Royal Docks, London, E16 2DQ, United Kingdom`,
-    email: 'support@proassignments.co.uk',
-    phone: '+447407692800',
+    address:'UK',
+    email: 'support@dissertationwriting.co.uk',
+    phone: '+4458755888',
   };
 
   paymentMethods = [
