@@ -6,7 +6,8 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class OrderService {
-  private apiUrl = 'https://proassignmentbackend.smartedultd.co.uk/api/v1/';
+  // private apiUrl = 'https://proassignmentbackend.smartedultd.co.uk/api/v1/';
+  private apiUrl = 'http://localhost:3000/api/v1/';
 
   constructor(private http: HttpClient) {}
 
@@ -48,7 +49,7 @@ export class OrderService {
     return this.http.get(`${this.apiUrl}order`);
   }
   getAllCategories():Observable<any>{
-    return this.http.get(`${this.apiUrl}catogery`);
+    return this.http.get(`${this.apiUrl}category`);
   }
   uploadDocuments(payload:any):Observable<any>{
     return this.http.post(`${this.apiUrl}upload/fileupload`,payload);

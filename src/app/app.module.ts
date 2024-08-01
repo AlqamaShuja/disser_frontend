@@ -70,6 +70,7 @@ import { fas } from '@fortawesome/free-solid-svg-icons';
 import { AdminHeaderComponent } from './admin/admin-header/admin-header.component';
 import { AdminTasklistComponent } from './admin-tasklist/admin-tasklist.component';
 import { AccordionComponent } from './accordion/accordion.component';
+import { ChatInterfaceComponent } from './admin/chat-interface/chat-interface.component';
 
 library.add(fas);
 const modules = {};
@@ -125,7 +126,8 @@ const modules = {};
     DashboardComponent,
     AdminHeaderComponent,
     AdminTasklistComponent,
-    AccordionComponent
+    AccordionComponent,
+    ChatInterfaceComponent,
   ],
   imports: [
     BrowserModule,

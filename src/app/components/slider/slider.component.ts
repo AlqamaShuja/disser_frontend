@@ -13,8 +13,8 @@ export class SliderComponent implements OnInit {
   slides = [
     {
       imageUrl: '../../../assets/banners/banner1.jpg',
-      heading: 'Cutting Edge & Professional Academic Excellence',
-      text: 'Are you looking for top-notch assignment writing services? Partnering with Dissertation Writings UK means gaining access to a dynamic and innovative academic support system. We leverage cutting-edge technologies, research methodologies, and teaching strategies to ensure that our clients receive the most up-to-date and relevant assistance.',
+      heading: 'Welcome to Your Roadmap to Academic Excellence: The Leading Dissertation Writing Service in the UK',
+      text: "Initiating the dissertation process can seem overwhelming due to the requirements of thorough research, profound analysis, and meticulous writing. For students in the UK, our holistic services provide much-needed assistance on this demanding academic path. <br/>These services aim to support students throughout the dissertation process, offering comprehensive resources and expertise. From the initial stages of topic selection and research proposal development to the final stages of writing and editing, they offer a wealth of support to ensure students can navigate the complexities of their dissertations successfully.",
       showAboutUs: false
     },
     {
@@ -42,6 +42,16 @@ export class SliderComponent implements OnInit {
       showAboutUs: false
     },
   ];
+
+  // FIrst slide prev data obj
+  // slides = [
+  //   {
+  //     imageUrl: '../../../assets/banners/banner1.jpg',
+  //     heading: 'Cutting Edge & Professional Academic Excellence',
+  //     text: 'Are you looking for top-notch assignment writing services? Partnering with Dissertation Writings UK means gaining access to a dynamic and innovative academic support system. We leverage cutting-edge technologies, research methodologies, and teaching strategies to ensure that our clients receive the most up-to-date and relevant assistance.',
+  //     showAboutUs: false
+  //   },
+  // ];
 
   currentIndex: number = 0;
 

@@ -265,7 +265,7 @@ export class OrderFormComponent implements OnInit {
         Status: 'New',
         PaidStatus: 'Unpaid',
         suportingDoc:this.fileUrl,
-        isSample:false
+        isSample:false,
       };
       console.log(orderPayload)
       this.orderEvent.emit(orderPayload);

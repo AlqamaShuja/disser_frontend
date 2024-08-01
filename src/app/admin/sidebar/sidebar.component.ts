@@ -86,6 +86,9 @@ export class SidebarComponent implements OnInit {
       case 'sample-orders':
         this.selected = 'Sample Orders';
         break;
+      case 'chat':
+        this.selected = 'Conversation';
+        break;
       case 'category':
         this.selected = 'Categories';
         break;

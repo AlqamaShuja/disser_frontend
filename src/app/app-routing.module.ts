@@ -32,6 +32,7 @@ import { SiteMapComponent } from './site-map/site-map.component';
 import { ServiceListComponent } from './service-list/service-list.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { TermsAndConditions } from './terms-and-conditions/terms-and-conditions.component';
+import { ChatInterfaceComponent } from './admin/chat-interface/chat-interface.component';
 const routes: Routes = [
   {
     path: 'admin',
@@ -40,6 +41,10 @@ const routes: Routes = [
   {
     path: 'admin/login',
     component: AdminLoginComponent,
+  },
+  {
+    path: 'admin/chat',
+    component: ChatInterfaceComponent,
   },
   {
     path: 'admin/orders',
@@ -112,6 +117,10 @@ const routes: Routes = [
   {
     path: 'order',
     component: OrdersComponent,
+  },
+  {
+    path: 'order/:id',
+    component: CheckoutComponent,
   },
   {
     path: 'samples',
