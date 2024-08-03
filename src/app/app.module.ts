@@ -71,6 +71,9 @@ import { AdminHeaderComponent } from './admin/admin-header/admin-header.componen
 import { AdminTasklistComponent } from './admin-tasklist/admin-tasklist.component';
 import { AccordionComponent } from './accordion/accordion.component';
 import { ChatInterfaceComponent } from './admin/chat-interface/chat-interface.component';
+import { ResearchTopicsComponent } from './research-topics/research-topics.component';
+import { AssignmentCategoriesComponent } from './assignment-categories/assignment-categories.component';
+import { ServiceNewComponent } from './service-new/service-new.component';
 
 library.add(fas);
 const modules = {};
@@ -128,6 +131,9 @@ const modules = {};
     AdminTasklistComponent,
     AccordionComponent,
     ChatInterfaceComponent,
+    ResearchTopicsComponent,
+    AssignmentCategoriesComponent,
+    ServiceNewComponent,
   ],
   imports: [
     BrowserModule,

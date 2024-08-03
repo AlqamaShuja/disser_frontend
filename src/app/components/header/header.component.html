@@ -71,11 +71,17 @@
                   <a class="nav-link fw-bold" routerLink="/about">About Us</a>
                 </li>
                 <li class="nav-item ms-4">
-                  <a class="nav-link fw-bold">Our Services</a>
+                  <a class="nav-link fw-bold" routerLink="/services">Our Services</a>
                 </li>
                 <li class="nav-item ms-4">
                   <a class="nav-link fw-bold" routerLink="/order">Order Now</a>
                 </li>
+                <li class="nav-item ms-4">
+                  <a class="nav-link fw-bold" routerLink="/research-topic" >Research Topic</a>
+                </li>
+                <!-- <li class="nav-item ms-4">
+                  <a class="nav-link fw-bold" routerLink="/categories" >Categories</a>
+                </li> -->
                 <li class="nav-item ms-4">
                   <a class="nav-link fw-bold" routerLink="/contactus" >Contact Us</a>
                 </li>
@@ -93,7 +99,7 @@
 
         
         <span >
-          <div class="my-account-div"  *ngIf="loggedInUser == ''" style="border: 1px solid #000; padding: 5px; border-radius: 5px; margin-left: 50px;">
+          <div class="my-account-div"  *ngIf="loggedInUser == ''" style="border: 1px solid #000; padding: 5px; border-radius: 5px; margin-left: 50px; margin-top: 12px;">
             <div class="dropdown">
               <button class="dropdown-button" style="background-color: rgb(248, 249, 250);">
                 <i class="fa fa-user fs-4 text-center p-0"  aria-hidden="true"></i> My Account

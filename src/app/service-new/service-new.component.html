@@ -1,0 +1,17 @@
+<div class="main-container">
+    <div class="header-container">
+      <h1>{{ services.length }} Service Available</h1>
+      <hr>
+      <p>If you're at the start of your research journey and are trying to figure out which <strong>Service</strong> you want to focus on, you've come to the right place. Select your area of interest below to view a comprehensive collection of potential research ideas.</p>
+    </div>
+      
+    <div class="topics-container">
+      <div *ngIf="services.length === 0" class="no-topics">
+        No available topics with that alphabet.
+      </div>
+      <div *ngFor="let service of services" class="topic-box">
+        {{ service.pageTitle }}
+      </div>
+    </div>
+</div>
+  

@@ -1,0 +1,18 @@
+.container {
+    max-width: 600px;
+  }
+  
+  .card-header .btn-link {
+    text-decoration: none;
+    color: #007bff;
+  }
+  
+  .card-header .btn-link:hover {
+    text-decoration: none;
+    color: #0056b3;
+  }
+  
+.card {
+    margin-bottom: 10px;
+}
+  

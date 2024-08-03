@@ -1,0 +1,244 @@
+<div class="main-container">
+    <div class="left-section">
+      <!-- First Image Section (Form Section) -->
+      <div class="form-section">
+        <h2>How much will your dissertation cost?</h2>
+        <form #dissertationForm="ngForm" (ngSubmit)="checkPrice()">
+          <div class="form-group">
+            <select class="form-control" name="service" ngModel required>
+              <option value="" disabled selected>Dissertation Services</option>
+              <option *ngFor="let topic of sortedTopics" [value]="topic.title">
+                {{ topic.title }}
+              </option>
+            </select>
+          </div>
+          <div class="form-group">
+            <select class="form-control" name="serviceType" ngModel required>
+              <option value="" disabled selected>Select Service Type</option>
+              <option *ngFor="let service of serviceType" [value]="service.title">
+                {{ service.title }}
+              </option>
+              <!-- <option>Dissertation Full</option>
+              <option>Dissertation Proposal</option> -->
+            </select>
+          </div>
+          <h4>Select Your Academic Level</h4>
+          <div class="form-group">
+            <select class="form-control" name="academicLevel" ngModel required>
+              <option value="" disabled selected>Select Academic Level</option>
+              <option *ngFor="let academic of academicLevels" [value]="academic.title">
+                {{ academic.title }}
+              </option>
+              <!-- <option>Undergraduate</option>
+              <option>Graduate</option>
+              <option>PhD</option> -->
+            </select>
+          </div>
+          <h4>Select Deadline :</h4>
+          <div class="form-group">
+            <input type="date" class="form-control" name="deadline" ngModel required>
+          </div>
+          <button type="submit" class="btn btn-primary">Check Price</button>
+          <div *ngIf="errorMessage" class="alert alert-danger mt-3">{{ errorMessage }}</div>
+          <div *ngIf="totalPrice != 0" class="alert alert-success mt-3">Total Price is: {{ totalPrice }}</div>
+        </form>
+      </div>
+      <!-- Second Image Section (Blue Background) -->
+      <div class="blue-section">
+        <div class="position-relative d-flex justify-content-center">
+            <div class="d-flex justify-content-center align-items-center gap-2">
+                <img src="../../assets/chat-gpt.png" style="width: 50px;" alt="Chat GPT Icon" />
+                <span style="font-size: 30px;">ChatGPT</span>
+            </div>
+            <p style="font-size: 50px; color: red; position: absolute; top: 5px; opacity: 0.6;">X</p>
+        </div>
+        <p>
+          The services provided by Assignment Experts UK are 100% original and custom written.
+          We never use any paraphrasing tool, any software to generate content for e.g., Chat GPT and all other content writing tools.
+          We ensure that the work produced by our writers is self-written and 100% plagiarism-free.
+        </p>
+        <button>DISCOVER MORE</button>
+      </div>
+    </div>
+    <div class="right-section">
+      <div class="header-container">
+        <h1>1000+ FREE Research Topics & Title Ideas</h1>
+        <hr />
+        <p>
+          If you're at the start of your research journey and are trying to figure out which
+          <strong>research topic</strong> you want to focus on, you've come to the right place.
+          Select your area of interest below to view a comprehensive collection of potential research ideas.
+        </p>
+      </div>
+      <div class="alphabet-container">
+        <ng-container *ngFor="let letter of alphabet">
+          <input #radioButton type="radio" id="{{letter}}" name="alphabet" (click)="sortTopics(letter)" />
+          <label for="{{letter}}">{{ letter }}</label>
+        </ng-container>
+        <button class="clear-btn" (click)="clearTopic()">Clear</button>
+      </div>
+      <div class="topics-container">
+        <div *ngIf="sortedTopics.length === 0" class="no-topics">
+          No available topics with that alphabet.
+        </div>
+        <div *ngFor="let topic of sortedTopics" class="topic-box">
+          <p style="margin-bottom: 0;">{{ topic.title }}</p>
+          <!-- <p>{{ topic.description }}</p>
+          <p><strong>Price:</strong> {{ topic.price }}</p> -->
+        </div>
+      </div>
+    </div>
+</div>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div class="main-container">
+    <div class="left-section">
+      <div class="form-section">
+        <h2>How much will your dissertation cost?</h2>
+        <div class="form-group">
+          <select class="form-control">
+            <option disabled selected>Dissertation Services</option>
+            <option *ngFor="let topic of sortedTopics">
+                {{ topic.title }}
+            </option>
+          </select>
+        </div>
+        <div class="form-group">
+            <select class="form-control">
+                <option value="" disabled selected>Select Service Type</option>
+                <option>Dissertation Full</option>
+                <option>Dissertation Proposal</option>
+            </select>
+        </div>
+        <h4>Select Your Academic Level</h4>
+        <div class="form-group">
+          <select class="form-control">
+            <option>Undergraduate</option>
+            <option>Graduate</option>
+            <option>PhD</option>
+          </select>
+        </div>
+        <h4>Select Deadline :</h4>
+        <div class="form-group">
+          <input type="date" class="form-control" value="2024-06-27">
+        </div>
+        <button class="btn btn-primary">Check Price</button>
+      </div>
+      <div class="blue-section">
+        <img src="assets/image2.png" alt="Second Image" />
+        <p>
+          The services provided by Assignment Experts UK are 100% original and custom written.
+          We never use any paraphrasing tool, any software to generate content for e.g., Chat GPT and all other content writing tools.
+          We ensure that the work produced by our writers is self-written and 100% plagiarism-free.
+        </p>
+        <button>DISCOVER MORE</button>
+      </div>
+    </div>
+    <div class="right-section">
+      <div class="header-container">
+        <h1>1000+ FREE Research Topics & Title Ideas</h1>
+        <hr />
+        <p>
+          If you're at the start of your research journey and are trying to figure out which
+          <strong>research topic</strong> you want to focus on, you've come to the right place.
+          Select your area of interest below to view a comprehensive collection of potential research ideas.
+        </p>
+      </div>
+      <div class="alphabet-container">
+        <ng-container *ngFor="let letter of alphabet">
+          <input #radioButton type="radio" id="{{letter}}" name="alphabet" (click)="sortTopics(letter)" />
+          <label for="{{letter}}">{{ letter }}</label>
+        </ng-container>
+        <button class="clear-btn" (click)="clearTopic()">Clear</button>
+      </div>
+      <div class="topics-container">
+        <div *ngIf="sortedTopics.length === 0" class="no-topics">
+          No available topics with that alphabet.
+        </div>
+        <div *ngFor="let topic of sortedTopics" class="topic-box">
+          {{ topic.title }}
+        </div>
+      </div>
+    </div>
+</div>
+   -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div class="main-container">
+    <div class="left-section">
+      <div class="blue-section">
+        <div class="position-relative d-flex justify-content-center">
+            <div class="d-flex justify-content-center align-items-center gap-2">
+                <img src="../../assets/chat-gpt.png" style="width: 50px;" alt="Chat GPT Icon" />
+                <span style="font-size: 30px;">ChatGPT</span>
+            </div>
+            <p style="font-size: 50px; color: red; position: absolute; top: 5px; opacity: 0.6;">X</p>
+        </div>
+        <p>
+          The services provided by Assignment Experts UK are 100% original and custom written.
+          We never use any paraphrasing tool, any software to generate content for e.g., Chat GPT and all other content writing tools.
+          We ensure that the work produced by our writers is self-written and 100% plagiarism-free.
+        </p>
+        <button>DISCOVER MORE</button>
+      </div>
+    </div>
+    <div class="right-section">
+      <div class="header-container">
+        <h1>1000+ FREE Research Topics & Title Ideas</h1>
+        <hr />
+        <p>
+          If you're at the start of your research journey and are trying to figure out which
+          <strong>research topic</strong> you want to focus on, you've come to the right place.
+          Select your area of interest below to view a comprehensive collection of potential research ideas.
+        </p>
+      </div>
+      <div class="alphabet-container">
+        <ng-container *ngFor="let letter of alphabet">
+          <input #radioButton type="radio" id="{{letter}}" name="alphabet" (click)="sortTopics(letter)" />
+          <label for="{{letter}}">{{ letter }}</label>
+        </ng-container>
+        <button class="clear-btn" (click)="clearTopic()">Clear</button>
+      </div>
+      <div class="topics-container">
+        <div *ngIf="sortedTopics.length === 0" class="no-topics">
+          No available topics with that alphabet.
+        </div>
+        <div *ngFor="let topic of sortedTopics" class="topic-box">
+          {{ topic }}
+        </div>
+      </div>
+    </div>
+</div> -->

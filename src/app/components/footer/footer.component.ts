@@ -47,6 +47,8 @@ export class FooterComponent {
     { title: 'About Us', url: '/about' },
     // blogs
     { title: 'Blogs', url: '/' },
+    // categories
+    { title: 'Categories', url: '/categories' },
     // contactus
     { title: 'Contact Us', url: '/' },
     // samples

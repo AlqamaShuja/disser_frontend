@@ -6,7 +6,8 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class ServicesService {
-  private apiUrl = 'https://proassignmentbackend.smartedultd.co.uk/api/v1/';
+  // private apiUrl = 'https://proassignmentbackend.smartedultd.co.uk/api/v1/';
+  private apiUrl = 'http://localhost:3000/api/v1/';
 
   constructor(private http: HttpClient) {}
 
@@ -46,5 +47,10 @@ export class ServicesService {
   }
   deleteBlog(id:number):Observable<any>{
     return this.http.delete<any>(`${this.apiUrl}blogs/${id}`);
+  }
+
+  // Topic API
+  getAllTopic():Observable<any>{
+    return this.http.get<any>(`${this.apiUrl}topic`);
   }
 }

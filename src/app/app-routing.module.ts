@@ -33,6 +33,9 @@ import { ServiceListComponent } from './service-list/service-list.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { TermsAndConditions } from './terms-and-conditions/terms-and-conditions.component';
 import { ChatInterfaceComponent } from './admin/chat-interface/chat-interface.component';
+import { ResearchTopicsComponent } from './research-topics/research-topics.component';
+import { AssignmentCategoriesComponent } from './assignment-categories/assignment-categories.component';
+import { ServiceNewComponent } from './service-new/service-new.component';
 const routes: Routes = [
   {
     path: 'admin',
@@ -111,6 +114,14 @@ const routes: Routes = [
     component: AboutUsComponent,
   },
   {
+    path: 'research-topic',
+    component: ResearchTopicsComponent,
+  },
+  {
+    path: 'categories',
+    component: AssignmentCategoriesComponent,
+  },
+  {
     path: 'contactus',
     component: ContactUsComponent,
   },
@@ -152,7 +163,8 @@ const routes: Routes = [
   },
   {
     path: 'services',
-    component:ServiceListComponent
+    // component:ServiceListComponent
+    component: ServiceNewComponent
   },
   {
     path: 'blog/:slug',
