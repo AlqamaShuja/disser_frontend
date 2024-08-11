@@ -17,16 +17,29 @@
     text-decoration: none;
   }
 
-.curved {
-    
+
+  .curved {  
     height: 15vh;
-background-image: url('../../assets/images/login-image.jpeg') !important;
-background-position: top top;
-position: relative;
-background-size: 100% 100%;
-/* background-repeat: no-repeat; */
+    /* background-image: url('../../assets/images/login-image.jpeg'); */
+    /* background-color: #242A61; */
+    background: linear-gradient(45deg, #242A61, #150e42, #242A61) !important;
+    background-position: top top;
+    position: relative;
+    background-size: 100% 100%;
+    border-bottom-left-radius: 40px;
+    border-bottom-right-radius: 40px;
     width: 100%;
   }
+/* .curved {
+    
+  height: 15vh;
+  background-position: top top;
+  background-color: #242961;
+  position: relative;
+  background-size: 100% 100%;
+  width: 100%;
+} */
+
 
   .curved>div{
     width: 100%;
@@ -57,7 +70,8 @@ background-size: 100% 100%;
     text-align: center;
     font-weight: bold;
     color: #fff;
-        font-size: 2.5rem;
+    font-size: 2.5rem;
+    /* background-color: #242961; */
 
   }
 

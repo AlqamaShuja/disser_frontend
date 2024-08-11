@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { io, Socket } from 'socket.io-client';
+// import { io, Socket } from 'socket.io-client';
 
 interface TextMessage {
   senderId: string;
@@ -37,23 +37,24 @@ export class ChatInterfaceComponent implements OnInit {
 
   selectedUser: any;
   newMessage: string = '';
-  messages: Message[] = [
+  messages: Message[] = [ 
     // Example messages
     { senderId: 'user1_id', receiverId: 'admin_id', text: 'Hello, how are you?', time: new Date(), isRead: false, sendBy: 'user' },
     { senderId: 'admin_id', receiverId: 'user1_id', text: 'I am fine, thank you!', time: new Date(), isRead: true, sendBy: 'admin' },
     // Add more example messages here
   ];
 
-  socket: Socket;
+  // socket: Socket;
+  socket: string = '';
 
   constructor() {
-    this.socket = io('http://localhost:3000'); // Replace with your backend URL
+    // this.socket = io('http://localhost:3000'); // Replace with your backend URL
   }
 
   ngOnInit() {
-    this.socket.on('message', (message: Message) => {
-      this.messages.push(message);
-    });
+  //   this.socket.on('message', (message: Message) => {
+  //     this.messages.push(message);
+  //   });
   }
 
   selectUser(user: any) {
@@ -72,7 +73,7 @@ export class ChatInterfaceComponent implements OnInit {
         sendBy: 'admin',
       };
       this.messages.push(message);
-      this.socket.emit('message', message);
+      // this.socket.emit('message', message);
       this.newMessage = '';
     }
   }
@@ -105,7 +106,7 @@ export class ChatInterfaceComponent implements OnInit {
           sendBy: 'admin'
         };
         this.messages.push(message);
-        this.socket.emit('message', message);
+        // this.socket.emit('message', message);
       };
       reader.readAsDataURL(file);
     }

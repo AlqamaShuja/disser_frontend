@@ -1,6 +1,80 @@
 
 
-<app-slider [aboutUs]="false" style="position: relative; z-index: 1;"></app-slider>
+<!-- <app-slider [aboutUs]="false" style="position: relative; z-index: 1;"></app-slider> -->
+
+<div class="container-calc">  
+    <div class="overlay"></div>
+    <div class="content-wrapper-slide">
+        <div class="content">
+            <div class="title">
+                <h1>Dissertation Writing</h1>
+                <p>Dissertation Writing Help You To Write Your Assignment Without Using Any AI Tools</p>
+                <div class="buttons">
+                    <!-- <button class="live-chat">LIVE CHAT</button> -->
+                    <button class="order-now">ORDER NOW</button>
+                </div>
+            </div>
+        
+            <!-- <div class="reviews">
+                <span>ReviewsBank 4.9 <i class="fa fa-star"></i></span>
+                <span>Trustpilot 4.9 <i class="fa fa-star"></i></span>
+                <span>Sitejabbar 4.9 <i class="fa fa-star"></i></span>
+            </div> -->
+        </div>
+      
+        <div class="quote-form">
+            <h3>GET A PRICE QUOTE</h3>
+            <form #dissertationForm="ngForm" (ngSubmit)="checkPrice()">
+                <div class="form-group">
+                    <label>Dissertation Topic</label>
+                    <select class="form-control" name="service" ngModel required>
+                        <option value="" disabled selected>Select Dissertation Topic</option>
+                        <option *ngFor="let topic of sortedTopics" [value]="topic.title">
+                            {{ topic.title }}
+                        </option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Academic Level</label>
+                    <select class="form-control" name="academicLevel" ngModel required>
+                        <option value="" disabled selected>Select Academic Level</option>
+                        <option *ngFor="let academic of academicLevels" [value]="academic.title">
+                            {{ academic.title }}
+                        </option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Service Type</label>
+                    <select class="form-control" name="serviceType" ngModel required>
+                        <option value="" disabled selected>Select Service Type</option>
+                        <option *ngFor="let service of serviceType" [value]="service.title">
+                            {{ service.title }}
+                        </option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>No. of Pages</label>
+                    <input type="number" class="form-control" name="pages" ngModel min="1" required />
+                </div>
+                <div class="form-group">
+                    <label>Deadline</label>
+                    <input type="date" class="form-control" name="deadline" ngModel required />
+                </div>
+                <!-- <div class="form-group">
+                    <span>Cost Per Page: PKR <span id="costPerPage">{{ costPerPage }}</span></span>
+                    <span>Total Cost: PKR <span id="totalCost">{{ totalPrice }}</span></span>
+                </div> -->
+                <button type="submit" class="btn btn-primary">Check Price</button>
+                <div *ngIf="errorMessage" class="alert alert-danger mt-3">{{ errorMessage }}</div>
+                <div *ngIf="totalPrice != 0" class="alert alert-success mt-3">Total Price is: {{ totalPrice }}</div>
+            </form>
+        </div>
+    </div>
+</div>
+
+  
+
+
 <div style="position: relative; z-index: 2;">
     <style>
         .features-2 {
@@ -22,61 +96,8 @@
             padding: 15px;
         }
     </style>
+
 <section class="features-2" style="max-width:80%;margin:0 auto;">
-    <!-- <div class="container-fluid">
-        <div class="row justify-content-center">
-            <div class="col-xl-8">
-                <div class="section-heading mb-70 text-center">
-                    <h2 class="font-lg mb-30">Dissertation Writing - Your Best Assignment Writing Service</h2>
-                    <p>In the whirlwind of university life, tackling assignments can be a daunting task. Dissertation Writing is here to help, providing exceptional assignment writing services that take the stress out of your academic journey.</p>
-                    <p>With years of experience and a team of expert writers, we've earned the trust of countless students. Our diverse services cater to all your assignment needs, ensuring you receive tailored solutions that meet your specific requirements.</p>
-                    <p>Choose Dissertation Writing today and experience the peace of mind that comes with knowing your assignments are in safe hands.</p>
-                </div>
-            </div>
-        </div>
-
-        <div class="row ">
-            <div class="col-lg-4 col-md-6 col-xl-4 col-sm-6">
-
-                <div  class="feature-item feature-style-top mb-4 mb-lg-0">
-                    <div class="feature-icon">
-                        <i class="flaticon-teacher"></i>
-                    </div>
-                    <div class="feature-text">
-                        <h4>Plagiarism -Free Assignments</h4>
-                        <p>At Dissertation Writing, we understand the importance of originality and academic integrity. Our team of prestigious experts meticulously crafts every assignment from scratch, ensuring that your work is 100% plagiarism-free.</p>
-                    </div>
-                </div>
-            </div>
-
-            <div  class="col-lg-4 col-md-6 col-xl-4 col-sm-6">
-                <div class="feature-item feature-style-top mb-4 mb-lg-0">
-                    <div class="feature-icon">
-                        <i class="flaticon-layer"></i>
-                    </div>
-                    <div class="feature-text">
-                        <h4>Prestigious Experts</h4>
-                        <p>We boast a diverse pool of writers specializing in a wide range of subjects. Whether you need assistance with a complex scientific report, a persuasive essay, or a detailed case study, our experts possess the knowledge and experience to deliver exceptional results.</p>
-                    </div>
-                </div>
-            </div>
-
-            <div  class="col-lg-4 col-md-6 col-xl-4 col-sm-6">
-                <div class="feature-item feature-style-top mb-4 mb-lg-0">
-                    <div class="feature-icon">
-                        <i class="flaticon-video-camera"></i>
-                    </div>
-                    <div class="feature-text">
-                        <h4>All Subject Help</h4>
-                        <p>With Dissertation Writing, you can rest assured that your assignments will be handled by the best in the industry, guaranteeing high-quality, original work that meets the highest academic standards.</p>
-                    </div>
-                </div>
-            </div>
-
-        </div>
-    </div> -->
-    
-
     <div class="mt-3 ">
         <div class="row  gap-3"  >
           <div class="col-lg-5 mb-3 mb-lg-0">
@@ -100,13 +121,9 @@
           <div class="col-1" ></div>
           <div class="col-lg-5"  >
             <div class="p-3 p-lg-2" >
-              <h5>Our Mission</h5>
+              <h1>Our Mission</h1>
               <br />
-              <!-- <h3>A Few Words About the College</h3> -->
-              <h3>We&apos;re More Than Just a Dissertation Writing Service</h3>
-              <!-- <p>
-                <strong>Through compassion and academic excellence, we will pursue faith-based education.</strong>
-              </p> -->
+              <h4>We&apos;re More Than Just a Dissertation Writing Service</h4>
               <p>
                 We aim to be more than just a writing service. We view ourselves as partners in your academic journey, providing support and guidance at each step. We're here to make the dissertation writing process smoother for you. Contact us today to start your journey toward academic excellence.
               </p>
@@ -115,65 +132,14 @@
           </div>
         </div>
       </div>
-      
-      
-
 </section>
 
 
-<section class="about-3 section-padding-btm" style="max-width:30%;margin:0 auto">
-    <!-- <div class="container-fluid">
-        <div class="row align-items-center justify-content-between">
-            <div class="col-xl-5 col-lg-6">
+<div class="our-program-section">
+    <app-our-program></app-our-program>
+</div>
 
-                <div  class="about-img">
-                    <img src="../../assets/images/banner/img_9.png" alt="" class="img-fluid">
-                </div>
-            </div>
-            <div class="col-xl-6 col-lg-6">
-              
-                <div  class="about-content mt-5 mt-lg-0">
-                    <div class="heading mb-50">
-                        <span class="subheading">10 years Glory of success</span>
-                        <h2 class="font-lg">Why Choose Dissertation Writing?</h2>
-                    </div>
-
-                    <div class="about-features">
-                        <div class="feature-item feature-style-left">
-                            <div class="feature-icon icon-radius" style="background-color: #2f5464 !important">
-                                <i class="fa fa-video-camera"  aria-hidden="true"></i>
-                            </div>
-                            <div class="feature-text">
-                                <h4>Guaranteed On-Time Delivery</h4>
-                                <p>We understand that meeting deadlines is crucial for your academic success. Our team works diligently to ensure that your assignments are delivered promptly, without compromising the quality of our work.</p>
-                            </div>
-                        </div>
-
-                        <div class="feature-item feature-style-left">
-                            <div class="feature-icon icon-bg-2 icon-radius">
-                                <i class="fa fa-file" aria-hidden="true"></i>
-                            </div>
-                            <div class="feature-text">
-                                <h4>No Hidden Charges</h4>
-                                <p>We believe in transparency and honesty. Our pricing is clear and upfront, with no hidden fees or unexpected costs. You will only pay for the services you request, and we will always provide you with a detailed breakdown of our charges before you place your order.</p>
-                            </div>
-                        </div>
-
-                        <div class="feature-item feature-style-left">
-                            <div class="feature-icon icon-bg-1 icon-radius">
-                                <i class="fa fa-users" aria-hidden="true"></i>
-                            </div>
-                            <div class="feature-text">
-                                <h4>Unlimited Revisions</h4>
-                                <p>We are committed to providing you with the highest quality work that meets your exact requirements. That's why we offer unlimited revisions until you are completely satisfied with your assignment. Our team is dedicated to working with you until your assignment is perfect, ensuring that you receive the best possible grade.</p>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> -->
-
+<!-- <section class="about-3 section-padding-btm" style="max-width:30%;margin:0 auto">
     <div class="container text-center" >
 
         <h1 style="color: #242961;">Our Four Programs</h1>
@@ -229,56 +195,11 @@
     </div>
 </div>
 
-</section>
+</section> -->
 
 
-<section class="counter-section-2 section-padding-btm counter-section-assist" style="max-width:100%;margin:0 auto; ">
-    <!-- <div class="container-fluid">
-     
-        <div class="row align-items-center justify-content-center">
-            <div class="col-xl-5 pr-xl-5 col-lg-8">
-                <div class="section-heading mb-5 mb-xl-0 text-center text-xl-start">
-                    <span class="subheading">Analysis</span>
-                    <h2 class="font-lg">Our Numbers Speak For Us </h2>
-                </div>
-            </div>
-
-            <div class="col-xl-7">
-                <div class="row">
-                    <div class="col-lg-4 col-md-6">
-                        <div class="counter-box bg-1 mb-4 mb-lg-0">
-                            <i class="flaticon-man"></i>
-                            <div class="count">
-                                <span class="counter h2">5</span><span>k</span>
-                            </div>
-                            <p>Satisfied Students</p>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4 col-md-6">
-                        <div class="counter-box bg-2 mb-4 mb-lg-0">
-                            <i class="flaticon-infographic"></i>
-                            <div class="count">
-                                <span class="counter h2">200</span><span>+</span>
-                            </div>
-                            <p>Versatile Academic Writers </p>
-                        </div>
-                    </div>
-
-                    <div class="col-lg-4 col-md-6">
-                        <div class="counter-box bg-3">
-                            <i class="flaticon-satisfaction"></i>
-                            <div class="count">
-                                <span class="counter h2">100</span><span>%</span>
-                            </div>
-                            <p>Satisfaction</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div> -->
-
+<app-assistance-info></app-assistance-info>
+<!-- <section class="counter-section-2 section-padding-btm counter-section-assist" style="max-width:100%;margin:0 auto; ">
     <div class="container-fluid" style="display: flex; flex-wrap: wrap;">
         <div style=" padding: 30px 120px 20px 50px; flex: 1; background-color: #242961; color: #fff;  ">
             <div style="margin: 0 auto;">
@@ -357,19 +278,138 @@
         <div style="background-image: url('../../assets/images/banner/illustration.png'); background-size: cover; background-position: center;  flex: 1;">
         </div>
     </div>
+</section> -->
+
+
+<section class="choose-us-section-container">
+    <div class="container-fluid-choose-us">
+        <div class="choose-us-section">
+            <h1>Why Choose Us?</h1>
+            <h3>Choosing Human Writers Over AI for Your Dissertation</h3>
+        </div>
+        <div class="inner-content-choose-us">
+            <div class="content-wrapper-choose-us">
+                <div class="expert-section-choose-us">
+                    <div class="expert-card-choose-us">
+                        <img src="../../assets/user.png" alt="Corrie F" />
+                        <div class="expert-info-choose-us">
+                            <div class="expert-name-choose-us">Corrie F</div>
+                            <div class="expert-rating-choose-us">★★★★★</div>
+                            <div class="expert-qualifications-choose-us">
+                                <span>MBA</span><span>Management</span>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <div class="expert-card-choose-us">
+                        <img src="../../assets/user.png" alt="Sarah A" />
+                        <div class="expert-info-choose-us">
+                            <div class="expert-name-choose-us">Sarah A</div>
+                            <div class="expert-rating-choose-us">★★★★★</div>
+                            <div class="expert-qualifications-choose-us">
+                                <span>Ph.D.</span><span>Nursing & Ecology</span>
+                            </div>
+                        </div>
+                    </div>
+                  
+                    <h3>True professionals</h3>
+                    <p class="expert-description-choose-us">
+                        We only assign verified experts with advanced degrees and extensive expertise in your subject to every single order, be it a research paper or report.
+                    </p>
+                </div>
+
+                <div class="features-section-choose-us">
+                    <div class="feature-row-choose-us">
+                        <div class="feature-card-choose-us">
+                            <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="20" height="20" viewBox="0 0 512 512">
+                                <path fill="#E04F5F" d="M7.9,256C7.9,119,119,7.9,256,7.9C393,7.9,504.1,119,504.1,256c0,137-111.1,248.1-248.1,248.1C119,504.1,7.9,393,7.9,256z"></path>
+                                <path fill="#FFF" d="M408.1,206.8l-150.1-74.9c-1.3-0.6-2.7-0.6-4,0l-150.2,74.9c-1.7,0.8-2.7,2.4-2.7,4.3v29.6c0,1.6,0.8,3.1,2.2,4c1.4,0.9,3.1,1,4.5,0.3l148.2-74l148.1,74c0.6,0.3,1.3,0.5,2,0.5c0.9,0,1.8-0.2,2.5-0.7c1.4-0.9,2.2-2.4,2.2-4V211C410.8,209.2,409.8,207.5,408.1,206.8z"></path>
+                                <path fill="#FFF" d="M380.5 245.8L256 183.8 131.5 245.8 131.5 360.8 200.5 360.8 200.5 272.6 248 272.6 248 360.8 380.5 360.8z"></path>
+                                <path fill="#EA4949" d="M263.7 272.6H295.7V304.6H263.7z"></path>
+                            </svg>
+                            <div class="feature-info-choose-us">
+                                <div class="feature-title-choose-us">Simple language writing</div>
+                            </div>
+                        </div>
+                        <div class="feature-card-choose-us">
+                            <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="20" height="20" viewBox="0 0 512 512">
+                                <path fill="#49A0AE" d="M7.9,256C7.9,119,119,7.9,256,7.9C393,7.9,504.1,119,504.1,256c0,137-111.1,248.1-248.1,248.1C119,504.1,7.9,393,7.9,256z"></path>
+                                <path fill="#DFF1ED" d="M412.7,313.2c0,18.1-14.6,32.7-32.7,32.7H132c-18.1,0-32.7-14.6-32.7-32.7V168.8c0-18.1,14.6-32.7,32.7-32.7h248c18.1,0,32.7,14.6,32.7,32.7V313.2z"></path>
+                                <path fill="#DFF1ED" d="M337,389.9c-2.6,2.6-6.7,2.6-9.3,0l-31.3-44.3c-2.6-2.6-2.6-6.7,0-9.3h72c2.6,2.6,2.6,6.7,0,9.3L337,389.9z"></path>
+                                <g><path fill="#B7CAC4" d="M364.9 191.6c0 6.6-5.3 11.9-11.9 11.9H158.2c-6.6 0-11.9-5.3-11.9-11.9l0 0c0-6.6 5.3-11.9 11.9-11.9h194.9C359.6 179.8 364.9 185.1 364.9 191.6L364.9 191.6zM364.9 239.2c0 6.6-5.3 11.9-11.9 11.9H158.2c-6.6 0-11.9-5.3-11.9-11.9l0 0c0-6.6 5.3-11.9 11.9-11.9h194.9C359.6 227.3 364.9 232.6 364.9 239.2L364.9 239.2zM364.9 286.7c0 6.6-5.3 11.9-11.9 11.9H158.2c-6.6 0-11.9-5.3-11.9-11.9l0 0c0-6.6 5.3-11.9 11.9-11.9h194.9C359.6 274.8 364.9 280.1 364.9 286.7L364.9 286.7z"></path></g>
+                            </svg>
+                            <div class="feature-info-choose-us">
+                                <div class="feature-title-choose-us">Native US or UK expert</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="feature-card-choose-us">
+                        <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="20" height="20" viewBox="0 0 512 512">
+                            <path fill="#E5AA17" d="M7.9,256C7.9,119,119,7.9,256,7.9C393,7.9,504.1,119,504.1,256c0,137-111.1,248.1-248.1,248.1C119,504.1,7.9,393,7.9,256z"></path>
+                            <path fill="#FFF" d="M133.7 240.2H378.29999999999995V400H133.7z"></path>
+                            <path fill="#FFF" d="M349.7,340.1c-7.7,0-14-6.3-14-14v-136c0-44-35.8-79.8-79.8-79.8s-79.8,35.8-79.8,79.8c0,7.7-6.3,14-14,14s-14-6.3-14-14c0-59.4,48.3-107.7,107.7-107.7s107.7,48.3,107.7,107.7v136C363.7,333.9,357.4,340.1,349.7,340.1z"></path>
+                            <path fill="#E5AA17" d="M282.6,309.3c0-14.7-11.9-26.6-26.6-26.6c-14.7,0-26.6,11.9-26.6,26.6c0,9.4,4.8,17.6,12.1,22.3c0,4.2,0,9.4,0,11.5c0,8,6.5,14.5,14.5,14.5s14.5-6.5,14.5-14.5c0-2,0-7.2,0-11.4C277.8,326.9,282.6,318.6,282.6,309.3z"></path>
+                        </svg>
+                        <div class="feature-info-choose-us">
+                            <div class="feature-title-choose-us">English is a second language option</div>
+                        </div>
+                    </div>
+                    <h3 class="section-title-choose-us">We cater to your needs</h3>
+                    <p class="section-description-choose-us">
+                        Our services are fully customizable to your preferences: deadlines from 1 hour, a simple language option for ESL students, three levels of experts to choose from, and much, much more.
+                    </p>
+                </div>
+                
+                <div class="content-section-choose-us">
+                    <div class="originality-bar-choose-us">
+                        <p>96+ originality</p>
+                        <div class="bar-background">
+                            <div class="bar-foreground"></div>
+                        </div>
+                    </div>
+                    <div class="plagiarism-checkers-choose-us">
+                        <div class="checker">
+                            <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="20" height="20" viewBox="0 0 48 48">
+                                <path fill="#007aff" d="M11.731,22.253l0.375-3.5h13.75l-1.875,12.125h-3.75l1.125-6.5c0,0-7.301,4.636-7.926,11.511 s3.551,7.864,6.426,8.989v1c0,0-9.234-0.761-9.234-8.011l-0.064-1.915c0,0,0.048-7.074,6.673-13.574 C17.231,22.378,11.856,22.253,11.731,22.253z"></path>
+                                <path fill="#007aff" d="M37.856,2.878h-22c-2.625,0-2.955,2.976-2.955,2.976l-0.045,10.024h4v-9h17v25h-6l-1,4h7 c2.209,0,4-1.791,4-4V2.878z"></path>
+                            </svg>
+                            <span>TurnItIn</span>
+                        </div>
+                        <img src="../../assets/plag_scan_icon.png" alt="PlagScan" />
+                        <img src="../../assets/plagium.svg" alt="Plagium" />
+                    </div>
+                    <h3 class="section-title-choose-us">Original content</h3>
+                    <p class="section-description-choose-us">
+                        All papers are tailored from the ground up to ensure they will meet your specific requirements and pass any plagiarism checker.
+                    </p>
+                </div>
+            </div>            
+        </div>
+    </div>
 </section>
 
-<section class="counter-section-2 section-padding-btm" style="max-width:100%;margin:0 auto; "  >
-    <div class="container-fluid" style="position: relative;">
-        <div style="height:350px; border: 1px solid black; background-color: #242961;">
-        </div>
+<app-whatmakesusbest-sect></app-whatmakesusbest-sect>
+
+<app-how-to-order-sect></app-how-to-order-sect>
+
+<app-quality-guaranteed-sect></app-quality-guaranteed-sect>
+
+<app-personal-manager-sect></app-personal-manager-sect>
+
+<app-improve-grades-sect></app-improve-grades-sect>
+
+<app-faq-section></app-faq-section>
+
+
+<!-- <section class="choose-us-section-container" style="max-width:100%;margin: auto; padding: 10px;"  >
+    <div class="container-fluid-choose-us" style="position: relative;">
+        <div class="choose-us-section" style="border: 1px solid black; background-color: #242961;border-radius: 5px;"></div>
         
         <div style=" width: 80%; margin: 0 auto; position: absolute; top: 50px; left: 50%; transform: translateX(-50%);  padding: 20px; box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1); z-index: 2;">
-            <h1 style="color:#fff">Choosing Human Writers Over AI for Your Dissertation</h1>
+            <h1 style="color:#fff; text-align: center;">Why Choose Us?</h1>
+            <h3 style="color:#fff; text-align: center;">Choosing Human Writers Over AI for Your Dissertation</h3>
             <br />
             <div style="display: flex; flex-wrap: wrap;" >
-
-            
                 <div class="expert-section">
                     <div class="expert-card">
                       <img src="../../assets/user.png" alt="Corrie F" />
@@ -398,125 +438,95 @@
                       We only assign verified experts with advanced degrees and extensive expertise in your subject to every single order, be it a research paper or report.
                     </p>
                 </div>
-            <!-- <div style="border: 1px solid grey; border-radius: 15px; overflow: hidden; max-width: 300px; margin: 0 auto; background-color: #fff;">
-                <div style="background-image: url(''); background-size: cover; background-position: center; height: 150px;">
-                    
-                </div>
-                <div style="text-align: center; margin-top: -40px;">
-                    <img src="path-to-placeholder-image.jpg" alt="Profile Image" style="border-radius: 50%; border: 2px solid white; width: 80px; height: 80px;">
-                </div>
-                <div style="padding: 15px;">
-                    <h3 style="text-align: center;">Biblical Studies</h3>
-                    <p style="font-size: 14px; text-align: center;">
-                        There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable.
-                    </p>
-                    <div style="text-align: center;">
-                        <button style="background-color: #3b5998; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">
-                            View Details
-                        </button>
-                    </div>
-                </div>
-            </div> -->
 
-            <div class="features-section">
-                <div class="feature-row">
-                  <div class="feature-card">
-                    <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="20" height="20" viewBox="0 0 512 512">
-                        <path fill="#E04F5F" d="M7.9,256C7.9,119,119,7.9,256,7.9C393,7.9,504.1,119,504.1,256c0,137-111.1,248.1-248.1,248.1C119,504.1,7.9,393,7.9,256z"></path><path fill="#FFF" d="M408.1,206.8l-150.1-74.9c-1.3-0.6-2.7-0.6-4,0l-150.2,74.9c-1.7,0.8-2.7,2.4-2.7,4.3v29.6c0,1.6,0.8,3.1,2.2,4c1.4,0.9,3.1,1,4.5,0.3l148.2-74l148.1,74c0.6,0.3,1.3,0.5,2,0.5c0.9,0,1.8-0.2,2.5-0.7c1.4-0.9,2.2-2.4,2.2-4V211C410.8,209.2,409.8,207.5,408.1,206.8z"></path><path fill="#FFF" d="M380.5 245.8L256 183.8 131.5 245.8 131.5 360.8 200.5 360.8 200.5 272.6 248 272.6 248 360.8 380.5 360.8z"></path><path fill="#EA4949" d="M263.7 272.6H295.7V304.6H263.7z"></path>
-                    </svg>
-                    <div class="feature-info">
-                      <div class="feature-title">Simple language writing</div>
-                    </div>
-                  </div>
-                  <div class="feature-card">
-                    <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="20" height="20" viewBox="0 0 512 512">
-                        <path fill="#49A0AE" d="M7.9,256C7.9,119,119,7.9,256,7.9C393,7.9,504.1,119,504.1,256c0,137-111.1,248.1-248.1,248.1C119,504.1,7.9,393,7.9,256z"></path><path fill="#DFF1ED" d="M412.7,313.2c0,18.1-14.6,32.7-32.7,32.7H132c-18.1,0-32.7-14.6-32.7-32.7V168.8c0-18.1,14.6-32.7,32.7-32.7h248c18.1,0,32.7,14.6,32.7,32.7V313.2z"></path><path fill="#DFF1ED" d="M337,389.9c-2.6,2.6-6.7,2.6-9.3,0l-31.3-44.3c-2.6-2.6-2.6-6.7,0-9.3h72c2.6,2.6,2.6,6.7,0,9.3L337,389.9z"></path><g><path fill="#B7CAC4" d="M364.9 191.6c0 6.6-5.3 11.9-11.9 11.9H158.2c-6.6 0-11.9-5.3-11.9-11.9l0 0c0-6.6 5.3-11.9 11.9-11.9h194.9C359.6 179.8 364.9 185.1 364.9 191.6L364.9 191.6zM364.9 239.2c0 6.6-5.3 11.9-11.9 11.9H158.2c-6.6 0-11.9-5.3-11.9-11.9l0 0c0-6.6 5.3-11.9 11.9-11.9h194.9C359.6 227.3 364.9 232.6 364.9 239.2L364.9 239.2zM364.9 286.7c0 6.6-5.3 11.9-11.9 11.9H158.2c-6.6 0-11.9-5.3-11.9-11.9l0 0c0-6.6 5.3-11.9 11.9-11.9h194.9C359.6 274.8 364.9 280.1 364.9 286.7L364.9 286.7z"></path></g>
+                <div class="features-section">
+                    <div class="feature-row">
+                    <div class="feature-card">
+                        <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="20" height="20" viewBox="0 0 512 512">
+                            <path fill="#E04F5F" d="M7.9,256C7.9,119,119,7.9,256,7.9C393,7.9,504.1,119,504.1,256c0,137-111.1,248.1-248.1,248.1C119,504.1,7.9,393,7.9,256z"></path><path fill="#FFF" d="M408.1,206.8l-150.1-74.9c-1.3-0.6-2.7-0.6-4,0l-150.2,74.9c-1.7,0.8-2.7,2.4-2.7,4.3v29.6c0,1.6,0.8,3.1,2.2,4c1.4,0.9,3.1,1,4.5,0.3l148.2-74l148.1,74c0.6,0.3,1.3,0.5,2,0.5c0.9,0,1.8-0.2,2.5-0.7c1.4-0.9,2.2-2.4,2.2-4V211C410.8,209.2,409.8,207.5,408.1,206.8z"></path><path fill="#FFF" d="M380.5 245.8L256 183.8 131.5 245.8 131.5 360.8 200.5 360.8 200.5 272.6 248 272.6 248 360.8 380.5 360.8z"></path><path fill="#EA4949" d="M263.7 272.6H295.7V304.6H263.7z"></path>
                         </svg>
-                    <div class="feature-info">
-                      <div class="feature-title">Native US or UK expert</div>
+                        <div class="feature-info">
+                        <div class="feature-title">Simple language writing</div>
+                        </div>
                     </div>
-                  </div>
+                    <div class="feature-card">
+                        <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="20" height="20" viewBox="0 0 512 512">
+                            <path fill="#49A0AE" d="M7.9,256C7.9,119,119,7.9,256,7.9C393,7.9,504.1,119,504.1,256c0,137-111.1,248.1-248.1,248.1C119,504.1,7.9,393,7.9,256z"></path><path fill="#DFF1ED" d="M412.7,313.2c0,18.1-14.6,32.7-32.7,32.7H132c-18.1,0-32.7-14.6-32.7-32.7V168.8c0-18.1,14.6-32.7,32.7-32.7h248c18.1,0,32.7,14.6,32.7,32.7V313.2z"></path><path fill="#DFF1ED" d="M337,389.9c-2.6,2.6-6.7,2.6-9.3,0l-31.3-44.3c-2.6-2.6-2.6-6.7,0-9.3h72c2.6,2.6,2.6,6.7,0,9.3L337,389.9z"></path><g><path fill="#B7CAC4" d="M364.9 191.6c0 6.6-5.3 11.9-11.9 11.9H158.2c-6.6 0-11.9-5.3-11.9-11.9l0 0c0-6.6 5.3-11.9 11.9-11.9h194.9C359.6 179.8 364.9 185.1 364.9 191.6L364.9 191.6zM364.9 239.2c0 6.6-5.3 11.9-11.9 11.9H158.2c-6.6 0-11.9-5.3-11.9-11.9l0 0c0-6.6 5.3-11.9 11.9-11.9h194.9C359.6 227.3 364.9 232.6 364.9 239.2L364.9 239.2zM364.9 286.7c0 6.6-5.3 11.9-11.9 11.9H158.2c-6.6 0-11.9-5.3-11.9-11.9l0 0c0-6.6 5.3-11.9 11.9-11.9h194.9C359.6 274.8 364.9 280.1 364.9 286.7L364.9 286.7z"></path></g>
+                            </svg>
+                        <div class="feature-info">
+                        <div class="feature-title">Native US or UK expert</div>
+                        </div>
+                    </div>
+                    </div>
+                    <div class="feature-card" style="margin: 0 auto; max-width: 250px;">
+                        <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="20" height="20" viewBox="0 0 512 512">
+                            <path fill="#E5AA17" d="M7.9,256C7.9,119,119,7.9,256,7.9C393,7.9,504.1,119,504.1,256c0,137-111.1,248.1-248.1,248.1C119,504.1,7.9,393,7.9,256z"></path><path fill="#FFF" d="M133.7 240.2H378.29999999999995V400H133.7z"></path><path fill="#FFF" d="M349.7,340.1c-7.7,0-14-6.3-14-14v-136c0-44-35.8-79.8-79.8-79.8s-79.8,35.8-79.8,79.8c0,7.7-6.3,14-14,14s-14-6.3-14-14c0-59.4,48.3-107.7,107.7-107.7s107.7,48.3,107.7,107.7v136C363.7,333.9,357.4,340.1,349.7,340.1z"></path><path fill="#E5AA17" d="M282.6,309.3c0-14.7-11.9-26.6-26.6-26.6c-14.7,0-26.6,11.9-26.6,26.6c0,9.4,4.8,17.6,12.1,22.3c0,4.2,0,9.4,0,11.5c0,8,6.5,14.5,14.5,14.5s14.5-6.5,14.5-14.5c0-2,0-7.2,0-11.4C277.8,326.9,282.6,318.6,282.6,309.3z"></path>
+                            </svg>
+                        <div class="feature-info">
+                        <div class="feature-title">'English is a second language' option</div>
+                    </div>
+                    </div>
+                    <h3 class="section-title">We cater to your needs</h3>
+                    <p class="section-description">
+                    Our services are fully customizable to your preferences: deadlines from 1 hour, a simple language option for ESL students, three levels of experts to choose from, and much, much more.
+                    </p>
                 </div>
-                <div class="feature-card" style="margin: 0 auto; max-width: 250px;">
-                    <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="20" height="20" viewBox="0 0 512 512">
-                        <path fill="#E5AA17" d="M7.9,256C7.9,119,119,7.9,256,7.9C393,7.9,504.1,119,504.1,256c0,137-111.1,248.1-248.1,248.1C119,504.1,7.9,393,7.9,256z"></path><path fill="#FFF" d="M133.7 240.2H378.29999999999995V400H133.7z"></path><path fill="#FFF" d="M349.7,340.1c-7.7,0-14-6.3-14-14v-136c0-44-35.8-79.8-79.8-79.8s-79.8,35.8-79.8,79.8c0,7.7-6.3,14-14,14s-14-6.3-14-14c0-59.4,48.3-107.7,107.7-107.7s107.7,48.3,107.7,107.7v136C363.7,333.9,357.4,340.1,349.7,340.1z"></path><path fill="#E5AA17" d="M282.6,309.3c0-14.7-11.9-26.6-26.6-26.6c-14.7,0-26.6,11.9-26.6,26.6c0,9.4,4.8,17.6,12.1,22.3c0,4.2,0,9.4,0,11.5c0,8,6.5,14.5,14.5,14.5s14.5-6.5,14.5-14.5c0-2,0-7.2,0-11.4C277.8,326.9,282.6,318.6,282.6,309.3z"></path>
+                
+                <div class="content-section">
+                    <div class="originality-bar">
+                    <p>96+ originality</p>
+                    <div style="background: #e0e0e0; border-radius: 5px; height: 10px; width: 100%;">
+                        <div style="background: #242961; width: 96%; height: 100%; border-radius: 5px;"></div>
+                    </div>
+                    </div>
+                
+                    <div class="plagiarism-checkers">
+                    <div style="display: flex; gap: 10px; align-items: center;">
+                        <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="20" height="20" viewBox="0 0 48 48">
+                            <path fill="#007aff" d="M11.731,22.253l0.375-3.5h13.75l-1.875,12.125h-3.75l1.125-6.5c0,0-7.301,4.636-7.926,11.511 s3.551,7.864,6.426,8.989v1c0,0-9.234-0.761-9.234-8.011l-0.064-1.915c0,0,0.048-7.074,6.673-13.574 C17.231,22.378,11.856,22.253,11.731,22.253z"></path><path fill="#007aff" d="M37.856,2.878h-22c-2.625,0-2.955,2.976-2.955,2.976l-0.045,10.024h4v-9h17v25h-6l-1,4h7 c2.209,0,4-1.791,4-4V2.878z"></path>
                         </svg>
-                    <div class="feature-info">
-                    <div class="feature-title">'English is a second language' option</div>
-                  </div>
-                </div>
-                <h3 class="section-title">We cater to your needs</h3>
-                <p class="section-description">
-                  Our services are fully customizable to your preferences: deadlines from 1 hour, a simple language option for ESL students, three levels of experts to choose from, and much, much more.
-                </p>
-            </div>
-            <!-- <div style="border: 1px solid grey; border-radius: 15px; overflow: hidden; max-width: 300px; margin: 0 auto; background-color: #fff;">
-                <div style="background-image: url(''); background-size: cover; background-position: center; height: 150px;"></div>
-                <div style="text-align: center; margin-top: -40px;">
-                    <img src="path-to-placeholder-image.jpg" alt="Profile Image" style="border-radius: 50%; border: 2px solid white; width: 80px; height: 80px;">
-                </div>
-                <div style="padding: 15px;">
-                    <h3 style="text-align: center;">Biblical Studies</h3>
-                    <p style="font-size: 14px; text-align: center;">
-                        There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable.
-                    </p>
-                    <div style="text-align: center;">
-                        <button style="background-color: #3b5998; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">
-                            View Details
-                        </button>
+                        <span style="font-size: 12px;">TurnItIn</span>
                     </div>
-                </div>
-            </div> -->
-            
-            <div class="content-section">
-                <div class="originality-bar">
-                  <p>96+ originality</p>
-                  <div style="background: #e0e0e0; border-radius: 5px; height: 10px; width: 100%;">
-                    <div style="background: #242961; width: 96%; height: 100%; border-radius: 5px;"></div>
-                  </div>
-                </div>
-              
-                <div class="plagiarism-checkers">
-                  <!-- <img src="assets/icons/turnitin.svg" alt="Turnitin" /> -->
-                   <div style="display: flex; gap: 10px; align-items: center;">
-                       <svg xmlns="http://www.w3.org/2000/svg" x="0px" y="0px" width="20" height="20" viewBox="0 0 48 48">
-                         <path fill="#007aff" d="M11.731,22.253l0.375-3.5h13.75l-1.875,12.125h-3.75l1.125-6.5c0,0-7.301,4.636-7.926,11.511 s3.551,7.864,6.426,8.989v1c0,0-9.234-0.761-9.234-8.011l-0.064-1.915c0,0,0.048-7.074,6.673-13.574 C17.231,22.378,11.856,22.253,11.731,22.253z"></path><path fill="#007aff" d="M37.856,2.878h-22c-2.625,0-2.955,2.976-2.955,2.976l-0.045,10.024h4v-9h17v25h-6l-1,4h7 c2.209,0,4-1.791,4-4V2.878z"></path>
-                       </svg>
-                       <span style="font-size: 12px;">TurnItIn</span>
-                   </div>
-                  <img src="../../assets/plag_scan_icon.png" alt="PlagScan" />
-                  <br />
-                  <img src="../../assets/plagium.svg" alt="Plagium" />
-                  <!-- <img src="assets/icons/unicheck.svg" alt="Unicheck" /> -->
-                </div>
-              
-                <h3 class="section-title">Original content</h3>
-                <p class="section-description">
-                  All papers are tailored from the ground up to ensure they will meet your specific requirements and pass any plagiarism checker.
-                </p>
-            </div>
-            <!-- <div style="border: 1px solid grey; border-radius: 15px; overflow: hidden; max-width: 300px; margin: 0 auto; background-color: #fff;">
-                <div style="background-image: url(''); background-size: cover; background-position: center; height: 150px;"></div>
-                <div style="text-align: center; margin-top: -40px;">
-                    <img src="path-to-placeholder-image.jpg" alt="Profile Image" style="border-radius: 50%; border: 2px solid white; width: 80px; height: 80px;">
-                </div>
-                <div style="padding: 15px;">
-                    <h3 style="text-align: center;">Biblical Studies</h3>
-                    <p style="font-size: 14px; text-align: center;">
-                        There are many variations of passages of Lorem Ipsum available, but the majority have suffered alteration in some form, by injected humour, or randomised words which don't look even slightly believable.
-                    </p>
-                    <div style="text-align: center;">
-                        <button style="background-color: #3b5998; color: white; border: none; padding: 10px 20px; border-radius: 5px; cursor: pointer;">
-                            View Details
-                        </button>
+                    <img src="../../assets/plag_scan_icon.png" alt="PlagScan" />
+                    <br />
+                    <img src="../../assets/plagium.svg" alt="Plagium" />
                     </div>
+                
+                    <h3 class="section-title">Original content</h3>
+                    <p class="section-description">
+                    All papers are tailored from the ground up to ensure they will meet your specific requirements and pass any plagiarism checker.
+                    </p>
                 </div>
-            </div> -->
-        </div>            
+            </div>            
         </div>
     </div>
-    
-</section>
+</section> -->
+
+
+<app-home-testimonial-section></app-home-testimonial-section>
+
+<!-- <section
+  class="testimonial-3 section-padding"
+  style="background-color: #242961; margin: 20px; border-radius: 6px;"
+>
+  <div class="container-fluid" style="max-width: 80%; margin: 0 auto">
+    <div class="row justify-content-center">
+      <div class="col-xl-6">
+        <div class="section-heading text-center">
+          <h2 class="font-lg" style="color: #fff">Our Students Says</h2>
+          <p style="color: #fff">
+            Discover Your Perfect Program In Our Courses.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="row align-items-center">
+      <app-testimonials [aboutUs]="true"></app-testimonials>
+    </div>
+  </div>
+</section> -->
+
+
 <!-- <app-how-to-write></app-how-to-write> -->
 <!-- <app-samples></app-samples> -->
 </div>

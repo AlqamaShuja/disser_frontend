@@ -6,7 +6,8 @@ import { Observable } from 'rxjs';
   providedIn: 'root'
 })
 export class TestimonialService {
-  private apiUrl = 'https://proassignmentbackend.smartedultd.co.uk/api/v1/';
+  // private apiUrl = 'https://proassignmentbackend.smartedultd.co.uk/api/v1/';
+  private apiUrl = 'https://dissertationbackend.dissertationwriting.help/api/v1/';
 
   constructor(private http: HttpClient) {}
 

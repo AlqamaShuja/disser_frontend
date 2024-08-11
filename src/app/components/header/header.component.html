@@ -70,14 +70,14 @@
                 <li class="nav-item ms-4">
                   <a class="nav-link fw-bold" routerLink="/about">About Us</a>
                 </li>
-                <li class="nav-item ms-4">
+                <!-- <li class="nav-item ms-4">
                   <a class="nav-link fw-bold" routerLink="/services">Our Services</a>
-                </li>
+                </li> -->
                 <li class="nav-item ms-4">
                   <a class="nav-link fw-bold" routerLink="/order">Order Now</a>
                 </li>
                 <li class="nav-item ms-4">
-                  <a class="nav-link fw-bold" routerLink="/research-topic" >Research Topic</a>
+                  <a class="nav-link fw-bold" routerLink="/research-topic" >Dissertation Topic</a>
                 </li>
                 <!-- <li class="nav-item ms-4">
                   <a class="nav-link fw-bold" routerLink="/categories" >Categories</a>
@@ -98,29 +98,28 @@
         </div>
 
         
-        <span >
-          <div class="my-account-div"  *ngIf="loggedInUser == ''" style="border: 1px solid #000; padding: 5px; border-radius: 5px; margin-left: 50px; margin-top: 12px;">
+        <!-- <span > -->
+          <div class="my-account-div"  *ngIf="loggedInUser == ''" style="border: 1px solid #000; padding: 5px; border-radius: 5px; margin-left: 50px; margin-top: 12px; height: 45px !important;">
             <div class="dropdown">
-              <button class="dropdown-button" style="background-color: rgb(248, 249, 250);">
+              <button class="dropdown-button" style="">
                 <i class="fa fa-user fs-4 text-center p-0"  aria-hidden="true"></i> My Account
               </button>
-              <!-- <div class="dropdown-content" style="background-color: rgb(248, 249, 250);">
+              <div class="dropdown-content" style="">
                 <a routerLink="/login">Login</a>
                 <a routerLink="/register">Register</a>
-              </div> -->
+              </div>
             </div>
           </div>
-          <div class="dropdown" style="padding: 25px 0px 0px 0px; margin-left: 10%;" *ngIf="loggedInUser" style="background-color: rgb(248, 249, 250);">
-            <button class="dropdown-button" style="background-color: rgb(248, 249, 250);">
+          <div class="dropdown" style="padding: 25px 0px 0px 0px; margin-left: 10%; display: flex; justify-content: center; align-items: center;" *ngIf="loggedInUser" style="">
+            <button class="dropdown-button" style="margin-top: 20px;">
               <i class="fa fa-user fs-4 text-center p-0" aria-hidden="true"></i> Welcome {{loggedInUser.name}}
             </button>
-            <div class="dropdown-content" style="background-color: rgb(248, 249, 250);">
+            <div class="dropdown-content">
               <a routerLink="/user-details">View Profile</a>
               <a href="javascript:;" (click)="logout()">Logout</a>
             </div>
           </div>
-    
-        </span>
+        <!-- </span> -->
       </nav>
 
       

@@ -14,6 +14,7 @@ export class AppComponent implements OnInit {
   isAdminLogin: boolean = false;
   isAdmin: boolean = false;
   isSidebarOpen = true;
+  showFooter: boolean = true;
 
   constructor(
     private router: Router,
@@ -41,6 +42,13 @@ export class AppComponent implements OnInit {
           this.isAdmin = false;
         }
       }
+
+      // Hide the footer when on the /user-details page
+      if (event.url.includes('/user-details')) {
+        this.showFooter = false;
+      } else {
+          this.showFooter = true;
+      }
     });
   }
 
@@ -52,8 +60,10 @@ export class AppComponent implements OnInit {
   }
 
   getServices(): void {
-    this.serviceService.getAllServices().subscribe((res: any) => {
-      this.services = res.data;
+    this.serviceService.getAllTopic().subscribe((res: any) => {
+      console.log(res, "===res:app.service");
+      
+      this.services = res;
     });
   }
 

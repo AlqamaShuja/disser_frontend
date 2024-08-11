@@ -26,8 +26,9 @@ export class InvoiceComponent {
   ngOnInit(): void {
     this.orderService.getOrderById(this.orderId).subscribe((res) => {
       var loggedInUser = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')||""):"";
-      if(loggedInUser.email === res.data[0].Email){
-        this.invoice = res.data[0];
+      console.log(res.data,'THE IVOUICE:GetOrderById')
+      if(loggedInUser.email === res.data.Email){
+        this.invoice = res.data;
         console.log(this.invoice,'THE IVOUICE')
       }else{
         localStorage.clear();

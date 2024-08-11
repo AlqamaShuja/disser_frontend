@@ -35,7 +35,8 @@ export class AdminSamplesComponent {
     defaultParagraphSeparator: '',
     defaultFontName: '',
     defaultFontSize: '',
-    uploadUrl: 'https://proassignmentbackend.smartedultd.co.uk/api/v1/upload/fileuploadAdmin',
+    // uploadUrl: 'https://proassignmentbackend.smartedultd.co.uk/api/v1/upload/fileuploadAdmin',
+    uploadUrl: 'https://dissertationbackend.dissertationwriting.help/api/v1/upload/fileuploadAdmin',
     customClasses: [
       {
         name: 'quote',

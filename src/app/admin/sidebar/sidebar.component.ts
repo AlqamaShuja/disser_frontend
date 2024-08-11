@@ -58,7 +58,7 @@ export class SidebarComponent implements OnInit {
 
   logout(): void {
     localStorage.clear();
-    this.router.navigate(['/admin']);
+    this.router.navigate(['/admin/login']);
   }
 
   selectedClass(value: string): string {

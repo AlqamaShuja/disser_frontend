@@ -1,33 +1,132 @@
+.form-row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.form-group {
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.form-group.col-md-4 {
+  flex: 0 0 33.3333%;
+  max-width: 33.3333%;
+}
+
+.form-group.col-md-12 {
+  flex: 0 0 100%;
+  max-width: 100%;
+}
+
+.form-control {
+  width: 100%;
+  box-sizing: border-box;
+  background-color: white;
+  border: 1px solid #000;
+  height: 45px;
+}
+
+.btn-block {
+  width: 100%;
+}
+
 .is-invalid {
-    border-color: red; /* Change border color */
-    background-color: #ffeeee; /* Change background color */
-    color: #ff0000; /* Change text color */
-  }
+  border-color: red;
+  background-color: #ffeeee;
+  color: #ff0000; 
+}
 
-  input{
-    text-transform: capitalize;
-    font-size: 12px;
-    height: 45px;
-    border: 1px solid;
-    background: #fff;
-  }
-  select{
-    text-transform: capitalize;
-    font-size: 12px;
-    height: 45px;
-    border: 1px solid;
-    background: #fff;
-  }
+.total-price-box {
+  width: 100%;
+  padding: 10px;
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+  border-radius: 4px;
+  margin-top: 10px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 16px;
+}
 
-  textarea{
-    text-transform: capitalize;
-    font-size: 12px;
+.bg-my-color {
+  background-color: #242961;
+}
 
-    border: 1px solid;
-    background: #fff;
-  }
+.bg-my-color:hover {
+  background-color: #252e8d;
+}
 
-  input[type="checkbox"]{
-    height: 12px !important;
-    margin-right: 2px;
-  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* .form-row {
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.form-group {
+  padding: 10px;
+  box-sizing: border-box;
+}
+
+.form-group.col-md-6 {
+  flex: 0 0 50%;
+  max-width: 50%;
+}
+
+.form-control {
+  width: 100%;
+  box-sizing: border-box;
+  background-color: white;
+  border: 1px solid #000;
+}
+
+.btn-block {
+  width: 100%;
+}
+
+.is-invalid {
+  border-color: red;
+  background-color: #ffeeee;
+  color: #ff0000; 
+}
+
+.total-price-box {
+  width: 100%;
+  padding: 10px;
+  background-color: #d4edda;
+  color: #155724;
+  border: 1px solid #c3e6cb;
+  border-radius: 4px;
+  margin-top: 10px;
+  text-align: center;
+  font-weight: bold;
+  font-size: 16px;
+}
+
+
+.bg-my-color {
+  background-color: #242961;
+}
+
+.bg-my-color:hover {
+  background-color: #252e8d;
+} */

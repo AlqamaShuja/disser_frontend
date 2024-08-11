@@ -7,7 +7,10 @@ import { Observable } from 'rxjs';
 })
 export class SamplesService {
 
-  private apiUrl = 'https://proassignmentbackend.smartedultd.co.uk/api/v1/samples';
+  // private apiUrl = 'https://proassignmentbackend.smartedultd.co.uk/api/v1/samples';
+  // private apiUrl = 'https://dissertationbackend.dissertationwriting.help/api/v1/samples';
+  private apiUrl = 'http://localhost:3000/api/v1/samples';
+  private apiUrlOurSamples = 'http://localhost:3000/api/v1/';
 
   constructor(private http: HttpClient) {}
 
@@ -32,5 +35,10 @@ export class SamplesService {
 
   getSampleBySlug(slug:any):Observable<any>{
     return this.http.get<any>(`${this.apiUrl}/${slug}`);
+  }
+  getSampleByLevelTypeTopicAndCatPoint(level: string, type: string, topic: string, catPoint: string): Observable<any> {
+    console.log(`${this.apiUrlOurSamples}level-samples/${level}/${type}/${topic}/${catPoint}`, "helloooooo");
+    
+    return this.http.get<any>(`${this.apiUrlOurSamples}level-samples/${level}/${type}/${topic}/${catPoint}`);
   }
 }

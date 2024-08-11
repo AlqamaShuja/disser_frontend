@@ -1,0 +1,175 @@
+.how-to-order-container {
+    text-align: center;
+    padding: 40px;
+    min-height: 600px;
+    margin-top: 30px;
+    display: flex;
+    justify-content: center;
+  }
+  
+  .steps-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-top: 25px;
+  }
+  
+  .step-left img {
+    width: 100%;
+    max-width: 400px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+  }
+  
+  .step-right {
+    width: 60%;
+    padding-left: 20px;
+  }
+  
+  .tabs {
+    display: flex;
+    justify-content: flex-start;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    border-bottom: 2px solid #e0e0e0;
+  }
+  
+  .tabs li {
+    margin-right: 20px;
+    padding: 10px 0;
+    cursor: pointer;
+    position: relative;
+  }
+  
+  .tabs li.active {
+    font-weight: bold;
+    border-bottom: 2px solid #242961;
+  }
+  
+  .tab-content {
+    text-align: left;
+    margin-top: 20px;
+  }
+  
+  .tab-content h3 {
+    font-size: 24px;
+    margin-top: 0;
+  }
+  
+  .tab-content p {
+    font-size: 16px;
+    margin: 10px 0;
+  }
+  
+  .premium-quality {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+  }
+  
+  .premium-quality img {
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+  }
+  
+  .premium-quality p {
+    margin: 0;
+  }
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/* .how-to-order-container {
+    text-align: center;
+    padding: 40px;
+  }
+  
+  .steps-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    margin-top: 20px;
+  }
+  
+  .step-left img {
+    width: 100%;
+    max-width: 400px;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+  }
+  
+  .step-right {
+    width: 50%;
+    padding-left: 20px;
+  }
+  
+  .tabs {
+    display: flex;
+    justify-content: flex-start;
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+    border-bottom: 2px solid #e0e0e0;
+  }
+  
+  .tabs li {
+    margin-right: 20px;
+    padding: 10px 0;
+    cursor: pointer;
+    position: relative;
+  }
+  
+  .tabs li.active {
+    font-weight: bold;
+    border-bottom: 2px solid #242961;
+  }
+  
+  .tab-content {
+    text-align: left;
+    margin-top: 20px;
+  }
+  
+  .tab-content h3 {
+    font-size: 24px;
+    margin-top: 0;
+  }
+  
+  .tab-content p {
+    font-size: 16px;
+    margin: 10px 0;
+  }
+  
+  .premium-quality {
+    display: flex;
+    align-items: center;
+    margin-top: 20px;
+  }
+  
+  .premium-quality img {
+    width: 50px;
+    height: 50px;
+    margin-right: 10px;
+  }
+  
+.premium-quality p {
+    margin: 0;
+}
+   */

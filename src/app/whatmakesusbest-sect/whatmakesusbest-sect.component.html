@@ -1,0 +1,41 @@
+
+<div class="what-makes-us-main-container">
+    <h1 style="text-align: center; margin-top: 15px;">What Makes Us The Best?</h1>
+    <h2 style="text-align: center; margin-top: 10px;">Why We Stand as the Top Choice for Dissertation Writing Assistance in the UK</h2>
+    <p style="text-align: center; margin-top: 10px; margin-bottom: 15px;">Choosing our services translates to opting for success, quality, and peace of mind. We are committed to facilitating your academic journey, allowing you to focus on other aspects of your education while we handle your dissertation. Here is why we are the preferred choice for <span style="font-weight: 600;">dissertation writing help in the UK:</span></p>
+    <div class="features-container-main">
+      <div class="features-container">
+          <div class="features-left">
+            <div class="feature-item" *ngFor="let feature of makeUsBest1">
+              <div class="icon-container">
+                <i class="fa fa-play"></i>
+              </div>
+              <div class="text-container">
+                <h3>{{ feature.title }}</h3>
+                <p>{{ feature.description }}</p>
+              </div>
+            </div>
+          </div>
+          <div class="features-right">
+            <img src="../../assets/images/make-us-best-1.jpg" alt="Podcast Image">
+          </div>
+      </div>
+      <div class="features-container-2">
+          <div class="features-left-2">
+            <div class="feature-item" *ngFor="let feature of makeUsBest2">
+              <div class="icon-container">
+                <i class="fa fa-play"></i>
+              </div>
+              <div class="text-container">
+                <h3>{{ feature.title }}</h3>
+                <p>{{ feature.description }}</p>
+              </div>
+            </div>
+          </div>
+          <div class="features-right-2">
+            <img src="../../assets/images/make-us-best-2.jpg" alt="Podcast Image">
+          </div>
+      </div>
+    </div>
+</div>
+  

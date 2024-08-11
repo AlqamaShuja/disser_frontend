@@ -1,0 +1,9 @@
+<div class="topic-list">
+    <h3 class="category-title">Assignment Categories</h3>
+    <ul class="category-list">
+      <li *ngFor="let topic of topics" (click)="onSelectTopic(topic)">
+        <span>&#10095;</span> {{ topic.title }}
+      </li>
+    </ul>
+</div>
+  

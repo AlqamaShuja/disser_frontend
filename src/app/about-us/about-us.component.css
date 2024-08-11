@@ -26,3 +26,72 @@
 
 
 
+
+/* About Us sec */
+
+.instructors {
+    padding: 50px 0;
+  }
+  
+  .image-container {
+    border: 1px solid black;
+    height: 100%;
+    width: 100%;
+    overflow: hidden;
+    border-radius: 10px;
+    overflow: hidden;
+  }
+  
+  .image-container img {
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+  }
+  
+  .section-heading {
+    padding: 20px;
+  }
+  
+  @media (max-width: 1200px) {
+    .image-container {
+      height: auto;
+    }
+  }
+  
+  @media (max-width: 768px) {
+    .container-fluid {
+      max-width: 90%;
+    }
+  
+    .section-heading {
+      padding: 10px;
+    }
+  }
+  
+  @media (max-width: 576px) {
+    .container-fluid {
+      max-width: 100%;
+    }
+  
+    .section-heading h2 {
+      font-size: 24px;
+    }
+  
+    .section-heading p {
+      font-size: 14px;
+    }
+  
+    .btn-main {
+      width: 100%;
+      margin-top: 10px;
+    }
+  }
+  
+  .btn-main {
+    background-color: #242961;
+    color: white;
+  }
+  
+
+
+/* About Us sec End */

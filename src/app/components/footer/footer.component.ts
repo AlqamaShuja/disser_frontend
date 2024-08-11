@@ -1,6 +1,7 @@
 import { Component, Input, Renderer2 } from '@angular/core';
 import { Router } from '@angular/router';
 import { GlobalService } from 'src/app/services/global.service';
+import { ServicesService } from 'src/app/services/services.service';
 
 @Component({
   selector: 'app-footer',
@@ -9,9 +10,11 @@ import { GlobalService } from 'src/app/services/global.service';
 })
 export class FooterComponent {
   @Input() services: any[] = [];
+  topics: any[] = [];
   constructor(
     private router: Router,
     private globalService: GlobalService,
+    private serviceService: ServicesService,
     private renderer: Renderer2
   ) {
     window.scrollTo({
@@ -19,22 +22,31 @@ export class FooterComponent {
       behavior: 'smooth' // Use 'smooth' for smooth scrolling, or 'auto' for instant scrolling
     });  }
     ngOnInit(): void {
-      console.log(this.services,"THE SERVICES TAP")
+      // console.log(this.services,"THE SERVICES TAP")
+      this.getServices();
+    }
+
+    getServices(): void {
+      this.serviceService.getAllTopic().subscribe((res: any) => {
+        console.log(res, "===res:app.service");
+        
+        this.topics = res;
+      });
     }
   
   getSevenServices(start: number, end: number): any[] {
-    var servicesBrakdown: any[] = [];
-    if (start < this.services.length) {
+    var topicsBrakdown: any[] = [];
+    if (start < this.topics.length) {
       for (
         let i = start;
-        i < (end < this.services.length ? end : this.services.length);
+        i < (end < this.topics.length ? end : this.topics.length);
         i++
       ) {
-        servicesBrakdown.push(this.services[i]);
+        topicsBrakdown.push(this.topics[i]);
       }
-      return servicesBrakdown;
+      return topicsBrakdown;
     } else {
-      return servicesBrakdown;
+      return topicsBrakdown;
     }
   }
 

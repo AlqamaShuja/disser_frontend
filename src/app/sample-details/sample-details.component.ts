@@ -84,7 +84,7 @@ export class SampleDetailsComponent {
       console.log(params.get('slug'));
       this.sampleService.getSampleBySlug(params.get('slug')).subscribe((res) => {
         if(res.data){
-          console.log(res.data,'THE RESPONSE DATA')
+          console.log(res.data,'THE RESPONSE DATA:sampleBySlug')
           this.selectedSample = res.data;
         }else{
           this.router.navigate(['/not-found'])
@@ -180,5 +180,9 @@ export class SampleDetailsComponent {
 
   getSafeHtml(html: string): SafeHtml {
     return this.sanitizer.bypassSecurityTrustHtml(html);
+  }
+
+  viewSamples(): void {
+    this.router.navigate(['/our-samples']);
   }
 }

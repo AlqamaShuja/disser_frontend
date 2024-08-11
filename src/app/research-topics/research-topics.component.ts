@@ -3,8 +3,6 @@ import { NgForm } from '@angular/forms';
 import { ServicesService } from '../services/services.service';
 import { AcademicLevelData } from './topic.model';
 
-
-
 @Component({
   selector: 'app-research-topics',
   templateUrl: './research-topics.component.html',
@@ -16,16 +14,20 @@ export class ResearchTopicsComponent implements OnInit {
   sortedTopics: any[] = [];
   selectedTopic: any;
   errorMessage: string = '';
+  expandedIndex: number | null = null;
+  
   academicLevels: AcademicLevelData[] = [
     { title: 'Undergraduate', price: 5, }, 
     { title: 'Graduate', price: 10, }, 
     { title: 'PhD', price: 15, }, 
   ];
+
   serviceType: AcademicLevelData[] = [
     { title: 'Dissertation Full', price: 15, }, 
     { title: 'Dissertation Proposal', price: 30, }, 
   ];
-  totalPrice: number = 0
+
+  totalPrice: number = 0;
 
   @ViewChildren('radioButton') radioButtons!: QueryList<any>;
   @ViewChild('dissertationForm', { static: true }) dissertationForm!: NgForm;
@@ -34,7 +36,6 @@ export class ResearchTopicsComponent implements OnInit {
 
   ngOnInit(): void {
     this.serviceService.getAllTopic().subscribe((res) => {
-      // console.log(res, "====res.data:topiccss");
       this.topics = res;
       this.sortedTopics = res;
     });
@@ -47,6 +48,10 @@ export class ResearchTopicsComponent implements OnInit {
   clearTopic() {
     this.sortedTopics = [...this.topics];
     this.radioButtons.forEach((radioButton: any) => radioButton.nativeElement.checked = false);
+  }
+
+  toggle(index: number): void {
+    this.expandedIndex = this.expandedIndex === index ? null : index;
   }
 
   checkPrice() {
@@ -75,9 +80,108 @@ export class ResearchTopicsComponent implements OnInit {
 
     console.log(selectedDeadline, "==deadlineeeee");
     console.log(priceOfTopic, " = ", priceForAcadLevel, " = ", priceOfService, "==deadlineeeee");
-    
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// import { Component, OnInit, ViewChildren, QueryList, ViewChild } from '@angular/core';
+// import { NgForm } from '@angular/forms';
+// import { ServicesService } from '../services/services.service';
+// import { AcademicLevelData } from './topic.model';
+
+
+
+// @Component({
+//   selector: 'app-research-topics',
+//   templateUrl: './research-topics.component.html',
+//   styleUrls: ['./research-topics.component.css']
+// })
+// export class ResearchTopicsComponent implements OnInit {
+//   alphabet: string[] = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
+//   topics: any[] = [];
+//   sortedTopics: any[] = [];
+//   selectedTopic: any;
+//   errorMessage: string = '';
+//   academicLevels: AcademicLevelData[] = [
+//     { title: 'Undergraduate', price: 5, }, 
+//     { title: 'Graduate', price: 10, }, 
+//     { title: 'PhD', price: 15, }, 
+//   ];
+//   serviceType: AcademicLevelData[] = [
+//     { title: 'Dissertation Full', price: 15, }, 
+//     { title: 'Dissertation Proposal', price: 30, }, 
+//   ];
+//   totalPrice: number = 0
+
+//   @ViewChildren('radioButton') radioButtons!: QueryList<any>;
+//   @ViewChild('dissertationForm', { static: true }) dissertationForm!: NgForm;
+
+//   constructor(private serviceService: ServicesService) { }
+
+//   ngOnInit(): void {
+//     this.serviceService.getAllTopic().subscribe((res) => {
+//       // console.log(res, "====res.data:topiccss");
+//       this.topics = res;
+//       this.sortedTopics = res;
+//     });
+//   }
+
+//   sortTopics(letter: string) {
+//     this.sortedTopics = this.topics.filter(topic => topic.title.startsWith(letter));
+//   }
+
+//   clearTopic() {
+//     this.sortedTopics = [...this.topics];
+//     this.radioButtons.forEach((radioButton: any) => radioButton.nativeElement.checked = false);
+//   }
+
+//   checkPrice() {
+//     if (this.dissertationForm.invalid) {
+//       this.errorMessage = 'Please fill out all fields.';
+//       return;
+//     }
+
+//     this.errorMessage = '';
+
+//     const selectedService = this.dissertationForm.value.service;
+//     const selectedServiceType = this.dissertationForm.value.serviceType;
+//     const selectedAcademicLevel = this.dissertationForm.value.academicLevel;
+//     const selectedDeadline = this.dissertationForm.value.deadline;
+
+//     const selectedTopic = this.sortedTopics.find(topic => topic.title === selectedService);
+//     const priceOfTopic = selectedTopic ? selectedTopic.price : 0;
+    
+//     const selectedservice = this.serviceType.find(service => service.title === selectedServiceType);
+//     const priceOfService = selectedservice ? selectedservice.price : 0;
+
+//     const selectedAcadLevelObj = this.academicLevels.find(topic => topic.title === selectedAcademicLevel);
+//     const priceForAcadLevel = selectedAcadLevelObj ? selectedAcadLevelObj.price : 0;
+
+//     this.totalPrice = Number(priceOfTopic) + Number(priceForAcadLevel) + Number(priceOfService);
+
+//     console.log(selectedDeadline, "==deadlineeeee");
+//     console.log(priceOfTopic, " = ", priceForAcadLevel, " = ", priceOfService, "==deadlineeeee");
+    
+//   }
+// }
 
 
 

@@ -1,0 +1,48 @@
+<div class="samples-page">
+    <div class="breadcrumb-container">
+        <ul class="breadcrumb" style="padding: 3px 12px;">
+          <li><a [routerLink]="'/'">Home</a></li>
+          <li><a [routerLink]="'/our-samples'">Our Samples</a></li>
+          <li>{{ level | titlecase }}</li>
+          <li class="active">{{ type | titlecase }}</li>
+        </ul>
+    </div>
+  
+    <div class="content-container">
+      <h2 class="section-title">Essay Samples</h2>
+      <p class="section-description">
+        At Dissertation Writing, we're proud to showcase our quality and work. We've put together some sample essays, written by our expert writers to show their skills and quality. Take a look at what we can produce with the following examples created at Undergraduate 2:1 and 2:2 level in our most popular subjects – Business, Law and Nursing.
+      </p>
+      
+      <div class="samples-grid">
+        <div class="sample-card">
+          <div class="sample-image" style="background-image: url('../../assets/images/oursamples-business.jpg');">
+            <div class="overlay">
+              <h3>BUSINESS</h3>
+              <button (click)="viewSample('business-2-1')">2:1 SAMPLE ›</button>
+              <button (click)="viewSample('business-2-2')">2:2 SAMPLE ›</button>
+            </div>
+          </div>
+        </div>
+        <div class="sample-card">
+          <div class="sample-image" style="background-image: url('../../assets/images/oursamples-business.jpg');">
+            <div class="overlay">
+              <h3>LAW</h3>
+                <button (click)="viewSample('law-2-1')">2:1 SAMPLE ›</button>
+                <button (click)="viewSample('law-2-2')">2:2 SAMPLE ›</button>
+            </div>
+          </div>
+        </div>
+        <div class="sample-card">
+          <div class="sample-image" style="background-image: url('../../assets/images/oursamples-business.jpg');">
+            <div class="overlay">
+              <h3>NURSING</h3>
+              <button (click)="viewSample('nursing-2-1')">2:1 SAMPLE ›</button>
+              <button (click)="viewSample('nursing-2-2')">2:2 SAMPLE ›</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</div>
+  

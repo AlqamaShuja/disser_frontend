@@ -1,0 +1,160 @@
+.improve-grades-container {
+    padding: 50px;
+    max-width: 1300px;
+    margin: 0 auto;
+    background-color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  }
+  
+  .section-title {
+    text-align: center;
+    font-size: 40px;
+    color: #242961; /* Theme color */
+    margin-bottom: 40px;
+  }
+  
+  .grades-section {
+    text-align: center;
+  }
+  
+  .intro {
+    margin-bottom: 30px;
+  }
+  
+  .intro h2 {
+    font-size: 32px;
+    color: #2a2a2a;
+    margin-bottom: 20px;
+  }
+  
+  .intro p {
+    font-size: 18px;
+    color: #555;
+    line-height: 1.6;
+  }
+  
+  .content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+  
+  .content-block {
+    display: flex;
+    align-items: center;
+    background-color: #f4f4f9;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    max-width: 800px;
+  }
+  
+  .content-block .icon {
+    font-size: 30px;
+    color: #242961;
+    margin-right: 20px;
+  }
+  
+  .content-block p {
+    font-size: 18px;
+    color: #333;
+    line-height: 1.6;
+    margin: 0;
+  }
+  
+  @media screen and (max-width: 768px) {
+    .improve-grades-container {
+      padding: 20px;
+    }
+  
+    .section-title {
+      font-size: 32px;
+    }
+  
+    .intro h2 {
+      font-size: 28px;
+    }
+  
+    .intro p {
+      font-size: 16px;
+    }
+  
+    .content-block {
+      flex-direction: column;
+      text-align: center;
+    }
+  
+    .content-block .icon {
+      margin-bottom: 10px;
+    }
+  
+    .content-block p {
+      font-size: 16px;
+    }
+  }
+  
+
+
+
+
+
+
+
+
+
+
+
+
+/* .improve-grades-container {
+    padding: 40px;
+    max-width: 1000px;
+    margin: 0 auto;
+    background-color: #f9f9fc;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .improve-grades-container h1 {
+    text-align: center;
+    font-size: 36px;
+    color: #242961;
+    margin-bottom: 30px;
+  }
+  
+  .grades-section {
+    margin-bottom: 30px;
+  }
+  
+  .grades-section h2 {
+    font-size: 28px;
+    color: #2a2a2a; 
+    margin-bottom: 20px;
+  }
+  
+.grades-section p {
+    font-size: 18px;
+    line-height: 1.8;
+    color: #555; 
+    margin-bottom: 20px;
+}
+  
+@media screen and (max-width: 768px) {
+    .improve-grades-container {
+      padding: 20px;
+    }
+  
+    .improve-grades-container h1 {
+      font-size: 28px;
+    }
+  
+    .grades-section h2 {
+      font-size: 24px;
+    }
+  
+    .grades-section p {
+      font-size: 16px;
+    }
+}
+   */

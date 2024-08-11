@@ -1,0 +1,7 @@
+
+
+.selected {
+    font-weight: bold; /* Make the text bold */
+    background-color: #e7f3ff; /* Optional: Light blue background for the active item */
+    color: #007bff; /* Optional: Blue text color for the active item */
+}

@@ -5,15 +5,18 @@
 }
 
 
-.curved {
-    
+  .curved {  
     height: 15vh;
-background-image: url('../../assets/images/login-image.jpeg');
-background-position: top top;
-position: relative;
-background-size: 100% 100%;
-/* background-repeat: no-repeat; */
+    /* background-image: url('../../assets/images/login-image.jpeg'); */
+    /* background-color: #242A61; */
+    background: linear-gradient(45deg, #242A61, #150e42, #242A61);
+    background-position: top top;
+    position: relative;
+    background-size: 100% 100%;
+    border-bottom-left-radius: 40px;
+    border-bottom-right-radius: 40px;
     width: 100%;
+    overflow: hidden;
   }
 
   .curved>div{
@@ -51,9 +54,10 @@ background-size: 100% 100%;
   }
 
   .register-now-button{
-
     width: 170px !important;
     font-weight: bold !important;
+    background-color: #242A61;
+    color: #fff;
   }
   
 

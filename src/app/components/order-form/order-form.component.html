@@ -1,1478 +1,439 @@
-<form
-  class="aSubmit"
-  id="order_form"
-  [formGroup]="orderForm"
->
-  <div class="col-12">
-    <div class="row">
-      <div class="col-xs-12 col-md-3">
-        <div class="form-group">
-          <input
-            type="text"
-            class="form-control mb-3"
-            [ngClass]="{'is-invalid': orderForm.get('firstName')?.invalid && orderForm.get('firstName')?.touched}"
-            style="text-transform: capitalize"
-            placeholder="Full Name*"
-            aria-invalid="false"
-            size="40"
-            value=""
-            formControlName="firstName" [ngClass]="{'is-invalid': orderForm.get('firstName')?.invalid && orderForm.get('firstName')?.touched}"
-            required=""
-          />
-        </div>
-      </div>
-      <div class="col-xs-12 col-md-3">
-        <div class="form-group">
-          <input
-            ng-model="orderObj.email"
-            type="email"
-            class="form-control mb-3"
-            placeholder="E-mail address*"
-            aria-invalid="false"
-            [ngClass]="{'is-invalid': orderForm.get('email')?.invalid && orderForm.get('email')?.touched}"
-            size="40"
-            value=""
-            formControlName="email" [ngClass]="{'is-invalid': orderForm.get('email')?.invalid && orderForm.get('email')?.touched}"
-            required=""
-          />
-          <div
-            data-lastpass-icon-root="true"
-            style="
-              position: relative !important;
-              height: 0px !important;
-              width: 0px !important;
-              float: left !important;
-            "
-          ></div>
-        </div>
-      </div>
-      <div class="col-xs-12 col-md-3">
-        <div class="form-group">
-          <select class="form-control" formControlName="country" [ngClass]="{'is-invalid': orderForm.get('country')?.invalid && orderForm.get('country')?.touched}">
-            <option data-countrycode="DZ" value="Algeria (+213)">
-              Algeria (+213)
-            </option>
-            <option data-countrycode="AD" value="Andorra (+376)">
-              Andorra (+376)
-            </option>
-            <option data-countrycode="AO" value="Angola (+244)">
-              Angola (+244)
-            </option>
-            <option data-countrycode="AI" value="Anguilla (+1264)">
-              Anguilla (+1264)
-            </option>
-            <option data-countrycode="AG" value="Antigua &amp; Barbuda (+1268)">
-              Antigua &amp; Barbuda (+1268)
-            </option>
-            <option data-countrycode="AR" value="Argentina (+54)">
-              Argentina (+54)
-            </option>
-            <option data-countrycode="AM" value="Armenia (+374)">
-              Armenia (+374)
-            </option>
-            <option data-countrycode="AW" value="Aruba (+297)">
-              Aruba (+297)
-            </option>
-            <option data-countrycode="AU" value="Australia (+61)">
-              Australia (+61)
-            </option>
-            <option data-countrycode="AT" value="Austria (+43)">
-              Austria (+43)
-            </option>
-            <option data-countrycode="AZ" value="Azerbaijan (+994)">
-              Azerbaijan (+994)
-            </option>
-            <option data-countrycode="BS" value="Bahamas (+1242)">
-              Bahamas (+1242)
-            </option>
-            <option data-countrycode="BH" value="Bahrain (+973)">
-              Bahrain (+973)
-            </option>
-            <option data-countrycode="BD" value="Bangladesh (+880)">
-              Bangladesh (+880)
-            </option>
-            <option data-countrycode="BB" value="Barbados (+1246)">
-              Barbados (+1246)
-            </option>
-            <option data-countrycode="BY" value="Belarus (+375)">
-              Belarus (+375)
-            </option>
-            <option data-countrycode="BE" value="Belgium (+32)">
-              Belgium (+32)
-            </option>
-            <option data-countrycode="BZ" value="Belize (+501)">
-              Belize (+501)
-            </option>
-            <option data-countrycode="BJ" value="Benin (+229)">
-              Benin (+229)
-            </option>
-            <option data-countrycode="BM" value="Bermuda (+1441)">
-              Bermuda (+1441)
-            </option>
-            <option data-countrycode="BT" value="Bhutan (+975)">
-              Bhutan (+975)
-            </option>
-            <option data-countrycode="BO" value="Bolivia (+591)">
-              Bolivia (+591)
-            </option>
-            <option data-countrycode="BA" value="Bosnia Herzegovina (+387)">
-              Bosnia Herzegovina (+387)
-            </option>
-            <option data-countrycode="BW" value="Botswana (+267)">
-              Botswana (+267)
-            </option>
-            <option data-countrycode="BR" value="Brazil (+55)">
-              Brazil (+55)
-            </option>
-            <option data-countrycode="BN" value="Brunei (+673)">
-              Brunei (+673)
-            </option>
-            <option data-countrycode="BG" value="Bulgaria (+359)">
-              Bulgaria (+359)
-            </option>
-            <option data-countrycode="BF" value="Burkina Faso (+226)">
-              Burkina Faso (+226)
-            </option>
-            <option data-countrycode="BI" value="Burundi (+257)">
-              Burundi (+257)
-            </option>
-            <option data-countrycode="KH" value="Cambodia (+855)">
-              Cambodia (+855)
-            </option>
-            <option data-countrycode="CM" value="Cameroon (+237)">
-              Cameroon (+237)
-            </option>
-            <option data-countrycode="CA" value="Canada (+1)">
-              Canada (+1)
-            </option>
-            <option data-countrycode="CV" value="Cape Verde Islands (+238)">
-              Cape Verde Islands (+238)
-            </option>
-            <option data-countrycode="KY" value="Cayman Islands (+1345)">
-              Cayman Islands (+1345)
-            </option>
-            <option
-              data-countrycode="CF"
-              value="Central African Republic (+236)"
-            >
-              Central African Republic (+236)
-            </option>
-            <option data-countrycode="CL" value="Chile (+56)">
-              Chile (+56)
-            </option>
-            <option data-countrycode="CN" value="China (+86)">
-              China (+86)
-            </option>
-            <option data-countrycode="CO" value="Colombia (+57)">
-              Colombia (+57)
-            </option>
-            <option data-countrycode="KM" value="Comoros (+269)">
-              Comoros (+269)
-            </option>
-            <option data-countrycode="CG" value="Congo (+242)">
-              Congo (+242)
-            </option>
-            <option data-countrycode="CK" value="Cook Islands (+682)">
-              Cook Islands (+682)
-            </option>
-            <option data-countrycode="CR" value="Costa Rica (+506)">
-              Costa Rica (+506)
-            </option>
-            <option data-countrycode="HR" value="Croatia (+385)">
-              Croatia (+385)
-            </option>
-            <option data-countrycode="CU" value="Cuba (+53)">Cuba (+53)</option>
-            <option data-countrycode="CY" value="Cyprus North (+90392)">
-              Cyprus North (+90392)
-            </option>
-            <option data-countrycode="CY" value="Cyprus South (+357)">
-              Cyprus South (+357)
-            </option>
-            <option data-countrycode="CZ" value="Czech Republic (+42)">
-              Czech Republic (+42)
-            </option>
-            <option data-countrycode="DK" value="Denmark (+45)">
-              Denmark (+45)
-            </option>
-            <option data-countrycode="DJ" value="Djibouti (+253)">
-              Djibouti (+253)
-            </option>
-            <option data-countrycode="DM" value="Dominica (+1809)">
-              Dominica (+1809)
-            </option>
-            <option data-countrycode="DO" value="Dominican Republic (+1809)">
-              Dominican Republic (+1809)
-            </option>
-            <option data-countrycode="EC" value="Ecuador (+593)">
-              Ecuador (+593)
-            </option>
-            <option data-countrycode="EG" value="Egypt (+20)">
-              Egypt (+20)
-            </option>
-            <option data-countrycode="SV" value="El Salvador (+503)">
-              El Salvador (+503)
-            </option>
-            <option data-countrycode="GQ" value="Equatorial Guinea (+240)">
-              Equatorial Guinea (+240)
-            </option>
-            <option data-countrycode="ER" value="Eritrea (+291)">
-              Eritrea (+291)
-            </option>
-            <option data-countrycode="EE" value="Estonia (+372)">
-              Estonia (+372)
-            </option>
-            <option data-countrycode="ET" value="Ethiopia (+251)">
-              Ethiopia (+251)
-            </option>
-            <option data-countrycode="FK" value="Falkland Islands (+500)">
-              Falkland Islands (+500)
-            </option>
-            <option data-countrycode="FO" value="Faroe Islands (+298)">
-              Faroe Islands (+298)
-            </option>
-            <option data-countrycode="FJ" value="Fiji (+679)">
-              Fiji (+679)
-            </option>
-            <option data-countrycode="FI" value="Finland (+358)">
-              Finland (+358)
-            </option>
-            <option data-countrycode="FR" value="France (+33)">
-              France (+33)
-            </option>
-            <option data-countrycode="GF" value="French Guiana (+594)">
-              French Guiana (+594)
-            </option>
-            <option data-countrycode="PF" value="French Polynesia (+689)">
-              French Polynesia (+689)
-            </option>
-            <option data-countrycode="GA" value="Gabon (+241)">
-              Gabon (+241)
-            </option>
-            <option data-countrycode="GM" value="Gambia (+220)">
-              Gambia (+220)
-            </option>
-            <option data-countrycode="GE" value="Georgia (+7880)">
-              Georgia (+7880)
-            </option>
-            <option data-countrycode="DE" value="Germany (+49)">
-              Germany (+49)
-            </option>
-            <option data-countrycode="GH" value="Ghana (+233)">
-              Ghana (+233)
-            </option>
-            <option data-countrycode="GI" value="Gibraltar (+350)">
-              Gibraltar (+350)
-            </option>
-            <option data-countrycode="GR" value="Greece (+30)">
-              Greece (+30)
-            </option>
-            <option data-countrycode="GL" value="Greenland (+299)">
-              Greenland (+299)
-            </option>
-            <option data-countrycode="GD" value="Grenada (+1473)">
-              Grenada (+1473)
-            </option>
-            <option data-countrycode="GP" value="Guadeloupe (+590)">
-              Guadeloupe (+590)
-            </option>
-            <option data-countrycode="GU" value="Guam (+671)">
-              Guam (+671)
-            </option>
-            <option data-countrycode="GT" value="Guatemala (+502)">
-              Guatemala (+502)
-            </option>
-            <option data-countrycode="GN" value="Guinea (+224)">
-              Guinea (+224)
-            </option>
-            <option data-countrycode="GW" value="Guinea - Bissau (+245)">
-              Guinea - Bissau (+245)
-            </option>
-            <option data-countrycode="GY" value="Guyana (+592)">
-              Guyana (+592)
-            </option>
-            <option data-countrycode="HT" value="Haiti (+509)">
-              Haiti (+509)
-            </option>
-            <option data-countrycode="HN" value="Honduras (+504)">
-              Honduras (+504)
-            </option>
-            <option data-countrycode="HK" value="Hong Kong (+852)">
-              Hong Kong (+852)
-            </option>
-            <option data-countrycode="HU" value="Hungary (+36)">
-              Hungary (+36)
-            </option>
-            <option data-countrycode="IS" value="Iceland (+354)">
-              Iceland (+354)
-            </option>
-            <option data-countrycode="IN" value="India (+91)">
-              India (+91)
-            </option>
-            <option data-countrycode="ID" value="Indonesia (+62)">
-              Indonesia (+62)
-            </option>
-            <option data-countrycode="IR" value="Iran (+98)">Iran (+98)</option>
-            <option data-countrycode="IQ" value="Iraq (+964)">
-              Iraq (+964)
-            </option>
-            <option data-countrycode="IE" value="Ireland (+353)">
-              Ireland (+353)
-            </option>
-            <option data-countrycode="IL" value="Israel (+972)">
-              Israel (+972)
-            </option>
-            <option data-countrycode="IT" value="Italy (+39)">
-              Italy (+39)
-            </option>
-            <option data-countrycode="JM" value="Jamaica (+1876)">
-              Jamaica (+1876)
-            </option>
-            <option data-countrycode="JP" value="Japan (+81)">
-              Japan (+81)
-            </option>
-            <option data-countrycode="JO" value="Jordan (+962)">
-              Jordan (+962)
-            </option>
-            <option data-countrycode="KZ" value="Kazakhstan (+7)">
-              Kazakhstan (+7)
-            </option>
-            <option data-countrycode="KE" value="Kenya (+254)">
-              Kenya (+254)
-            </option>
-            <option data-countrycode="KI" value="Kiribati (+686)">
-              Kiribati (+686)
-            </option>
-            <option data-countrycode="KP" value="Korea North (+850)">
-              Korea North (+850)
-            </option>
-            <option data-countrycode="KR" value="Korea South (+82)">
-              Korea South (+82)
-            </option>
-            <option data-countrycode="KW" value="Kuwait (+965)">
-              Kuwait (+965)
-            </option>
-            <option data-countrycode="KG" value="Kyrgyzstan (+996)">
-              Kyrgyzstan (+996)
-            </option>
-            <option data-countrycode="LA" value="Laos (+856)">
-              Laos (+856)
-            </option>
-            <option data-countrycode="LV" value="Latvia (+371)">
-              Latvia (+371)
-            </option>
-            <option data-countrycode="LB" value="Lebanon (+961)">
-              Lebanon (+961)
-            </option>
-            <option data-countrycode="LS" value="Lesotho (+266)">
-              Lesotho (+266)
-            </option>
-            <option data-countrycode="LR" value="Liberia (+231)">
-              Liberia (+231)
-            </option>
-            <option data-countrycode="LY" value="Libya (+218)">
-              Libya (+218)
-            </option>
-            <option data-countrycode="LI" value="Liechtenstein (+417)">
-              Liechtenstein (+417)
-            </option>
-            <option data-countrycode="LT" value="Lithuania (+370)">
-              Lithuania (+370)
-            </option>
-            <option data-countrycode="LU" value="Luxembourg (+352)">
-              Luxembourg (+352)
-            </option>
-            <option data-countrycode="MO" value="Macao (+853)">
-              Macao (+853)
-            </option>
-            <option data-countrycode="MK" value="Macedonia (+389)">
-              Macedonia (+389)
-            </option>
-            <option data-countrycode="MG" value="Madagascar (+261)">
-              Madagascar (+261)
-            </option>
-            <option data-countrycode="MW" value="Malawi (+265)">
-              Malawi (+265)
-            </option>
-            <option data-countrycode="MY" value="Malaysia (+60)">
-              Malaysia (+60)
-            </option>
-            <option data-countrycode="MV" value="Maldives (+960)">
-              Maldives (+960)
-            </option>
-            <option data-countrycode="ML" value="Mali (+223)">
-              Mali (+223)
-            </option>
-            <option data-countrycode="MT" value="Malta (+356)">
-              Malta (+356)
-            </option>
-            <option data-countrycode="MH" value="Marshall Islands (+692)">
-              Marshall Islands (+692)
-            </option>
-            <option data-countrycode="MQ" value="Martinique (+596)">
-              Martinique (+596)
-            </option>
-            <option data-countrycode="MR" value="Mauritania (+222)">
-              Mauritania (+222)
-            </option>
-            <option data-countrycode="YT" value="Mayotte (+269)">
-              Mayotte (+269)
-            </option>
-            <option data-countrycode="MX" value="Mexico (+52)">
-              Mexico (+52)
-            </option>
-            <option data-countrycode="FM" value="Micronesia (+691)">
-              Micronesia (+691)
-            </option>
-            <option data-countrycode="MD" value="Moldova (+373)">
-              Moldova (+373)
-            </option>
-            <option data-countrycode="MC" value="Monaco (+377)">
-              Monaco (+377)
-            </option>
-            <option data-countrycode="MN" value="Mongolia (+976)">
-              Mongolia (+976)
-            </option>
-            <option data-countrycode="MS" value="Montserrat (+1664)">
-              Montserrat (+1664)
-            </option>
-            <option data-countrycode="MA" value="Morocco (+212)">
-              Morocco (+212)
-            </option>
-            <option data-countrycode="MZ" value="Mozambique (+258)">
-              Mozambique (+258)
-            </option>
-            <option data-countrycode="MN" value="Myanmar (+95)">
-              Myanmar (+95)
-            </option>
-            <option data-countrycode="NA" value="Namibia (+264)">
-              Namibia (+264)
-            </option>
-            <option data-countrycode="NR" value="Nauru (+674)">
-              Nauru (+674)
-            </option>
-            <option data-countrycode="NP" value="Nepal (+977)">
-              Nepal (+977)
-            </option>
-            <option data-countrycode="NL" value="Netherlands (+31)">
-              Netherlands (+31)
-            </option>
-            <option data-countrycode="NC" value="New Caledonia (+687)">
-              New Caledonia (+687)
-            </option>
-            <option data-countrycode="NZ" value="New Zealand (+64)">
-              New Zealand (+64)
-            </option>
-            <option data-countrycode="NI" value="Nicaragua (+505)">
-              Nicaragua (+505)
-            </option>
-            <option data-countrycode="NE" value="Niger (+227)">
-              Niger (+227)
-            </option>
-            <option data-countrycode="NG" value="Nigeria (+234)">
-              Nigeria (+234)
-            </option>
-            <option data-countrycode="NU" value="Niue (+683)">
-              Niue (+683)
-            </option>
-            <option data-countrycode="NF" value="Norfolk Islands (+672)">
-              Norfolk Islands (+672)
-            </option>
-            <option data-countrycode="NP" value="Northern Marianas (+670)">
-              Northern Marianas (+670)
-            </option>
-            <option data-countrycode="NO" value="Norway (+47)">
-              Norway (+47)
-            </option>
-            <option data-countrycode="OM" value="Oman (+968)">
-              Oman (+968)
-            </option>
-            <option data-countrycode="PW" value="Pakistan (+92)">
-              Pakistan (+92)
-            </option>
-            <option data-countrycode="PW" value="Palau (+680)">
-              Palau (+680)
-            </option>
-            <option data-countrycode="PA" value="Panama (+507)">
-              Panama (+507)
-            </option>
-            <option data-countrycode="PG" value="Papua New Guinea (+675)">
-              Papua New Guinea (+675)
-            </option>
-            <option data-countrycode="PY" value="Paraguay (+595)">
-              Paraguay (+595)
-            </option>
-            <option data-countrycode="PE" value="Peru (+51)">Peru (+51)</option>
-            <option data-countrycode="PH" value="Philippines (+63)">
-              Philippines (+63)
-            </option>
-            <option data-countrycode="PL" value="Poland (+48)">
-              Poland (+48)
-            </option>
-            <option data-countrycode="PT" value="Portugal (+351)">
-              Portugal (+351)
-            </option>
-            <option data-countrycode="PR" value="Puerto Rico (+1787)">
-              Puerto Rico (+1787)
-            </option>
-            <option data-countrycode="QA" value="Qatar (+974)">
-              Qatar (+974)
-            </option>
-            <option data-countrycode="RE" value="Reunion (+262)">
-              Reunion (+262)
-            </option>
-            <option data-countrycode="RO" value="Romania (+40)">
-              Romania (+40)
-            </option>
-            <option data-countrycode="RU" value="Russia (+7)">
-              Russia (+7)
-            </option>
-            <option data-countrycode="RW" value="Rwanda (+250)">
-              Rwanda (+250)
-            </option>
-            <option data-countrycode="SM" value="San Marino (+378)">
-              San Marino (+378)
-            </option>
-            <option
-              data-countrycode="ST"
-              value="Sao Tome &amp; Principe (+239)"
-            >
-              Sao Tome &amp; Principe (+239)
-            </option>
-            <option data-countrycode="SA" value="Saudi Arabia (+966)">
-              Saudi Arabia (+966)
-            </option>
-            <option data-countrycode="SN" value="Senegal (+221)">
-              Senegal (+221)
-            </option>
-            <option data-countrycode="CS" value="Serbia (+381)">
-              Serbia (+381)
-            </option>
-            <option data-countrycode="SC" value="Seychelles (+248)">
-              Seychelles (+248)
-            </option>
-            <option data-countrycode="SL" value="Sierra Leone (+232)">
-              Sierra Leone (+232)
-            </option>
-            <option data-countrycode="SG" value="Singapore (+65)">
-              Singapore (+65)
-            </option>
-            <option data-countrycode="SK" value="Slovak Republic (+421)">
-              Slovak Republic (+421)
-            </option>
-            <option data-countrycode="SI" value="Slovenia (+386)">
-              Slovenia (+386)
-            </option>
-            <option data-countrycode="SB" value="Solomon Islands (+677)">
-              Solomon Islands (+677)
-            </option>
-            <option data-countrycode="SO" value="Somalia (+252)">
-              Somalia (+252)
-            </option>
-            <option data-countrycode="ZA" value="South Africa (+27)">
-              South Africa (+27)
-            </option>
-            <option data-countrycode="ES" value="Spain (+34)">
-              Spain (+34)
-            </option>
-            <option data-countrycode="LK" value="Sri Lanka (+94)">
-              Sri Lanka (+94)
-            </option>
-            <option data-countrycode="SH" value="St. Helena (+290)">
-              St. Helena (+290)
-            </option>
-            <option data-countrycode="KN" value="St. Kitts (+1869)">
-              St. Kitts (+1869)
-            </option>
-            <option data-countrycode="SC" value="St. Lucia (+1758)">
-              St. Lucia (+1758)
-            </option>
-            <option data-countrycode="SD" value="Sudan (+249)">
-              Sudan (+249)
-            </option>
-            <option data-countrycode="SR" value="Suriname (+597)">
-              Suriname (+597)
-            </option>
-            <option data-countrycode="SZ" value="Swaziland (+268)">
-              Swaziland (+268)
-            </option>
-            <option data-countrycode="SE" value="Sweden (+46)">
-              Sweden (+46)
-            </option>
-            <option data-countrycode="CH" value="Switzerland (+41)">
-              Switzerland (+41)
-            </option>
-            <option data-countrycode="SI" value="Syria (+963)">
-              Syria (+963)
-            </option>
-            <option data-countrycode="TW" value="Taiwan (+886)">
-              Taiwan (+886)
-            </option>
-            <option data-countrycode="TJ" value="Tajikstan (+7)">
-              Tajikstan (+7)
-            </option>
-            <option data-countrycode="TH" value="Thailand (+66)">
-              Thailand (+66)
-            </option>
-            <option data-countrycode="TG" value="Togo (+228)">
-              Togo (+228)
-            </option>
-            <option data-countrycode="TO" value="Tonga (+676)">
-              Tonga (+676)
-            </option>
-            <option data-countrycode="TT" value="Trinidad &amp; Tobago (+1868)">
-              Trinidad &amp; Tobago (+1868)
-            </option>
-            <option data-countrycode="TN" value="216">Tunisia (+216)</option>
-            <option data-countrycode="TR" value="Turkey (+90)">
-              Turkey (+90)
-            </option>
-            <option data-countrycode="TM" value="Turkmenistan (+7)">
-              Turkmenistan (+7)
-            </option>
-            <option data-countrycode="TM" value="Turkmenistan (+993)">
-              Turkmenistan (+993)
-            </option>
-            <option
-              data-countrycode="TC"
-              value="Turks &amp; Caicos Islands (+1649)"
-            >
-              Turks &amp; Caicos Islands (+1649)
-            </option>
-            <option data-countrycode="TV" value="Tuvalu (+688)">
-              Tuvalu (+688)
-            </option>
-            <option data-countrycode="UG" value="Uganda (+256)">
-              Uganda (+256)
-            </option>
-            <option data-countrycode="GB" value="UK (+44)" selected="">
-              UK (+44)
-            </option>
-            <option data-countrycode="UA" value="Ukraine (+380)">
-              Ukraine (+380)
-            </option>
-            <option data-countrycode="AE" value="United Arab Emirates (+971)">
-              United Arab Emirates (+971)
-            </option>
-            <option data-countrycode="UY" value="Uruguay (+598)">
-              Uruguay (+598)
-            </option>
-            <option data-countrycode="US" value="USA (+1)">USA (+1)</option>
-            <option data-countrycode="UZ" value="Uzbekistan (+7)">
-              Uzbekistan (+7)
-            </option>
-            <option data-countrycode="VU" value="Vanuatu (+678)">
-              Vanuatu (+678)
-            </option>
-            <option data-countrycode="VA" value="Vatican City (+379)">
-              Vatican City (+379)
-            </option>
-            <option data-countrycode="VE" value="Venezuela (+58)">
-              Venezuela (+58)
-            </option>
-            <option data-countrycode="VN" value="Vietnam (+84)">
-              Vietnam (+84)
-            </option>
-            <option
-              data-countrycode="VG"
-              value="Virgin Islands - British (+1284)"
-            >
-              Virgin Islands - British (+1284)
-            </option>
-            <option data-countrycode="VI" value="Virgin Islands - US (+1340)">
-              Virgin Islands - US (+1340)
-            </option>
-            <option data-countrycode="WF" value="Wallis &amp; Futuna (+681)">
-              Wallis &amp; Futuna (+681)
-            </option>
-            <option data-countrycode="YE" value="Yemen (North)(+969)">
-              Yemen (North)(+969)
-            </option>
-            <option data-countrycode="YE" value="Yemen (South)(+967)">
-              Yemen (South)(+967)
-            </option>
-            <option data-countrycode="ZM" value="Zambia (+260)">
-              Zambia (+260)
-            </option>
-            <option data-countrycode="ZW" value="Zimbabwe (+263)">
-              Zimbabwe (+263)
-            </option>
-          </select>
-        </div>
-      </div>
-      <div class="col-xs-12 col-md-3">
-        <div class="form-group">
-          <input
-            type="tel"
-            class="form-control mb-3"
-            placeholder="Phone Number*"
-            aria-invalid="false"
-            
-            size="40"
-            value=""
-            formControlName="contactPhone" [ngClass]="{'is-invalid': orderForm.get('contactPhone')?.invalid && orderForm.get('contactPhone')?.touched}"
-            required=""
-          />
-        </div>
+
+<form [formGroup]="orderForm" (ngSubmit)="onSubmit()">
+  <div class="form-row">
+    <div class="form-group col-md-4">
+      <label for="typeOfService">Type of Service*</label>
+      <select class="form-control" formControlName="typeOfService" required (change)="calculateTotalPrice()">
+        <option value="" disabled selected>Select One</option>
+        <option *ngFor="let service of typeOfServices" [value]="service.title">{{ service.title }}</option>
+      </select>
+      <div *ngIf="orderForm.get('typeOfService')?.invalid && orderForm.get('typeOfService')?.touched" class="text-danger">
+        Type of Service is required.
       </div>
     </div>
-    <div class="row">
-      <div class="col-xs-12 col-md-4">
-        <div class="form-group">
-          <label for="writing_service">Type of Writing Service*</label>
-          <select
-            class="form-control mb-3"
-            formControlName="writingService" [ngClass]="{'is-invalid': orderForm.get('writingService')?.invalid && orderForm.get('writingService')?.touched}"
-            id="writing_service"
-            aria-invalid="true"
-            
-            required=""
-            onchange="if (!window.__cfRLUnblockHandlers) return false; showUser(this.value)"
-          >
-            <option value="">SELECT ONE*</option>
-            <option value="5205">BTEC Assignment</option>
-            <option value="5169">CIPD Assignment</option>
-            <option value="5197">CMI Assignment</option>
-            <option value="5187">HNC Assignment</option>
-            <option value="5189">HND Assignment</option>
-            <option value="5215">IWFM Assignment</option>
-            <option value="5044">Letter</option>
-            <option value="5191">NCFE Assignment</option>
-            <option value="5179">NVQs Assignment</option>
-            <option value="5173">TEFL Assignment</option>
-            <option value="1">Admission Essay</option>
-            <option value="2100">Analytical Essay</option>
-            <option value="2129">Annotated Bibliography</option>
-            <option value="2140">Application letter</option>
-            <option value="2152">Argumentative Essay</option>
-            <option value="2164">Article Critique</option>
-            <option value="2165">Article Review</option>
-            <option value="5096">Article Writing</option>
-            <option value="2166">Assignment</option>
-            <option value="2167">Autobiographies</option>
-            <option value="2168">Blogs</option>
-            <option value="2169">Book/Movie Review</option>
-            <option value="2170">Business Plan</option>
-            <option value="2171">Case Study</option>
-            <option value="2172">Copywriting</option>
-            <option value="2173">Coursework</option>
-            <option value="2174">Cover Letter</option>
-            <option value="2175">Creative Writing</option>
-            <option value="2176">Critical Writing</option>
-            <option value="2177">Curriculum Vitae</option>
-            <option value="2320">Database Creation</option>
-            <option value="2321">Dissertation</option>
-            <option value="2322">Dissertation Chapter - Abstract</option>
-            <option value="2323">Dissertation Chapter - Analysis</option>
-            <option value="2324">Dissertation Chapter - Conclusion</option>
-            <option value="2325">Dissertation Chapter - Discussion</option>
-            <option value="2326">Dissertation Chapter - Hypothesis</option>
-            <option value="2327">Dissertation Chapter - Introduction</option>
-            <option value="2328">
-              Dissertation Chapter - Literature Review
-            </option>
-            <option value="2329">Dissertation Chapter - Methodology</option>
-            <option value="2330">Dissertation Chapter - Recommendation</option>
-            <option value="2331">Dissertation Chapter - Results</option>
-            <option value="2332">Dissertation Proposal</option>
-            <option value="2333">Essay</option>
-            <option value="2334">Exam Questions</option>
-            <option value="2335">Expository Essay</option>
-            <option value="2336">Forum Post</option>
-            <option value="2337">Ghost Writing</option>
-            <option value="2338">Info graphics</option>
-            <option value="2339">Lab Report</option>
-            <option value="2340">Literature Writing</option>
-            <option value="2341">Marketing Proposal</option>
-            <option value="2342">Multiple Choice Questions</option>
-            <option value="2343">Newsletter</option>
-            <option value="2344">Online Assignment</option>
-            <option value="2345">Other</option>
-            <option value="2346">Personal Statement</option>
-            <option value="2347">Persuasive Essay</option>
-            <option value="2348">Portfolio Creation</option>
-            <option value="2349">Presentation or Speech</option>
-            <option value="2350">Press Release</option>
-            <option value="2351">Problem Solving</option>
-            <option value="2352">Programming</option>
-            <option value="2353">Project</option>
-            <option value="2354">Reaction Paper</option>
-            <option value="5038">Reflective</option>
-            <option value="2355">Report</option>
-            <option value="2356">Research Paper</option>
-            <option value="2357">Research Proposal</option>
-            <option value="2358">Resume Writing</option>
-            <option value="2359">Software Development</option>
-            <option value="2360">Term Paper</option>
-            <option value="5090">Thesis</option>
-            <option value="2361">Thesis Proposal</option>
-            <option value="2362">Thesis Statement</option>
-            <option value="2363">Travelogue Writing</option>
-            <option value="2364">Video Creation</option>
-            <option value="2365">Web content</option>
-            <option value="2366">Website Development</option>
-          </select>
-        </div>
-      </div>
-      <div class="col-xs-12 col-md-4">
-        <div id="txtHint">
-          <label for="help_require">Type of Help Require*</label>
-          <select
-            class="form-control mb-3"
-            formControlName="helpRequire" 
-            [ngClass]="{'is-invalid': orderForm.get('helpRequire')?.invalid && orderForm.get('helpRequire')?.touched}"
-            id="help_require"
-            aria-invalid="true"
-            
-          >
-            <option value="">Select One</option>
-            <option value="categorie['catogeryName']" *ngFor="let categorie of categories">{{categorie['catogeryName']}}</option>
-          </select>
-        </div>
-      </div>
-      <div class="col-xs-12 col-md-4">
-        <div class="form-group">
-          <label for="topic">Topic Category*</label>
-          <select
-            class="form-control mb-3"
-            formControlName="topic" [ngClass]="{'is-invalid': orderForm.get('topic')?.invalid && orderForm.get('topic')?.touched}"
-            id="topic"
-            aria-invalid="true"
-            (change)="topicCatogeryChanged($event)"
-            required=""
-          >
-            <option value="">SELECT ONE</option>
-            <option value="5082">Letter</option>
-            <option value="3669">Accounting</option>
-            <option value="3670">Accounting Law</option>
-            <option value="3671">Advertisement Studies</option>
-            <option value="3672">Agriculture</option>
-            <option value="3673">American Studies</option>
-            <option value="3674">Anatomy</option>
-            <option value="3675">Anglo Saxon History</option>
-            <option value="3676">Anthropology</option>
-            <option value="3677">Applied Science</option>
-            <option value="3678">Art &amp; Architecture</option>
-            <option value="3679">Asian Studies</option>
-            <option value="3680">Astronomy</option>
-            <option value="2367">Auditing</option>
-            <option value="2368">Australian Studies</option>
-            <option value="5221">Aviation</option>
-            <option value="2369">Banking</option>
-            <option value="2370">Behavioral Science</option>
-            <option value="2371">Bioinformatics</option>
-            <option value="2372">Biological Science</option>
-            <option value="2373">Biology</option>
-            <option value="2374">Biomechanics</option>
-            <option value="2375">Biomedical engineering</option>
-            <option value="2376">Biotechnology</option>
-            <option value="2377">Botany</option>
-            <option value="2877">Business Ethics</option>
-            <option value="2878">Business Intelligence</option>
-            <option value="2879">Business Management</option>
-            <option value="2880">Business Studies</option>
-            <option value="2881">Career Management</option>
-            <option value="2882">Celtic Studies</option>
-            <option value="2883">Chemical Engineering</option>
-            <option value="2884">Chemistry</option>
-            <option value="2885">Chinese Studies</option>
-            <option value="2886">Civics</option>
-            <option value="2887">Civil engineering</option>
-            <option value="2888">Classic English Literature</option>
-            <option value="2889">Communication</option>
-            <option value="2890">Community Studies</option>
-            <option value="2891">Computational Science</option>
-            <option value="2892">Computer Engineering</option>
-            <option value="2893">Computer Science</option>
-            <option value="5168">Construction</option>
-            <option value="2894">Criminology</option>
-            <option value="2895">Cultural Studies</option>
-            <option value="2896">Design &amp; Technology</option>
-            <option value="2897">Digital Cultures</option>
-            <option value="2898">Drama Studies</option>
-            <option value="2899">Economics</option>
-            <option value="2900">Education</option>
-            <option value="2901">Electrical Engineering</option>
-            <option value="2902">Electronic Engineering</option>
-            <option value="5122">Energy</option>
-            <option value="2903">Engineering &amp; Construction</option>
-            <option value="2904">Environmental Engineering</option>
-            <option value="2905">Environmental Science</option>
-            <option value="2906">Ethics</option>
-            <option value="2907">European Studies</option>
-            <option value="2908">Family &amp; Consumer Science</option>
-            <option value="2909">Fashion</option>
-            <option value="2910">Film &amp; Theater Studies</option>
-            <option value="2911">Finance</option>
-            <option value="2912">Financial Law</option>
-            <option value="2913">Food Science</option>
-            <option value="2914">Foreign Affairs</option>
-            <option value="2915">French Studies</option>
-            <option value="2916">Gene Technology</option>
-            <option value="2917">Genetics</option>
-            <option value="2918">Geography</option>
-            <option value="2919">Geology</option>
-            <option value="2920">Geoscience</option>
-            <option value="2921">Germanic Studies</option>
-            <option value="5089">Global Health</option>
-            <option value="2922">Health Care</option>
-            <option value="2923">Histology</option>
-            <option value="2924">History</option>
-            <option value="2925">Human Resource</option>
-            <option value="2926">Immunobiology</option>
-            <option value="2927">Indonesian Studies</option>
-            <option value="2928">Informatics</option>
-            <option value="2929">Information Science</option>
-            <option value="2930">Information System Management</option>
-            <option value="2931">Informational Literary Studies</option>
-            <option value="5084">Innovation and commercialisation</option>
-            <option value="2932">International Relation</option>
-            <option value="2933">International Studies</option>
-            <option value="2934">Italian Studies</option>
-            <option value="2935">Japanese Studies</option>
-            <option value="2936">Korean Studies</option>
-            <option value="2937">Law</option>
-            <option value="2938">Legal Management</option>
-            <option value="2939">Library Management</option>
-            <option value="2940">Linguistic</option>
-            <option value="2941">Logic &amp; Programming</option>
-            <option value="2942">Management</option>
-            <option value="2943">Marketing</option>
-            <option value="2944">Mathematics</option>
-            <option value="2945">Mechanical Engineering</option>
-            <option value="2946">Media Studies</option>
-            <option value="2947">Medical Studies</option>
-            <option value="2948">Medicine/Pharmacy</option>
-            <option value="2949">Meteorology</option>
-            <option value="2950">Military Science</option>
-            <option value="2951">Modern Language</option>
-            <option value="2952">Modern Studies</option>
-            <option value="2953">Music</option>
-            <option value="2954">Natural Science</option>
-            <option value="2955">Neuroscience</option>
-            <option value="2956">Nursing</option>
-            <option value="2957">Nutrition</option>
-            <option value="2958">Other</option>
-            <option value="2959">Pathology</option>
-            <option value="2960">Performance Studies</option>
-            <option value="2961">Personal Management</option>
-            <option value="2962">
-              Personnel &amp; Professional Development
-            </option>
-            <option value="2963">Pharmacology</option>
-            <option value="2964">Photography</option>
-            <option value="2965">Physical Education</option>
-            <option value="2966">Physics</option>
-            <option value="2967">Plant Science</option>
-            <option value="2968">Political Economy</option>
-            <option value="2969">Political Science</option>
-            <option value="2970">Project Management</option>
-            <option value="2971">Psychology</option>
-            <option value="2972">Public administration</option>
-            <option value="2973">Public Policy</option>
-            <option value="2974">Public Relation</option>
-            <option value="2975">Real Estate/Property</option>
-            <option value="2976">Religious Studies</option>
-            <option value="5214">Social Care</option>
-            <option value="2977">Social Studies</option>
-            <option value="2978">Sociology</option>
-            <option value="2979">Software Engineering</option>
-            <option value="2980">Soil Science</option>
-            <option value="2981">Space Science</option>
-            <option value="2982">Special Education</option>
-            <option value="2983">Sports Management &amp; Studies</option>
-            <option value="2984">Statistics</option>
-            <option value="2985">System Biology</option>
-            <option value="2986">Taxonomy</option>
-            <option value="2987">Technology</option>
-            <option value="2988">Theology</option>
-            <option value="2989">Tourism Studies</option>
-            <option value="2990">Urban Studies</option>
-            <option value="2991">Visual Arts</option>
-            <option value="2992">Web &amp; High Tech</option>
-            <option value="2993">Wildlife Science</option>
-            <option value="2994">Women &amp; Gender Studies</option>
-            <option value="2995">World Affairs</option>
-            <option value="2996">World Literature</option>
-            <option value="2997">World politics</option>
-            <option value="2998">Zoology</option>
-          </select>
-        </div>
+    <div class="form-group col-md-4">
+      <label for="subjectArea">Subject Area*</label>
+      <select class="form-control" formControlName="subjectArea" required (change)="calculateTotalPrice()">
+        <option value="" disabled selected>Select One</option>
+        <option *ngFor="let subject of subjectAreas" [value]="subject.title">{{ subject.title }}</option>
+      </select>
+      <div *ngIf="orderForm.get('subjectArea')?.invalid && orderForm.get('subjectArea')?.touched" class="text-danger">
+        Subject Area is required.
       </div>
     </div>
-    <div class="row">
-      <div class="col-xs-12 col-md-6">
-        <div class="form-group">
-          <label for="your_topic">Your Topic*</label>
-          <textarea
-            ng-model="orderObj.yourTopic"
-            class="form-control mb-3"
-            placeholder="Your Topic*"
-            aria-invalid="false"
-            rows="5"
-            cols="40"
-            formControlName="yourTopic" [ngClass]="{'is-invalid': orderForm.get('yourTopic')?.invalid && orderForm.get('yourTopic')?.touched}"
-            id="your_topic"
-            required=""
-          ></textarea>
-        </div>
+    <div class="form-group col-md-4">
+      <label for="level">Level*</label>
+      <select class="form-control" formControlName="level" required (change)="calculateTotalPrice()">
+        <option value="" disabled selected>Select One</option>
+        <option value="Undergraduate">Undergraduate</option>
+        <option value="Postgraduate">Postgraduate</option>
+        <option value="Masters">Masters</option>
+        <option value="LLB">LLB</option>
+        <option value="LLM">LLM</option>
+        <option value="MPhil">MPhil</option>
+        <option value="PhD">PhD</option>
+      </select>
+      <div *ngIf="orderForm.get('level')?.invalid && orderForm.get('level')?.touched" class="text-danger">
+        Level is required.
       </div>
-      <div class="col-xs-12 col-md-6">
-        <div class="form-group">
-          <label for="detail_instructions">Your Detail Instructions*</label>
-          <textarea
-            class="form-control mb-3"
-            placeholder="Your Detail Instructions*"
-            aria-invalid="false"
-            rows="5"
-            cols="40"
-            formControlName="detailInstructions" [ngClass]="{'is-invalid': orderForm.get('detailInstructions')?.invalid && orderForm.get('detailInstructions')?.touched}"
-            id="detail_instructions"
-            required=""
-          ></textarea>
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-xs-12 col-md-6">
-        <div class="form-group">
-          <label for="sources_ref">Number of Sources/References*</label>
-          <input
-            class="form-control mb-3"
-            type="number"
-            value=""
-            size="40"
-            placeholder="Number of Sources/References* &nbsp;&nbsp;&nbsp; (min 0 max 128 Value)"
-            formControlName="sourcesRef" [ngClass]="{'is-invalid': orderForm.get('sourcesRef')?.invalid && orderForm.get('sourcesRef')?.touched}"
-            id="sources_ref"
-            max="500"
-            min="0"
-            aria-invalid="false"
-            
-            required=""
-          />
-        </div>
-      </div>
-      <!-- File hai yaha -->
-      <div class="col-xs-12 col-md-6">
-        <div class="form-group">
-          <label for="upload_file"
-            >Please upload multiple files at once. Please send larger files via
-            email at
-            <a href="mailto:support@dissertationwriting.co"
-              >{{'support@dissertationwriting.co'}}</a
-            >
-            if size exceeds 20 MB</label
-          >
-          <input
-            class="form-control mb-3"
-            type="file"
-            id="upload_file"
-            (change)="onFileSelected($event)"
-            name="upload[]"
-            placeholder="Supporting Files* "
-            aria-invalid="false"
-            
-            multiple=""
-          />
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-xs-12 col-md-6">
-        <div class="form-group">
-          <input
-            formControlName="categoryLevel" [ngClass]="{'is-invalid': orderForm.get('categoryLevel')?.invalid && orderForm.get('categoryLevel')?.touched}"
-            id="category_level"
-            type="checkbox"
-            class="cb"
-            rel="unchecked"
-          />
-          <label for="category_level">Number of Presentation Slides</label>
-          <select
-            (change)="numberOfSlidesChanged($event);"
-            class="form-control mb-3"
-            formControlName="preSlide" [ngClass]="{'is-invalid': orderForm.get('preSlide')?.invalid && orderForm.get('preSlide')?.touched}"
-            id="pre_slide"
-            aria-invalid="true"
-            
-          >
-            <option value="">SELECT ONE*</option>
-            <option value="1">1</option>
-            <option value="2">2</option>
-            <option value="3">3</option>
-            <option value="4">4</option>
-            <option value="5">5</option>
-            <option value="6">6</option>
-            <option value="7">7</option>
-            <option value="8">8</option>
-            <option value="9">9</option>
-            <option value="10">10</option>
-            <option value="11">11</option>
-            <option value="12">12</option>
-            <option value="13">13</option>
-            <option value="14">14</option>
-            <option value="15">15</option>
-            <option value="16">16</option>
-            <option value="17">17</option>
-            <option value="18">18</option>
-            <option value="19">19</option>
-            <option value="20">20</option>
-            <option value="21">21</option>
-            <option value="22">22</option>
-            <option value="23">23</option>
-            <option value="24">24</option>
-            <option value="25">25</option>
-          </select>
-        </div>
-      </div>
-      <div class="col-xs-12 col-md-6">
-        <div class="form-group">
-          <input
-            type="checkbox"
-            formControlName="categoryLev" [ngClass]="{'is-invalid': orderForm.get('categoryLev')?.invalid && orderForm.get('categoryLev')?.touched}"
-            id="category_lev"
-          />
-          <label for="category_lev">Software Service</label>
-          <select
-            (change)="softwareServiceChanged($event);"
-            class="form-control mb-3"
-            formControlName="softService" 
-            [ngClass]="{'is-invalid': orderForm.get('softService')?.invalid && orderForm.get('softService')?.touched}"
-            id="soft_service"
-            aria-invalid="true"
-            
-          >
-            <option value="">SELECT ONE*</option>
-            <option value="60">Dot Net</option>
-            <option value="60">SPSS</option>
-            <option value="60">Microsoft Access</option>
-            <option value="60">Microsoft Project Management</option>
-            <option value="60">MATLAB</option>
-            <option value="60">MINITAB</option>
-            <option value="60">Microsoft Word</option>
-            <option value="60">LaTeX</option>
-            <option value="60">EViews</option>
-            <option value="60">STATISTICA</option>
-            <option value="60">Microsoft Excel</option>
-            <option value="60">STATA</option>
-            <option value="60">Microsoft PowerPoint</option>
-            <option value="60">CAD</option>
-            <option value="60">ANOVA</option>
-          </select>
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-xs-12 col-md-6">
-        <div class="form-group">
-          <label for="writing_style">Writing Style of Citation</label>
-          <select
-            class="form-control mb-3"
-            formControlName="writingStyle" [ngClass]="{'is-invalid': orderForm.get('writingStyle')?.invalid && orderForm.get('writingStyle')?.touched}"
-            id="writing_style"
-            aria-invalid="true"
-            
-          >
-            <option value="">SELECT ONE*</option>
-            <option value="NON">NON</option>
-            <option value="APA">APA</option>
-            <option value="AMA">AMA</option>
-            <option value="APSA">APSA</option>
-            <option value="ASA">ASA</option>
-            <option value="CBE">CBE</option>
-            <option value="Cambridge">Cambridge</option>
-            <option value="MLA">MLA</option>
-            <option value="Chicago/Turabian">Chicago/Turabian</option>
-            <option value="Harvard">Harvard</option>
-            <option value="Oxford">Oxford</option>
-            <option value="Vancouver">Vancouver</option>
-            <option value="MHRA">MHRA</option>
-            <option value="IEEE">IEEE</option>
-            <option value="Other">Other</option>
-            <option value="OSCOLA">OSCOLA</option>
-          </select>
-        </div>
-      </div>
-      <div class="col-xs-12 col-md-6">
-        <div class="form-group">
-          <label for="language_style">Preferred Language Level*</label>
-          <select
-            ng-model=""
-            ng-change=""
-            class="form-control mb-3"
-            formControlName="languageStyle" [ngClass]="{'is-invalid': orderForm.get('languageStyle')?.invalid && orderForm.get('languageStyle')?.touched}"
-            id="language_style"
-            aria-invalid="true"
-            
-            onchange="if (!window.__cfRLUnblockHandlers) return false; showUser9(this.value)"
-            required=""
-          >
-            <option value="">SELECT ONE*</option>
-            <option value="English (UK )">English (UK )</option>
-            <option value="English (USA)">English (USA)</option>
-            <option value="ESL (English as a Second Language)">
-              ESL (English as a Second Language)
-            </option>
-            <option value="ESOL (English for Speakers of Other Languages)">
-              ESOL (English for Speakers of Other Languages)
-            </option>
-            <option value="EFL (English as a Foreign Language)">
-              EFL (English as a Foreign Language)
-            </option>
-          </select>
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-xs-12 col-md-2">
-        <div class="form-group">
-          <div class="" style="display: flex;">
-            <input
-              id="Single_Spacing"
-              type="radio"
-              value="1"
-              formControlName="lineSpace" [ngClass]="{'is-invalid': orderForm.get('lineSpace')?.invalid && orderForm.get('lineSpace')?.touched}"
-              required=""
-            />
-            <label for="Single_Spacing" style="margin-top: 8px;margin-left: 8px;">1.0 Line Spacing</label>
-          </div>
-          <div class="" style="display: flex;">
-            <input
-              id="one_point_five_spacin`"
-              type="radio"
-              value="1.5"
-              formControlName="lineSpace" [ngClass]="{'is-invalid': orderForm.get('lineSpace')?.invalid && orderForm.get('lineSpace')?.touched}"
-              required=""
-            />
-            <label for="Single_Spacing" style="margin-top: 8px;margin-left: 8px;">1.5 Line Spacing</label>
-          </div>
-          <div class="" style="display: flex;">
-            <input
-              id="Double_Spacing"
-              type="radio"
-              value="2"
-              formControlName="lineSpace" [ngClass]="{'is-invalid': orderForm.get('lineSpace')?.invalid && orderForm.get('lineSpace')?.touched}"
-              required=""
-            />
-            <label for="Single_Spacing" style="margin-top: 8px;margin-left: 8px;">2.0 Line Spacing</label>
-          </div>
-        </div>
-      </div>
-      <div class="col-xs-12 col-md-4">
-        <label for="page_words">Required No. of Pages / Words*</label>
-        <div class="row no-gutter">
-          <div class="col-md-5">
-            <select
-              formControlName="farmaish" [ngClass]="{'is-invalid': orderForm.get('farmaish')?.invalid && orderForm.get('farmaish')?.touched}"
-              class="form-control"
-              style="height: 38px"
-              id="farmaish"
-              size="1"
-              aria-invalid="true"
-              
-              required=""
-              (change)="wordsORPagesChanged($event)"
-            >
-            <option value="">SELECT ONE</option>
-              <option value="pages">Pages</option>
-              <option value="words">Words</option>
-            </select>
-          </div>
-          <div class="col-md-7" style="margin-left: -1px">
-            <div class="form-group">
-              <input
-                class="form-control"
-                type="text"
-                style="height: 38px; font-size: 15px"
-                placeholder="No. of Pages / Words"
-                formControlName="pageWords" [ngClass]="{'is-invalid': orderForm.get('pageWords')?.invalid && orderForm.get('pageWords')?.touched}"
-                id="page_words"
-                aria-invalid="false"
-                required=""
-                (change)="numberOfWordsORPagesChanged($event)"
-              />
-              <div
-                id="words"
-                style="
-                  display: inline-block;
-                  font-family: arial;
-                  font-size: 14px;
-                  font-weight: bold;
-                  color: #e40303;
-                  margin-left: 10px;
-                "
-              ></div>
-            </div>
-          </div>
-        </div>
-      </div>
-      <div class="col-xs-12 col-md-6">
-        <div class="form-group">
-          <label for="edu_level">Education Level*</label>
-          <select
-            class="form-control mb-3"
-            formControlName="eduLevel" [ngClass]="{'is-invalid': orderForm.get('eduLevel')?.invalid && orderForm.get('eduLevel')?.touched}"
-            id="edu_level"
-            aria-invalid="true"
-            required=""
-            (change)="educationLevelChanged($event)"
-          >
-            <option value="">SELECT ONE</option>
-            <option value="248">GCSE/ A Levels</option>
-            <option value="249">Under Graduate</option>
-            <option value="250">Graduate</option>
-            <option value="552">Masters</option>
-            <option value="553">PH.D Doctorate</option>
-            <option value="554">Post Graduate</option>
-            <option value="555">Freshman</option>
-            <option value="556">Sophomore</option>
-            <option value="557">Senior</option>
-            <option value="559">Diploma</option>
-            <option value="560">Other</option>
-          </select>
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-xs-12 col-md-6">
-        <div id="txtHint1">
-          <label for="paper_standard">Paper Standard*</label>
-          <select
-            class="form-control mb-3"
-            required=""
-            formControlName="paperStnd" [ngClass]="{'is-invalid': orderForm.get('paperStnd')?.invalid && orderForm.get('paperStnd')?.touched}"
-            id="paper_stnd"
-            aria-invalid="true"
-            
-          >
-            <option value="">Paper Standard</option>
-            <option value="Guaranteed 1st Class Standard">Guaranteed 1st Class Standard</option>
-            <option value="Guaranteed 2:1 Standard">Guaranteed 2:1 Standard</option>
-            <option value="Guaranteed 2:2 Standard">Guaranteed 2:2 Standard</option>
-          </select>
-        </div>
-      </div>
-      <div class="col-xs-12 col-md-6">
-        <div id="txtHint2">
-          <label for="deadline">Deadline*</label>
-          <select
-            ng-model="services[2].value"
-            (change)="deadLineChanged($event);"
-            class="form-control mb-3"
-            formControlName="deadline" [ngClass]="{'is-invalid': orderForm.get('deadline')?.invalid && orderForm.get('deadline')?.touched}"
-            id="deadline"
-            aria-invalid="true"
-            
-            required=""
-          >
-            <option value="">Deadline</option>
-            <option value="6">6 Hours Urgent Delivery</option>
-            <option value="12">12 Hours Urgent Delivery</option>
-            <option value="24">24 Hours Urgent Delivery</option>
-            <option value="48">48 Hours Urgent Delivery</option>
-            <option value="72">3 Days Delivery</option>
-            <option value="96">4 Days Delivery</option>
-            <option value="120">5 Days Delivery</option>
-            <option value="144">6 Days Delivery</option>
-            <option value="168">7 Days Delivery</option>
-            <option value="192">8 Days Delivery</option>
-            <option value="216">9 Days Delivery</option>
-            <option value="240">10 Days Delivery</option>
-            <option value="264">15 Days Delivery</option>
-            <option value="288">20 Days Delivery</option>
-            <option value="528">22 Days Delivery</option>
-            <option value="312">25 Days Delivery</option>
-            <option value="336">30 Days Delivery</option>
-            <option value="3847">40 Days Delivery</option>
-            <option value="3846">45 Days Delivery</option>
-            <option value="3845">60 Days Delivery</option>
-            <option value="3844">90 Days Delivery</option>
-          </select>
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-xs-12 col-md-12"  >
-        <label for="">Total Cost</label>
-        <div
-          id="orderprice"
-          disable=""
-          class="clearfix disabled"
-          style="line-height: 57px;
-          background-color: #2f5464;
-          color: white;
-          font-size: 20px;
-          text-align: center;"
-          value="Total Cost: £ 0.00"
-        >
-          <div id="">Total Cost: £{{gbp?gbp+'': '0'}}</div>
-        </div>
-      </div>
-    </div>
-    <div class="row">
-      <div class="col-xs-12 col-md-6">
-        <div class="form-group">
-          <label for="payment">Payment Type*</label>
-          <select
-            class="form-control mb-3"
-            formControlName="payment" [ngClass]="{'is-invalid': orderForm.get('payment')?.invalid && orderForm.get('payment')?.touched}"
-            id="payment"
-            aria-invalid="true"
-            
-          >
-          <option value="">SELECT ONE</option>
-            <option value="PayPal">PayPal</option>
-            <option value="Credit / Debit Card">Credit / Debit Card</option>
-          </select>
-        </div>
-      </div>
-      <div class="col-xs-12 col-md-6">
-        <div class="form-group">
-          <label for="referred">Referred By*</label>
-          <select
-            ng-model="orderObj.referedBy"
-            class="form-control mb-3"
-            formControlName="referred" [ngClass]="{'is-invalid': orderForm.get('referred')?.invalid && orderForm.get('referred')?.touched}"
-            id="referred"
-            aria-invalid="true"
-            
-          >
-            <option value="">Referred By*</option>
-            <option value="Friend">Friend</option>
-            <option value="Search Engine">Search Engine</option>
-            <option value="Social Bookmarking">Social Bookmarking</option>
-            <option value="Social Network">Social Network</option>
-          </select>
-        </div>
-      </div>
-      <div class="col-xs-12 col-md-12" id="txtHint27"></div>
-    </div>
-    <div class="row">
-      <div class="col-xs-12 col-md-12">
-        <div class="form-group">
-          <input
-            formControlName="terms" [ngClass]="{'is-invalid': orderForm.get('terms')?.invalid && orderForm.get('terms')?.touched}"
-            id="terms"
-            type="checkbox"
-            value="yes"
-            required=""
-          />
-           <label for="terms"
-            > I agree with
-            <a
-              routerLink="/terms-and-conditions"
-              target="_blank"
-              >Terms and Conditions</a
-            >*</label
-          >
-        </div>
-        </div>
-        <button
-          type="submit"
-          class="btn btn-primary btn-block btnf"
-          (click)="onSubmit()"
-        >SUBMIT ORDER</button>
-      
     </div>
   </div>
+
+  <div class="form-row">
+    <div class="form-group col-md-4">
+      <label for="requiredWordCount">Required Word Count*</label>
+      <input type="number" class="form-control" formControlName="requiredWordCount" required (input)="calculateTotalPrice()" />
+      <div *ngIf="orderForm.get('requiredWordCount')?.invalid && orderForm.get('requiredWordCount')?.touched" class="text-danger">
+        Required Word Count is required.
+      </div>
+    </div>
+    <div class="form-group col-md-4">
+      <label for="desiredGrade">Desired Grade*</label>
+      <select class="form-control" formControlName="desiredGrade" required (change)="calculateTotalPrice()">
+        <option value="" disabled selected>Select One</option>
+        <option *ngFor="let grade of desiredGrades" [value]="grade.title">{{ grade.title }}</option>
+      </select>
+      <div *ngIf="orderForm.get('desiredGrade')?.invalid && orderForm.get('desiredGrade')?.touched" class="text-danger">
+        Desired Grade is required.
+      </div>
+    </div>
+    <div class="form-group col-md-4">
+      <label for="deadline">Deadline*</label>
+      <select class="form-control" formControlName="deadline" required (change)="calculateTotalPrice()">
+        <option value="" disabled selected>Select One</option>
+        <option *ngFor="let deadline of deadlines" [value]="deadline.title">{{ deadline.title }}</option>
+      </select>
+      <div *ngIf="orderForm.get('deadline')?.invalid && orderForm.get('deadline')?.touched" class="text-danger">
+        Deadline is required.
+      </div>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group col-md-4">
+      <label for="topic">Topic*</label>
+      <select class="form-control" formControlName="topic" required (change)="calculateTotalPrice()">
+        <option value="" disabled selected>Select One</option>
+        <option *ngFor="let topic of topics" [value]="topic.title">{{ topic.title }}</option>
+      </select>
+      <div *ngIf="orderForm.get('topic')?.invalid && orderForm.get('topic')?.touched" class="text-danger">
+        Topic is required.
+      </div>
+    </div>
+    <div class="form-group col-md-4">
+      <label for="referencingStyle">Referencing Style*</label>
+      <select class="form-control" formControlName="referencingStyle" required (change)="calculateTotalPrice()">
+        <option value="" disabled selected>Select One</option>
+        <option *ngFor="let style of referencingStyles" [value]="style.title">{{ style.title }}</option>
+      </select>
+      <div *ngIf="orderForm.get('referencingStyle')?.invalid && orderForm.get('referencingStyle')?.touched" class="text-danger">
+        Referencing Style is required.
+      </div>
+    </div>
+    <div class="form-group col-md-4">
+      <label for="numberOfReferences">Number of References*</label>
+      <input type="number" class="form-control" formControlName="numberOfReferences" required (input)="calculateTotalPrice()" />
+      <div *ngIf="orderForm.get('numberOfReferences')?.invalid && orderForm.get('numberOfReferences')?.touched" class="text-danger">
+        Number of References is required.
+      </div>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group col-md-4">
+      <label for="email">Email*</label>
+      <input type="email" class="form-control" formControlName="email" required />
+      <div *ngIf="orderForm.get('email')?.invalid && orderForm.get('email')?.touched" class="text-danger">
+        Valid email is required.
+      </div>
+    </div>
+    <div class="form-group col-md-4">
+      <label for="contactNumber">Contact Number*</label>
+      <input type="tel" class="form-control" formControlName="contactNumber" required />
+      <div *ngIf="orderForm.get('contactNumber')?.invalid && orderForm.get('contactNumber')?.touched" class="text-danger">
+        Contact Number is required.
+      </div>
+    </div>
+    <div class="form-group col-md-4">
+      <label for="universityName">University Name*</label>
+      <input type="text" class="form-control" formControlName="universityName" required />
+      <div *ngIf="orderForm.get('universityName')?.invalid && orderForm.get('universityName')?.touched" class="text-danger">
+        University Name is required.
+      </div>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group col-md-4">
+      <label for="turnitin">Turnitin Report Available*</label>
+      <div class="d-flex gap-4">
+        <label class="radio-inline">
+          <input type="radio" formControlName="turnitin" value="Yes" required /> Yes
+        </label>
+        <label class="radio-inline">
+          <input type="radio" formControlName="turnitin" value="No" required /> No
+        </label>
+      </div>
+      <div *ngIf="orderForm.get('turnitin')?.invalid && orderForm.get('turnitin')?.touched" class="text-danger">
+        Turnitin Report selection is required.
+      </div>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group col-md-12">
+      <label for="detailInstructions">Detail Instructions*</label>
+      <textarea class="form-control" formControlName="detailInstructions" rows="10" required style="height: 200px; overflow: auto;"></textarea>
+      <div *ngIf="orderForm.get('detailInstructions')?.invalid && orderForm.get('detailInstructions')?.touched" class="text-danger">
+        Detail Instructions are required.
+      </div>
+    </div>
+  </div>
+
+  <div class="total-price-box mb-3">
+    <h4>Total Price: £{{ gbpTotalCost | number: '1.0-0' }}</h4>
+  </div>
+  <button type="submit" class="btn btn-primary btn-block bg-my-color">Submit Order</button>
 </form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <form [formGroup]="orderForm" (ngSubmit)="onSubmit()">
+  <div class="form-row">
+    <div class="form-group col-md-4">
+      <label for="typeOfService">Type of Service*</label>
+      <select class="form-control" formControlName="typeOfService" required (change)="calculateTotalPrice()">
+        <option value="" disabled selected>Select One</option>
+        <option *ngFor="let service of typeOfServices" [value]="service.title">{{ service.title }}</option>
+      </select>
+    </div>
+    <div class="form-group col-md-4">
+      <label for="subjectArea">Subject Area*</label>
+      <select class="form-control" formControlName="subjectArea" required (change)="calculateTotalPrice()">
+        <option value="" disabled selected>Select One</option>
+        <option *ngFor="let subject of subjectAreas" [value]="subject.title">{{ subject.title }}</option>
+      </select>
+    </div>
+    <div class="form-group col-md-4">
+      <label for="level">Level*</label>
+      <select class="form-control" formControlName="level" required (change)="calculateTotalPrice()">
+        <option value="" disabled selected>Select One</option>
+        <option value="Undergraduate">Undergraduate</option>
+        <option value="Postgraduate">Postgraduate</option>
+        <option value="Masters">Masters</option>
+        <option value="LLB">LLB</option>
+        <option value="LLM">LLM</option>
+        <option value="MPhil">MPhil</option>
+        <option value="PhD">PhD</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group col-md-4">
+      <label for="requiredWordCount">Required Word Count*</label>
+      <input type="number" class="form-control" formControlName="requiredWordCount" required (input)="calculateTotalPrice()" />
+    </div>
+    <div class="form-group col-md-4">
+      <label for="desiredGrade">Desired Grade*</label>
+      <select class="form-control" formControlName="desiredGrade" required (change)="calculateTotalPrice()">
+        <option value="" disabled selected>Select One</option>
+        <option *ngFor="let grade of desiredGrades" [value]="grade.title">{{ grade.title }}</option>
+      </select>
+    </div>
+    <div class="form-group col-md-4">
+      <label for="deadline">Deadline*</label>
+      <select class="form-control" formControlName="deadline" required (change)="calculateTotalPrice()">
+        <option value="" disabled selected>Select One</option>
+        <option *ngFor="let deadline of deadlines" [value]="deadline.title">{{ deadline.title }}</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group col-md-4">
+      <label for="topic">Topic*</label>
+      <select class="form-control" formControlName="topic" required (change)="calculateTotalPrice()">
+        <option value="" disabled selected>Select One</option>
+        <option *ngFor="let topic of topics" [value]="topic.title">{{ topic.title }}</option>
+      </select>
+    </div>
+    <div class="form-group col-md-4">
+      <label for="referencingStyle">Referencing Style*</label>
+      <select class="form-control" formControlName="referencingStyle" required (change)="calculateTotalPrice()">
+        <option value="" disabled selected>Select One</option>
+        <option *ngFor="let style of referencingStyles" [value]="style.title">{{ style.title }}</option>
+      </select>
+    </div>
+    <div class="form-group col-md-4">
+      <label for="numberOfReferences">Number of References*</label>
+      <input type="number" class="form-control" formControlName="numberOfReferences" required (input)="calculateTotalPrice()" />
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group col-md-4">
+      <label for="email">Email*</label>
+      <input type="email" class="form-control" formControlName="email" required />
+    </div>
+    <div class="form-group col-md-4">
+      <label for="contactNumber">Contact Number*</label>
+      <input type="tel" class="form-control" formControlName="contactNumber" required />
+    </div>
+    <div class="form-group col-md-4">
+      <label for="universityName">University Name*</label>
+      <input type="text" class="form-control" formControlName="universityName" required />
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group col-md-4">
+      <label for="turnitin">Turnitin Report*</label>
+      <div style="display: flex; gap: 20px;">
+        <label class="radio-inline">
+          <input type="radio" formControlName="turnitin" value="Yes" required /> Yes
+        </label>
+        <label class="radio-inline">
+          <input type="radio" formControlName="turnitin" value="No" required /> No
+        </label>
+      </div>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group col-md-12">
+      <label for="detailInstructions">Detail Instructions*</label>
+      <textarea class="form-control" formControlName="detailInstructions" rows="10" required style="height: 200px; overflow: auto;"></textarea>
+    </div>
+  </div>
+
+  <div class="total-price-box mb-3">
+    <h4>Total Price: £{{ gbpTotalCost | number: '1.0-0' }}</h4>
+  </div>
+  <button type="submit" class="btn btn-primary btn-block bg-my-color">Submit Order</button>
+</form> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <form [formGroup]="orderForm" (ngSubmit)="onSubmit()">
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="typeOfService">Type of Service*</label>
+      <select class="form-control" formControlName="typeOfService" required (change)="calculateTotalPrice()">
+        <option value="" disabled selected>Select One</option>
+        <option *ngFor="let service of typeOfServices" [value]="service.title">{{ service.title }}</option>
+      </select>
+    </div>
+    <div class="form-group col-md-6">
+      <label for="subjectArea">Subject Area*</label>
+      <select class="form-control" formControlName="subjectArea" required (change)="calculateTotalPrice()">
+        <option value="" disabled selected>Select One</option>
+        <option *ngFor="let subject of subjectAreas" [value]="subject.title">{{ subject.title }}</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="level">Level*</label>
+      <select class="form-control" formControlName="level" required (change)="calculateTotalPrice()">
+        <option value="" disabled selected>Select One</option>
+        <option value="Undergraduate">Undergraduate</option>
+        <option value="Postgraduate">Postgraduate</option>
+        <option value="Masters">Masters</option>
+        <option value="LLB">LLB</option>
+        <option value="LLM">LLM</option>
+        <option value="MPhil">MPhil</option>
+        <option value="PhD">PhD</option>
+      </select>
+    </div>
+    <div class="form-group col-md-6">
+      <label for="requiredWordCount">Required Word Count*</label>
+      <input type="number" class="form-control" formControlName="requiredWordCount" required (input)="calculateTotalPrice()" />
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="desiredGrade">Desired Grade*</label>
+      <select class="form-control" formControlName="desiredGrade" required (change)="calculateTotalPrice()">
+        <option value="" disabled selected>Select One</option>
+        <option *ngFor="let grade of desiredGrades" [value]="grade.title">{{ grade.title }}</option>
+      </select>
+    </div>
+    <div class="form-group col-md-6">
+      <label for="deadline">Deadline*</label>
+      <select class="form-control" formControlName="deadline" required (change)="calculateTotalPrice()">
+        <option value="" disabled selected>Select One</option>
+        <option *ngFor="let deadline of deadlines" [value]="deadline.title">{{ deadline.title }}</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="topic">Topic*</label>
+      <select class="form-control" formControlName="topic" required (change)="calculateTotalPrice()">
+        <option value="" disabled selected>Select One</option>
+        <option *ngFor="let topic of topics" [value]="topic.title">{{ topic.title }}</option>
+      </select>
+    </div>
+    <div class="form-group col-md-6">
+      <label for="detailInstructions">Detail Instructions*</label>
+      <textarea class="form-control" formControlName="detailInstructions" rows="1" required></textarea>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="referencingStyle">Referencing Style*</label>
+      <select class="form-control" formControlName="referencingStyle" required (change)="calculateTotalPrice()">
+        <option value="" disabled selected>Select One</option>
+        <option *ngFor="let style of referencingStyles" [value]="style.title">{{ style.title }}</option>
+      </select>
+    </div>
+    <div class="form-group col-md-6">
+      <label for="numberOfReferences">Number of References*</label>
+      <input type="number" class="form-control" formControlName="numberOfReferences" required (input)="calculateTotalPrice()" />
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="paymentPlan">Payment Plan*</label>
+      <select class="form-control" formControlName="paymentPlan" required (change)="calculateTotalPrice()">
+        <option value="" disabled selected>Select One</option>
+        <option *ngFor="let plan of paymentPlans" [value]="plan.title">
+          {{ plan.title }} (£{{ gbpTotalCost + plan.additionalCost }})
+        </option>
+      </select>
+    </div>
+    <div class="form-group col-md-6">
+      <label for="paymentSchedule">Payment Schedule*</label>
+      <select class="form-control" formControlName="paymentSchedule" required>
+        <option value="" disabled selected>Select One</option>
+        <option value="Weekly">Weekly</option>
+        <option value="Monthly">Monthly</option>
+      </select>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="email">Email*</label>
+      <input type="email" class="form-control" formControlName="email" required />
+    </div>
+    <div class="form-group col-md-6">
+      <label for="contactNumber">Contact Number*</label>
+      <input type="tel" class="form-control" formControlName="contactNumber" required />
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="universityName">University Name*</label>
+      <input type="text" class="form-control" formControlName="universityName" required />
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="form-group col-md-6">
+      <label for="turnitin">Turnitin Report*</label>
+      <input type="text" class="form-control" formControlName="turnitin" required />
+    </div>
+  </div>
+
+  <div class="total-price-box mb-3">
+    <h4>Total Price: £{{ gbpTotalCost | number: '1.0-0' }}</h4>
+  </div>
+  <button type="submit" class="btn btn-primary btn-block bg-my-color">Submit Order</button>
+</form> -->

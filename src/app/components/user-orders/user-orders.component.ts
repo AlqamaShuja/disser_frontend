@@ -18,9 +18,12 @@ export class UserOrdersComponent implements OnInit{
     this.selectedOrder = order;
     this.showDeilas = true;
   }
+
+  
+
   formatDatabaseTimestamp(databaseTimestamp: string): string {
     // Convert the database timestamp to a JavaScript Date object
-    const date = new Date(databaseTimestamp);
+    const date = databaseTimestamp ? new Date(databaseTimestamp) : new Date();
   
     // Options for formatting the date and time
     const options: Intl.DateTimeFormatOptions = {

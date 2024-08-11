@@ -1,0 +1,27 @@
+.topic-list {
+    padding: 20px;
+  }
+  
+  .category-title {
+    color: #242961;
+    font-weight: bold;
+    margin-bottom: 20px;
+  }
+  
+  .category-list {
+    list-style-type: none;
+    padding-left: 0;
+  }
+  
+  .category-list li {
+    padding: 8px 0;
+    border-bottom: 1px solid lightgrey;
+    cursor: pointer;
+  }
+  
+.category-list li span {
+    color: #242961;
+    font-weight: bold;
+    margin-right: 10px;
+}
+  

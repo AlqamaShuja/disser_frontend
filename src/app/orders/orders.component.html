@@ -17,7 +17,55 @@
 
 <!-- About Section Start -->
 
-<section class="pt-2" *ngIf="!orderRecieved" style="margin: 0 auto; background-color: whitesmoke;" >
+
+<section class="pt-2" *ngIf="!orderRecieved" style="margin: 0 auto; background-color: whitesmoke;">
+  <section style="margin: 0 auto; width: 70%;">
+    <nav aria-label="">
+      <ol class="breadcrumb justify-content-left" style="background-color: transparent;">
+        <li class="breadcrumb-item"><a href="/">Home</a></li>
+        <li class="breadcrumb-item active" aria-current="page">Order</li>
+      </ol>
+    </nav>
+  </section>
+  <div style="margin: 0 auto; width: 70%; background-color: whitesmoke;">
+    <div class="container-fluid" style="padding: 30px;">
+      <div class="row">
+        <div class="col-xl-12 col-lg-12">
+          <app-order-form [categories]="categories" (orderEvent)="submitOrder($event)"></app-order-form>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<div class="mt-4 mb-4">
+  <app-checkout *ngIf="orderRecieved" [orderDetails]="orderDetails"></app-checkout>
+</div>
+
+<!-- Modal -->
+<div class="custom-modal-overlay" *ngIf="showModal">
+  <div class="custom-modal">
+    <div class="custom-modal-header">
+      <h5 class="custom-modal-title">Order Submitted</h5>
+      <button type="button" class="close" (click)="closeModal()" aria-label="Close">
+        <span aria-hidden="true" style="color: #FFF;">&times;</span>
+      </button>
+    </div>
+    <div class="custom-modal-body">
+      <p>Your order has been successfully submitted!</p>
+      <p class="text-muted">Please choose an option below:</p>
+    </div>
+    <div class="custom-modal-footer">
+      <button type="button" class="btn btn-secondary" (click)="cancelOrder()">Cancel</button>
+      <button type="button" class="btn btn-primary" (click)="checkout()">Checkout</button>
+    </div>
+  </div>
+</div>
+
+
+
+
+
+<!-- <section class="pt-2" *ngIf="!orderRecieved" style="margin: 0 auto; background-color: whitesmoke;" >
   <section style="margin: 0 auto; width: 70%;">
     <nav aria-label="">
       <ol class="breadcrumb justify-content-lefy" style="background-color: transparent;" >
@@ -39,4 +87,4 @@
 </section>
 <div class="mt-4 mb-4">
   <app-checkout *ngIf="orderRecieved" [orderDetails]="orderDetails"></app-checkout>
-</div>
+</div> -->

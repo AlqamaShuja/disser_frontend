@@ -13,7 +13,7 @@
 
 </style>
 <div class="row">
-    <div class="col-md-3 pt-5 ps-5 bordered">
+    <!-- <div class="col-md-3 pt-5 ps-5 bordered">
         <ul class="bg-light">
             <li style="border-top: 2px solid blue;" class="text-primary fw-bold p-3">Welcome {{user.name}}</li>
         </ul>
@@ -25,7 +25,59 @@
             <li class="pt-2 pb-2" (click)="showComponent('showChangePassword')" style="cursor: pointer;border-bottom: 1px solid lightgrey;"><span class="fw-bold">></span>  Change Password</li>
             <li (click)="logout()" style="cursor: pointer;"><span class="fw-bold">></span>  Logout</li>
         </ul>
-    </div>
+    </div> -->
+    <div class="col-md-3 pt-5 ps-5 bordered">
+        <ul class="bg-light">
+          <li style="border-top: 2px solid blue;" class="text-primary fw-bold p-3">
+            Welcome {{user.name}}
+          </li>
+        </ul>
+        <ul class="mt-4 bg-light">
+          <li
+            class="pt-2 pb-2"
+            [class.selected]="showOrder"
+            (click)="showComponent('showOrder')"
+            style="cursor: pointer; border-bottom: 1px solid lightgrey;"
+          >
+            <span class="fw-bold">></span> My Orders
+          </li>
+          <li
+            class="pt-2 pb-2"
+            [class.selected]="showInvoices"
+            (click)="showComponent('showInvoices')"
+            style="cursor: pointer; border-bottom: 1px solid lightgrey;"
+          >
+            <span class="fw-bold">></span> My Invoices
+          </li>
+          <li
+            class="pt-2 pb-2"
+            [class.selected]="showCompleted"
+            (click)="showComponent('showCompleted')"
+            style="cursor: pointer; border-bottom: 1px solid lightgrey;"
+          >
+            <span class="fw-bold">></span> Completed Orders
+          </li>
+          <li
+            class="pt-2 pb-2"
+            [class.selected]="showEditUser"
+            (click)="showComponent('showEditUser')"
+            style="cursor: pointer; border-bottom: 1px solid lightgrey;"
+          >
+            <span class="fw-bold">></span> Edit Profile
+          </li>
+          <li
+            class="pt-2 pb-2"
+            [class.selected]="showChangePassword"
+            (click)="showComponent('showChangePassword')"
+            style="cursor: pointer; border-bottom: 1px solid lightgrey;"
+          >
+            <span class="fw-bold">></span> Change Password
+          </li>
+          <li (click)="logout()" style="cursor: pointer;">
+            <span class="fw-bold">></span> Logout
+          </li>
+        </ul>
+      </div>
 <div class="col-md-9 pt-5 pe-5">
     <app-user-orders [orders]="orders" *ngIf="showOrder"></app-user-orders>
     <app-user-orders [orders]="completedOrders" *ngIf="showCompleted"></app-user-orders>

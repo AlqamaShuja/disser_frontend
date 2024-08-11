@@ -1,0 +1,33 @@
+<div class="sample-detail-container" *ngIf="sampleData && !isNotFound; else noDataTemplate">
+    <div class="breadcrumb-container">
+        <ul class="breadcrumb" style="padding: 3px 15px;">
+          <li><a routerLink="/">Home</a></li>
+          <li><a routerLink="/our-samples">Our Samples</a></li>
+          <li><a [routerLink]="['/our-samples', level.toLowerCase()]">{{ level }}</a></li>
+          <li><a [routerLink]="['/our-samples', level.toLowerCase(), type.toLowerCase()]">{{ type }}</a></li>
+          <li class="active">{{ topic }} / {{ catPoint }}</li>
+        </ul>
+    </div>
+  
+    <div class="content-container">
+        <div class="header-section" [ngStyle]="{'background-image': 'url(../../assets/images/page-header-bg.jpg)'}">
+            <div class="overlay">
+              <h1 class="sample-title">Sample {{ catPoint }} {{ level }} {{ topic }} {{ type }}</h1>
+              <p class="sample-subtitle">{{ sampleData.title }}</p>
+            </div>
+        </div>
+  
+      <div class="essay-content" [innerHTML]="sampleData.description" style="margin-top: 15px;">
+        <!-- The content of the essay will be inserted here using innerHTML -->
+      </div>
+    </div>
+</div>
+
+<!-- Template to show when no data is found -->
+<ng-template #noDataTemplate>
+    <div class="no-data-container" style="text-align: center; padding: 50px 20px; background-color: #f8f9fa; border-radius: 10px; margin-top: 30px;">
+      <h2 style="font-size: 2em; color: #dc3545; margin-bottom: 20px;">No Data in this Sample Category</h2>
+      <p style="font-size: 1.2em; color: #6c757d;">We're sorry, but we couldn't find any samples matching your criteria.</p>
+      <a routerLink="/our-samples" class="btn mt-4" style="padding: 10px 20px; font-size: 1em; border-radius: 5px; background-color: #242A61; color: #FFF;">Go Back to Samples</a>
+    </div>
+  </ng-template>

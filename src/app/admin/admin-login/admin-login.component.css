@@ -10,3 +10,16 @@
     text-align: center;
     line-height: 0px !important;
 }
+
+.admin-login-btn { 
+    border-radius: 4px;
+    background-color: #242A61;
+    color: #FFF;
+    transition: all 0.2s ease-in-out;
+    margin-top: 14px;
+}
+
+.admin-login-btn:hover { 
+    border-radius: 4px;
+    background-color: #131e85;
+}

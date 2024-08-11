@@ -1,6 +1,6 @@
-<div class="text-center fw-bold fs-3 text-primary">My Invoices</div>
+<div class="text-center fw-bold fs-3" style="color: #242961;">My Invoices</div>
 <table style="margin-top: 20px;" class="table table-borderless table-hover">
-    <thead class="bg-primary">
+    <thead class="" style="background-color: #242961; color: #FFF;">
         <tr class="table-borderless">
             <th>Order ID</th>
             <th>Invoice Date</th>
@@ -11,11 +11,11 @@
     </thead>
     <tbody class="bg-light">
         <tr style="height: 70px;border-bottom: 1px solid lightgray;" *ngFor="let invoice of invoices">
-            <td>PA - {{  invoice.Id}}</td>
+            <td>PA - {{  invoice.id}}</td>
             <td>{{formatDatabaseTimestamp(invoice.created_at)}}</td>
             <td>{{invoice.PaidStatus}}</td>
             <td>
-                <a routerLink="/invoice/{{invoice.Id}}">
+                <a routerLink="/invoice/{{invoice.id}}">
                     <i class="fa fa-file-text" aria-hidden="true"></i>
                     View Invoice
                 </a>

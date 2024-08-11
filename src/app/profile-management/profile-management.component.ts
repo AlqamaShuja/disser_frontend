@@ -32,6 +32,8 @@ export class ProfileManagementComponent implements OnInit {
       this.orderService
         .getOrderByEmail(this.user.email)
         .subscribe((res: any) => {
+          console.log(res.data, "===res.data:getOrderByEmilId, ", this.user);
+          
           if (res.data.length > 0) {
             this.invoices = res.data;
             this.orders = res.data.filter(
@@ -50,41 +52,41 @@ export class ProfileManagementComponent implements OnInit {
     }
   }
 
-  showComponent(flag:any){
-    if(flag === 'showOrder'){
-      this.showOrder =true;
-      this.showInvoices =false;
-      this.showCompleted =false;
-      this.showEditUser =false;
-      this.showChangePassword =false;
-    }else if(flag === 'showInvoices'){
-      this.showOrder =false;
-      this.showInvoices =true;
-      this.showCompleted =false;
-      this.showEditUser =false;
-      this.showChangePassword =false;
-    }else if(flag === 'showCompleted'){
-      this.showOrder =false;
-      this.showInvoices =false;
-      this.showCompleted =true;
-      this.showEditUser =false;
-      this.showChangePassword =false;
-    }else if(flag === 'showEditUser'){
-      this.showOrder =false;
-      this.showInvoices =false;
-      this.showCompleted =false;
-      this.showEditUser =true;
-      this.showChangePassword =false;
-    }else if(flag === 'showChangePassword'){
-      this.showOrder =false;
-      this.showInvoices =false;
-      this.showCompleted =false;
-      this.showEditUser =false;
-      this.showChangePassword =true;
-    }else{
+  // showComponent(flag:any){
+  //   if(flag === 'showOrder'){
+  //     this.showOrder =true;
+  //     this.showInvoices =false;
+  //     this.showCompleted =false;
+  //     this.showEditUser =false;
+  //     this.showChangePassword =false;
+  //   }else if(flag === 'showInvoices'){
+  //     this.showOrder =false;
+  //     this.showInvoices =true;
+  //     this.showCompleted =false;
+  //     this.showEditUser =false;
+  //     this.showChangePassword =false;
+  //   }else if(flag === 'showCompleted'){
+  //     this.showOrder =false;
+  //     this.showInvoices =false;
+  //     this.showCompleted =true;
+  //     this.showEditUser =false;
+  //     this.showChangePassword =false;
+  //   }else if(flag === 'showEditUser'){
+  //     this.showOrder =false;
+  //     this.showInvoices =false;
+  //     this.showCompleted =false;
+  //     this.showEditUser =true;
+  //     this.showChangePassword =false;
+  //   }else if(flag === 'showChangePassword'){
+  //     this.showOrder =false;
+  //     this.showInvoices =false;
+  //     this.showCompleted =false;
+  //     this.showEditUser =false;
+  //     this.showChangePassword =true;
+  //   }else{
 
-    }
-  }
+  //   }
+  // }
 
   updateProfile(event: any): void {
     this.authService.updateUser(event).subscribe((res) => {
@@ -119,4 +121,25 @@ export class ProfileManagementComponent implements OnInit {
       }
     })
   }
+
+  showComponent(flag: string): void {
+    this.showOrder = false;
+    this.showInvoices = false;
+    this.showCompleted = false;
+    this.showEditUser = false;
+    this.showChangePassword = false;
+  
+    if (flag === 'showOrder') {
+      this.showOrder = true;
+    } else if (flag === 'showInvoices') {
+      this.showInvoices = true;
+    } else if (flag === 'showCompleted') {
+      this.showCompleted = true;
+    } else if (flag === 'showEditUser') {
+      this.showEditUser = true;
+    } else if (flag === 'showChangePassword') {
+      this.showChangePassword = true;
+    }
+  }
+  
 }

@@ -36,6 +36,9 @@ import { ChatInterfaceComponent } from './admin/chat-interface/chat-interface.co
 import { ResearchTopicsComponent } from './research-topics/research-topics.component';
 import { AssignmentCategoriesComponent } from './assignment-categories/assignment-categories.component';
 import { ServiceNewComponent } from './service-new/service-new.component';
+import { OurSamplesComponent } from './our-samples/our-samples.component';
+import { OurSamplesDynamicCatLevelComponent } from './our-samples-dynamic-cat-level/our-samples-dynamic-cat-level.component';
+import { OurSampleLevelTypeDetailsComponent } from './our-sample-level-type-details/our-sample-level-type-details.component';
 const routes: Routes = [
   {
     path: 'admin',
@@ -138,6 +141,10 @@ const routes: Routes = [
     component: SamplelistComponent,
   },
   {
+    path: 'our-samples',
+    component: OurSamplesComponent,
+  },
+  {
     path: 'blogs',
     component: BlogsComponent,
   },
@@ -179,14 +186,21 @@ const routes: Routes = [
     component: InvoiceComponent,
   },
   {
+    path: 'samples/:slug',
+    component: SampleDetailsComponent,
+  },
+  {
+    path: 'our-samples/:level/:type',
+    component: OurSamplesDynamicCatLevelComponent,
+  },
+  {
+    path: 'our-samples/:level/:type/:cat_point',
+    component: OurSampleLevelTypeDetailsComponent,
+  },
+  {
     path:'not-found',
     component: PageNotFoundComponent
   },
-  {
-    path: ':slug',
-    component: SampleDetailsComponent,
-  },
-
 ];
 
 @NgModule({

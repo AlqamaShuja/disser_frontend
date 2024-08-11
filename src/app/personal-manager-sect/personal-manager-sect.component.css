@@ -1,0 +1,135 @@
+.personal-manager-container {
+    display: flex;
+    flex-direction: column;
+    /* background-color: #f9f9fc; */
+    background-color: #242961;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+    max-width: 1300px;
+    margin: 60px auto;
+  }
+  
+  .personal-manager-content {
+    display: flex;
+    align-items: center;
+    margin-bottom: 30px;
+  }
+  
+  .image-container {
+    flex: 1;
+    text-align: center;
+  }
+  
+  .image-container img {
+    max-width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); /* Image shadow for depth */
+  }
+  
+  .text-container {
+    flex: 2;
+    margin-left: 30px;
+  }
+  
+  .text-container h2 {
+    font-size: 28px;
+    color: #FFF; 
+    margin-bottom: 15px;
+  }
+  
+  .text-container p {
+    font-size: 16px;
+    line-height: 1.6;
+    color: rgb(250, 242, 233); /* Softer text color */
+    margin-bottom: 15px;
+  }
+  
+  .text-container p strong {
+    font-weight: bold;
+  }
+  
+  .buttons-container {
+    margin-top: 20px;
+    display: flex;
+    gap: 20px;
+  }
+  
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    padding: 10px 20px;
+    border-radius: 5px;
+    border: 2px solid transparent;
+    font-size: 16px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin-right: 10px;
+  }
+  
+  .btn.live-chat {
+    background-color: #ffffff;
+    color: #242961;
+    border: 2px solid #242961;
+    display: flex;
+    gap: 5px;
+  }
+  
+  .btn.live-chat:hover {
+    background-color: #242961;
+    color: #ffffff;
+    border: 2px solid #FFF;
+  }
+  
+  .btn.whatsapp {
+    background-color: #25D366;
+    color: #ffffff;
+    display: flex;
+    gap: 5px;
+  }
+  
+  .btn.whatsapp:hover {
+    background-color: #20b358;
+  }
+  
+  .confidentiality-section {
+    margin-top: 30px;
+  }
+  
+  .confidentiality-section h3 {
+    font-size: 22px;
+    color: #FFF; /* Theme color */
+    margin-bottom: 15px;
+  }
+  
+  .confidentiality-section ul {
+    list-style-type: disc;
+    padding-left: 20px;
+  }
+  
+.confidentiality-section ul li {
+    font-size: 16px;
+    line-height: 1.6;
+    color: rgb(250, 242, 233);
+    margin-bottom: 10px;
+}
+  
+@media screen and (max-width: 768px) {
+    .personal-manager-content {
+      flex-direction: column;
+    }
+  
+    .text-container {
+      margin-left: 0;
+      margin-top: 20px;
+    }
+  
+    .buttons-container {
+      text-align: center;
+    }
+  
+    .btn {
+      margin-bottom: 10px;
+    }
+}
+  

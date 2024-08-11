@@ -1,0 +1,21 @@
+<div class="assist-container">
+  <div class="assist-container-header">
+      <h1>Where Can dissertationwriting.help Assist You ?</h1>
+      <p>Venturing on a dissertation is a significant academic milestone.<br /> It is more than just meeting a requirement; it is about crafting an exceptional piece that showcases your expertise and critical thinking abilities.<br /> Here is how we can assist you:</p>
+  </div>
+  <div style="display: flex; justify-content: center; align-items: center;">
+    <div class="features-container-assis">
+        <div class="feature-item" *ngFor="let item of assistanceItems" data-aos="fade-up" data-aos-duration="1000" data-aos-delay="200">
+          <div class="icon-container">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+              <path d="M9 16.17L4.83 12 3.41 13.41 9 19l12-12L19.59 5.59z" fill="#242961"/>
+            </svg>
+          </div>
+          <div class="text-container">
+            <h3>{{ item.title }}</h3>
+            <p>{{ item.description }}</p>
+          </div>
+        </div>
+    </div>
+  </div>
+</div>

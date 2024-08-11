@@ -185,3 +185,359 @@
     font-size: 14px;
     color: #555;
 }
+
+
+.our-program-section {
+  padding-top: 30px;
+  padding-bottom: 30px;
+}
+
+
+/* calculator Section */
+/* .container-calc {
+  width: 100%;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 40px;
+  background-image: url('../../assets/images/calc-laptop.jpg');
+  background-size: cover;
+  background-position: center;
+  background-color: #242961;
+  opacity: 0.5;
+} */
+
+.container-calc {
+  width: 100%;
+  margin: 0 auto;
+  padding: 20px;
+  font-family: Arial, sans-serif;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 40px;
+  background-image: url('../../assets/images/calc-laptop.jpg');
+  background-size: cover;
+  background-position: center;
+  position: relative;
+}
+
+.overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(36, 41, 97, 0.6);
+  z-index: 1;
+}
+
+.content-wrapper-slide {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: transparent !important;
+  /* margin-left: 50px !important; */
+}
+
+.header {
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.header h1 {
+  font-size: 36px;
+  color: #242961;
+}
+
+.header nav {
+  font-size: 18px;
+  color: #242961;
+}
+
+.header nav a {
+  text-decoration: none;
+  color: #242961;
+}
+
+.header nav span {
+  color: #242961;
+}
+
+.content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.title {
+  /* text-align: center; */
+  margin-bottom: 30px;
+  max-width: 550px;
+}
+
+.title h1 {
+  font-size: 55px;
+  color: #FFF;
+  margin-bottom: 12px;
+}
+
+.title p {
+  font-size: 20px;
+  color: #FFF;
+}
+
+.title .buttons {
+  margin-top: 10px;
+}
+
+.title .buttons button {
+  background-color: #242961;
+  color: #FFF;
+  border: none;
+  padding: 10px 20px;
+  margin: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  border-radius: 5px;
+  font-weight: 700;
+  transition: all 0.2s ease-in-out;
+}
+
+.title .buttons button:hover {
+  color: #242961;
+  background-color: #FFF;
+  border-radius: 10px;
+}
+
+.reviews {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 30px;
+}
+
+.reviews span {
+  margin: 0 10px;
+  font-size: 18px;
+  color: #242961;
+}
+
+.reviews .fa-star {
+  color: gold;
+}
+
+.quote-form {
+  background-color: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  width: 400px;
+}
+
+.quote-form h3 {
+  text-align: center;
+  color: #242961;
+}
+
+.form-group {
+  margin-bottom: 15px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 5px;
+  font-size: 16px;
+  color: #333;
+}
+
+.form-group input,
+.form-group select {
+  width: 100%;
+  padding: 10px;
+  font-size: 16px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+.form-group span {
+  display: inline-block;
+  margin-right: 20px;
+  font-size: 16px;
+  color: #333;
+}
+
+.btn-primary {
+  background-color: #242961;
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  font-size: 16px;
+  width: 100%;
+  border-radius: 4px;
+}
+
+.btn-primary:hover {
+  background-color: #5a2e6c;
+}
+/* calculator Section End */
+
+
+
+
+/* Choose Us Section */
+
+.choose-us-section-container {
+  max-width: 100%;
+  margin: auto;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+}
+
+.container-fluid-choose-us {
+  position: relative;
+  max-width: 1300px;
+}
+
+.choose-us-section {
+  border: 1px solid black;
+  background-color: #242961;
+  border-radius: 5px;
+  padding: 20px;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.choose-us-section h1, h3 {
+  text-align: center;
+  color: #FFF;
+}
+
+.inner-content-choose-us {
+  width: 80%;
+  margin: 0 auto;
+  padding: 20px;
+  box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+  background-color: white; /* Ensure content has a background */
+}
+
+.inner-content-choose-us h1,
+.inner-content-choose-us h3 {
+  color: #fff;
+  text-align: center;
+}
+
+.content-wrapper-choose-us {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.expert-section-choose-us,
+.features-section-choose-us,
+.content-section-choose-us {
+  flex: 1;
+  margin: 10px;
+  padding: 10px;
+  background-color: #f9f9f9;
+  border-radius: 5px;
+  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.expert-card-choose-us,
+.feature-card-choose-us {
+  display: flex;
+  align-items: center;
+  margin-bottom: 10px;
+}
+
+.expert-card-choose-us img,
+.feature-card-choose-us svg {
+  margin-right: 10px;
+}
+
+.expert-card-choose-us img {
+  max-width: 80px; /* Fix the image size */
+  height: auto;
+  border-radius: 50%; /* Optional: make images circular */
+}
+
+.feature-card-choose-us.center-feature {
+  margin: 0 auto;
+  max-width: 250px;
+}
+
+.section-title-choose-us {
+  font-size: 1.5em;
+  margin-top: 20px;
+  color: #333;
+}
+
+.section-description-choose-us {
+  color: #555;
+}
+
+.originality-bar-choose-us .bar-background {
+  background: #e0e0e0;
+  border-radius: 5px;
+  height: 10px;
+  width: 100%;
+}
+
+.originality-bar-choose-us .bar-foreground {
+  background: #242961;
+  width: 96%;
+  height: 100%;
+  border-radius: 5px;
+}
+
+.plagiarism-checkers-choose-us .checker {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.plagiarism-checkers-choose-us img {
+  max-width: 50px; /* Fix the image size */
+  height: auto;
+  margin: 10px 0;
+}
+
+@media (max-width: 768px) {
+  .inner-content-choose-us {
+      width: 90%;
+      top: 20px;
+      padding: 10px;
+  }
+
+  .content-wrapper-choose-us {
+      flex-direction: column;
+      align-items: center;
+  }
+
+  .expert-section-choose-us,
+  .features-section-choose-us,
+  .content-section-choose-us {
+      width: 100%;
+      margin: 10px 0;
+  }
+
+  .feature-card-choose-us.center-feature {
+      max-width: none;
+  }
+
+  .section-title-choose-us {
+      font-size: 1.2em;
+  }
+}
+
+/* Choose Us Section End */

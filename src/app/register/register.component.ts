@@ -25,18 +25,45 @@ export class RegisterComponent {
       name:['',Validators.required]
     });
   }
-  onSubmit():void{
-    if(this.registerForm.invalid){
-      return;
+  onSubmit(): void {
+    if (this.registerForm.invalid) {
+        return;
     }
-    this.authService.createUser(this.registerForm.value).subscribe(res => {
-      if(res.data){
-        console.log(res.data,'THE RES DATA')
-        localStorage.setItem('user', JSON.stringify(res.data));
-        this.globalService.loggedIn$.next(res.data);
-        this.router.navigate(['/user-details']);
-      }
-      console.log(res);
-    })
+
+    this.authService.createUser(this.registerForm.value).subscribe({
+        next: (res) => {
+            if (res.data) {
+                console.log(res.data, 'THE RES DATA');
+                localStorage.setItem('user', JSON.stringify(res.data));
+                this.globalService.loggedIn$.next(res.data);
+                this.router.navigate(['/user-details']);
+            } else {
+                // Handle cases where res.data is not present
+            }
+            console.log(res, "====res:RegisterComponent");
+        },
+        error: (err) => {
+            console.error('Error creating user:', err);
+            // Display the error message from the backend
+            alert(`Error: ${err}`);
+        }
+    });
   }
+  // onSubmit():void{
+  //   if(this.registerForm.invalid){
+  //     return;
+  //   }
+  //   this.authService.createUser(this.registerForm.value).subscribe(res => {
+  //     if(res.data){
+  //       console.log(res.data,'THE RES DATA')
+  //       localStorage.setItem('user', JSON.stringify(res.data));
+  //       this.globalService.loggedIn$.next(res.data);
+  //       this.router.navigate(['/user-details']);
+  //     }
+  //     else {
+
+  //     }
+  //     console.log(res, "====res:RegisterComponent");
+  //   })
+  // }
 }

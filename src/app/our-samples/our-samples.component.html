@@ -1,0 +1,46 @@
+<div class="samples-container">
+    <div class="breadcrumb-container">
+      <ul class="breadcrumb" style="padding: 4px 15px;">
+        <li><a routerLink="/">Home</a></li>
+        <li><a routerLink="/our-samples">Our Sample</a></li>
+      </ul>
+    </div>
+  
+    <div class="content-container">
+      <h2 class="title">Select Your Academic Level</h2>
+      <div class="levels">
+        <div class="level">
+          <div class="level-icon">
+            <i class="fa fa-graduation-cap icon"></i>
+          </div>
+          <h3 class="level-title">UNDER GRADUATE</h3>
+          <ul class="level-options">
+            <li (click)="navigateToLevel('undergraduate', 'essay')">➤ Essays</li>
+            <li (click)="navigateToLevel('undergraduate', 'coursework')">➤ Coursework</li>
+            <li (click)="navigateToLevel('undergraduate', 'dissertations')">➤ Dissertations</li>
+          </ul>
+        </div>
+        <div class="level">
+          <div class="level-icon">
+            <i class="fa fa-graduation-cap icon"></i>
+          </div>
+          <h3 class="level-title">MASTERS</h3>
+          <ul class="level-options">
+            <li (click)="navigateToLevel('masters', 'essay')">➤ Essays</li>
+            <li (click)="navigateToLevel('masters', 'coursework')">➤ Coursework</li>
+            <li (click)="navigateToLevel('masters', 'dissertations')">➤ Dissertations</li>
+          </ul>
+        </div>
+        <div class="level">
+          <div class="level-icon">
+            <i class="fa fa-graduation-cap icon"></i>
+          </div>
+          <h3 class="level-title">PhD</h3>
+          <ul class="level-options">
+            <li (click)="navigateToLevel('phd', 'essay')">➤ Essays</li>
+            <li (click)="navigateToLevel('phd', 'dissertations')">➤ Dissertations</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+</div>

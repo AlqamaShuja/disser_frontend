@@ -1,145 +1,73 @@
-<style>
-  .testimonial-card {
-    border: 0.5px solid rgb(151, 149, 149);
-    margin: 10px;
-    height: 350px; /* Initial height */
-    overflow: hidden; /* Hide overflow content */
-    transition: height 0.5s; /* Add smooth transition effect */
-    border-radius: 5px;
-    position: relative;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-    transition: box-shadow 0.3s ease-out, transform 0.3s ease-out;
-  }
-
-  .testimonial-card:hover {
-    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
-    transform: translateY(-5px);
-  }
-
-  .location-badge {
-    padding: 10px;
-    margin-bottom: 5px;
-  }
-
-  .stars {
-    display: inline-block;
-    margin-left: 5px;
-    color: orange;
-  }
-
-  .testimonial-date-stars {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    /* border-top: 1px solid #ccc; */
-    padding-top: 5px;
-  }
-
-  .description-container {
-    max-height: 150px; /* Set your desired initial height */
-    overflow: hidden;
-    white-space: nowrap; /* Prevent text from wrapping */
-    text-overflow: ellipsis; /* Show ellipsis (...) for overflow text */
-    transition: max-height 0.5s; /* Add smooth transition effect */
-  }
-
-  .expanded-description {
-    max-height: none; /* Expand the height when the class is applied */
-    white-space: normal; /* Allow text to wrap in expanded state */
-  }
-</style>
-
-
-<section class="page-header">
-  <div class="container">
-    <div class="row justify-content-center">
-      <div class="col-lg-8 col-xl-8">
-        <div class="title-block">
-          <h1>Customer Reviews</h1>
-          <ul class="header-bradcrumb justify-content-center">
-            <li><a href="/">Home</a></li>
-            <li class="active" aria-current="page">Reviews</li>
-          </ul>
-        </div>
-      </div>
-    </div>
-  </div>
-</section>
-
-<div class="container-fluid mt-5 d-flex justify-content-center align-items-center">
-  <div style="width: 80%;">
-    <div class="row">
-      <div class="col-md-4" *ngFor="let testimonial of testimonials">
-        <div class="testimonial-card" style="background-color: rgb(248, 249, 250);"  [style.height]="testimonial.showFullDescription ? '470px' : '350px'">
-          <div class="overlay" style="background-color: rgba(0,0,0,0.5); z-index: 999;">
-          <div class="location-badge" 
-          style="
-          background-image: url('../../assets/images/covertes.jpeg');
-           background-repeat: no-repeat;
-            background-position: center; 
-           "
-            >
-
-              <div class="location-badge p-2">
-                <span class="badge bg-primary d-flex " style="padding: 10px; color: white; font-size: 16px; width: fit-content;">
-                  <div>
-                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <circle cx="12" cy="12" r="7"/>
-                  <path d="M12 2s-2 3.586-2 6a2 2 0 0 0 4 0c0-2.414-2-6-2-6zm0 10a2 2 0 1 1 0-4a2 2 0 0 1 0 4z"/>
-                </svg>
-
-                  </div>
-                  {{testimonial.location}}
-                </span>
-              </div>
-            </div>
-          </div> 
-         <!-- Your modified code with the Bootstrap user icon -->
-         <!-- border-top: 1px solid #ccc; -->
-
-          <div class="p-2" style="font-size: medium; border-bottom:1px solid #ccc ; color: #031f42;" >
-            <div class="d-flex align-items-center">
-              <div>
-                <svg xmlns="http://www.w3.org/2000/svg" width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                  <circle cx="12" cy="7" r="4"/>
-                  <path d="M21 21v-2a4 4 0 0 0-4-4H7a4 4 0 0 0-4 4v2"/>
-                </svg>
-              </div>
-              <strong>{{testimonial.name.toUpperCase()}}</strong>
-            </div>
+<div class="container mt-5">
+  <div class="row">
+    <div class="col-lg-4 col-md-6 mb-4" *ngFor="let testimonial of testimonials; let i = index">
+      <div class="card h-100 shadow-sm">
+        <div class="card-body">
+          <div class="card-header-2">
+            <h5 class="card-title">{{ testimonial.name }}</h5>
+            <p class="card-text stars" [innerHTML]="generateStars(testimonial.rating)"></p>
           </div>
-          
-          
-
-          <div class="testimonial-date-stars p-2" style="font-weight: 600; width: 70%;color: #031f42;">
-            <div>
-              Date
-              <br />
-              {{testimonial.date | date:'dd MMM yyyy'}}
-            </div>
-            <div>
-              Stars
-              <br />
-              <span style='color: yellow;'>
-                {{generateStars(testimonial.rating)}}
-              </span>
-            </div>
+          <div class="city-date">
+            <p class="card-text location"><i class="fas fa-map-marker-alt"></i> {{ testimonial.location }}</p>
+            <p class="card-text date"><i class="fas fa-calendar-alt"></i> {{ testimonial.date | date }}</p>
           </div>
-
-          <div class="p-2">
-            <div [class.expanded-description]="testimonial.showFullDescription" class="description-container" style="color: #888585;">
-              {{testimonial.description}}
-            </div>
-            <button *ngIf="testimonial.description.length > 150 && !testimonial.showFullDescription" type="button" class="btn btn-link" (click)="toggleDescription(testimonial)"> 
-              Read More
-            </button>
-            <button *ngIf="testimonial.showFullDescription" type="button" class="btn btn-link" (click)="toggleDescription(testimonial)"> 
-              Read Less
-            </button>
-
-          </div>
+          <p class="card-text description">
+            {{ testimonial.expanded ? testimonial.description : (testimonial.description | slice:0:100) + (testimonial.description.length > 100 ? '... ' : '') }}
+            <span *ngIf="testimonial.description.length > 100 && !testimonial.expanded" class="read-more" (click)="toggleDescription(testimonial)">Read More</span>
+            <span *ngIf="testimonial.expanded" class="read-more" (click)="toggleDescription(testimonial)">Read Less</span>
+          </p>
         </div>
       </div>
     </div>
   </div>
 </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div class="container mt-5">
+  <div class="row">
+    <div class="col-md-12" *ngFor="let testimonial of testimonials; let i = index">
+      <div class="card mb-4 shadow-sm">
+        <div class="card-body">
+          <div class="card-header-2">
+            <h5 class="card-title"><strong>{{ testimonial.name }}</strong></h5>
+            <p class="card-text stars" [innerHTML]="generateStars(testimonial.rating)"></p>
+          </div>
+          <div class="city-date">
+            <p class="card-text"><small class="text-muted">{{ testimonial.location }}</small></p>
+            <p class="card-text"><small class="text-muted">{{ testimonial.date | date }}</small></p>
+          </div>
+          <p class="card-text">
+            {{ testimonial.expanded ? testimonial.description : (testimonial.description | slice:0:100) + (testimonial.description.length > 100 ? '... ' : '') }}
+            <span *ngIf="testimonial.description.length > 100 && !testimonial.expanded" class="read-more" (click)="toggleDescription(testimonial)">Read More</span>
+            <span *ngIf="testimonial.expanded" class="read-more" (click)="toggleDescription(testimonial)">Read Less</span>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->

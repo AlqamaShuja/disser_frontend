@@ -1,6 +1,8 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { OrderService } from 'src/app/services/order.service';
+import { ServicesService } from 'src/app/services/services.service';
+import { ToastrService } from 'ngx-toastr';
 
 @Component({
   selector: 'app-order-form',
@@ -8,267 +10,770 @@ import { OrderService } from 'src/app/services/order.service';
   styleUrls: ['./order-form.component.css'],
 })
 export class OrderFormComponent implements OnInit {
-  @Input()
-  categories:any;
-  orderForm: FormGroup;
-  gbpTotalCost: Number = 0;
-  gbp: string = '';
-  services: Array<any> = [
-    {
-      Id: 1,
-      name: 'softwareAsService',
-      Price: 0,
-      value: '0',
-      isactive: false,
-    },
-    {
-      Id: 2,
-      name: 'presentaionSlides',
-      Price: 0,
-      value: '0',
-      isactive: false,
-    },
-    {
-      Id: 3,
-      name: 'deadLine',
-      Price: 0,
-      value: '',
-      isactive: false,
-    },
-    {
-      Id: 4,
-      name: 'words',
-      Price: 0,
-      value: 'words',
-      isactive: false,
-    },
-  ];
-  fileUrl:String = "";
-  payload: any = {
-    name: '',
-    email: '',
-    educationLevel: '',
-    number: '',
-    typeOfWritingService: '',
-    typeOfHelpRequired: '',
-    topicCatogery: '',
-    yourTopic: '',
-    detailInstruction: '',
-    numberOfReferences: '',
-    numberOfPresentationSlides: 0,
-    softwareAsService: '',
-    writingStyleCitation: '',
-    preferedLanguage: '',
-    lineSpacing: 2,
-    requiredNumberOfPages: 0,
-    requiredNumberOfWords: 0,
-    deadLine: '',
-    totalCost: '0.00',
-    paymentType: '',
-    referedBy: '',
-  };
-
+  @Input() categories: any;
   @Output() orderEvent = new EventEmitter();
+  orderForm: FormGroup;
+  gbpTotalCost: number = 0;
+  topics: any[] = [];
 
-  constructor(private formBuilder: FormBuilder,private orderService:OrderService) {
+  typeOfServices: Array<{ title: string, price: number }> = [
+    { title: 'Dissertation Writing', price: 50 },
+    { title: 'Research Proposal Writing', price: 40 },
+    { title: 'Dissertation Proofreading & Editing', price: 30 }
+  ];
+
+  subjectAreas: Array<{ title: string, price: number }> = [
+    { title: 'Business', price: 10 },
+    { title: 'Engineering', price: 15 },
+    { title: 'Law', price: 20 },
+    { title: 'Medicine', price: 25 },
+    { title: 'Science', price: 12 },
+    { title: 'Arts', price: 8 }
+  ];
+
+  desiredGrades: Array<{ title: string, price: number }> = [
+    { title: '1st Class Standard (80%+)', price: 70 },
+    { title: '2:1 Standard (70%+)', price: 60 },
+    { title: '2:2 Standard (50%-60%+)', price: 50 }
+  ];
+
+  deadlines: Array<{ title: string, price: number }> = [
+    { title: '48 Hours Urgent Delivery', price: 100 },
+    { title: '3 Days Urgent Delivery', price: 80 },
+    { title: '5 Days Delivery', price: 60 },
+    { title: '10 Days Delivery', price: 40 },
+    { title: '15 Days Delivery', price: 20 },
+    { title: '25 Days Delivery', price: 10 },
+    { title: '30 Days Delivery', price: 5 }
+  ];
+
+  referencingStyles: Array<{ title: string, price: number }> = [
+    { title: 'Harvard', price: 0 },
+    { title: 'APA', price: 0 },
+    { title: 'MLA', price: 0 },
+    { title: 'OSCOLA', price: 0 },
+    { title: 'Oxford', price: 0 },
+    { title: 'Other', price: 0 }
+  ];
+
+  constructor(
+    private formBuilder: FormBuilder,
+    private orderService: OrderService,
+    private serviceService: ServicesService,
+    private toastr: ToastrService
+  ) {
     this.orderForm = this.formBuilder.group({
-      firstName: ['', Validators.required],
-      email: ['', [Validators.required, Validators.email]],
-      country: ['UK (+44)', Validators.required],
-      contactPhone: ['', Validators.required],
-      writingService: ['', Validators.required],
-      helpRequire: ['',Validators.required],
-      topic: ['', Validators.required],
-      yourTopic: ['', Validators.required],
-      detailInstructions: ['', Validators.required],
-      sourcesRef: ['', Validators.required],
-      categoryLevel: [''],
-      preSlide: ['', Validators.required],
-      categoryLev: [''],
-      writingStyle: ['', Validators.required],
-      languageStyle: ['', Validators.required],
-      lineSpace: ['', Validators.required],
-      farmaish: ['', Validators.required],
-      pageWords: ['', Validators.required],
-      eduLevel: ['', Validators.required],
-      paperStnd: ['', Validators.required],
+      typeOfService: ['', Validators.required],
+      subjectArea: ['', Validators.required],
+      level: ['', Validators.required],
+      requiredWordCount: ['', Validators.required],
+      desiredGrade: ['', Validators.required],
       deadline: ['', Validators.required],
-      payment: ['', Validators.required],
-      referred: ['', Validators.required],
-      terms: ['', Validators.required],
-      softService: ['', Validators.required],
+      topic: ['', Validators.required],
+      detailInstructions: ['', Validators.required],
+      referencingStyle: ['', Validators.required],
+      numberOfReferences: ['', Validators.required],
+      totalPrice: [{ value: '', disabled: true }, Validators.required],
+      email: ['', [Validators.required, Validators.email]],
+      contactNumber: ['', Validators.required],
+      universityName: ['', Validators.required],
+      turnitin: ['', Validators.required],
     });
   }
 
-  ngOnInit(): void {}
-
-  wordsORPagesChanged(event: any): void {
-    console.log(this.orderForm.value?.pageWords);
-    if (this.services[3].value == 'pages') {
-      if (
-        this.orderForm.value?.lineSpacing == 2 ||
-        this.orderForm.value?.lineSpacing == 0
-      ) {
-        this.services[3].Price = parseInt(this.orderForm.value?.pageWords) * 10;
-      } else if (this.orderForm.value?.lineSpacing == 1) {
-        this.services[3].Price = parseInt(this.orderForm.value?.pageWords) * 20;
-      } else if (this.orderForm.value?.lineSpacing == 1.5) {
-        this.services[3].Price = parseInt(this.orderForm.value?.pageWords) * 15;
-      }
-      this.calculateGBP(
-        4,
-        this.orderForm.value?.pageWords,
-        this.payload.requiredNumberOfPages
-      );
-      this.payload.requiredNumberOfPages = this.orderForm.value?.pageWords;
-    } else if (this.services[3].value == 'words') {
-      let basePrice = 0.03;
-      this.services[3].Price =
-        parseInt(this.orderForm.value?.pageWords) * basePrice;
-      this.calculateGBP(
-        3,
-        this.orderForm.value?.pageWords,
-        this.payload.requiredNumberOfWords
-      );
-      this.payload.requiredNumberOfWords = this.orderForm.value?.pageWords;
-    }
+  ngOnInit(): void {
+    this.serviceService.getAllTopic().subscribe((res) => {
+      this.topics = res;
+    });
   }
 
-  numberOfWordsORPagesChanged(event: any): void {
-    if (this.services[3].value === 'pages') {
-      if (
-        this.orderForm.value?.lineSpacing === 2 ||
-        this.orderForm.value.lineSpacing === 0
-      ) {
-        this.services[3].Price =
-          parseInt(this.orderForm.value.pageWords.toString()) * 10;
-      } else if (this.orderForm.value.lineSpacing === 1) {
-        this.services[3].Price =
-          parseInt(this.orderForm.value.pageWords.toString()) * 20;
-      } else if (this.orderForm.value.lineSpacing === 1.5) {
-        this.services[3].Price =
-          parseInt(this.orderForm.value.pageWords.toString()) * 15;
-      }
-      this.calculateGBP(
-        4,
-        this.orderForm.value.pageWords,
-        this.payload.requiredNumberOfPages
-      );
-      this.payload.requiredNumberOfPages = this.orderForm.value.pageWords;
-    } else if (this.services[3].value === 'words') {
-      const basePrice = 0.03;
-      this.services[3].Price =
-        parseInt(this.orderForm.value.pageWords.toString()) * basePrice;
-      this.calculateGBP(
-        3,
-        this.orderForm.value.pageWords,
-        this.payload.requiredNumberOfWords
-      );
-      this.payload.requiredNumberOfWords = this.orderForm.value.pageWords;
-    }
-  }
-
-  deadLineChanged(event: any): void {
-    this.payload.deadLine = event.target.selectedOptions[0].innerText;
-    let time = parseInt(this.services[2].value);
-    if (time >= 24) {
-      this.services[2].Price = 20;
-    } else {
-      this.services[2].Price = 25;
-    }
-    this.calculateGBP(
-      4,
-      this.payload.totalPagesORWords,
-      this.payload.requiredNumberOfPages
-    );
-  }
-
-  topicCatogeryChanged(event:any):void{
-    this.payload.topicCatogery =event.target.selectedOptions[0].innerText;
-  }
+  calculateTotalPrice(): void {
+    const typeOfServicePrice = this.typeOfServices.find(item => item.title === this.orderForm.value.typeOfService)?.price || 0;
+    const subjectAreaPrice = this.subjectAreas.find(item => item.title === this.orderForm.value.subjectArea)?.price || 0;
+    const desiredGradePrice = this.desiredGrades.find(item => item.title === this.orderForm.value.desiredGrade)?.price || 0;
+    const deadlinePrice = this.deadlines.find(item => item.title === this.orderForm.value.deadline)?.price || 0;
+    const wordCount = this.orderForm.value.requiredWordCount || 0;
   
-  educationLevelChanged(event:any):void{
-    this.payload.educationLevel =event.target.selectedOptions[0].innerText;
+    const perPageWordCount = 1200;
+    this.gbpTotalCost = Math.round((typeOfServicePrice + subjectAreaPrice + desiredGradePrice + deadlinePrice) * wordCount / perPageWordCount);
+  
+    this.orderForm.patchValue({ totalPrice: this.gbpTotalCost });
   }
 
-  softwareServiceChanged(event: any): void {
-    console.log(event.target.selectedOptions[0].innerText);
-    this.payload.softwareAsService = event.target.selectedOptions[0].innerText
-    this.services[0].Price = parseInt(this.orderForm.value.softService);
-    console.log(this.services);
-    this.calculateGBP(2, this.orderForm.value.softService);
-  }
-  numberOfSlidesChanged(event: any): void {
-    this.services[1].Price = parseInt(this.orderForm.value.preSlide) * 5;
-    this.calculateGBP(
-      1,
-      this.orderForm.value.preSlide,
-      this.payload.numberOfPresentationSlides
-    );
-    this.payload.numberOfPresentationSlides = this.orderForm.value.preSlide;
-  }
-
-  calculateGBP(key?: any, value?: any, previousValue?: any): void {
-    console.log(key, value, previousValue);
-    let totalCost = 0;
-    this.services.forEach(function (item, index) {
-      totalCost = totalCost + item.Price;
-      console.log(item);
-    });
-    this.gbp = totalCost.toString();
-  }
-  onFileSelected(event: any): void {
-    const selectedFile: File = event.target.files[0];
-    if (selectedFile) {
-      const formData = new FormData();
-      formData.append('image', selectedFile);
-      this.orderService.uploadDocuments(formData).subscribe((res)=>{
-        this.fileUrl = res.filename;
-        console.log(res)
-        console.log('Selected File:', selectedFile);
-      })      
-
-      // If you want to upload the file to a server, you can use HttpClient or a dedicated file upload library
-      // Example: this.uploadFile(selectedFile);
-    }
-  }
   onSubmit(): void {
     if (this.orderForm.invalid) {
-      console.log(this.orderForm.value)
-      console.log(this.orderForm)
-      console.log(this.orderForm.invalid)
+      // Mark all controls as touched to trigger validation messages
+      this.orderForm.markAllAsTouched();
+  
+      // Handle form validation errors
+      Object.keys(this.orderForm.controls).forEach(field => {
+        const control = this.orderForm.get(field);
+        if (control && control.invalid) {
+          // const fieldName = field.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase());
+          // this.toastr.error(`Please correct the ${fieldName} field`, 'Form Invalid');
+        }
+      });
       return;
-    } else {
-      console.log(this.orderForm.value)
-      const orderPayload = {
-        Name:this.orderForm.value?.firstName,
-        Phone:this.orderForm.value?.country.split(' ')[1]+' '+this.orderForm.value?.contactPhone,
-        Email: this.orderForm.value?.email,
-        WordsORPages: this.orderForm.value.softService,
-        NumberOfWordsPages: this.orderForm.value.pageWords,
-        Topic: this.orderForm.value.yourTopic,
-        DetailInstructions: this.orderForm.value.detailInstructions,
-        TypeofHelpRequire: "",
-        LineSpacing: this.orderForm.value.lineSpace,
-        SoftwareService: this.payload.softwareAsService,
-        TopicCategory: this.payload.topicCatogery,
-        PresentationSlides: this.payload.numberOfPresentationSlides,
-        SourceReferences: this.orderForm.value.sourcesRef,
-        WritingStyle: this.orderForm.value.writingStyle,
-        PreferredLanguageLevel: this.orderForm.value.languageStyle,
-        EducationLevel: this.payload.educationLevel,
-        PaperStandard: this.orderForm.value.paperStnd,
-        DeadLine: this.payload.deadLine,
-        BeforeDiscount: 0,
-        DiscountCode: '',
-        GrossAmount: this.gbp,
-        Status: 'New',
-        PaidStatus: 'Unpaid',
-        suportingDoc:this.fileUrl,
-        isSample:false,
-      };
-      console.log(orderPayload)
-      this.orderEvent.emit(orderPayload);
     }
+  
+    const orderPayload = {
+      Name: this.orderForm.value.email.split("@")[0],
+      Email: this.orderForm.value.email,
+      Phone: this.orderForm.value.contactNumber,
+      WordsORPages: 'words',
+      NumberOfWordsPages: this.orderForm.value.requiredWordCount,
+      Topic: this.orderForm.value.topic,
+      DetailInstructions: this.orderForm.value.detailInstructions,
+      TypeofHelpRequire: this.orderForm.value.typeOfService,
+      LineSpacing: 2, // Assuming a default value for now
+      SoftwareService: 'N/A', // Assuming a default value for now
+      TopicCategory: this.orderForm.value.subjectArea,
+      PresentationSlides: 0, // Assuming a default value for now
+      SourceReferences: this.orderForm.value.numberOfReferences,
+      WritingStyle: this.orderForm.value.referencingStyle,
+      PreferredLanguageLevel: 'English', // Assuming a default value for now
+      EducationLevel: this.orderForm.value.level,
+      PaperStandard: this.orderForm.value.desiredGrade,
+      DeadLine: this.orderForm.value.deadline,
+      BeforeDiscount: 0,
+      DiscountCode: '',
+      // GrossAmount: this.orderForm.value.totalPrice,
+      GrossAmount: this.gbpTotalCost,
+      Status: 'New',
+      PaidStatus: 'Unpaid',
+      suportingDoc: '',
+      isSample: false
+    };
+  
+    console.log(orderPayload, "===orderPayloadorderPayload");
+  
+    this.orderEvent.emit(orderPayload); // Emit the event on success
+    // this.orderService.createOrder(orderPayload).subscribe(
+    //   response => {
+    //     // this.toastr.success('Order created successfully', 'Success');
+    //     this.orderEvent.emit(orderPayload); // Emit the event on success
+    //   },
+    //   error => {
+    //     // this.toastr.error('Error creating order', 'Error');
+    //     alert('Error creating order');
+    //   }
+    // );
+  }
+
+  resetForm(): void {
+    this.orderForm.reset(); // Reset the form fields
+    this.gbpTotalCost = 0; // Reset the total cost
   }
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+// import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+// import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+// import { OrderService } from 'src/app/services/order.service';
+// import { ServicesService } from 'src/app/services/services.service';
+// import { ToastrService } from 'ngx-toastr';
+
+// @Component({
+//   selector: 'app-order-form',
+//   templateUrl: './order-form.component.html',
+//   styleUrls: ['./order-form.component.css'],
+// })
+// export class OrderFormComponent implements OnInit {
+//   @Input() categories: any;
+//   orderForm: FormGroup;
+//   gbpTotalCost: number = 0;
+//   topics: any[] = [];
+
+//   typeOfServices: Array<{ title: string, price: number }> = [
+//     { title: 'Dissertation Writing', price: 50 },
+//     { title: 'Research Proposal Writing', price: 40 },
+//     { title: 'Dissertation Proofreading & Editing', price: 30 }
+//   ];
+
+//   subjectAreas: Array<{ title: string, price: number }> = [
+//     { title: 'Business', price: 10 },
+//     { title: 'Engineering', price: 15 },
+//     { title: 'Law', price: 20 },
+//     { title: 'Medicine', price: 25 },
+//     { title: 'Science', price: 12 },
+//     { title: 'Arts', price: 8 }
+//   ];
+
+//   desiredGrades: Array<{ title: string, price: number }> = [
+//     { title: '1st Class Standard (80%+)', price: 70 },
+//     { title: '2:1 Standard (70%+)', price: 60 },
+//     { title: '2:2 Standard (50%-60%+)', price: 50 }
+//   ];
+
+//   deadlines: Array<{ title: string, price: number }> = [
+//     { title: '48 Hours Urgent Delivery', price: 100 },
+//     { title: '3 Days Urgent Delivery', price: 80 },
+//     { title: '5 Days Delivery', price: 60 },
+//     { title: '10 Days Delivery', price: 40 },
+//     { title: '15 Days Delivery', price: 20 },
+//     { title: '25 Days Delivery', price: 10 },
+//     { title: '30 Days Delivery', price: 5 }
+//   ];
+
+//   referencingStyles: Array<{ title: string, price: number }> = [
+//     { title: 'Harvard', price: 0 },
+//     { title: 'APA', price: 0 },
+//     { title: 'MLA', price: 0 },
+//     { title: 'OSCOLA', price: 0 },
+//     { title: 'Oxford', price: 0 },
+//     { title: 'Other', price: 0 }
+//   ];
+
+//   @Output() orderEvent = new EventEmitter();
+
+//   constructor(
+//     private formBuilder: FormBuilder,
+//     private orderService: OrderService,
+//     private serviceService: ServicesService,
+//     private toastr: ToastrService
+//   ) {
+//     this.orderForm = this.formBuilder.group({
+//       typeOfService: ['', Validators.required],
+//       subjectArea: ['', Validators.required],
+//       level: ['', Validators.required],
+//       requiredWordCount: ['', Validators.required],
+//       desiredGrade: ['', Validators.required],
+//       deadline: ['', Validators.required],
+//       topic: ['', Validators.required],
+//       detailInstructions: ['', Validators.required],
+//       referencingStyle: ['', Validators.required],
+//       numberOfReferences: ['', Validators.required],
+//       totalPrice: [{ value: '', disabled: true }, Validators.required],
+//       email: ['', [Validators.required, Validators.email]],
+//       contactNumber: ['', Validators.required],
+//       universityName: ['', Validators.required],
+//       turnitin: ['', Validators.required],
+//     });
+//   }
+
+//   ngOnInit(): void {
+//     this.serviceService.getAllTopic().subscribe((res) => {
+//       this.topics = res;
+//     });
+//   }
+
+//   calculateTotalPrice(): void {
+//     const typeOfServicePrice = this.typeOfServices.find(item => item.title === this.orderForm.value.typeOfService)?.price || 0;
+//     const subjectAreaPrice = this.subjectAreas.find(item => item.title === this.orderForm.value.subjectArea)?.price || 0;
+//     const desiredGradePrice = this.desiredGrades.find(item => item.title === this.orderForm.value.desiredGrade)?.price || 0;
+//     const deadlinePrice = this.deadlines.find(item => item.title === this.orderForm.value.deadline)?.price || 0;
+//     const wordCount = this.orderForm.value.requiredWordCount || 0;
+  
+//     const perPageWordCount = 1200;
+//     this.gbpTotalCost = Math.round((typeOfServicePrice + subjectAreaPrice + desiredGradePrice + deadlinePrice) * wordCount / perPageWordCount);
+  
+//     this.orderForm.patchValue({ totalPrice: this.gbpTotalCost });
+//   }
+
+//   // onSubmit(): void {
+//   //   if (this.orderForm.invalid) {
+//   //     // Handle form validation errors
+//   //     Object.keys(this.orderForm.controls).forEach(field => {
+//   //       const control = this.orderForm.get(field);
+//   //       if (control && control.invalid) {
+//   //         const fieldName = field.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase());
+//   //         this.toastr.error(`Please correct the ${fieldName} field`, 'Form Invalid');
+//   //       }
+//   //     });
+//   //     return;
+//   //   }
+
+//   //   const orderPayload = {
+//   //     Name: this.orderForm.value.email.split("@")[0],
+//   //     Email: this.orderForm.value.email,
+//   //     Phone: this.orderForm.value.contactNumber,
+//   //     WordsORPages: 'words',
+//   //     NumberOfWordsPages: this.orderForm.value.requiredWordCount,
+//   //     Topic: this.orderForm.value.topic,
+//   //     DetailInstructions: this.orderForm.value.detailInstructions,
+//   //     TypeofHelpRequire: this.orderForm.value.typeOfService,
+//   //     LineSpacing: 2, // Assuming a default value for now
+//   //     SoftwareService: 'N/A', // Assuming a default value for now
+//   //     TopicCategory: this.orderForm.value.subjectArea,
+//   //     PresentationSlides: 0, // Assuming a default value for now
+//   //     SourceReferences: this.orderForm.value.numberOfReferences,
+//   //     WritingStyle: this.orderForm.value.referencingStyle,
+//   //     PreferredLanguageLevel: 'English', // Assuming a default value for now
+//   //     EducationLevel: this.orderForm.value.level,
+//   //     PaperStandard: this.orderForm.value.desiredGrade,
+//   //     DeadLine: this.orderForm.value.deadline,
+//   //     BeforeDiscount: 0,
+//   //     DiscountCode: '',
+//   //     GrossAmount: this.orderForm.value.totalPrice,
+//   //     Status: 'New',
+//   //     PaidStatus: 'Unpaid',
+//   //     suportingDoc: '',
+//   //     isSample: false
+//   //   };
+
+//   //   console.log(orderPayload, "===orderPayloadorderPayload");
+    
+//   //   this.orderService.createOrder(orderPayload).subscribe(
+//   //     response => {
+//   //       this.toastr.success('Order created successfully', 'Success');
+//   //       this.orderEvent.emit(orderPayload); // Emit the event on success
+//   //     },
+//   //     error => {
+//   //       this.toastr.error('Error creating order', 'Error');
+//   //     }
+//   //   );
+//   // }
+
+//   onSubmit(): void {
+//     if (this.orderForm.invalid) {
+//       // Mark all controls as touched to trigger validation messages
+//       this.orderForm.markAllAsTouched();
+  
+//       // Handle form validation errors
+//       Object.keys(this.orderForm.controls).forEach(field => {
+//         const control = this.orderForm.get(field);
+//         if (control && control.invalid) {
+//           const fieldName = field.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase());
+//           this.toastr.error(`Please correct the ${fieldName} field`, 'Form Invalid');
+//         }
+//       });
+//       return;
+//     }
+  
+//     const orderPayload = {
+//       Name: this.orderForm.value.email.split("@")[0],
+//       Email: this.orderForm.value.email,
+//       Phone: this.orderForm.value.contactNumber,
+//       WordsORPages: 'words',
+//       NumberOfWordsPages: this.orderForm.value.requiredWordCount,
+//       Topic: this.orderForm.value.topic,
+//       DetailInstructions: this.orderForm.value.detailInstructions,
+//       TypeofHelpRequire: this.orderForm.value.typeOfService,
+//       LineSpacing: 2, // Assuming a default value for now
+//       SoftwareService: 'N/A', // Assuming a default value for now
+//       TopicCategory: this.orderForm.value.subjectArea,
+//       PresentationSlides: 0, // Assuming a default value for now
+//       SourceReferences: this.orderForm.value.numberOfReferences,
+//       WritingStyle: this.orderForm.value.referencingStyle,
+//       PreferredLanguageLevel: 'English', // Assuming a default value for now
+//       EducationLevel: this.orderForm.value.level,
+//       PaperStandard: this.orderForm.value.desiredGrade,
+//       DeadLine: this.orderForm.value.deadline,
+//       BeforeDiscount: 0,
+//       DiscountCode: '',
+//       GrossAmount: this.orderForm.value.totalPrice,
+//       Status: 'New',
+//       PaidStatus: 'Unpaid',
+//       suportingDoc: '',
+//       isSample: false
+//     };
+  
+//     console.log(orderPayload, "===orderPayloadorderPayload");
+  
+//     this.orderService.createOrder(orderPayload).subscribe(
+//       response => {
+//         this.toastr.success('Order created successfully', 'Success');
+//         this.orderEvent.emit(orderPayload); // Emit the event on success
+//       },
+//       error => {
+//         this.toastr.error('Error creating order', 'Error');
+//       }
+//     );
+//   }
+// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+// import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+// import { OrderService } from 'src/app/services/order.service';
+// import { ServicesService } from 'src/app/services/services.service';
+// import { ToastrService } from 'ngx-toastr';
+
+// @Component({
+//   selector: 'app-order-form',
+//   templateUrl: './order-form.component.html',
+//   styleUrls: ['./order-form.component.css'],
+// })
+// export class OrderFormComponent implements OnInit {
+//   @Input() categories: any;
+//   orderForm: FormGroup;
+//   gbpTotalCost: number = 0;
+//   topics: any[] = [];
+
+//   typeOfServices: Array<{ title: string, price: number }> = [
+//     { title: 'Dissertation Writing', price: 50 },
+//     { title: 'Research Proposal Writing', price: 40 },
+//     { title: 'Dissertation Proofreading & Editing', price: 30 }
+//   ];
+
+//   subjectAreas: Array<{ title: string, price: number }> = [
+//     { title: 'Business', price: 10 },
+//     { title: 'Engineering', price: 15 },
+//     { title: 'Law', price: 20 },
+//     { title: 'Medicine', price: 25 },
+//     { title: 'Science', price: 12 },
+//     { title: 'Arts', price: 8 }
+//   ];
+
+//   desiredGrades: Array<{ title: string, price: number }> = [
+//     { title: '1st Class Standard (80%+)', price: 70 },
+//     { title: '2:1 Standard (70%+)', price: 60 },
+//     { title: '2:2 Standard (50%-60%+)', price: 50 }
+//   ];
+
+//   deadlines: Array<{ title: string, price: number }> = [
+//     { title: '48 Hours Urgent Delivery', price: 100 },
+//     { title: '3 Days Urgent Delivery', price: 80 },
+//     { title: '5 Days Delivery', price: 60 },
+//     { title: '10 Days Delivery', price: 40 },
+//     { title: '15 Days Delivery', price: 20 },
+//     { title: '25 Days Delivery', price: 10 },
+//     { title: '30 Days Delivery', price: 5 }
+//   ];
+
+//   referencingStyles: Array<{ title: string, price: number }> = [
+//     { title: 'Harvard', price: 0 },
+//     { title: 'APA', price: 0 },
+//     { title: 'MLA', price: 0 },
+//     { title: 'OSCOLA', price: 0 },
+//     { title: 'Oxford', price: 0 },
+//     { title: 'Other', price: 0 }
+//   ];
+
+//   @Output() orderEvent = new EventEmitter();
+
+//   constructor(
+//     private formBuilder: FormBuilder,
+//     private orderService: OrderService,
+//     private serviceService: ServicesService,
+//     private toastr: ToastrService
+//   ) {
+//     this.orderForm = this.formBuilder.group({
+//       typeOfService: ['', Validators.required],
+//       subjectArea: ['', Validators.required],
+//       level: ['', Validators.required],
+//       requiredWordCount: ['', Validators.required],
+//       desiredGrade: ['', Validators.required],
+//       deadline: ['', Validators.required],
+//       topic: ['', Validators.required],
+//       detailInstructions: ['', Validators.required],
+//       referencingStyle: ['', Validators.required],
+//       numberOfReferences: ['', Validators.required],
+//       totalPrice: [{ value: '', disabled: true }, Validators.required],
+//       email: ['', [Validators.required, Validators.email]],
+//       contactNumber: ['', Validators.required],
+//       universityName: ['', Validators.required],
+//       turnitin: [''],
+//     });
+//   }
+
+//   ngOnInit(): void {
+//     this.serviceService.getAllTopic().subscribe((res) => {
+//       this.topics = res;
+//     });
+//   }
+
+//   calculateTotalPrice(): void {
+//     const typeOfServicePrice = this.typeOfServices.find(item => item.title === this.orderForm.value.typeOfService)?.price || 0;
+//     const subjectAreaPrice = this.subjectAreas.find(item => item.title === this.orderForm.value.subjectArea)?.price || 0;
+//     const desiredGradePrice = this.desiredGrades.find(item => item.title === this.orderForm.value.desiredGrade)?.price || 0;
+//     const deadlinePrice = this.deadlines.find(item => item.title === this.orderForm.value.deadline)?.price || 0;
+//     const wordCount = this.orderForm.value.requiredWordCount || 0;
+  
+//     const perPageWordCount = 1200;
+//     this.gbpTotalCost = Math.round((typeOfServicePrice + subjectAreaPrice + desiredGradePrice + deadlinePrice) * wordCount / perPageWordCount);
+  
+//     this.orderForm.patchValue({ totalPrice: this.gbpTotalCost });
+//   }
+
+//   onSubmit(): void {
+//     if (this.orderForm.invalid) {
+//       Object.keys(this.orderForm.controls).forEach(field => {
+//         const control = this.orderForm.get(field);
+//         if (control && control.invalid) {
+//           const fieldName = field.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase());
+//           this.toastr.error(`Please correct the ${fieldName} field`, 'Form Invalid');
+//         }
+//       });
+//       return;
+//     } else {
+//       const orderPayload = {
+//         Name: this.orderForm.value.email.split("@")[0],
+//         Email: this.orderForm.value.email,
+//         Phone: this.orderForm.value.contactNumber,
+//         WordsORPages: 'words',
+//         NumberOfWordsPages: this.orderForm.value.requiredWordCount,
+//         Topic: this.orderForm.value.topic,
+//         DetailInstructions: this.orderForm.value.detailInstructions,
+//         TypeofHelpRequire: this.orderForm.value.typeOfService,
+//         LineSpacing: 2, // Assuming a default value for now
+//         SoftwareService: 'N/A', // Assuming a default value for now
+//         TopicCategory: this.orderForm.value.subjectArea,
+//         PresentationSlides: 0, // Assuming a default value for now
+//         SourceReferences: this.orderForm.value.numberOfReferences,
+//         WritingStyle: this.orderForm.value.referencingStyle,
+//         PreferredLanguageLevel: 'English', // Assuming a default value for now
+//         EducationLevel: this.orderForm.value.level,
+//         PaperStandard: this.orderForm.value.desiredGrade,
+//         DeadLine: this.orderForm.value.deadline,
+//         BeforeDiscount: 0,
+//         DiscountCode: '',
+//         GrossAmount: this.orderForm.value.totalPrice,
+//         Status: 'New',
+//         PaidStatus: 'Unpaid',
+//         suportingDoc: '',
+//         isSample: false
+//       };
+
+//       this.orderService.createOrder(orderPayload).subscribe(
+//         response => {
+//           this.toastr.success('Order created successfully', 'Success');
+//         },
+//         error => {
+//           this.toastr.error('Error creating order', 'Error');
+//         }
+//       );
+
+//       this.orderEvent.emit(orderPayload);
+//     }
+//   }
+// }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+// import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+// import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+// import { OrderService } from 'src/app/services/order.service';
+// import { ServicesService } from 'src/app/services/services.service';
+// import { ToastrService } from 'ngx-toastr';
+
+// @Component({
+//   selector: 'app-order-form',
+//   templateUrl: './order-form.component.html',
+//   styleUrls: ['./order-form.component.css'],
+// })
+// export class OrderFormComponent implements OnInit {
+//   @Input() categories: any;
+//   orderForm: FormGroup;
+//   gbpTotalCost: number = 0;
+//   topics: any[] = [];
+
+//   typeOfServices: Array<{ title: string, price: number }> = [
+//     { title: 'Dissertation Writing', price: 50 },
+//     { title: 'Research Proposal Writing', price: 40 },
+//     { title: 'Dissertation Proofreading & Editing', price: 30 }
+//   ];
+
+//   subjectAreas: Array<{ title: string, price: number }> = [
+//     { title: 'Business', price: 10 },
+//     { title: 'Engineering', price: 15 },
+//     { title: 'Law', price: 20 },
+//     { title: 'Medicine', price: 25 },
+//     { title: 'Science', price: 12 },
+//     { title: 'Arts', price: 8 }
+//   ];
+
+//   desiredGrades: Array<{ title: string, price: number }> = [
+//     { title: '1st Class Standard (80%+)', price: 70 },
+//     { title: '2:1 Standard (70%+)', price: 60 },
+//     { title: '2:2 Standard (50%-60%+)', price: 50 }
+//   ];
+
+//   deadlines: Array<{ title: string, price: number }> = [
+//     { title: '48 Hours Urgent Delivery', price: 100 },
+//     { title: '3 Days Urgent Delivery', price: 80 },
+//     { title: '5 Days Delivery', price: 60 },
+//     { title: '10 Days Delivery', price: 40 },
+//     { title: '15 Days Delivery', price: 20 },
+//     { title: '25 Days Delivery', price: 10 },
+//     { title: '30 Days Delivery', price: 5 }
+//   ];
+
+//   referencingStyles: Array<{ title: string, price: number }> = [
+//     { title: 'Harvard', price: 0 },
+//     { title: 'APA', price: 0 },
+//     { title: 'MLA', price: 0 },
+//     { title: 'OSCOLA', price: 0 },
+//     { title: 'Oxford', price: 0 },
+//     { title: 'Other', price: 0 }
+//   ];
+
+//   paymentPlans: Array<{ title: string, additionalCost: number }> = [
+//     { title: 'Pay in full', additionalCost: 0 },
+//     { title: 'Pay in 2 Instalments', additionalCost: 10 },
+//     { title: 'Pay in 3 Instalments', additionalCost: 20 },
+//     { title: 'Pay in 4 Instalments', additionalCost: 30 }
+//   ];
+
+//   @Output() orderEvent = new EventEmitter();
+
+//   constructor(
+//     private formBuilder: FormBuilder,
+//     private orderService: OrderService,
+//     private serviceService: ServicesService,
+//     private toastr: ToastrService
+//   ) {
+//     this.orderForm = this.formBuilder.group({
+//       typeOfService: ['', Validators.required],
+//       subjectArea: ['', Validators.required],
+//       level: ['', Validators.required],
+//       requiredWordCount: ['', Validators.required],
+//       desiredGrade: ['', Validators.required],
+//       deadline: ['', Validators.required],
+//       topic: ['', Validators.required],
+//       detailInstructions: ['', Validators.required],
+//       referencingStyle: ['', Validators.required],
+//       numberOfReferences: ['', Validators.required],
+//       totalPrice: [{ value: '', disabled: true }, Validators.required],
+//       paymentPlan: ['', Validators.required],
+//       paymentSchedule: ['', Validators.required],
+//       email: ['', [Validators.required, Validators.email]],
+//       contactNumber: ['', Validators.required],
+//       universityName: ['', Validators.required],
+//       turnitin: [''],
+//     });
+//   }
+
+//   ngOnInit(): void {
+//     this.serviceService.getAllTopic().subscribe((res) => {
+//       this.topics = res;
+//     });
+//   }
+
+//   calculateTotalPrice(): void {
+//     const typeOfServicePrice = this.typeOfServices.find(item => item.title === this.orderForm.value.typeOfService)?.price || 0;
+//     const subjectAreaPrice = this.subjectAreas.find(item => item.title === this.orderForm.value.subjectArea)?.price || 0;
+//     const desiredGradePrice = this.desiredGrades.find(item => item.title === this.orderForm.value.desiredGrade)?.price || 0;
+//     const deadlinePrice = this.deadlines.find(item => item.title === this.orderForm.value.deadline)?.price || 0;
+//     const wordCount = this.orderForm.value.requiredWordCount || 0;
+  
+//     const perPageWordCount = 1200;
+//     this.gbpTotalCost = Math.round((typeOfServicePrice + subjectAreaPrice + desiredGradePrice + deadlinePrice) * wordCount / perPageWordCount);
+  
+//     const paymentPlanCost = this.paymentPlans.find(item => item.title === this.orderForm.value.paymentPlan)?.additionalCost || 0;
+
+    
+//     const finalCost = Math.round(this.gbpTotalCost + paymentPlanCost);
+//     console.log(paymentPlanCost, "===paymentPlanCostpaymentPlanCostpayment", finalCost);
+  
+//     this.orderForm.patchValue({ totalPrice: finalCost });
+//   }
+
+//   onSubmit(): void {
+//     if (this.orderForm.invalid) {
+//       console.log(this.orderForm.invalid, "===isInvaliddd");
+      
+//       Object.keys(this.orderForm.controls).forEach(field => {
+//         const control = this.orderForm.get(field);
+//         console.log(control, "===controllaaaa");
+        
+//         if (control && control.invalid) {
+//           const fieldName = field.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase());
+//           this.toastr.error(`Please correct the ${fieldName} field`, 'Form Invalid');
+//         }
+//       });
+//       return;
+//     } else {
+//       const orderPayload = {
+//         Name: this.orderForm.value.email.split("@")[0],
+//         Email: this.orderForm.value.email,
+//         Phone: this.orderForm.value.contactNumber,
+//         WordsORPages: 'words',
+//         NumberOfWordsPages: this.orderForm.value.requiredWordCount,
+//         Topic: this.orderForm.value.topic,
+//         DetailInstructions: this.orderForm.value.detailInstructions,
+//         TypeofHelpRequire: this.orderForm.value.typeOfService,
+//         LineSpacing: 2, // Assuming a default value for now
+//         SoftwareService: 'N/A', // Assuming a default value for now
+//         TopicCategory: this.orderForm.value.subjectArea,
+//         PresentationSlides: 0, // Assuming a default value for now
+//         SourceReferences: this.orderForm.value.numberOfReferences,
+//         WritingStyle: this.orderForm.value.referencingStyle,
+//         PreferredLanguageLevel: 'English', // Assuming a default value for now
+//         EducationLevel: this.orderForm.value.level,
+//         PaperStandard: this.orderForm.value.desiredGrade,
+//         DeadLine: this.orderForm.value.deadline,
+//         BeforeDiscount: 0,
+//         DiscountCode: '',
+//         GrossAmount: this.orderForm.value.totalPrice,
+//         Status: 'New',
+//         PaidStatus: 'Unpaid',
+//         suportingDoc: '',
+//         isSample: false
+//       };
+
+//       console.log(orderPayload, "===orderPayload");
+
+//       this.orderService.createOrder(orderPayload).subscribe(
+//         response => {
+//           this.toastr.success('Order created successfully', 'Success');
+//         },
+//         error => {
+//           this.toastr.error('Error creating order', 'Error');
+//         }
+//       );
+
+//       this.orderEvent.emit(orderPayload);
+//     }
+//   }
+// }

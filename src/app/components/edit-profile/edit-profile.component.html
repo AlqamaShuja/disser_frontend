@@ -14,7 +14,7 @@
 </style>
 
 <div class="container">
-  <div class="text-center fw-bold fs-3 text-primary">Edit Profile</div>
+  <div class="text-center fw-bold fs-3" style="color: #242961;">Edit Profile</div>
   <div class="container d-flex justify-content-center">
     <form [formGroup]="userForm">
       <div class="form-group">
@@ -72,11 +72,11 @@
       <input class="ms-4" type="radio" value="No" formControlName="isTrue" id="" />
       <label for="javascript" class="ms-1"> No</label>
 
+      <!-- class="btn-primary rounded-pill" -->
 
       <div>
         <button
-          style="width: 140px; height: 40px"
-          class="btn-primary rounded-pill"
+          style="background-color: #242961; border-radius: 6px; padding: 8px 16px; color: #FFF;"
           (click)="submitForm()"
         >
           Update Profile

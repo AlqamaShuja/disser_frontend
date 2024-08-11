@@ -74,6 +74,23 @@ import { ChatInterfaceComponent } from './admin/chat-interface/chat-interface.co
 import { ResearchTopicsComponent } from './research-topics/research-topics.component';
 import { AssignmentCategoriesComponent } from './assignment-categories/assignment-categories.component';
 import { ServiceNewComponent } from './service-new/service-new.component';
+import { OurProgramComponent } from './our-program/our-program.component';
+import { AssistanceInfoComponent } from './assistance-info/assistance-info.component';
+
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { ToastrModule } from 'ngx-toastr';
+import { WhatmakesusbestSectComponent } from './whatmakesusbest-sect/whatmakesusbest-sect.component';
+import { HowToOrderSectComponent } from './how-to-order-sect/how-to-order-sect.component';
+import { QualityGuaranteedSectComponent } from './quality-guaranteed-sect/quality-guaranteed-sect.component';
+import { PersonalManagerSectComponent } from './personal-manager-sect/personal-manager-sect.component';
+import { ImproveGradesSectComponent } from './improve-grades-sect/improve-grades-sect.component';
+import { FaqSectionComponent } from './faq-section/faq-section.component';
+import { HomeTestimonialSectionComponent } from './home-testimonial-section/home-testimonial-section.component';
+import { SampleTopicListComponent } from './sample-topic-list/sample-topic-list.component';
+import { OurSamplesComponent } from './our-samples/our-samples.component';
+import { OurSamplesDynamicCatLevelComponent } from './our-samples-dynamic-cat-level/our-samples-dynamic-cat-level.component';
+import { OurSampleLevelTypeDetailsComponent } from './our-sample-level-type-details/our-sample-level-type-details.component';
+// import { CarouselModule } from 'ngx-bootstrap/carousel';
 
 library.add(fas);
 const modules = {};
@@ -134,8 +151,28 @@ const modules = {};
     ResearchTopicsComponent,
     AssignmentCategoriesComponent,
     ServiceNewComponent,
+    OurProgramComponent,
+    AssistanceInfoComponent,
+    WhatmakesusbestSectComponent,
+    HowToOrderSectComponent,
+    QualityGuaranteedSectComponent,
+    PersonalManagerSectComponent,
+    ImproveGradesSectComponent,
+    FaqSectionComponent,
+    HomeTestimonialSectionComponent,
+    SampleTopicListComponent,
+    OurSamplesComponent,
+    OurSamplesDynamicCatLevelComponent,
+    OurSampleLevelTypeDetailsComponent,
   ],
   imports: [
+    BrowserAnimationsModule,
+    ToastrModule.forRoot({
+      positionClass: 'toast-top-right',
+      closeButton: true,
+      timeOut: 5000,
+      progressBar: true,
+    }),
     BrowserModule,
     AppRoutingModule,
     ReactiveFormsModule,

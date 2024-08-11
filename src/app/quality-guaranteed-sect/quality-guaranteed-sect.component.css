@@ -1,0 +1,93 @@
+.quality-guaranteed-container {
+    padding: 40px;
+    max-width: 1300px;
+    margin: 0 auto;
+    background-color: #f4f4f9;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  }
+  
+  .qual-heading {
+    /* background-color: #242961;
+    padding: 15px 30px;
+    border-radius: 10px; */
+    display: flex;
+    justify-content: center;
+  }
+  
+  .qual-heading h1 {
+    background-color: #242961;
+    padding: 15px 30px;
+    border-radius: 10px;
+    color: #FFF;
+  }
+
+  .quality-guaranteed-container h1 {
+    text-align: center;
+    font-size: 36px;
+    color: #242961; /* Theme color for heading */
+    margin-bottom: 30px;
+  }
+  
+  .quality-section, .offer-section {
+    margin-bottom: 40px;
+  }
+  
+  .quality-section h2, .offer-section h2 {
+    font-size: 28px;
+    color: #2a2a2a; /* Darker color for section headings */
+    margin-bottom: 15px;
+  }
+  
+  .quality-section p, .offer-section p {
+    font-size: 18px;
+    line-height: 1.8;
+    color: #555; /* Softer text color for readability */
+    margin-bottom: 20px;
+  }
+  
+  .offer-section ul {
+    list-style-type: none;
+    padding-left: 0;
+  }
+  
+  .offer-section ul li {
+    font-size: 18px;
+    line-height: 1.8;
+    margin-bottom: 15px;
+    padding-left: 20px;
+    position: relative;
+    color: #333; /* Darker text color for list items */
+  }
+  
+  .offer-section ul li::before {
+    content: '✔'; /* Checkmark for each item */
+    position: absolute;
+    left: 0;
+    top: 0;
+    color: #242961; /* Theme color for checkmark */
+    font-size: 18px;
+  }
+  
+  .offer-section ul li strong {
+    color: #242961; /* Theme color for emphasized text */
+  }
+  
+  @media screen and (max-width: 768px) {
+    .quality-guaranteed-container {
+      padding: 20px;
+    }
+  
+    .quality-guaranteed-container h1 {
+      font-size: 28px;
+    }
+  
+    .quality-section h2, .offer-section h2 {
+      font-size: 24px;
+    }
+  
+    .quality-section p, .offer-section p, .offer-section ul li {
+      font-size: 16px;
+    }
+}
+  

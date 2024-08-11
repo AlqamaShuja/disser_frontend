@@ -11,10 +11,10 @@
 </div> -->
 
 <div *ngIf="isAdmin && !isAdminLogin">
-    <div class="loader3">
+    <!-- <div class="loader3">
         <span></span>
         <span></span>
-    </div>
+    </div> -->
     <router-outlet></router-outlet>
 </div>
 
@@ -26,26 +26,26 @@
             <span></span>
         </div>
     </div>
-<!-- <app-cta></app-cta> -->
-<app-footer [services]="services"></app-footer>
+    <!-- <app-cta></app-cta> -->
+    <app-footer *ngIf="showFooter" [services]="services"></app-footer>
 </div>
 
 
 
 
 
-    <div style="display: flex; height: 100vh !important;" *ngIf="isAdmin && isAdminLogin">
-        <div style="">
-            <app-admin-sidebar *ngIf="isAdmin && isAdminLogin && isSidebarOpen" [isSidebarOpen]="isSidebarOpen"></app-admin-sidebar>
-        </div> 
-            
-        <div class="overflow-auto" style="" [ngStyle]="mainComponentSt">
-            <app-admin-header></app-admin-header> 
-            <div class="" style="background-color: white; height: calc(100vh - 60px); overflow: auto;">
-                <router-outlet></router-outlet>
-            </div>
+<div style="display: flex; height: 100vh !important;" *ngIf="isAdmin && isAdminLogin">
+    <div style="">
+        <app-admin-sidebar *ngIf="isAdmin && isAdminLogin && isSidebarOpen" [isSidebarOpen]="isSidebarOpen"></app-admin-sidebar>
+    </div> 
+        
+    <div class="overflow-auto" style="" [ngStyle]="mainComponentSt">
+        <app-admin-header></app-admin-header> 
+        <div class="" style="background-color: white; height: calc(100vh - 60px); overflow: auto;">
+            <router-outlet></router-outlet>
         </div>
     </div>
+</div>
  
 
 

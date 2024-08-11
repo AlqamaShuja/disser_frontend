@@ -1,4 +1,5 @@
-<footer class="text-center text-lg-start" style="padding: 180px 5px 20px 10px; bottom: 0; width: 100%; background-color: rgba(0, 0, 0, 0.2);">
+<footer class="text-center text-lg-start" style="padding: 100px 5px 20px 10px; margin-top: 50px; bottom: 0; width: 100%; background-color: #FFF; border-top: 2px solid #000;"> 
+  <!-- rgba(0, 0, 0, 0.2); -->
   <div class="container-fluid" style="width: 90%; margin: 0 auto;">
     <div class="row">
       <!-- Logo div -->
@@ -10,7 +11,7 @@
           Dissertation Writing UK is renowned for quality writing in London | Leeds | Liverpool | Birmingham | Oxford | Croydon | Manchester | Sheffield | Leicester | Luton
         </p>
         <hr style="border-top: 1px solid #000; width: 100%;">
-        <div class="mu-social-media">
+        <div class="mu-social-media" style="margin-bottom: 10px;">
           <style>
             .social-icon {
               font-size: 20px;
@@ -30,6 +31,7 @@
           <a  class="mu-whatsapp "  href="https://api.whatsapp.com/send?phone=4564654654&amp;text=Hi%E2%80%9A%20Assignment%20Experts" target="_blank">
             <i class="fa fa-whatsapp social-icon"></i>
           </a>
+          
           <!-- Floating Whatsapp -->
           <!-- <a style="height: 50px; width: 50px;" class="mu-whatsapp my-floatoo floatoo" href="https://api.whatsapp.com/send?phone=4564654654&amp;text=Hi%E2%80%9A%20Assignment%20Experts" target="_blank">
             <i style="font-size: 40px;" class="fa fa-whatsapp social-icon"></i>
@@ -45,6 +47,45 @@
             <i class="fa fa-envelope social-icon"></i>
           </a> -->
         </div>
+
+        <h5 class="text-uppercase" style="margin-top: 10px;">Contact Information</h5>
+        <ul class="list-unstyled" style="margin: 0; padding: 0; font-size: 12px; font-weight: 500;">
+          <li style="margin-bottom: 5px; padding: 0;">
+            <i class="fa fa-home fa-lg mr-2"></i>{{ contactInfo.address }}          </li>
+          <hr style="border-top: 1px solid #ccc; width: 100%; margin: 0;">
+          <li style="margin-bottom: 5px; padding: 0;">
+            <i class="fa fa-envelope mr-2"></i>
+            <a
+                class="text-decoration-none ms-2 "
+                href="https://mail.google.com/mail/u/0/#search/info%40smartedultd.co.uk"
+              >
+              {{ contactInfo.email }}
+              </a>
+          </li>
+          <hr style="border-top: 1px solid #ccc; width: 100%; margin: 0;">
+          <li style="margin-bottom: 5px; padding: 0;">
+            <i class="fa fa-phone mr-2"></i>
+            <a
+            
+                class="text-decoration-none ms-2 text-black"
+                href="https://api.whatsapp.com/send?phone=447586654894&amp;text=Hi%E2%80%9A%20Pro%20Assignments"
+              >
+              {{ contactInfo.phone }}
+              </a>
+          </li>
+          <hr style="border-top: 1px solid #ccc; width: 100%; margin: 0;">
+          <li style="margin-bottom: 5px; padding: 0;">
+            <!-- <i class="fi fi-rr-briefcase"></i> -->
+            <svg width="15" height="15" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M21 15.002c0 1.103-.897 2-2 2h-3.586L12 21.416l-3.414-4.414H5c-1.103 0-2-.897-2-2v-10c0-1.103.897-2 2-2h14c1.103 0 2 .897 2 2v10zM7 9h10v2H7V9zm0 4h7v2H7v-2z" fill="#3A4A56"/>
+            </svg>
+            <a class="text-decoration-none ms-2 text-black"
+              href="/samples"
+              >
+                Samples
+              </a>
+          </li>
+        </ul>
         
         
         
@@ -73,14 +114,33 @@
       <div class="col-lg-3 col-md-6 mb-4" style="padding: 10px; border-radius: 5px;">
         <h5 class="text-uppercase">Services</h5>
         <ul class="list-unstyled" style="margin: 0; padding: 0;">
-          <li *ngFor="let service of getSevenServices(0, 7)"
+          <li *ngFor="let service of getSevenServices(0, 9)"
           class="footerContent" 
           style="margin-bottom: 5px; padding: 0; font-size: 12px; font-weight: 500;">
-            <a routerLink="/services/{{service.pageSlug}}"
+            <a routerLink="/services/{{service.id}}"
              class="text-dark " 
              style="text-decoration: none; display: block; padding: 0;">
               <span class="underline-on-hover">
-                {{service.pageTitle}}
+                {{service.title}}
+
+              </span> 
+            </a>
+            <hr style="border-top: 1px solid #ccc; width: 100%; margin: 0;">
+          </li>
+        </ul>
+      </div>
+      <!-- Services Column 2 -->
+      <div class="col-lg-3 col-md-6 mb-4" style="padding: 10px; border-radius: 5px;">
+        <h5 class="text-uppercase">Services</h5>
+        <ul class="list-unstyled" style="margin: 0; padding: 0;">
+          <li *ngFor="let service of getSevenServices(9, 17)"
+          class="footerContent" 
+          style="margin-bottom: 5px; padding: 0; font-size: 12px; font-weight: 500;">
+            <a routerLink="/services/{{service.id}}"
+             class="text-dark " 
+             style="text-decoration: none; display: block; padding: 0;">
+              <span class="underline-on-hover">
+                {{service.title}}
 
               </span> 
             </a>
@@ -90,7 +150,7 @@
       </div>
 
       <!-- Contact Information -->
-      <div class="col-lg-3 col-md-6 mb-4" style="padding: 10px; border-radius: 5px;">
+      <!-- <div class="col-lg-3 col-md-6 mb-4" style="padding: 10px; border-radius: 5px;">
         <h5 class="text-uppercase">Contact Information</h5>
         <ul class="list-unstyled" style="margin: 0; padding: 0; font-size: 12px; font-weight: 500;">
           <li style="margin-bottom: 5px; padding: 0;">
@@ -114,11 +174,10 @@
                 href="https://api.whatsapp.com/send?phone=447586654894&amp;text=Hi%E2%80%9A%20Pro%20Assignments"
               >
               {{ contactInfo.phone }}
-                <!--+4564654654 -->
               </a>
           </li>
         </ul>
-      </div>
+      </div> -->
    
       
     </div>

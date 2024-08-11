@@ -1,0 +1,30 @@
+<div class="testimonial-section">
+    <h2 class="section-title">Top 5 Star Customer Reviews</h2>
+    <p-carousel 
+      [value]="testimonials" 
+      [numVisible]="1" 
+      [numScroll]="1" 
+      [circular]="true" 
+      [autoplayInterval]="3000"
+      [style]="{width: '80%', margin: '0 auto'}"
+      [responsiveOptions]="responsiveOptions">
+  
+      <ng-template pTemplate="item" let-testimonial>
+        <div class="testimonial-content">
+          <p class="testimonial-review">"{{ testimonial.description }}"</p>
+          <h4 class="testimonial-name">{{ testimonial.name }}</h4>
+          <div class="testimonial-location">{{ testimonial.location }}</div>
+          <div class="testimonial-date">{{ testimonial.date | date: 'longDate' }}</div>
+          <div class="stars">
+            <ng-container *ngFor="let star of [1,2,3,4,5]; let i = index">
+              <span [class.filled]="i < testimonial.rating">★</span>
+            </ng-container>
+          </div>
+        </div>
+      </ng-template>
+    </p-carousel>
+    <!-- <button class="view-all-btn">VIEW ALL REVIEWS</button> -->
+    <button class="view-all-btn" (click)="viewAllTestimonials()">VIEW ALL REVIEWS</button>
+
+</div>
+  

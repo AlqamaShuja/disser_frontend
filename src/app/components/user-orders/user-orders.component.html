@@ -5,9 +5,9 @@
         color: rgb(125, 197, 219);
     }
 </style>
-<div class="text-center fw-bold fs-3 text-primary">My orders</div>
+<div class="text-center fw-bold fs-3" style="color: #242961;">My orders</div>
 <table style="margin-top: 20px;" class="table table-borderless table-hover" *ngIf="!showDeilas">
-    <thead class="bg-primary">
+    <thead class="" style="background-color: #242961; color: #FFF;">
         <tr class="table-borderless">
             <th>Order ID</th>
             <th>Topic</th>
@@ -19,7 +19,7 @@
     </thead>
     <tbody class="bg-light">
         <tr style="height: 70px;border-bottom: 1px solid lightgray;" *ngFor="let order of orders;let i=index;">
-            <td>PA - {{  order.Id}}</td>
+            <td>PA - {{  order.id}}</td>
             <td>{{order.Topic}}</td>
             <td>{{formatDatabaseTimestamp(order.created_at)}}</td>
             <td>{{order.PaidStatus}}</td>

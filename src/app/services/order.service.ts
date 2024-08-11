@@ -7,7 +7,8 @@ import { Observable } from 'rxjs';
 })
 export class OrderService {
   // private apiUrl = 'https://proassignmentbackend.smartedultd.co.uk/api/v1/';
-  private apiUrl = 'http://localhost:3000/api/v1/';
+  // private apiUrl = 'http://localhost:3000/api/v1/';
+  private apiUrl = 'https://dissertationbackend.dissertationwriting.help/api/v1/';
 
   constructor(private http: HttpClient) {}
 
