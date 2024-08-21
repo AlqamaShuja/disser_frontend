@@ -1,4 +1,5 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit, AfterViewInit, Input } from '@angular/core';
+import { SafeHtml } from '@angular/platform-browser';
 import * as AOS from 'aos';
 
 @Component({
@@ -7,6 +8,8 @@ import * as AOS from 'aos';
   styleUrls: ['./our-program.component.css']
 })
 export class OurProgramComponent implements OnInit, AfterViewInit {
+  @Input() beingAGoodResidential!: SafeHtml;
+
   ngOnInit(): void {
     AOS.init();
   }

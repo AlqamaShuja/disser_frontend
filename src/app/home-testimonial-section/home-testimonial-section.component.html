@@ -1,4 +1,47 @@
-<div class="testimonial-section">
+<div class="testimonial-section" style="background-color: #0f0e68; color: white; padding: 50px 0; text-align: center;">
+  <h2 class="section-title" style="font-size: 52px; margin-bottom: 30px;">What Our Clients Say</h2>
+  <p-carousel 
+    [value]="testimonials" 
+    [numVisible]="1" 
+    [numScroll]="1" 
+    [circular]="true" 
+    [autoplayInterval]="3000"
+    [style]="{width: '60%', margin: '0 auto'}"
+    [responsiveOptions]="responsiveOptions">
+
+    <ng-template pTemplate="item" let-testimonial>
+      <div class="testimonial-content" style="display: flex; flex-direction: column; align-items: center;">
+        <img [src]="getImageUrl('user.png')" alt="Avatar" style="border-radius: 50%; width: 150px; height: 150px; margin-bottom: 20px;">
+        <p class="testimonial-review" style="font-size: 18px; font-style: italic;">"{{ testimonial.description }}"</p>
+        <h4 class="testimonial-name" style="font-size: 22px; margin: 10px 0; color: beige;">{{ testimonial.name }}</h4>
+        <div class="testimonial-location" style="font-size: 16px; color: #cccccc;">{{ testimonial.location }}</div>
+      </div>
+    </ng-template>
+  </p-carousel>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div class="testimonial-section">
     <h2 class="section-title">Top 5 Star Customer Reviews</h2>
     <p-carousel 
       [value]="testimonials" 
@@ -23,8 +66,6 @@
         </div>
       </ng-template>
     </p-carousel>
-    <!-- <button class="view-all-btn">VIEW ALL REVIEWS</button> -->
     <button class="view-all-btn" (click)="viewAllTestimonials()">VIEW ALL REVIEWS</button>
-
 </div>
-  
+   -->

@@ -2,13 +2,14 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
+import { BASEURL } from 'src/globals';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
-  // private apiUrl = 'http://localhost:3000/api/v1/auth';
-  private apiUrl = 'https://dissertationbackend.dissertationwriting.help/api/v1/auth';
+  private apiUrl = `${BASEURL}auth`;
+  // private apiUrl = 'https://dissertationbackend.dissertationwriting.help/api/v1/auth';
 
   constructor(private http: HttpClient) {}
 

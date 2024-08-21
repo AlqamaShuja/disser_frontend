@@ -16,16 +16,18 @@ export class ResearchTopicsComponent implements OnInit {
   errorMessage: string = '';
   expandedIndex: number | null = null;
   
-  academicLevels: AcademicLevelData[] = [
-    { title: 'Undergraduate', price: 5, }, 
-    { title: 'Graduate', price: 10, }, 
-    { title: 'PhD', price: 15, }, 
-  ];
+  academicLevels: AcademicLevelData[] = []
+  // [
+  //   { title: 'Undergraduate', price: 5, }, 
+  //   { title: 'Graduate', price: 10, }, 
+  //   { title: 'PhD', price: 15, }, 
+  // ];
 
-  serviceType: AcademicLevelData[] = [
-    { title: 'Dissertation Full', price: 15, }, 
-    { title: 'Dissertation Proposal', price: 30, }, 
-  ];
+  serviceType: AcademicLevelData[] = []
+  // [
+  //   { title: 'Dissertation Full', price: 15, }, 
+  //   { title: 'Dissertation Proposal', price: 30, }, 
+  // ];
 
   totalPrice: number = 0;
 
@@ -38,6 +40,12 @@ export class ResearchTopicsComponent implements OnInit {
     this.serviceService.getAllTopic().subscribe((res) => {
       this.topics = res;
       this.sortedTopics = res;
+    });
+    this.serviceService.getAllAcademicLevels().subscribe(res => {
+      this.academicLevels = res;
+    });
+    this.serviceService.getAllServices().subscribe(res => {
+      this.serviceType = res;
     });
   }
 

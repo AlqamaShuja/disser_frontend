@@ -22,25 +22,110 @@
 <!-- <hr style="border: 1px solid #77838f" class="p-0 m-0" /> -->
 
 <!-- Main Navigation -->
- <div style="display: flex; justify-content: space-between; background-color: #242961; color: white; padding: 0 25px 0 25px;" >
+<!-- <div style="display: flex; justify-content: space-between; background-color: #242961; color: white; padding: 6px 25px 6px 25px;" >
   <div style="font-size: 14px;">
     <span>
-      <i class="fa fa-whatsapp text-green"></i>
-      +44 73021548485454
+      <i class="fa fa-envelope text-green"></i>
+      admin@dissertationwriting.help
     </span>
     <span style="padding-left: 12px;">
       <i class="fa fa-phone text-green"></i>
       +44 73021548485454
     </span>
   </div>
-  <div >
-    <!-- <span>
+  <div class="">
+    <span style="padding: 0 12px;">
+      <i class="fa fa-ticket text-green"></i>
       Notification
-    </span> -->
- 
-
+    </span>
   </div>
- </div>
+</div> -->
+
+<div style="display: flex; justify-content: space-between; background-color: #242961; color: white; padding: 10px 65px 10px 25px;">
+  <div style="font-size: 14px;">
+    <span>
+      <i class="fa fa-envelope text-green"></i>
+      admin@dissertationwriting.help
+    </span>
+    <span style="padding-left: 12px; margin-left: 15px;">
+      <i class="fa fa-phone text-green"></i>
+      +44 73021548485454
+    </span>
+  </div>
+  <div class="d-flex gap-4">
+    <div class="dropdown" (mouseenter)="showDropdown()" (mouseleave)="hideDropdown()">
+      <span class="dropdown-toggle" id="notificationDropdown" data-bs-toggle="dropdown" aria-expanded="false" style="cursor: pointer;">
+        <i class="fa fa-ticket text-green"></i>
+        Coupons
+      </span>
+      <ul class="dropdown-menu" [class.show]="isDropdownOpen" aria-labelledby="notificationDropdown" style="background-color: white; color: #242961;">
+        <li *ngFor="let coupon of coupons">
+          <div class="dropdown-item d-flex justify-content-between">
+            <span>{{ coupon.code }}</span>
+            <span>{{ coupon.discount | number:'1.0-0' }}%</span>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div class="dropdown" *ngIf="loggedInUser == ''" (mouseenter)="toggleMyAccountDropdown()" (mouseleave)="toggleMyAccountDropdown()">
+      <span class="dropdown-toggle" id="myAccountDropdown" data-bs-toggle="dropdown" aria-expanded="false" style="cursor: pointer;">
+        <i class="fa fa-user text-center text-green"  aria-hidden="true"></i> My Account
+      </span>
+      <ul class="dropdown-menu" [class.show]="myAccountDropdown" aria-labelledby="myAccountDropdown" style="background-color: white; color: #242961;">
+        <li>
+          <div class="dropdown-item d-flex justify-content-between">
+            <a routerLink="/login">Login</a>
+          </div>
+        </li>
+        <li>
+          <div class="dropdown-item d-flex justify-content-between">
+            <a routerLink="/register">Register</a>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <div class="dropdown" *ngIf="loggedInUser" (mouseenter)="profileDropdownDropdown()" (mouseleave)="profileDropdownDropdown()">
+      <span class="dropdown-toggle" id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false" style="cursor: pointer;">
+        <i class="fa fa-user text-center text-green"  aria-hidden="true"></i> Welcome {{loggedInUser.name}}
+      </span>
+      <ul class="dropdown-menu" [class.show]="profileDropdown" aria-labelledby="profileDropdown" style="background-color: white; color: #242961;">
+        <li>
+          <div class="dropdown-item d-flex justify-content-between">
+            <a routerLink="/user-details">View Profile</a>
+          </div>
+        </li>
+        <li>
+          <div class="dropdown-item d-flex justify-content-between">
+            <a href="javascript:;" (click)="logout()">Logout</a>
+          </div>
+        </li>
+      </ul>
+    </div>
+    <!-- <div class="my-account-div"  *ngIf="loggedInUser == ''" style="border: 1px solid #000; padding: 5px; border-radius: 5px; height: 45px !important; background-color: transparent !important;">
+      <div class="dropdown">
+        <button class="dropdown-button" style="">
+          <i class="fa fa-user fs-4 text-center p-0"  aria-hidden="true"></i> My Account
+        </button>
+        <div class="dropdown-content" style="">
+          <a routerLink="/login">Login</a>
+          <a routerLink="/register">Register</a>
+        </div>
+      </div>
+    </div> -->
+    <!-- <div class="dropdown" style="padding: 25px 0px 0px 0px; margin-left: 10%; display: flex; justify-content: center; align-items: center;" *ngIf="loggedInUser" style="">
+      <button class="dropdown-button" style="margin-top: 20px;">
+        <i class="fa fa-user fs-4 text-center p-0" aria-hidden="true"></i> Welcome {{loggedInUser.name}}
+      </button>
+      <div class="dropdown-content">
+        <a routerLink="/user-details">View Profile</a>
+        <a href="javascript:;" (click)="logout()">Logout</a>
+      </div>
+    </div> -->
+  </div>
+</div>
+
+
+
 <div style="top: 0; z-index: 100; position: relative; color: #B5B8C8;" >
     <div class="container-fluid">
     <div class="d-flex justify-content-center flex-wrap">
@@ -99,7 +184,8 @@
 
         
         <!-- <span > -->
-          <div class="my-account-div"  *ngIf="loggedInUser == ''" style="border: 1px solid #000; padding: 5px; border-radius: 5px; margin-left: 50px; margin-top: 12px; height: 45px !important;">
+          <!-- Profile Login/Register -->
+          <!-- <div class="my-account-div"  *ngIf="loggedInUser == ''" style="border: 1px solid #000; padding: 5px; border-radius: 5px; margin-left: 50px; margin-top: 12px; height: 45px !important;">
             <div class="dropdown">
               <button class="dropdown-button" style="">
                 <i class="fa fa-user fs-4 text-center p-0"  aria-hidden="true"></i> My Account
@@ -118,7 +204,7 @@
               <a routerLink="/user-details">View Profile</a>
               <a href="javascript:;" (click)="logout()">Logout</a>
             </div>
-          </div>
+          </div> -->
         <!-- </span> -->
       </nav>
 

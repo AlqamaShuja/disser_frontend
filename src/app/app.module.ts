@@ -90,7 +90,19 @@ import { SampleTopicListComponent } from './sample-topic-list/sample-topic-list.
 import { OurSamplesComponent } from './our-samples/our-samples.component';
 import { OurSamplesDynamicCatLevelComponent } from './our-samples-dynamic-cat-level/our-samples-dynamic-cat-level.component';
 import { OurSampleLevelTypeDetailsComponent } from './our-sample-level-type-details/our-sample-level-type-details.component';
+import { AdminTopicListComponent } from './admin/admin-topic-list/admin-topic-list.component';
 // import { CarouselModule } from 'ngx-bootstrap/carousel';
+import { ModalModule } from 'ngx-bootstrap/modal';
+import { AdminTextPagesComponent } from './admin/admin-text-pages/admin-text-pages.component';
+import { AdminEditorComponent } from './admin-editor/admin-editor.component';
+import { CKEditorModule } from '@ckeditor/ckeditor5-angular';
+import { ContentEditableModelDirective } from '../app/directives/content-editable-model.directive';
+import { AdminFaqInputComponent } from './admin/admin-faq-input/admin-faq-input.component';
+import { AdminCouponPageComponent } from './admin/admin-coupon-page/admin-coupon-page.component';
+import { AdminWriterPageComponent } from './admin/admin-manage-writer-profile/admin-manage-writer-profile.component';
+import { AcademicLevelComponent } from './admin/academic-level/academic-level.component';
+import { AdminSubjectAreaComponent } from './admin/admin-subject-area/admin-subject-area.component';
+
 
 library.add(fas);
 const modules = {};
@@ -164,6 +176,15 @@ const modules = {};
     OurSamplesComponent,
     OurSamplesDynamicCatLevelComponent,
     OurSampleLevelTypeDetailsComponent,
+    AdminTopicListComponent,
+    AdminTextPagesComponent,
+    AdminEditorComponent,
+    ContentEditableModelDirective,
+    AdminFaqInputComponent,
+    AdminCouponPageComponent,
+    AdminWriterPageComponent,
+    AcademicLevelComponent,
+    AdminSubjectAreaComponent,
   ],
   imports: [
     BrowserAnimationsModule,
@@ -188,7 +209,9 @@ const modules = {};
     AngularEditorModule,
     FormsModule,
     SocialLoginModule,
-    GoogleSigninButtonModule
+    GoogleSigninButtonModule,
+    ModalModule.forRoot(),
+    CKEditorModule,
   ],
   providers: [
     {

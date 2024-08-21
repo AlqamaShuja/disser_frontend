@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { GlobalService } from 'src/app/services/global.service';
 import { Router } from '@angular/router';
+import { ServicesService } from 'src/app/services/services.service';
 
 @Component({
   selector: 'app-header',
@@ -9,11 +10,12 @@ import { Router } from '@angular/router';
 })
 export class HeaderComponent {
   loggedInUser:any;
+  isDropdownOpen: boolean = false;
+  myAccountDropdown: boolean = false;
+  profileDropdown: boolean = false;
+  coupons: any = []
 
-  constructor(
-    private globalService:GlobalService,
-    private router:Router
-    ){
+  constructor(private globalService:GlobalService, private serviceService: ServicesService, private router:Router,){
     this.globalService.loggedIn$.subscribe((res)=>{
       if(res){
       this.loggedInUser = res;
@@ -21,8 +23,31 @@ export class HeaderComponent {
     }else{
       this.loggedInUser = localStorage.getItem('user') ? JSON.parse(localStorage.getItem('user')||""):"";
     }
+    });
+
+    this.serviceService.getAllCoupons().subscribe(res => {
+      console.log(res, "====res:couponssssssssssssss");
+      this.coupons = res;
     })
   }
+
+
+  showDropdown() {
+    this.isDropdownOpen = true;
+  }
+
+  hideDropdown() {
+    this.isDropdownOpen = false;
+  }
+  
+  toggleMyAccountDropdown() {
+    this.myAccountDropdown = !this.myAccountDropdown;
+  }
+  
+  profileDropdownDropdown() {
+    this.profileDropdown = !this.profileDropdown;
+  }
+
 
   logout(){
     localStorage.clear();

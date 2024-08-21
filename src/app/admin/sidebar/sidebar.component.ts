@@ -25,7 +25,7 @@ export class SidebarComponent implements OnInit {
         this.updateSelectedItem();
       }
     });
-    this.updateSelectedItem(); // Update selection on initial load
+    this.updateSelectedItem();
     this.updateScreenSize();
   }
 
@@ -44,6 +44,8 @@ export class SidebarComponent implements OnInit {
 
   sideBarNotification(): void {
     this.orderService.sideBarNotification().subscribe((res) => {
+      console.log(res, "===res:sideBarNotification");
+      
       if (res['data'].length > 0) {
         res['data'].map((element: any) => {
           if (element.type === 'orders') {
@@ -86,14 +88,32 @@ export class SidebarComponent implements OnInit {
       case 'sample-orders':
         this.selected = 'Sample Orders';
         break;
+      case 'text-pages':
+        this.selected = 'Text Page';
+        break;
+      case 'coupons':
+        this.selected = 'Coupons';
+        break;
+      case 'manage-writer':
+        this.selected = 'Manage Writer';
+        break;
       case 'chat':
         this.selected = 'Conversation';
+        break;
+      case 'topics':
+        this.selected = 'Topic';
+        break;
+      case 'academic-level':
+        this.selected = 'Academic Level';
         break;
       case 'category':
         this.selected = 'Categories';
         break;
       case 'samples':
         this.selected = 'Samples';
+        break;
+      case 'subject-area':
+        this.selected = 'Subject Area';
         break;
       case 'services':
         this.selected = 'Services';
@@ -114,7 +134,12 @@ export class SidebarComponent implements OnInit {
         this.selected = 'Change Password';
         break;
       default:
-        this.selected = 'Dashboard';
+        if(this.router.url.includes("text-pages")){
+          this.selected = 'Text Page';
+        }
+        else {
+          this.selected = 'Dashboard';
+        }
         break;
     }
   }

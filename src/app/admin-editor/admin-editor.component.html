@@ -1,0 +1,109 @@
+<!-- <textarea id="code-editor"></textarea> -->
+<!-- <textarea #codeEditor></textarea> -->
+
+<!-- *ngIf="faqs.length === 0" -->
+<div class="editor-container" [class.hidden]="faqs.length !== 0">    
+  <div *ngIf="extraData">
+      <div *ngFor="let key of imageKeys" class="image-upload-container">
+        <div class="image-preview">
+          <img [src]="getImageUrl(key)" alt="{{ key }}" class="small-image-preview">
+        </div>
+        <div class="upload-button-container">
+          <input type="file" (change)="onImageSelect($event, key)" />
+        </div>
+      </div> 
+  </div>
+  <div class="form-container">
+      <div class="text-input-container">
+        <label for="title">Section Title</label>
+        <input 
+          type="text" 
+          id="title" 
+          [(ngModel)]="allData.title" 
+          (change)="onTextChange($event, 'title')" 
+          placeholder="Enter Title"
+        />
+      </div>
+      
+      <div class="text-input-container">
+        <label for="page_name">Page Name</label>
+        <input 
+          type="text" 
+          id="page_name" 
+          [(ngModel)]="allData.page_name" 
+          (change)="onTextChange($event, 'page_name')" 
+          placeholder="Enter Page Name"
+        />
+      </div>
+  </div>
+
+  <textarea #codeEditor></textarea>
+  
+  <div class="d-flex justify-content-center gap-2">
+    <button (click)="goBack()" class="btn mt-3 cancel-content-btn">Cancel</button>
+    <button (click)="saveContent()" class="btn mt-3 save-content-btn">
+      Save Content
+    </button>
+  </div>
+</div> 
+
+
+
+
+
+
+<!-- <div class="editor-container">    
+    <div *ngIf="extraData">
+        <div *ngFor="let key of imageKeys" class="image-upload-container">
+          <div class="image-preview">
+            <img [src]="getImageUrl(key)" alt="{{ key }}" class="small-image-preview">
+          </div>
+          <div class="upload-button-container">
+            <input type="file" (change)="onImageSelect($event, key)" />
+          </div>
+        </div> 
+    </div>
+    <div class="form-container">
+        <div class="text-input-container">
+          <label for="title">Section Title</label>
+          <input 
+            type="text" 
+            id="title" 
+            [(ngModel)]="allData.title" 
+            (change)="onTextChange($event, 'title')" 
+            placeholder="Enter Title"
+          />
+        </div>
+        
+        <div class="text-input-container">
+          <label for="page_name">Page Name</label>
+          <input 
+            type="text" 
+            id="page_name" 
+            [(ngModel)]="allData.page_name" 
+            (change)="onTextChange($event, 'page_name')" 
+            placeholder="Enter Page Name"
+          />
+        </div>
+    </div>
+
+    <textarea #codeEditor></textarea>
+    
+    <div class="d-flex justify-content-center gap-2">
+      <button (click)="goBack()" class="btn mt-3 cancel-content-btn">Cancel</button>
+      <button (click)="saveContent()" class="btn mt-3 save-content-btn">
+        Save Content
+      </button>
+    </div>
+</div>   -->
+
+
+
+
+  <!-- <div 
+      #editableContent
+      style="border: 2px solid gray; border-radius: 8px; padding: 15px;"
+      contentEditable="true" 
+      contentEditableModel 
+      (contentChange)="onContentChange($event)">
+  </div> -->

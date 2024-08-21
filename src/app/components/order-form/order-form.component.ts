@@ -15,21 +15,24 @@ export class OrderFormComponent implements OnInit {
   orderForm: FormGroup;
   gbpTotalCost: number = 0;
   topics: any[] = [];
+  academicLevel: any[] = [];
 
-  typeOfServices: Array<{ title: string, price: number }> = [
-    { title: 'Dissertation Writing', price: 50 },
-    { title: 'Research Proposal Writing', price: 40 },
-    { title: 'Dissertation Proofreading & Editing', price: 30 }
-  ];
+  typeOfServices: Array<{ title: string, price: string, id: number, }> = []
+  // [
+  //   { title: 'Dissertation Writing', price: 50 },
+  //   { title: 'Research Proposal Writing', price: 40 },
+  //   { title: 'Dissertation Proofreading & Editing', price: 30 }
+  // ];
 
-  subjectAreas: Array<{ title: string, price: number }> = [
-    { title: 'Business', price: 10 },
-    { title: 'Engineering', price: 15 },
-    { title: 'Law', price: 20 },
-    { title: 'Medicine', price: 25 },
-    { title: 'Science', price: 12 },
-    { title: 'Arts', price: 8 }
-  ];
+  subjectAreas: Array<{ title: string, price: number, id: number }> = []
+  // [
+  //   { title: 'Business', price: 10 },
+  //   { title: 'Engineering', price: 15 },
+  //   { title: 'Law', price: 20 },
+  //   { title: 'Medicine', price: 25 },
+  //   { title: 'Science', price: 12 },
+  //   { title: 'Arts', price: 8 }
+  // ];
 
   desiredGrades: Array<{ title: string, price: number }> = [
     { title: '1st Class Standard (80%+)', price: 70 },
@@ -85,17 +88,27 @@ export class OrderFormComponent implements OnInit {
     this.serviceService.getAllTopic().subscribe((res) => {
       this.topics = res;
     });
+    this.serviceService.getAllServices().subscribe((res) => {
+      this.typeOfServices = res;
+    });
+    this.serviceService.getAllSubjectAreas().subscribe((res) => {
+      this.subjectAreas = res;
+    });
+    this.serviceService.getAllAcademicLevels().subscribe((res) => {
+      this.academicLevel = res;
+    });
   }
 
   calculateTotalPrice(): void {
     const typeOfServicePrice = this.typeOfServices.find(item => item.title === this.orderForm.value.typeOfService)?.price || 0;
     const subjectAreaPrice = this.subjectAreas.find(item => item.title === this.orderForm.value.subjectArea)?.price || 0;
+    const academicLevelPrice = this.academicLevel.find(item => item.title === this.orderForm.value.desiredGrade)?.price || 0;
     const desiredGradePrice = this.desiredGrades.find(item => item.title === this.orderForm.value.desiredGrade)?.price || 0;
     const deadlinePrice = this.deadlines.find(item => item.title === this.orderForm.value.deadline)?.price || 0;
     const wordCount = this.orderForm.value.requiredWordCount || 0;
   
     const perPageWordCount = 1200;
-    this.gbpTotalCost = Math.round((typeOfServicePrice + subjectAreaPrice + desiredGradePrice + deadlinePrice) * wordCount / perPageWordCount);
+    this.gbpTotalCost = Math.round((Number(typeOfServicePrice) + Number(subjectAreaPrice) + Number(academicLevelPrice) + desiredGradePrice + deadlinePrice) * wordCount / perPageWordCount);
   
     this.orderForm.patchValue({ totalPrice: this.gbpTotalCost });
   }

@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { TestimonialService } from '../services/testimonial.service';
+import { BASEURL } from 'src/globals';
 
 @Component({
   selector: 'app-home-testimonial-section',
@@ -44,5 +45,9 @@ export class HomeTestimonialSectionComponent implements OnInit {
   // Method to navigate to all testimonials
   viewAllTestimonials(): void {
     this.router.navigate(['/all-testimonials']);
+  }
+
+  getImageUrl(imageKey: string): string | ArrayBuffer | null {
+    return `${BASEURL}files/${imageKey}`;
   }
 }

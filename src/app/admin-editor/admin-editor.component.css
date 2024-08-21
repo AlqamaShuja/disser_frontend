@@ -1,0 +1,95 @@
+.editor-container {
+    margin: 20px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+  
+.quill-editor {
+    height: 300px;
+}
+  
+
+.save-content-btn {
+    background-color: rgb(37, 67, 54); 
+    border-radius: 10px; 
+    color: #FFF;
+    padding: 10px 20px !important;
+}
+
+.cancel-content-btn {
+    background-color: rgb(95, 95, 95); 
+    border-radius: 10px; 
+    color: #FFF;
+    padding: 10px 20px !important;
+}
+
+.cancel-content-btn:hover {
+    background-color: rgb(77, 77, 77);
+}
+
+
+.save-content-btn:hover {
+    background-color: rgb(22, 41, 32);
+}
+
+
+.image-upload-container {
+    display: flex;
+    align-items: center;
+    margin-bottom: 15px;
+  }
+  
+  .image-preview {
+    margin-right: 10px;
+  }
+  
+  .small-image-preview {
+    width: 100px;
+    height: auto;
+    border: 1px solid #ddd;
+    padding: 5px;
+  }
+  
+.upload-button-container {
+    flex-grow: 1;
+}
+  
+  
+
+/*  */
+  
+  .text-input-container {
+    margin-bottom: 20px; /* Space between input fields */
+  }
+  
+  .text-input-container label {
+    display: block;
+    margin-bottom: 8px;
+    font-weight: bold;
+    color: #333;
+  }
+  
+  .text-input-container input[type="text"] {
+    width: 100%; /* Full width for input fields */
+    padding: 10px;
+    font-size: 16px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    background-color: #fff; /* Ensure the input fields have a white background */
+  }
+  
+  .text-input-container input[type="text"]:focus {
+    border-color: #007bff;
+    outline: none;
+    box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+  }
+  
+
+  .hidden {
+    display: none;
+  }
+
+
+/*  */

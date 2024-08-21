@@ -1,4 +1,136 @@
-<div class="mt-5 container-fluid" style="min-width: 95%">
+<div class="container my-4">
+  <div class="row">
+      <div class="col-12">
+          <h2 class="text-center mb-4">Manage Clients</h2>
+          <div class="d-flex justify-content-between mb-3">
+              <button class="btn" style="background-color: rgb(37, 67, 54); color: #FFF; border-radius: 8px; padding: 8px 16px;" (click)="openClientModal(clientTemplate)">Insert New Client</button>
+          </div>
+          <div class="table-responsive">
+              <table *ngIf="clients.length > 0" class="table table-striped table-hover align-middle">
+                  <thead class="" style="background-color: rgb(37, 67, 54); color: #FFF;">
+                      <tr>
+                          <th scope="col">#</th>
+                          <th scope="col">Name</th>
+                          <th scope="col">Email</th>
+                          <th scope="col">Phone Number</th>
+                          <th scope="col">UID</th>
+                          <th scope="col">Options</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <tr *ngFor="let client of clients">
+                          <td>{{ client.id }}</td>
+                          <td>{{ client.name }}</td>
+                          <td>{{ client.email }}</td>
+                          <td>{{ client.phone_number }}</td>
+                          <td>{{ client.uid }}</td>
+                          <td>
+                              <button class="btn btn-outline-secondary btn-sm me-2" (click)="openClientModal(clientTemplate, client)">
+                                  <i class="bi bi-pencil-square"></i> Edit
+                              </button>
+                              <button class="btn btn-outline-danger btn-sm" (click)="openDeleteModal(deleteTemplate, client)">
+                                  <i class="bi bi-trash"></i> Delete
+                              </button>
+                          </td>
+                      </tr>
+                  </tbody>
+              </table>
+              <div *ngIf="clients.length === 0" class="d-flex justify-content-center my-4">No Clients Found</div>
+          </div>
+      </div>
+  </div>
+</div>
+
+<ng-template #clientTemplate>
+  <div class="custom-modal-wrapper">
+      <div class="custom-modal-backdrop"></div>
+      <div class="custom-modal">
+          <div class="custom-modal-header">
+              <h5>{{ isEditMode ? 'Edit Client' : 'Insert New Client' }}</h5>
+              <button type="button" class="custom-close-btn" aria-label="Close" (click)="clientModalRef?.hide()">×</button>
+          </div>
+          <div class="custom-modal-body">
+              <form>
+                  <div class="custom-form-group">
+                      <label for="name" class="custom-form-label">Name</label>
+                      <input type="text" class="custom-form-control w-100" id="name" [(ngModel)]="selectedClient.name" name="name" required placeholder="Enter Name">
+                  </div>
+                  <div class="custom-form-group">
+                      <label for="email" class="custom-form-label">Email</label>
+                      <input type="email" class="custom-form-control w-100" id="email" [(ngModel)]="selectedClient.email" name="email" required placeholder="Enter Email">
+                  </div>
+                  <div class="custom-form-group">
+                      <label for="phone_number" class="custom-form-label">Phone Number</label>
+                      <input type="text" class="custom-form-control w-100" id="phone_number" [(ngModel)]="selectedClient.phone_number" name="phone_number" required placeholder="Enter Phone Number">
+                  </div>
+                  <div class="custom-form-group">
+                      <label for="uid" class="custom-form-label">UID</label>
+                      <input type="text" class="custom-form-control w-100" id="uid" [(ngModel)]="selectedClient.uid" name="uid" required placeholder="Enter UID">
+                  </div>
+              </form>
+          </div>
+          <div class="custom-modal-footer d-flex gap-2">
+              <button type="button" class="custom-btn custom-btn-secondary" (click)="clientModalRef?.hide()">Close</button>
+              <button type="button" class="custom-btn custom-btn-primary" (click)="saveClient()">Save Client</button>
+          </div>
+      </div>
+  </div>
+</ng-template>
+
+<!-- Delete Modal -->
+<ng-template #deleteTemplate>
+  <div class="custom-modal-wrapper">
+      <div class="custom-modal">
+          <div class="custom-modal-header">
+              <h5>Confirm Deletion</h5>
+              <button type="button" class="custom-close-btn" aria-label="Close" (click)="deleteModalRef?.hide()">×</button>
+          </div>
+          <div class="custom-modal-body">
+              <p>Are you sure you want to delete the client <strong>{{ selectedClient?.name }}</strong>?</p>
+          </div>
+          <div class="custom-modal-footer d-flex gap-2">
+              <button type="button" class="custom-btn custom-btn-secondary" (click)="deleteModalRef?.hide()">Cancel</button>
+              <button type="button" class="custom-btn custom-btn-danger" (click)="confirmDelete()">Delete</button>
+          </div>
+      </div>
+  </div>
+</ng-template>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div class="mt-5 container-fluid" style="min-width: 95%">
     <div class="row">
       <div class="">
         <div class="">
@@ -7,7 +139,6 @@
               <i class="fa fa-arrow-left" style="font-size: 27px;"></i>
             </a>
             <form class="" [formGroup]="servicesForm">
-              <!-- ... your form inputs ... -->
               <input type="submit" (click)="submitForm('edit')" *ngIf="selectedService" value="UPDATE" class="btn btn-primary" />
             </form>
           </div>
@@ -49,4 +180,4 @@
       </div>
     </div>
   </div>
-  
+   -->

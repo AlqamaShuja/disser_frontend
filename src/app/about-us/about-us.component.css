@@ -4,12 +4,8 @@
 
     width: 100%;
     background-size: cover;
-    background-image: url('../../assets/banner-3.jpg') !important;
-    
-    
+    background-image: url('../../assets/banner-3.jpg') !important;    
 }
-
-
 
 .page-header:after {
     position: absolute;

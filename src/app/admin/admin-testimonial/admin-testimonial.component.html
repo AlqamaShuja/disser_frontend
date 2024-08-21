@@ -1,4 +1,134 @@
-<div class="mt-5 container-fluid" style="width: 90%">
+<div class="container my-4">
+    <div class="row">
+        <div class="col-12">
+            <h2 class="text-center mb-4">Manage Testimonials</h2>
+            <div class="d-flex justify-content-between mb-3">
+                <button class="btn" style="background-color: rgb(37, 67, 54); color: #FFF; border-radius: 8px; padding: 8px 16px;" (click)="openTestimonialModal(testimonialTemplate)">Insert New Testimonial</button>
+            </div>
+            <div class="table-responsive">
+                <table *ngIf="testimonials.length > 0" class="table table-striped table-hover align-middle">
+                    <thead class="" style="background-color: rgb(37, 67, 54); color: #FFF;">
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Name</th>
+                            <th scope="col">Description</th>
+                            <th scope="col">Rating</th>
+                            <th scope="col">Date</th>
+                            <th scope="col">Location</th>
+                            <th scope="col">Options</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let testimonial of testimonials; let i = index">
+                            <td>{{ i + 1 }}</td>
+                            <td>{{ testimonial.name }}</td>
+                            <td>{{ testimonial.description }}</td>
+                            <td>{{ testimonial.rating }}</td>
+                            <td>{{ testimonial.date | date }}</td>
+                            <td>{{ testimonial.location }}</td>
+                            <td>
+                                <button class="btn btn-outline-secondary btn-sm me-2" (click)="openTestimonialModal(testimonialTemplate, testimonial)">
+                                    <i class="bi bi-pencil-square"></i> Edit
+                                </button>
+                                <button class="btn btn-outline-danger btn-sm" (click)="openDeleteModal(deleteTemplate, testimonial)">
+                                    <i class="bi bi-trash"></i> Delete
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div *ngIf="testimonials.length === 0" class="d-flex justify-content-center my-4">No Testimonials Created</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #testimonialTemplate>
+    <div class="custom-modal-wrapper">
+        <div class="custom-modal-backdrop"></div>
+        <div class="custom-modal">
+            <div class="custom-modal-header">
+                <h5>{{ isEditMode ? 'Edit Testimonial' : 'Insert New Testimonial' }}</h5>
+                <button type="button" class="custom-close-btn" aria-label="Close" (click)="testimonialModalRef?.hide()">×</button>
+            </div>
+            <div class="custom-modal-body">
+                <form>
+                    <div class="custom-form-group">
+                        <label for="name" class="custom-form-label">Name</label>
+                        <input type="text" class="custom-form-control w-100" id="name" [(ngModel)]="selectedTestimonial.name" name="name" required placeholder="Enter Name">
+                    </div>
+                    <div class="custom-form-group">
+                        <label for="description" class="custom-form-label">Description</label>
+                        <textarea class="custom-form-control w-100" id="description" [(ngModel)]="selectedTestimonial.description" name="description" required placeholder="Enter Description"></textarea>
+                    </div>
+                    <div class="custom-form-group">
+                        <label for="rating" class="custom-form-label">Rating</label>
+                        <input type="number" class="custom-form-control w-100" id="rating" [(ngModel)]="selectedTestimonial.rating" name="rating" required placeholder="Enter Rating (1-5)">
+                    </div>
+                    <div class="custom-form-group">
+                        <label for="date" class="custom-form-label">Date</label>
+                        <input type="date" class="custom-form-control w-100" id="date" [(ngModel)]="selectedTestimonial.date" name="date" required>
+                    </div>
+                    <div class="custom-form-group">
+                        <label for="location" class="custom-form-label">Location</label>
+                        <input type="text" class="custom-form-control w-100" id="location" [(ngModel)]="selectedTestimonial.location" name="location" placeholder="Enter Location">
+                    </div>
+                </form>
+            </div>
+            <div class="custom-modal-footer d-flex gap-2">
+                <button type="button" class="custom-btn custom-btn-secondary" (click)="testimonialModalRef?.hide()">Close</button>
+                <button type="button" class="custom-btn custom-btn-primary" (click)="saveTestimonial()">Save Testimonial</button>
+            </div>
+        </div>
+    </div>
+</ng-template>
+
+<!-- Delete Modal -->
+<ng-template #deleteTemplate>
+    <div class="custom-modal-wrapper">
+        <div class="custom-modal">
+            <div class="custom-modal-header">
+                <h5>Confirm Deletion</h5>
+                <button type="button" class="custom-close-btn" aria-label="Close" (click)="deleteModalRef?.hide()">×</button>
+            </div>
+            <div class="custom-modal-body">
+                <p>Are you sure you want to delete the testimonial from <strong>{{ selectedTestimonial?.name }}</strong>?</p>
+            </div>
+            <div class="custom-modal-footer d-flex gap-2">
+                <button type="button" class="custom-btn custom-btn-secondary" (click)="deleteModalRef?.hide()">Cancel</button>
+                <button type="button" class="custom-btn custom-btn-danger" (click)="confirmDelete()">Delete</button>
+            </div>
+        </div>
+    </div>
+</ng-template>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div class="mt-5 container-fluid" style="width: 90%">
     <div class="row">
         <div class="">
             <div class="">
@@ -89,4 +219,4 @@
             </div>
         </div>
     </div>
-</div>
+</div> -->

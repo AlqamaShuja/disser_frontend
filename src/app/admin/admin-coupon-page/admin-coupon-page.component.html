@@ -1,0 +1,124 @@
+<div class="container my-4">
+    <div class="row">
+      <div class="col-12">
+        <h2 class="text-center mb-4">Manage Coupons</h2>
+        <nav aria-label="breadcrumb">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/admin">Home</a></li>
+            <li class="breadcrumb-item active" aria-current="page">Manage Coupon</li>
+          </ol>
+        </nav>
+        <div class="d-flex justify-content-between mb-3">
+          <button class="btn" style="background-color: rgb(37, 67, 54); color: #FFF; border-radius: 8px; padding: 8px 16px;" (click)="openCouponModal(couponTemplate)">Insert New Coupon Code</button>
+          <!-- <div class="form-group mb-0">
+            <input type="text" class="form-control" placeholder="Search Coupons">
+          </div> -->
+        </div>
+        <div class="table-responsive">
+          <table *ngIf="coupons.length > 0" class="table table-striped table-hover align-middle">
+            <thead class="" style="background-color: rgb(37, 67, 54); color: #FFF;">
+              <tr>
+                <th scope="col">Coupon Code</th>
+                <th scope="col">Currency</th>
+                <th scope="col">Discount</th>
+                <th scope="col">Duration</th>
+                <th scope="col">Status</th>
+                <th scope="col">Options</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let coupon of coupons">
+                <td>{{ coupon.code }}</td>
+                <td>{{ coupon.currency }}</td>
+                <td>{{ coupon.discount }}%</td>
+                <td>{{ coupon.duration }}</td>
+                <td>
+                  <select [(ngModel)]="coupon.status" class="form-select">
+                    <option value="Assigned">Assigned</option>
+                    <option value="Unassigned">Unassigned</option>
+                  </select>
+                </td>
+                <td>
+                    <button class="btn btn-outline-secondary btn-sm me-2" (click)="openCouponModal(couponTemplate, coupon)">
+                      <i class="bi bi-pencil-square"></i> Edit
+                    </button>
+                    <button class="btn btn-outline-danger btn-sm" (click)="openDeleteModal(deleteTemplate, coupon)">
+                      <i class="bi bi-trash"></i> Delete
+                    </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div *ngIf="coupons.length === 0" class="d-flex justify-content-center my-4">No Coupons Created</div>
+        </div>
+      </div>
+    </div>
+</div>
+  
+
+
+<ng-template #couponTemplate>
+    <div class="custom-modal-wrapper">
+      <div class="custom-modal-backdrop"></div>
+      <div class="custom-modal">
+        <div class="custom-modal-header">
+          <h5>{{ isEditMode ? 'Edit Coupon' : 'Insert New Coupon Code' }}</h5>
+          <button type="button" class="custom-close-btn" aria-label="Close" (click)="couponModalRef?.hide()">×</button>
+        </div>
+        <div class="custom-modal-body">
+          <form>
+            <div class="custom-form-group">
+              <label for="couponCode" class="custom-form-label">Coupon Code</label>
+              <input type="text" class="custom-form-control w-100" id="couponCode" [(ngModel)]="selectedCoupon.code" name="couponCode" required placeholder="Enter Coupon Code">
+            </div>
+            <div class="custom-form-group">
+              <label for="price" class="custom-form-label">Discount (%)</label>
+              <input type="number" class="custom-form-control w-100" id="price" [(ngModel)]="selectedCoupon.discount" name="price" required placeholder="Enter Discount Percent">
+            </div>
+            <div class="custom-form-group">
+              <label class="custom-form-label d-flex gap-3">Duration</label>
+              <div class="d-flex">
+                <label class="custom-form-check-label me-3">
+                  <input type="radio" class="custom-form-check-input" [(ngModel)]="selectedCoupon.duration" name="duration" value="One time Use"> One time Use
+                </label>
+                <label class="custom-form-check-label">
+                  <input type="radio" class="custom-form-check-input" [(ngModel)]="selectedCoupon.duration" name="duration" value="Lifetime"> Lifetime
+                </label>
+              </div>
+            </div>
+            <div class="custom-form-group">
+              <label for="currency" class="custom-form-label">Currency</label>
+              <select class="custom-form-select w-100" style="height: 56px; border: 1px solid rgb(218, 217, 217); border-radius: 6px; padding: 010px;" [(ngModel)]="selectedCoupon.currency" name="currency" id="currency">
+                <option value="GBP">GBP</option>
+                <option value="USD">USD</option>
+                <option value="EUR">EUR</option>
+              </select>
+            </div>
+          </form>
+        </div>
+        <div class="custom-modal-footer d-flex gap-2">
+          <button type="button" class="custom-btn custom-btn-secondary" (click)="couponModalRef?.hide()">Close</button>
+          <button type="button" class="custom-btn custom-btn-primary" (click)="saveCoupon()">Save Coupon</button>
+        </div>
+      </div>
+    </div>
+</ng-template>
+  
+  <!-- Delete Modal -->
+<ng-template #deleteTemplate>
+    <div class="custom-modal-wrapper">
+      <div class="custom-modal">
+        <div class="custom-modal-header">
+          <h5>Confirm Deletion</h5>
+          <button type="button" class="custom-close-btn" aria-label="Close" (click)="deleteModalRef?.hide()">×</button>
+        </div>
+        <div class="custom-modal-body">
+          <p>Are you sure you want to delete the coupon <strong>{{ selectedCoupon?.code }}</strong>?</p>
+        </div>
+        <div class="custom-modal-footer d-flex gap-2">
+          <button type="button" class="custom-btn custom-btn-secondary" (click)="deleteModalRef?.hide()">Cancel</button>
+          <button type="button" class="custom-btn custom-btn-danger" (click)="confirmDelete()">Delete</button>
+        </div>
+      </div>
+    </div>
+</ng-template>

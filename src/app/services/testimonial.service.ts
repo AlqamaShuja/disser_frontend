@@ -1,13 +1,15 @@
 import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { BASEURL } from 'src/globals';
 
 @Injectable({
   providedIn: 'root'
 })
 export class TestimonialService {
   // private apiUrl = 'https://proassignmentbackend.smartedultd.co.uk/api/v1/';
-  private apiUrl = 'https://dissertationbackend.dissertationwriting.help/api/v1/';
+  // private apiUrl = 'https://dissertationbackend.dissertationwriting.help/api/v1/';
+  private apiUrl = BASEURL;
 
   constructor(private http: HttpClient) {}
 

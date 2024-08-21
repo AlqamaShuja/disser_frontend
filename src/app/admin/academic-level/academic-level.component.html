@@ -1,0 +1,91 @@
+<div class="container my-4">
+    <div class="row">
+        <div class="col-12">
+            <h2 class="text-center mb-4">Manage Academic Levels</h2>
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="/admin">Home</a></li>
+                    <li class="breadcrumb-item active" aria-current="page">Manage Academic Levels</li>
+                </ol>
+            </nav>
+            <div class="d-flex justify-content-between mb-3">
+                <button class="btn" style="background-color: rgb(37, 67, 54); color: #FFF; border-radius: 8px; padding: 8px 16px;" (click)="openLevelModal(levelTemplate)">Insert New Academic Level</button>
+            </div>
+            <div class="table-responsive">
+                <table *ngIf="levels.length > 0" class="table table-striped table-hover align-middle">
+                    <thead class="" style="background-color: rgb(37, 67, 54); color: #FFF;">
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Academic Level</th>
+                            <th scope="col">Price</th>
+                            <th scope="col">Options</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let level of levels; let i = index">
+                            <td>{{ i + 1 }}</td>
+                            <td>{{ level.title }}</td>
+                            <td>{{ level.price | currency:'GBP' }}</td>
+                            <td>
+                                <button class="btn btn-outline-secondary btn-sm me-2" (click)="openLevelModal(levelTemplate, level)">
+                                    <i class="bi bi-pencil-square"></i> Edit
+                                </button>
+                                <button class="btn btn-outline-danger btn-sm" (click)="openDeleteModal(deleteTemplate, level)">
+                                    <i class="bi bi-trash"></i> Delete
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div *ngIf="levels.length === 0" class="d-flex justify-content-center my-4">No Academic Levels Created</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #levelTemplate>
+    <div class="custom-modal-wrapper">
+        <div class="custom-modal-backdrop"></div>
+        <div class="custom-modal">
+            <div class="custom-modal-header">
+                <h5>{{ isEditMode ? 'Edit Academic Level' : 'Insert New Academic Level' }}</h5>
+                <button type="button" class="custom-close-btn" aria-label="Close" (click)="levelModalRef?.hide()">×</button>
+            </div>
+            <div class="custom-modal-body">
+                <form>
+                    <div class="custom-form-group">
+                        <label for="levelTitle" class="custom-form-label">Academic Level</label>
+                        <input type="text" class="custom-form-control w-100" id="levelTitle" [(ngModel)]="selectedLevel.title" name="levelTitle" required placeholder="Enter Academic Level">
+                    </div>
+                    <div class="custom-form-group">
+                        <label for="price" class="custom-form-label">Price</label>
+                        <input type="number" class="custom-form-control w-100" id="price" [(ngModel)]="selectedLevel.price" name="price" required placeholder="Enter Price">
+                    </div>
+                </form>
+            </div>
+            <div class="custom-modal-footer d-flex gap-2">
+                <button type="button" class="custom-btn custom-btn-secondary" (click)="levelModalRef?.hide()">Close</button>
+                <button type="button" class="custom-btn custom-btn-primary" (click)="saveLevel()">Save Academic Level</button>
+            </div>
+        </div>
+    </div>
+</ng-template>
+
+<!-- Delete Modal -->
+<ng-template #deleteTemplate>
+    <div class="custom-modal-wrapper">
+        <div class="custom-modal">
+            <div class="custom-modal-header">
+                <h5>Confirm Deletion</h5>
+                <button type="button" class="custom-close-btn" aria-label="Close" (click)="deleteModalRef?.hide()">×</button>
+            </div>
+            <div class="custom-modal-body">
+                <p>Are you sure you want to delete the academic level <strong>{{ selectedLevel?.title }}</strong>?</p>
+            </div>
+            <div class="custom-modal-footer d-flex gap-2">
+                <button type="button" class="custom-btn custom-btn-secondary" (click)="deleteModalRef?.hide()">Cancel</button>
+                <button type="button" class="custom-btn custom-btn-danger" (click)="confirmDelete()">Delete</button>
+            </div>
+        </div>
+    </div>
+</ng-template>

@@ -1,141 +1,90 @@
-import { Component, OnInit } from '@angular/core';
-import { FormGroup, FormBuilder, Validators } from '@angular/forms';
+import { Component, OnInit, TemplateRef } from '@angular/core';
+import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { ServicesService } from 'src/app/services/services.service';
-import { AngularEditorConfig } from '@kolkov/angular-editor';
 
 @Component({
-  selector: 'app-admin-services',
+  selector: 'app-admin-services-page',
   templateUrl: './admin-services.component.html',
   styleUrls: ['./admin-services.component.css']
 })
-export class AdminServicesComponent implements OnInit{
-  services: any[] = [];
-  servicesForm!:FormGroup;
-  addService:boolean = false;
-  selectedService:any;
+export class AdminServicesComponent implements OnInit {
+  services: any = []; 
 
+  selectedService: any = {};
+  isEditMode: boolean = false;
+  serviceModalRef?: BsModalRef;
+  deleteModalRef?: BsModalRef;
 
-  editorConfig: AngularEditorConfig = {
-    editable: true,
-    spellcheck: true,
-    height: '15rem',
-    minHeight: '5rem',
-    width: 'auto',
-    minWidth: '0',
-    translate: 'yes',
-    enableToolbar: true,
-    showToolbar: true,
-    placeholder: 'Enter text here...',
-    defaultParagraphSeparator: '',
-    defaultFontName: '',
-    defaultFontSize: '',
-    uploadUrl: 'https://proassignmentbackend.smartedultd.co.uk/api/v1/upload/fileuploadAdmin',
-    customClasses: [
-      {
-        name: 'quote',
-        class: 'quote',
-      },
-      {
-        name: 'redText',
-        class: 'redText'
-      },
-      {
-        name: 'titleText',
-        class: 'titleText',
-        tag: 'h1',
-      },
-    ],
-    fonts: [
-      { class: 'arial', name: 'Arial' },
-      { class: 'times-new-roman', name: 'Times New Roman' },
-      { class: 'calibri', name: 'Calibri' },
-      { class: 'comic-sans-ms', name: 'Comic Sans MS' },
-      { class: 'verdana', name: 'Verdana' },
-      { class: 'courier-new', name: 'Courier New' },
-      { class: 'arial-black', name: 'Arial Black' },
-      { class: 'book-antiqua', name: 'Book Antiqua' },
-      { class: 'tahoma', name: 'Tahoma' },
-      { class: 'trebuchet-ms', name: 'Trebuchet MS' },
-      { class: 'garamond', name: 'Garamond' },
-      { class: 'cambria', name: 'Cambria' },
-      { class: 'helvetica', name: 'Helvetica' },
-      { class: 'arial-narrow', name: 'Arial Narrow' },
-      { class: 'rockwell', name: 'Rockwell' },
-      { class: 'century-gothic', name: 'Century Gothic' },
-      { class: 'franklin-gothic-medium', name: 'Franklin Gothic Medium' },
-      { class: 'arial-rounded', name: 'Arial Rounded' },
-    ],    
-  };
-  constructor(private formBuilder: FormBuilder,private serviceService:ServicesService){
-    
-  }
+  constructor(private modalService: BsModalService, private servicesService: ServicesService) { }
 
-  ngOnInit():void{
-    this.getServices();
-  }
-  getServices():void{
-    this.serviceService.getAllServices().subscribe((res:any)=>{
-      this.services  =res.data;
-    })
-  }
-
-  showAddService(service?:any):void{
-    this.selectedService = service;
-    this.generateForm();
-    this.addService = !this.addService;
-  }
-
-  submitForm(action:any):void{
-    if(this.servicesForm.invalid){
-      return;
-    }
-    const payload = {
-      pageTilte:this.servicesForm.value?.pageTitle,
-      pageSlug:this.servicesForm.value?.pageSlug,
-      icon:this.selectedService?this.selectedService.icon:'',
-      tagLine:this.selectedService?this.selectedService.tagLine:'',
-      images:this.selectedService?this.selectedService.image:'',
-      menuIconImage:this.selectedService?this.selectedService.menuIconImage:'',
-      postiontodisplay:this.selectedService?this.selectedService.postiontodisplay:'',
-      PrimaryPage:this.selectedService?this.selectedService.PrimaryPage:'',
-      shortDescription:this.selectedService?this.selectedService.shortDescription:'',
-      pageDescription:this.servicesForm.value?.description,
-      pageTitle:this.servicesForm.value?.pageTitle,
-      metaKeyWord:this.servicesForm.value?.keywords,
-      metaDescription:this.servicesForm.value?.metaDescription,
-      additionalHeaders:this.selectedService?this.selectedService.additionalHeaders:''
-    }
-    if(action === 'add'){
-    this.serviceService.create(payload).subscribe((res:any)=>{
-      if(res.data.insertId){
-        this.addService = !this.addService;
-        this.selectedService = null;
-        this.getServices();
-
-      }
-    })}else{
-      this.serviceService.update(payload,this.selectedService.pagesID).subscribe((res:any)=>{
-        if(res.data.affectedRows){
-          this.addService = !this.addService;
-          this.selectedService = null;
-          this.getServices();
-
-        }
-      })
-    }
-  }
-  generateForm():void{
-    this.servicesForm = this.formBuilder.group({
-      pageTitle: [this.selectedService ? this.selectedService.pageTilte:'', Validators.required],
-      pageSlug: [this.selectedService ? this.selectedService.pageSlug:'', [Validators.required]],
-      keywords: [this.selectedService ? this.selectedService.metaKeyWord:'', Validators.required],
-      metaDescription: [this.selectedService ? this.selectedService.metaDescription:'', Validators.required],
-      description: [this.selectedService ? this.selectedService.pageDescription:'', Validators.required]
+  ngOnInit(): void {
+    this.servicesService.getAllServices().subscribe(res => {
+      console.log(res, "===res.services");
+      this.services = res;
     });
+   }
+
+  openServiceModal(template: TemplateRef<any>, service: any = null): void {
+    if (service) {
+      this.isEditMode = true;
+      this.selectedService = { ...service }; // Clone the service object
+    } else {
+      this.isEditMode = false;
+      this.selectedService = { title: '', price: '' };
+    }
+    this.serviceModalRef = this.modalService.show(template);
   }
-  deleteService(id:number):void{
-    this.serviceService.delete(id).subscribe(res => {
-      window.location.reload();
-    })
+
+  saveService(): void {
+    if (this.isEditMode) {
+      // Find the service and update it
+      const index = this.services.findIndex((s: any) => s.id === this.selectedService.id);
+      if (index !== -1) {
+        this.services[index] = { ...this.selectedService };
+        this.servicesService.updateService(this.selectedService).subscribe(
+          () => {
+            alert('Service updated successfully');
+            this.serviceModalRef?.hide();
+          },
+          error => {
+            console.error('Error updating service:', error);
+            alert("Error Updating Service: " + error.message);
+          }
+        );
+      }
+    } else {
+      // Add a new service
+      this.servicesService.addService(this.selectedService).subscribe(
+        response => {
+          console.log('Service added successfully:', response);
+          this.selectedService.id = response.id; // Assuming the response includes the new service ID
+          this.services.push({ ...this.selectedService });
+          this.serviceModalRef?.hide();
+        },
+        error => {
+          console.error('Error adding service:', error);
+          alert("Error Adding Service: " + error.message);
+        }
+      );
+    }
+  }
+
+  openDeleteModal(template: TemplateRef<any>, service: any): void {
+    this.selectedService = service;
+    this.deleteModalRef = this.modalService.show(template);
+  }
+
+  confirmDelete(): void {
+    // Implement the delete logic here
+    this.servicesService.deleteService(this.selectedService.id).subscribe(
+      () => {
+        this.services = this.services.filter((s: any) => s.id !== this.selectedService.id);
+        this.deleteModalRef?.hide();
+      },
+      error => {
+        console.error('Error deleting service:', error);
+        alert("Error Deleting Service: " + error.message);
+      }
+    );
   }
 }

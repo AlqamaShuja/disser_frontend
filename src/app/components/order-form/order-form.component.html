@@ -25,13 +25,7 @@
       <label for="level">Level*</label>
       <select class="form-control" formControlName="level" required (change)="calculateTotalPrice()">
         <option value="" disabled selected>Select One</option>
-        <option value="Undergraduate">Undergraduate</option>
-        <option value="Postgraduate">Postgraduate</option>
-        <option value="Masters">Masters</option>
-        <option value="LLB">LLB</option>
-        <option value="LLM">LLM</option>
-        <option value="MPhil">MPhil</option>
-        <option value="PhD">PhD</option>
+        <option *ngFor="let type of academicLevel" [value]="type.title">{{ type.title }}</option>
       </select>
       <div *ngIf="orderForm.get('level')?.invalid && orderForm.get('level')?.touched" class="text-danger">
         Level is required.

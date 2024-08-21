@@ -35,10 +35,10 @@
   }
 </style>
 
-<div class="banner-style-3 banner-padding" [style.backgroundImage]="'url(' + slides[currentIndex].imageUrl + ')'">
+<div *ngIf="slides.length > 0" class="banner-style-3 banner-padding" [style.backgroundImage]="'url(' + slides[currentIndex].imageUrl + ')'">
   <div class="container">
     <div class="row align-items-center justify-content-center" >
-      <div >
+      <div>
         <div class="banner-content" *ngIf="!slides[currentIndex].showAboutUs" >
           <h1>{{ slides[currentIndex].heading }}</h1>
           <p>{{ slides[currentIndex].text }}</p>
@@ -48,7 +48,6 @@
             <button id="convo_btn" class="btn  rounded mr-1" style="background-color: #242961; color: white;" (click)="onStartConversation()">Contact Us</button>
             <button id="convo_btn" class="btn  rounded mr-1" style="background: transparent; color: white; border: 1px solid white;" (click)="onStartConversation()">About Us</button>
 
-            <!-- <a href="https://api.whatsapp.com/send?phone=4564654654&amp;text=Hi%E2%80%9A%20Assignment%20Experts" target="_blank" class="btn btn-main rounded mr-2">Order Now</a> -->
           </div>
         </div>
 

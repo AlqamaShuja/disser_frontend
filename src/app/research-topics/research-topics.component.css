@@ -5,7 +5,8 @@
 }
 
 .left-section {
-  width: 40%;
+  /* min-width: 40%; */
+  max-width: 450px;
   padding: 20px;
   box-sizing: border-box;
 }
@@ -82,7 +83,7 @@
 }
 
 .right-section {
-  width: 60%;
+  width: 100%;
   padding: 20px;
   box-sizing: border-box;
 }

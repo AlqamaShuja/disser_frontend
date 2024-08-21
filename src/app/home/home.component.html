@@ -2,25 +2,25 @@
 
 <!-- <app-slider [aboutUs]="false" style="position: relative; z-index: 1;"></app-slider> -->
 
-<div class="container-calc">  
+<div class="container-calc" 
+    [ngStyle]="{
+        'background-image': 'url(' + calcSectBg + ')',
+        'background-size': 'cover',
+        'background-position': 'center'
+    }"
+    > 
     <div class="overlay"></div>
     <div class="content-wrapper-slide">
-        <div class="content">
+        <div [innerHTML]="sliderData"></div>
+        <!-- <div class="content">
             <div class="title">
                 <h1>Dissertation Writing</h1>
                 <p>Dissertation Writing Help You To Write Your Assignment Without Using Any AI Tools</p>
                 <div class="buttons">
-                    <!-- <button class="live-chat">LIVE CHAT</button> -->
                     <button class="order-now">ORDER NOW</button>
                 </div>
-            </div>
-        
-            <!-- <div class="reviews">
-                <span>ReviewsBank 4.9 <i class="fa fa-star"></i></span>
-                <span>Trustpilot 4.9 <i class="fa fa-star"></i></span>
-                <span>Sitejabbar 4.9 <i class="fa fa-star"></i></span>
-            </div> -->
-        </div>
+            </div> 
+        </div> -->
       
         <div class="quote-form">
             <h3>GET A PRICE QUOTE</h3>
@@ -60,13 +60,9 @@
                     <label>Deadline</label>
                     <input type="date" class="form-control" name="deadline" ngModel required />
                 </div>
-                <!-- <div class="form-group">
-                    <span>Cost Per Page: PKR <span id="costPerPage">{{ costPerPage }}</span></span>
-                    <span>Total Cost: PKR <span id="totalCost">{{ totalPrice }}</span></span>
-                </div> -->
-                <button type="submit" class="btn btn-primary">Check Price</button>
                 <div *ngIf="errorMessage" class="alert alert-danger mt-3">{{ errorMessage }}</div>
-                <div *ngIf="totalPrice != 0" class="alert alert-success mt-3">Total Price is: {{ totalPrice }}</div>
+                <div *ngIf="totalPrice != 0" class="alert alert-success mt-3 d-flex justify-content-center">Total Price is: £{{ totalPrice | number: '1.0-0' }}</div>
+                <button type="submit" class="btn btn-primary d-flex justify-content-center">Check Price</button>
             </form>
         </div>
     </div>
@@ -97,46 +93,68 @@
         }
     </style>
 
-<section class="features-2" style="max-width:80%;margin:0 auto;">
-    <div class="mt-3 ">
-        <div class="row  gap-3"  >
-          <div class="col-lg-5 mb-3 mb-lg-0">
-            <div class="container mt-3">
-              <div class="row gap-3">
-                <div class="col-sm bg-image" style="background-image: url('../../assets/teach.png'); background-size: cover; background-position: center; border:1px solid #242961;  border-radius: 15px; height: 350px;"></div>
-                <div class="col-sm">
-                  <div class="row">
-                    <div class="col-12  p-5 mb-3 text-center text-white" style=" border:1px solid #242961; border-radius: 15px;">
-                      <h1>25+</h1>
-                      <h5>Years of Experience</h5>
+    <section class="features-2" style="max-width:80%;margin:0 auto;">
+        <div class="mt-3 ">
+            <div class="row  gap-3"  >
+                <div class="col-lg-5 mb-3 mb-lg-0">
+                    <div class="container mt-3">
+                    <div class="row gap-3">
+                        <!-- style="background-image: url('../../assets/teach.png'); background-size: cover; background-position: center; border:1px solid #242961;  border-radius: 15px; height: 350px;" -->
+                        <div class="col-sm bg-image" 
+                            [ngStyle]="{
+                                'background-image': 'url(' + ourMissionLeftContentImage1 + ')',
+                                'background-size': 'cover',
+                                'background-position': 'center',
+                                'border': '1px solid #242961',
+                                'border-radius': '15px',
+                                'height': '350px'
+                            }"
+                        ></div>
+                        <div class="col-sm">
+                        <div class="row">
+                            <!-- <div class="col-12 p-5 mb-3 text-center text-white our-mission-25-years">
+                                <h1>25+</h1>
+                                <h5>Years of Experience</h5>
+                            </div> -->
+                            <div [innerHTML]="ourMissionLeftContent"></div>
+                        </div>
+                        <div class="row">
+                            <!-- style="background-image: url('../../assets/sec.png'); background-size: cover; background-position: center; border:1px solid #242961; border-radius: 15px; height: 150px;" -->
+                            <div class="col-12 bg-image" 
+                                [ngStyle]="{
+                                    'background-image': 'url(' + ourMissionLeftContentImage2 + ')',
+                                    'background-size': 'cover',
+                                    'background-position': 'center',
+                                    'border': '1px solid #242961',
+                                    'border-radius': '15px',
+                                    'height': '150px'
+                                }"
+                            ></div>
+                        </div>
+                        </div>
                     </div>
-                  </div>
-                  <div class="row">
-                    <div class="col-12 bg-image" style="background-image: url('../../assets/sec.png'); background-size: cover; background-position: center; border:1px solid #242961; border-radius: 15px; height: 150px;"></div>
-                  </div>
+                    </div>
                 </div>
-              </div>
+                <div class="col-1" ></div>
+                <div class="col-lg-5" [innerHTML]="ourMissionRightContent"></div>
+                <!-- <div class="col-lg-5"  >
+                    <div class="p-3 p-lg-2" >
+                    <h1>Our Mission</h1>
+                    <br />
+                    <h4>We&apos;re More Than Just a Dissertation Writing Service</h4>
+                    <p>
+                        We aim to be more than just a writing service. We view ourselves as partners in your academic journey, providing support and guidance at each step. We're here to make the dissertation writing process smoother for you. Contact us today to start your journey toward academic excellence.
+                    </p>
+                    <button id="convo_btn" class="btn  rounded mr-1" style="background-color: #242961; color: white;" >About Us</button>
+                    </div>
+                </div> -->
             </div>
-          </div>
-          <div class="col-1" ></div>
-          <div class="col-lg-5"  >
-            <div class="p-3 p-lg-2" >
-              <h1>Our Mission</h1>
-              <br />
-              <h4>We&apos;re More Than Just a Dissertation Writing Service</h4>
-              <p>
-                We aim to be more than just a writing service. We view ourselves as partners in your academic journey, providing support and guidance at each step. We're here to make the dissertation writing process smoother for you. Contact us today to start your journey toward academic excellence.
-              </p>
-              <button id="convo_btn" class="btn  rounded mr-1" style="background-color: #242961; color: white;" >About Us</button>
-            </div>
-          </div>
         </div>
-      </div>
-</section>
+    </section>
 
 
 <div class="our-program-section">
-    <app-our-program></app-our-program>
+    <app-our-program [beingAGoodResidential]="beingAGoodResidential"></app-our-program>
 </div>
 
 <!-- <section class="about-3 section-padding-btm" style="max-width:30%;margin:0 auto">
@@ -198,7 +216,7 @@
 </section> -->
 
 
-<app-assistance-info></app-assistance-info>
+<app-assistance-info [assistantInfo]="assistantInfo"></app-assistance-info>
 <!-- <section class="counter-section-2 section-padding-btm counter-section-assist" style="max-width:100%;margin:0 auto; ">
     <div class="container-fluid" style="display: flex; flex-wrap: wrap;">
         <div style=" padding: 30px 120px 20px 50px; flex: 1; background-color: #242961; color: #fff;  ">
@@ -281,8 +299,9 @@
 </section> -->
 
 
-<section class="choose-us-section-container">
-    <div class="container-fluid-choose-us">
+
+<section class="choose-us-section-container" [innerHTML]="whyChooseUsSection">
+    <!-- <div class="container-fluid-choose-us">
         <div class="choose-us-section">
             <h1>Why Choose Us?</h1>
             <h3>Choosing Human Writers Over AI for Your Dissertation</h3>
@@ -385,18 +404,23 @@
                 </div>
             </div>            
         </div>
-    </div>
+    </div> -->
 </section>
 
-<app-whatmakesusbest-sect></app-whatmakesusbest-sect>
+<!-- <app-whatmakesusbest-sect></app-whatmakesusbest-sect> -->
+ <section [innerHTML]="whatMakesUsTheBest"></section>
 
-<app-how-to-order-sect></app-how-to-order-sect>
+<app-how-to-order-sect [howToOrder]="howToOrder"></app-how-to-order-sect>
 
-<app-quality-guaranteed-sect></app-quality-guaranteed-sect>
+<!-- <app-quality-guaranteed-sect></app-quality-guaranteed-sect> -->
+ <section [innerHTML]="qualityGuaranteed"></section>
 
-<app-personal-manager-sect></app-personal-manager-sect>
+<!-- <app-personal-manager-sect></app-personal-manager-sect> -->
 
-<app-improve-grades-sect></app-improve-grades-sect>
+<section [innerHTML]="personalManagerToAssistYou"></section>
+
+<!-- <app-improve-grades-sect></app-improve-grades-sect> -->
+<section [innerHTML]="improvesYourGradeWithUs"></section>
 
 <app-faq-section></app-faq-section>
 

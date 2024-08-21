@@ -39,10 +39,24 @@ import { ServiceNewComponent } from './service-new/service-new.component';
 import { OurSamplesComponent } from './our-samples/our-samples.component';
 import { OurSamplesDynamicCatLevelComponent } from './our-samples-dynamic-cat-level/our-samples-dynamic-cat-level.component';
 import { OurSampleLevelTypeDetailsComponent } from './our-sample-level-type-details/our-sample-level-type-details.component';
+import { AdminTopicListComponent } from './admin/admin-topic-list/admin-topic-list.component';
+import { AdminTextPagesComponent } from './admin/admin-text-pages/admin-text-pages.component';
+import { AdminEditorComponent } from './admin-editor/admin-editor.component';
+import { AdminFaqInputComponent } from './admin/admin-faq-input/admin-faq-input.component';
+import { AdminCouponPageComponent } from './admin/admin-coupon-page/admin-coupon-page.component';
+import { AdminWriterPageComponent } from './admin/admin-manage-writer-profile/admin-manage-writer-profile.component';
+import { AcademicLevelComponent } from './admin/academic-level/academic-level.component';
+import { AdminSubjectAreaComponent } from './admin/admin-subject-area/admin-subject-area.component';
+
+
 const routes: Routes = [
   {
     path: 'admin',
     component: DashboardComponent,
+  },
+  {
+    path: 'admin/topics',
+    component: AdminTopicListComponent,
   },
   {
     path: 'admin/login',
@@ -59,6 +73,34 @@ const routes: Routes = [
   {
     path: 'admin/sample-orders',
     component: AdminOrdersComponent,
+  },
+  {
+    path: 'admin/text-pages',
+    component: AdminTextPagesComponent,
+  },
+  {
+    path: 'admin/coupons',
+    component: AdminCouponPageComponent,
+  },
+  {
+    path: 'admin/manage-writer',
+    component: AdminWriterPageComponent,
+  },
+  {
+    path: 'admin/academic-level',
+    component: AcademicLevelComponent,
+  },
+  {
+    path: 'admin/subject-area',
+    component: AdminSubjectAreaComponent,
+  },
+  {
+    path: 'admin/text-pages/data/edit',
+    component: AdminFaqInputComponent,
+  },
+  {
+    path: 'admin/text-pages/:id',
+    component: AdminEditorComponent,
   },
   {
     path: 'admin/order-details',
@@ -201,7 +243,10 @@ const routes: Routes = [
     path:'not-found',
     component: PageNotFoundComponent
   },
+  { path: '', redirectTo: '/', pathMatch: 'full' },
+  { path: '**', redirectTo: '/' }
 ];
+
 
 @NgModule({
   imports: [RouterModule.forRoot(routes,{scrollPositionRestoration:'top'})],

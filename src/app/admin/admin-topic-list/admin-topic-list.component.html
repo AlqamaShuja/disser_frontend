@@ -1,0 +1,68 @@
+<div class="container mt-4">
+    <div class="d-flex justify-content-between align-items-center mb-3">
+      <h2>Topics</h2>
+      <button class="btn btn-primary" (click)="openModal()">Insert Topic</button>
+    </div>
+  
+    <div *ngIf="topics.length > 0; else noTopicsTemplate">
+      <table class="table table-striped">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Price</th>
+            <th>Description</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr *ngFor="let topic of topics">
+            <td>{{ topic.title }}</td>
+            <td>{{ topic.price | currency:'GBP':'symbol':'1.2-2' }}</td>
+            <td>{{ topic.description }}</td>
+            <td>
+              <button class="btn btn-warning btn-sm" (click)="openModal(topic)">Edit</button>
+              <button class="btn btn-danger btn-sm ms-2" (click)="deleteTopic(topic.id)">Delete</button>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  
+    <ng-template #noTopicsTemplate>
+      <p class="text-center">No topics available.</p>
+    </ng-template>
+  </div>
+  
+  <!-- Custom Modal -->
+  <div class="custom-modal" *ngIf="isModalOpen">
+    <div class="custom-modal-content">
+      <div class="custom-modal-header">
+        <h5>{{ isEditing ? 'Edit Topic' : 'Insert Topic' }}</h5>
+        <button type="button" class="close" (click)="closeModal()">&times;</button>
+      </div>
+      <div class="custom-modal-body">
+        <form [formGroup]="topicForm" (ngSubmit)="saveTopic()">
+          <div class="mb-3">
+            <label for="title" class="form-label">Title</label>
+            <input type="text" id="title" class="form-control" formControlName="title" />
+          </div>
+          <div class="mb-3">
+            <label for="price" class="form-label">Price (£)</label>
+            <input type="number" id="price" class="form-control" formControlName="price" />
+          </div>
+          <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <textarea id="description" class="form-control" formControlName="description" rows="3"></textarea>
+          </div>
+          <div class="custom-modal-footer" style="gap: 15px;">
+            <button type="button" class="btn btn-secondary" (click)="closeModal()">Close</button>
+            <button type="submit" class="btn btn-primary">{{ isEditing ? 'Update' : 'Insert' }}</button>
+          </div>
+        </form>
+      </div>
+    </div>
+</div>
+  
+<!-- Modal Backdrop -->
+<div class="custom-modal-backdrop" *ngIf="isModalOpen" (click)="closeModal()"></div>
+  

@@ -1,4 +1,9 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
+
+interface AccordionData {
+  title: string,
+  content: string,
+}
 
 @Component({
   selector: 'app-accordion',
@@ -6,11 +11,12 @@ import { Component } from '@angular/core';
   styleUrls: ['./accordion.component.css']
 })
 export class AccordionComponent {
-  items = [
-    { title: 'Accordion Item ', content: 'Content for accordion item .' },
-    { title: 'Accordion Item ', content: 'Content for accordion item .' },
-    { title: 'Accordion Item ', content: 'Content for accordion item .' }
-  ];
+  @Input() items!: AccordionData[]
+  // [
+  //   { title: 'Accordion Item ', content: 'Content for accordion item .' },
+  //   { title: 'Accordion Item ', content: 'Content for accordion item .' },
+  //   { title: 'Accordion Item ', content: 'Content for accordion item .' }
+  // ];
 
   expandedIndex: number | null = null;
 

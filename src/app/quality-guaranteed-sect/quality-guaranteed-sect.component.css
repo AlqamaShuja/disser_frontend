@@ -8,9 +8,6 @@
   }
   
   .qual-heading {
-    /* background-color: #242961;
-    padding: 15px 30px;
-    border-radius: 10px; */
     display: flex;
     justify-content: center;
   }
@@ -25,7 +22,7 @@
   .quality-guaranteed-container h1 {
     text-align: center;
     font-size: 36px;
-    color: #242961; /* Theme color for heading */
+    color: #242961;
     margin-bottom: 30px;
   }
   
@@ -35,14 +32,14 @@
   
   .quality-section h2, .offer-section h2 {
     font-size: 28px;
-    color: #2a2a2a; /* Darker color for section headings */
+    color: #2a2a2a;
     margin-bottom: 15px;
   }
   
   .quality-section p, .offer-section p {
     font-size: 18px;
     line-height: 1.8;
-    color: #555; /* Softer text color for readability */
+    color: #555;
     margin-bottom: 20px;
   }
   
@@ -57,20 +54,20 @@
     margin-bottom: 15px;
     padding-left: 20px;
     position: relative;
-    color: #333; /* Darker text color for list items */
+    color: #333;
   }
   
   .offer-section ul li::before {
-    content: '✔'; /* Checkmark for each item */
+    content: '✔';
     position: absolute;
     left: 0;
     top: 0;
-    color: #242961; /* Theme color for checkmark */
+    color: #242961;
     font-size: 18px;
   }
   
   .offer-section ul li strong {
-    color: #242961; /* Theme color for emphasized text */
+    color: #242961;
   }
   
   @media screen and (max-width: 768px) {

@@ -1,0 +1,141 @@
+<div *ngIf="isFaq">
+    <form (ngSubmit)="saveChangesFAQs()" style="padding: 10px 20px;">
+      <div *ngFor="let faq of faqs; let i = index" class="faq-item">
+        <label for="title-{{i}}">Title:</label>
+        <input 
+          id="title-{{i}}" 
+          [(ngModel)]="faq.title" 
+          name="title-{{i}}" 
+          class="form-control"
+        />
+  
+        <label for="content-{{i}}">Content:</label>
+        <textarea 
+          id="content-{{i}}" 
+          [(ngModel)]="faq.content" 
+          name="content-{{i}}" 
+          class="form-control"
+          rows="5"
+        ></textarea>
+      </div>
+  
+      <div class="d-flex justify-content-center gap-2">
+        <button type="button" (click)="goBack()" class="btn mt-3 cancel-content-btn">Cancel</button>
+        <button type="submit" class="btn mt-3 save-content-btn">Save Changes</button>
+      </div>
+    </form>
+</div>
+
+
+<div *ngIf="isAboutUsAccordion">
+    <form (ngSubmit)="saveChangesAccordion()" style="padding: 10px 20px;">
+      <div *ngFor="let faq of aboutUsAccordion; let i = index" class="faq-item">
+        <label for="title-{{i}}">Title:</label>
+        <input 
+          id="title-{{i}}" 
+          [(ngModel)]="faq.title" 
+          name="title-{{i}}" 
+          class="form-control"
+        />
+  
+        <label for="content-{{i}}">Content:</label>
+        <textarea 
+          id="content-{{i}}" 
+          [(ngModel)]="faq.content" 
+          name="content-{{i}}" 
+          class="form-control"
+          rows="5"
+        ></textarea>
+      </div>
+  
+      <div class="d-flex justify-content-center gap-2">
+        <button type="button" (click)="goBack()" class="btn mt-3 cancel-content-btn">Cancel</button>
+        <button type="submit" class="btn mt-3 save-content-btn">Save Changes</button>
+      </div>
+    </form>
+</div>
+
+
+<div style="padding: 15px;" *ngIf="isAboutUsSlider">
+    <div *ngFor="let slide of aboutUsSlider; let i = index">
+        <div class="form-group">
+          <label for="heading-{{i}}">Heading</label>
+          <input 
+            type="text" 
+            id="heading-{{i}}" 
+            [(ngModel)]="slide.heading" 
+            class="form-control" 
+            placeholder="Enter heading"
+          />
+        </div>
+      
+        <div class="form-group">
+          <label for="text-{{i}}">Text</label>
+          <textarea 
+            id="text-{{i}}" 
+            [(ngModel)]="slide.text" 
+            class="form-control" 
+            placeholder="Enter text"
+          ></textarea>
+        </div>
+      
+        <div class="form-group">
+          <label for="image-{{i}}">Image</label>
+          <div class="d-flex gap-3 align-items-center">
+            <img [src]="getImageUrl(slide, i)" alt="Slide Image" class="img-thumbnail" style="max-width: 300px;">
+            <input 
+                type="file" 
+                id="image-{{i}}" 
+                (change)="onImageSelect($event, i)" 
+                class="form-control"
+            />
+          </div>
+        </div>
+    </div>
+    <div class="d-flex justify-content-center gap-2">
+        <button type="button" (click)="goBack()" class="btn mt-3 cancel-content-btn">Cancel</button>
+        <button (click)="updateSliderData()" class="btn mt-3 save-content-btn">Save Changes</button>
+    </div>
+</div>
+
+
+<!-- <div style="padding: 15px;" *ngIf="isDissertationTopics">
+    <div *ngFor="let topic of dissertationTopics; let i = index">
+        <div class="form-group">
+          <label for="heading-{{i}}">Title</label>
+          <input 
+            type="text" 
+            id="heading-{{i}}" 
+            [(ngModel)]="topic.title" 
+            class="form-control" 
+            placeholder="Enter title"
+          />
+        </div>
+
+        <div class="form-group">
+          <label for="image-{{i}}">Price</label>
+          <input 
+            type="text" 
+            id="heading-{{i}}" 
+            [(ngModel)]="topic.price" 
+            class="form-control" 
+            placeholder="Enter price"
+          />
+        </div>
+      
+        <div class="form-group">
+          <label for="text-{{i}}">Description</label>
+          <textarea 
+            id="text-{{i}}" 
+            [(ngModel)]="topic.description"
+            class="form-control" 
+            placeholder="Enter description"
+          ></textarea>
+        </div>
+
+        <div class="d-flex justify-content-center gap-2">
+            <button type="button" (click)="goBack()" class="btn mt-3 cancel-content-btn">Cancel</button>
+            <button (click)="updateTopicsData(topic)" class="btn mt-3 save-content-btn">Save Changes</button>
+        </div>
+    </div>
+</div> -->
