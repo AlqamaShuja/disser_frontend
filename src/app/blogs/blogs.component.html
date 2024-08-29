@@ -1,36 +1,236 @@
-<section class="page-header">
-    <div class="container">
+<div class="">
+    <section class="page-header" style="background-color: #1d2ba7 !important; padding: 20px;">
+      <div class="container">
         <div class="row justify-content-center">
-            <div class="col-lg-8 col-xl-8">
-                <div class="title-block">
-                    <h1>Blogs</h1>
-                    <ul class="header-bradcrumb justify-content-center">
-                        <li><a href="/">Home</a></li>
-                        <li class="active" aria-current="page">Blogs</li>
-                    </ul>
-                </div>
+          <div class="col-lg-8 col-xl-8">
+            <div class="title-block">
+              <h1>Blogs</h1>
+              <ul class="header-bradcrumb justify-content-center" *ngIf="!selectedBlog">
+                <li><a href="/">Home</a></li>
+                <li class="active ms-2" aria-current="page">Blogs</li>
+              </ul>
+              <ul class="header-bradcrumb justify-content-center" *ngIf="selectedBlog">
+                <li><a href="/">Home</a></li>
+                <li class="ms-2"><a href="javascript:void(0)" (click)="clearSelection()">Blog</a></li>
+                <li class="active ms-2" aria-current="page">{{ selectedBlog.pageTilte }}</li>
+              </ul>
             </div>
+          </div>
         </div>
-    </div>
-</section>
-
-<div class="page-wrapper">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12 col-xl-12">
-                <div class="row">
-                    <div class="col-sm-4 col-lg-4 mb-20" *ngFor="let blog of blogs">
-                        <div class="single-course-category style-1 bg-shade" (click)="selectBlog(blog)" [style.background-image]="'url(' + (blog?.menuIconImage ? blog?.menuIconImage : '../../../../assets/images/blog_default.png') + ')'" [style.background-size]="'cover'">
-                            <div class="course-cat-content">
-                                <h4 class="course-cat-title">
-                                    <a href="javascript:;" style="color: #b12384;">{{blog?.pageTitle}}</a>
-                                </h4>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+      </div>
+    </section>
+  
+    <div class="row" style="padding: 40px; min-height: 70vh;">
+      <!-- Blog List View -->
+      <div *ngIf="!selectedBlog" class="col-lg-8 col-md-8">
+        <div class="blog-section" style="display: flex; flex-wrap: wrap; gap: 20px;">
+          <div *ngFor="let blog of filteredBlogs" class="blog-card" (click)="showBlogDetails(blog)"
+            style="flex: 0 0 calc(50% - 20px); background-color: white; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); cursor: pointer; overflow: hidden;">
+            <!-- Image Section -->
+            <div class="blog-image" style="position: relative;">
+              <img *ngIf="blog.images && blog.images.length" [src]="getImageUrl(blog.images[0])" alt="{{ blog.pageTitle }}"
+                style="width: 100%; height: auto; max-height: 350px;">
             </div>
+  
+            <!-- Content Section -->
+            <div class="blog-content" style="padding: 15px;">
+              <h3 class="blog-title" style="font-size: 20px; margin-bottom: 10px; color: #0f0e68;">{{ blog.pageTilte }}</h3>
+              <div class="blog-info"
+                style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; color: #888;">
+                <span style="margin-right: 10px;">📅 {{ blog.updatedAt | date: 'dd MMM yyyy' }}</span>
+                <span style="background-color: beige; color: #000; border-radius: 8px; padding: 2px 8px;">{{ blog.tagLine }}</span>
+              </div>
+              <p class="blog-description" style="font-size: 16px; color: #555;">{{ blog.shortDescription }}</p>
+            </div>
+          </div>
         </div>
+      </div>
+  
+      <!-- Blog Details View -->
+      <div *ngIf="selectedBlog" class="col-lg-8 col-md-8">
+        <!-- Slider for multiple images -->
+        <div *ngIf="selectedBlog.images && selectedBlog.images.length > 0" class="slider">
+          <div *ngFor="let image of selectedBlog.images">
+            <img [src]="getImageUrl(image)" alt="{{ selectedBlog.pageTilte }}" style="width: 100%; height: auto; margin-bottom: 10px;">
+          </div>
+        </div>
+        
+        <!-- Blog Details Content -->
+        <h2>{{ selectedBlog.pageTilte }}</h2>
+        <div class="blog-info" style="display: flex; margin-bottom: 20px; color: #888;">
+          <span style="margin-right: 10px;">📅 {{ selectedBlog.updatedAt | date: 'dd MMM yyyy' }}</span>
+          <span style="background-color: beige; color: #000; border-radius: 8px; padding: 2px 8px; margin-right: 30px;">{{ selectedBlog.tagLine }}</span>
+          <span style="color: #0f0e68;">Admin</span>
+        </div>
+        <!-- <p>{{ selectedBlog.pageDescription }}</p> -->
+         <div [innerHTML]="selectedBlog.pageDescription"></div>
+      </div>
+  
+      <!-- Sidebar Section -->
+      <div class="col-lg-4 col-md-4">
+        <!-- Categories are always visible -->
+        <div>
+          <!-- Search Box -->
+          <div class="search-box d-flex align-items-center gap-2" style="" *ngIf="!selectedBlog">
+            <input type="text" [(ngModel)]="searchTerm" (input)="onSearchChange()" class="form-control"
+              placeholder="Search..." style="">
+            <button class="btn btn-primary" (click)="onSearchClick()">Search</button>
+          </div>
+  
+          <!-- Categories -->
+          <div class="categories" style="margin-bottom: 20px;">
+            <h4 style="font-size: 22px; margin-bottom: 10px;">Categories</h4>
+            <ul class="list-unstyled">
+              <li *ngFor="let category of categories" (click)="filterByCategory(category)"
+                [class.active]="selectedCategory === category"
+                style="cursor: pointer; margin-bottom: 5px; color: #1d2ba7;">
+                {{ category }}
+              </li>
+            </ul>
+          </div>
+        </div>
+  
+        <!-- Latest Posts -->
+        <div class="latest-posts">
+          <h4 style="font-size: 22px; margin-bottom: 10px;">Latest Posts</h4>
+          <div *ngFor="let blog of latestBlogs" class="latest-post-item" (click)="showBlogDetails(blog)"
+            style="display: flex; align-items: center; cursor: pointer; margin-bottom: 10px;">
+            <img *ngIf="blog.images && blog.images.length" [src]="getImageUrl(blog.images[0])" alt="{{ blog.pageTitle }}"
+              style="width: 50px; height: 50px; border-radius: 5px; margin-right: 10px;">
+            <div>
+              <span style="font-size: 14px; color: #999;">{{ blog.updatedAt | date: 'MMM yyyy' }}</span>
+              <h5 style="font-size: 14px; color: #0f0e68; margin: 0;">{{ blog.pageTitle }}</h5>
+            </div>
+          </div>
+        </div>
+      </div>
     </div>
-    
 </div>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div class="container">
+    <section class="page-header" style="background-color: #1d2ba7 !important; padding: 20px;">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-8 col-xl-8">
+            <div class="title-block">
+              <h1>Blogs</h1>
+              <ul class="header-bradcrumb justify-content-center" *ngIf="!selectedBlog">
+                <li><a href="/">Home</a></li>
+                <li class="active ms-2" aria-current="page">Blogs</li>
+              </ul>
+              <ul class="header-bradcrumb justify-content-center" *ngIf="selectedBlog">
+                <li><a href="/">Home</a></li>
+                <li class="ms-2"><a href="/blogs">Blog</a></li>
+                <li class="active ms-2" aria-current="page">{{ selectedBlog.pageTilte }}</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  
+    <div class="row" style="padding: 20px;">
+      <div *ngIf="!selectedBlog" class="col-lg-8 col-md-8">
+        <div class="blog-section" style="display: flex; flex-wrap: wrap; gap: 20px;">
+          <div *ngFor="let blog of filteredBlogs" class="blog-card" (click)="showBlogDetails(blog)"
+            style="flex: 0 0 calc(50% - 20px); background-color: white; border-radius: 10px; box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1); cursor: pointer; overflow: hidden;">
+            <div class="blog-image" style="position: relative;">
+              <img *ngIf="blog.images && blog.images.length" [src]="getImageUrl(blog.images[0])" alt="{{ blog.pageTitle }}"
+                style="width: 100%; height: auto;">
+            </div>
+  
+            <div class="blog-content" style="padding: 15px;">
+              <h3 class="blog-title" style="font-size: 20px; margin-bottom: 10px; color: #0f0e68;">{{ blog.pageTitle }}</h3>
+              <div class="blog-info"
+                style="display: flex; align-items: center; justify-content: space-between; margin-bottom: 10px; color: #888;">
+                <span style="margin-right: 10px;">📅 {{ blog.updatedAt | date: 'dd MMM yyyy' }}</span>
+                <span style="background-color: beige; color: #000; border-radius: 8px; padding: 2px 8px;">{{ blog.tagLine }}</span>
+              </div>
+              <p class="blog-description" style="font-size: 16px; color: #555;">{{ blog.shortDescription }}</p>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <div *ngIf="selectedBlog" class="col-lg-8 col-md-8">
+        <div *ngIf="selectedBlog.images && selectedBlog.images.length > 0" class="slider">
+          <div *ngFor="let image of selectedBlog.images">
+            <img [src]="getImageUrl(image)" alt="{{ selectedBlog.pageTitle }}" style="width: 100%; height: auto; margin-bottom: 10px;">
+          </div>
+        </div>
+        
+        <h2>{{ selectedBlog.pageTitle }}</h2>
+        <div class="blog-info" style="display: flex; align-items: center; margin-bottom: 20px; color: #888;">
+          <span style="margin-right: 10px;">📅 {{ selectedBlog.updatedAt | date: 'dd MMM yyyy' }}</span>
+          <span style="background-color: beige; color: #000; border-radius: 8px; padding: 2px 8px; margin-right: 10px;">{{ selectedBlog.tagLine }}</span>
+          <span style="color: #0f0e68;">Admin</span>
+        </div>
+        <p>{{ selectedBlog.pageDescription }}</p>
+      </div>
+  
+      <div class="col-lg-4 col-md-4">
+        <div *ngIf="!selectedBlog">
+          <div class="search-box" style="margin-bottom: 20px;">
+            <input type="text" [(ngModel)]="searchTerm" (input)="onSearchChange()" class="form-control"
+              placeholder="Search..." style="margin-bottom: 10px;">
+            <button class="btn btn-primary" (click)="onSearchClick()">Search</button>
+          </div>
+  
+          <div class="categories" style="margin-bottom: 20px;">
+            <h4 style="font-size: 22px; margin-bottom: 10px;">Categories</h4>
+            <ul class="list-unstyled">
+              <li *ngFor="let category of categories" (click)="filterByCategory(category)"
+                [class.active]="selectedCategory === category"
+                style="cursor: pointer; margin-bottom: 5px; color: #1d2ba7;">
+                {{ category }}
+              </li>
+            </ul>
+          </div>
+        </div>
+  
+        <div class="latest-posts">
+          <h4 style="font-size: 22px; margin-bottom: 10px;">Latest Posts</h4>
+          <div *ngFor="let blog of latestBlogs" class="latest-post-item" (click)="showBlogDetails(blog)"
+            style="display: flex; align-items: center; cursor: pointer; margin-bottom: 10px;">
+            <img *ngIf="blog.images && blog.images.length" [src]="getImageUrl(blog.images[0])" alt="{{ blog.pageTitle }}"
+              style="width: 50px; height: 50px; border-radius: 5px; margin-right: 10px;">
+            <div>
+              <span style="font-size: 14px; color: #999;">{{ blog.updatedAt | date: 'MMM yyyy' }}</span>
+              <h5 style="font-size: 14px; color: #0f0e68; margin: 0;">{{ blog.pageTitle }}</h5>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+</div> -->

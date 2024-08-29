@@ -61,6 +61,13 @@ export class AuthService {
         catchError(this.handleError)
       );
   }
+  
+  getAllAdmin(): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}/all-admin`)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
 
   changePassword(payload: any): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}/admin-password-change`, payload)

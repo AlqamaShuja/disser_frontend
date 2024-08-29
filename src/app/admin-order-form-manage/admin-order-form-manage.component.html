@@ -1,0 +1,57 @@
+<div class="container my-4">
+    <div class="row">
+      <div class="col-12">
+        <h2 class="text-center mb-4">Manage Order Form Data</h2>
+  
+        <!-- Tab Navigation -->
+        <ul class="nav nav-tabs">
+          <li class="nav-item">
+            <a class="nav-link" [ngClass]="{ active: selectedTab === 'service-tab' }" (click)="selectTab('service-tab')">Service Types</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" [ngClass]="{ active: selectedTab === 'academic-level' }" (click)="selectTab('academic-level')">Academic Level</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" [ngClass]="{ active: selectedTab === 'subject-area' }" (click)="selectTab('subject-area')">Subject Area</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" [ngClass]="{ active: selectedTab === 'deadline-price' }" (click)="selectTab('deadline-price')">Deadline Price</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" [ngClass]="{ active: selectedTab === 'desire-grade' }" (click)="selectTab('desire-grade')">Desire Grade</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" [ngClass]="{ active: selectedTab === 'refrence-style' }" (click)="selectTab('refrence-style')">Refrence Style</a>
+          </li>
+        </ul>
+  
+        <!-- Tab Content -->
+        <div class="tab-content mt-4">
+            <div *ngIf="selectedTab === 'service-tab'">
+                <app-admin-services-page></app-admin-services-page>
+            </div>
+          
+            <div *ngIf="selectedTab === 'academic-level'">
+                <app-academic-level></app-academic-level>
+            </div>
+            
+            <div *ngIf="selectedTab === 'subject-area'">
+                <app-admin-subject-area></app-admin-subject-area>
+            </div>
+
+            <div *ngIf="selectedTab === 'deadline-price'">
+              <app-admin-order-price-by-date></app-admin-order-price-by-date>
+            </div>
+
+            <div *ngIf="selectedTab === 'desire-grade'">
+              <app-admin-desired-grade-page></app-admin-desired-grade-page>
+            </div>
+            
+            <div *ngIf="selectedTab === 'refrence-style'">
+              <app-admin-refrence-style></app-admin-refrence-style>
+            </div>
+        </div>
+      </div>
+    </div>
+</div>
+  

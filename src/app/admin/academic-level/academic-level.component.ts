@@ -3,7 +3,7 @@ import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { ServicesService } from 'src/app/services/services.service';
 
 @Component({
-  selector: 'app-admin-academic-level-page',
+  selector: 'app-academic-level',
   templateUrl: './academic-level.component.html',
   styleUrls: ['./academic-level.component.css']
 })

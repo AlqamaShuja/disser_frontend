@@ -1,0 +1,29 @@
+
+
+.btn-insert-blog {
+    background-color: rgb(37, 67, 54);
+    color: #FFF;
+    border-radius: 8px;
+    padding: 10px 20px;
+}
+
+.btn-insert-blog:hover {
+    background-color: rgb(23, 41, 33);
+}
+
+.table-header-thead {
+    background-color: rgb(37, 67, 54);
+    color: #FFF;
+
+}
+
+.btn-edit {
+    background-color: rgb(37, 67, 54);
+    color: #FFF;
+    border-radius: 6px;
+    padding: 10px 20px;
+}
+
+.btn-edit:hover {
+    background-color: rgb(23, 41, 33);
+}

@@ -37,6 +37,7 @@
             </div>
             <a routerLink="/samples/{{sample.Slug}}" class="read-more-link">Read more ➔</a>
           </div>
+          <div *ngIf="filteredSamples.length === 0" style="margin-top: 20px;">There is no Sample Available</div>
         </div>
     </div>
   </div>

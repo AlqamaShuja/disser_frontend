@@ -1,0 +1,10 @@
+
+.back-btn {
+    border: none;
+    color: #cc0303;
+    background-color: transparent;
+}
+
+.back-btn:hover {
+    color: hsl(0, 100%, 29%);
+}

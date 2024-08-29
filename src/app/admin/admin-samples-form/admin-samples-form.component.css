@@ -1,0 +1,12 @@
+
+
+.submit-or-update-btn {
+    background-color: rgb(37, 67, 54);
+    color: #FFF;
+    margin-top: 30px;
+    padding: 10px 30px;
+}
+
+.submit-or-update-btn:hover {
+    background-color: rgb(21, 43, 33);
+}

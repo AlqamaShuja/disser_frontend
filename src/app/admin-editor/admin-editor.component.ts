@@ -60,9 +60,12 @@ export class AdminEditorComponent implements OnInit, AfterViewInit {
       this.editorContent = this.parseDescription(parsedData.description);
       console.log(this.editorContent, "====this.editorContent");
       
-      this.extraData = parsedData.extra_data;
-      this.allData = parsedData;
+      this.extraData = this.parseDescription(parsedData.extra_data);
+      this.allData = { ...parsedData, extra_data: this.extraData };
       this.imageKeys = Object.keys(this.extraData).filter(key => key.toLowerCase().includes('image'));
+
+      console.log(this.imageKeys, "==imageKeysimageKeysimageKeys", parsedData);
+      
 
       // Set the initial content directly in the element
       this.editableContent.nativeElement.innerHTML = this.editorContent;      

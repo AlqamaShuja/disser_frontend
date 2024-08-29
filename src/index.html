@@ -43,40 +43,40 @@
 <body>
   <app-root></app-root>
 
-  <script type="text/javascript">
-function add_chatinline() {
-    var hccid = 65758555;
-    var nt = document.createElement("script");
-    nt.async = true;
-    nt.src = "https://mylivechat.com/chatinline.aspx?hccid=" + hccid;
-    var ct = document.getElementsByTagName("script")[0];
-    ct.parentNode.insertBefore(nt, ct);
+  <!-- <script type="text/javascript">
+    function add_chatinline() {
+      var hccid = 65758555;
+      var nt = document.createElement("script");
+      nt.async = true;
+      nt.src = "https://mylivechat.com/chatinline.aspx?hccid=" + hccid;
+      var ct = document.getElementsByTagName("script")[0];
+      ct.parentNode.insertBefore(nt, ct);
 
-    // Function to update the chat collapsed text
-    function updateChatCollapsedText() {
-        var chatCollapsedText = document.querySelector('.mylivechat_collapsed_text');
-        if (chatCollapsedText && chatCollapsedText.textContent.trim() !== "Talk to us now!") {
-            chatCollapsedText.innerHTML = "Talk to us now!";
-        }
+      // Function to update the chat collapsed text
+      function updateChatCollapsedText() {
+          var chatCollapsedText = document.querySelector('.mylivechat_collapsed_text');
+          if (chatCollapsedText && chatCollapsedText.textContent.trim() !== "Talk to us now!") {
+              chatCollapsedText.innerHTML = "Talk to us now!";
+          }
+      }
+
+      // Function to set up MutationObserver once the chat widget is loaded
+      function setupObserver() {
+          var chatWidgetParent = document.querySelector('.mylivechat_collapsed');
+          if (chatWidgetParent) {
+              var observer = new MutationObserver(updateChatCollapsedText);
+              observer.observe(chatWidgetParent, { childList: true, subtree: true });
+              // Call the update function immediately in case the element is already present
+              updateChatCollapsedText();
+          } else {
+              // If the chat widget parent is not yet available, retry after a short delay
+              setTimeout(setupObserver, 100);
+          }
+      }
+
+      // Start setting up the observer
+      setupObserver();
     }
-
-    // Function to set up MutationObserver once the chat widget is loaded
-    function setupObserver() {
-        var chatWidgetParent = document.querySelector('.mylivechat_collapsed');
-        if (chatWidgetParent) {
-            var observer = new MutationObserver(updateChatCollapsedText);
-            observer.observe(chatWidgetParent, { childList: true, subtree: true });
-            // Call the update function immediately in case the element is already present
-            updateChatCollapsedText();
-        } else {
-            // If the chat widget parent is not yet available, retry after a short delay
-            setTimeout(setupObserver, 100);
-        }
-    }
-
-    // Start setting up the observer
-    setupObserver();
-}
 
 
     const admin = localStorage.getItem('admin')
@@ -89,7 +89,7 @@ function add_chatinline() {
     function activateChat(){
       MyLiveChat_OpenDialog();
     }
-  </script>
+  </script> -->
 
   <script src="https://cdn.jsdelivr.net/npm/admin-lte@3.2/dist/js/adminlte.min.js"></script>
 </body>

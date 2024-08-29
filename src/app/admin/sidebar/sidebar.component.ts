@@ -72,8 +72,11 @@ export class SidebarComponent implements OnInit {
   }
 
   updateSelectedItem(): void {
-    const currentRoute = this.router.url.split('/').pop();
+    let currentRoute = this.router.url.split('/').pop();
     console.log(currentRoute, "=currentRouteee");
+    if(currentRoute?.includes("?")){
+      currentRoute = currentRoute.split("?")[0]
+    }
     
     switch (currentRoute) {
       case 'orders':
@@ -97,6 +100,9 @@ export class SidebarComponent implements OnInit {
       case 'manage-writer':
         this.selected = 'Manage Writer';
         break;
+      case 'order-form-manage':
+        this.selected = 'Order Form Manage';
+        break;
       case 'chat':
         this.selected = 'Conversation';
         break;
@@ -115,6 +121,9 @@ export class SidebarComponent implements OnInit {
       case 'subject-area':
         this.selected = 'Subject Area';
         break;
+      case 'inquiries':
+        this.selected = 'Inquiries';
+        break;
       case 'services':
         this.selected = 'Services';
         break;
@@ -129,6 +138,9 @@ export class SidebarComponent implements OnInit {
         break;
       case 'inquiries':
         this.selected = 'Inquiries';
+        break;
+      case 'price-by-date':
+        this.selected = 'Order Price By Day DIff';
         break;
       case 'change-password':
         this.selected = 'Change Password';

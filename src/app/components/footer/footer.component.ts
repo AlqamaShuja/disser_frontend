@@ -58,15 +58,15 @@ export class FooterComponent {
     { title: 'Home', url: '/' },
     { title: 'About Us', url: '/about' },
     // blogs
-    { title: 'Blogs', url: '/' },
+    { title: 'Blogs', url: '/blogs' },
     // categories
     { title: 'Categories', url: '/categories' },
     // contactus
-    { title: 'Contact Us', url: '/' },
+    { title: 'Contact Us', url: '/contactus' },
     // samples
-    { title: 'Recent Queries', url: '/' },
+    // { title: 'Recent Queries', url: '/' },
     // services
-    { title: 'Our Services', url: '/' },
+    { title: 'Our Services', url: '/services' },
     // sitemap
     { title: 'Sitemap', url: '/' },
     // Add more links as needed
@@ -76,8 +76,8 @@ export class FooterComponent {
   // Constance Street, Royal Docks, London, E16 2DQ, United Kingdom`,
   contactInfo = {
     address:'UK',
-    email: 'support@dissertationwriting.co.uk',
-    phone: '+4458755888',
+    email: 'support@dissertationwriting.help',
+    phone: '+4473021548485454',
   };
 
   paymentMethods = [

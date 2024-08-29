@@ -94,6 +94,11 @@ button, input, optgroup, select, textarea{
   padding: 5px 10px;
   border-radius: 4px;
   color: #fff;
+  background-color: rgb(37, 67, 54) !important;
+}
+
+.btn-submit:hover {
+  background-color: rgb(20, 39, 31) !important;
 }
 
 .btn-writer {
@@ -107,3 +112,40 @@ button, input, optgroup, select, textarea{
 .btn-writer:hover {
   background-color: #162e24 !important;
 }
+
+
+/* Button */
+.custom-btn {
+  background-color: rgb(37, 67, 54); /* Primary button color */
+  color: white; /* Text color */
+  border: none; /* Remove default border */
+  padding: 8px 16px; /* Padding for the button */
+  font-size: 14px; /* Font size */
+  font-weight: bold; /* Bold text */
+  border-radius: 5px; /* Rounded corners */
+  transition: background-color 0.3s ease; /* Smooth transition effect */
+  text-decoration: none; /* Remove underline from anchor tags */
+  display: inline-flex; /* Flex display for alignment */
+  align-items: center; /* Vertical alignment of text and icon */
+}
+
+.custom-btn i {
+  margin-right: 5px; /* Space between icon and text */
+}
+
+.custom-btn:hover {
+  background-color: rgb(30, 54, 43); /* Darker shade on hover */
+  color: white; /* Text color on hover */
+  text-decoration: none; /* Prevent underline on hover */
+}
+
+.btn-danger.custom-btn {
+  background-color: rgb(200, 0, 0); /* Red color for delete button */
+}
+
+.btn-danger.custom-btn:hover {
+  background-color: rgb(150, 0, 0); /* Darker red on hover for delete button */
+}
+
+
+

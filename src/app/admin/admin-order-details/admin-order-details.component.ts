@@ -2,7 +2,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { GlobalService } from 'src/app/services/global.service';
-
+import { Location } from '@angular/common';
 
 @Component({
   selector: 'app-admin-order-details',
@@ -13,7 +13,7 @@ export class AdminOrderDetailsComponent implements OnInit{
   selectedOrderForDetails:any;
   updateOrder:boolean = false;
 
-  constructor(private globalService:GlobalService, private router: Router){}
+  constructor(private globalService:GlobalService, private router: Router, private location: Location){}
 
   ngOnInit():void{
     
@@ -22,6 +22,11 @@ export class AdminOrderDetailsComponent implements OnInit{
       this.selectedOrderForDetails = res;
     })
   }
+
+  goBack(): void {
+    this.location.back(); // Use the Location service to navigate back
+  }
+
   updateOrderDetails():void{
     this.updateOrder = true;
   }

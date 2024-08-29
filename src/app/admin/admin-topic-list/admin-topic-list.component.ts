@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ServicesService } from 'src/app/services/services.service';
+import { AngularEditorConfig } from '@kolkov/angular-editor';
+import { BASEURL } from 'src/globals';
 
 @Component({
   selector: 'admin-topic-list',
@@ -14,6 +16,27 @@ export class AdminTopicListComponent implements OnInit {
   selectedTopic: any = null;
   isModalOpen = false;
 
+  editorConfig: AngularEditorConfig = {
+    editable: true,
+    spellcheck: true,
+    height: '10rem',
+    minHeight: '5rem',
+    width: 'auto',
+    minWidth: '0',
+    translate: 'yes',
+    enableToolbar: true,
+    showToolbar: true,
+    placeholder: 'Enter text here...',
+    uploadUrl: `${BASEURL}/upload/fileuploadAdmin`,  // Ensure you define BASEURL
+    customClasses: [],
+    fonts: [
+      { class: 'arial', name: 'Arial' },
+      { class: 'times-new-roman', name: 'Times New Roman' },
+      { class: 'calibri', name: 'Calibri' },
+      { class: 'comic-sans-ms', name: 'Comic Sans MS' },
+    ]
+  };
+
   constructor(
     private formBuilder: FormBuilder,
     private topicService: ServicesService
@@ -21,12 +44,17 @@ export class AdminTopicListComponent implements OnInit {
     this.topicForm = this.formBuilder.group({
       title: ['', Validators.required],
       price: ['', Validators.required],
-      description: ['', Validators.required]
+      description: ['', Validators.required],
+      research_aim: ['', Validators.required],
     });
   }
 
   ngOnInit(): void {
     this.loadTopics();
+  }
+
+  getTruncatedDescription(description: string): string {
+    return description.length > 60 ? description.slice(0, 60) + '...' : description;
   }
 
   loadTopics(): void {
@@ -54,10 +82,14 @@ export class AdminTopicListComponent implements OnInit {
 
   saveTopic(): void {
     if (this.topicForm.invalid) {
+      alert("Please fill all fields")
       return;
     }
 
     const topicData = this.topicForm.value;
+
+    console.log(topicData, "====topicDataaaaaa");
+    
 
     if (this.isEditing) {
       this.topicService.updateTopic(this.selectedTopic.id, topicData).subscribe(() => {

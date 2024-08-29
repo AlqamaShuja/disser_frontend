@@ -1,116 +1,81 @@
-
 <div class="container">
-    <div class="user-list">
-      <div *ngFor="let user of users" (click)="selectUser(user)" [ngClass]="{'user-item': true, 'selected': user === selectedUser}">
-        <div class="w-100 d-flex justify-content-between align-items-center">
-          <div class="d-flex gap-3 align-items-center">
-            <img [src]="user.avatar ? user.avatar : '../../../assets/user.png'" alt="Avatar">
-            <div class="user-info">
-              <h3>{{ user.name }}</h3>
-              <p class="mb-0">{{ user.lastMessage }}</p>
+  <div class="user-list">
+    <div *ngFor="let user of users" (click)="selectUser(user)" [ngClass]="{'user-item': true, 'selected': user === selectedUser}">
+      <div class="w-100 d-flex justify-content-between align-items-center">
+        <div class="d-flex gap-3 align-items-center">
+          <img [src]="user.avatar ? user.avatar : '../../../assets/user.png'" alt="Avatar">
+          <div class="user-info">
+            <h3>{{ user.name }}</h3>
+          </div>
+        </div>
+        <div class="count-new-msg text-white" *ngIf="newMsgCounts[user.uid]">{{ newMsgCounts[user.uid] }}</div>
+      </div>
+    </div>
+  </div>
+  <div class="chat">
+    <div *ngIf="selectedUser; else noUserSelected" class="chat-content">
+      <div class="chat-header">
+        <img [src]="selectedUser.avatar ? selectedUser.avatar : '../../../assets/user.png'" alt="Avatar">
+        <h2>{{ selectedUser.name }}</h2>
+      </div>
+      <div class="chat-messages">
+        <div *ngIf="loadingMessages" class="loading-spinner">Loading messages...</div>
+        <div *ngIf="messages.length === 0 && !loadingMessages" class="no-messages">No messages to display</div>
+        <div *ngFor="let message of messages">
+          <ng-container *ngIf="isTextMessage(message)">
+            <div class="user-message" *ngIf="message.sendBy === 'auth'">
+              <p>{{ message.content }}<span class="message-time">{{ message.created_at | date:'short' }}</span></p>
             </div>
-          </div>
-          <div class="count-new-msg text-white">5</div>
-        </div>
-      </div>
-    </div>
-    <div class="chat">
-      <div *ngIf="selectedUser; else noUserSelected" class="chat-content">
-        <div class="chat-header">
-          <img [src]="selectedUser.avatar ? selectedUser.avatar : '../../../assets/user.png'" alt="Avatar">
-          <h2>{{ selectedUser.name }}</h2>
-        </div>
-        <div class="chat-messages">
-          <div *ngIf="messages.length === 0" class="no-messages">No messages to display</div>
-          <div *ngFor="let message of messages">
-            <ng-container *ngIf="isTextMessage(message)">
-              <div class="user-message" *ngIf="message.sendBy === 'user'">
-                <p>{{ message.text }}<span class="message-time">{{ message.time | date:'short' }}</span></p>
-              </div>
-              <div class="admin-message" *ngIf="message.sendBy === 'admin'">
-                <p>{{ message.text }}<span class="message-time">{{ message.time | date:'short' }}</span></p>
-              </div>
-            </ng-container>
-            <ng-container *ngIf="isMediaMessage(message)">
-              <div class="user-message" *ngIf="message.sendBy === 'user'">
-                <img *ngIf="message.type === 'image'" [src]="message.content" class="message-image" />
-                <video *ngIf="message.type === 'video'" [src]="message.content" controls class="message-video"></video>
-                <a *ngIf="message.type === 'document'" [href]="message.content" target="_blank">{{ message.filename }}</a>
-              </div>
-              <div class="admin-message" *ngIf="message.sendBy === 'admin'">
-                <img *ngIf="message.type === 'image'" [src]="message.content" class="message-image" />
-                <video *ngIf="message.type === 'video'" [src]="message.content" controls class="message-video"></video>
-                <a *ngIf="message.type === 'document'" [href]="message.content" target="_blank">{{ message.filename }}</a>
-              </div>
-            </ng-container>
-          </div>
-        </div>
-        <div class="chat-input">
-          <input type="text" [(ngModel)]="newMessage" placeholder="Type a message">
-          <input type="file" id="fileInput" (change)="handleFileInput($event)" style="display: none;">
-          <button class="sent-btn" (click)="sendMessage()">Send</button>
-          <button class="sent-btn" (click)="triggerFileInput()">
-            <svg height="20px" width="20px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 280.067 280.067" xml:space="preserve" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <path style="fill:#000000;" d="M149.823,257.142c-31.398,30.698-81.882,30.576-113.105-0.429 c-31.214-30.987-31.337-81.129-0.42-112.308l-0.026-0.018L149.841,31.615l14.203-14.098c23.522-23.356,61.65-23.356,85.172,0 s23.522,61.221,0,84.586l-125.19,123.02l-0.044-0.035c-15.428,14.771-40.018,14.666-55.262-0.394 c-15.244-15.069-15.34-39.361-0.394-54.588l-0.044-0.053l13.94-13.756l69.701-68.843l13.931,13.774l-83.632,82.599 c-7.701,7.596-7.701,19.926,0,27.53s20.188,7.604,27.88,0L235.02,87.987l-0.035-0.026l0.473-0.403 c15.682-15.568,15.682-40.823,0-56.39s-41.094-15.568-56.776,0l-0.42,0.473l-0.026-0.018l-14.194,14.089L50.466,158.485 c-23.522,23.356-23.522,61.221,0,84.577s61.659,23.356,85.163,0l99.375-98.675l14.194-14.089l14.194,14.089l-14.194,14.098 l-99.357,98.675C149.841,257.159,149.823,257.142,149.823,257.142z"></path> </g> </g></svg>
-          </button>
-        </div>
-      </div>
-      <ng-template #noUserSelected>
-        <div class="no-user-selected">
-          <img class="noUserSelectedImage" src="../../../assets/2842499.jpg" alt="Chat Display Image">
-          <p>Select a user to start chatting</p>
-        </div>
-      </ng-template>
-    </div>
-</div>
-  
-  
-  
-  
-
-  
-
-
-
-
-
-
-<!-- <div class="container">
-    <div class="user-list">
-        <div *ngFor="let user of users" (click)="selectUser(user)" [ngClass]="{'user-item': true, 'selected': user === selectedUser}">
-        <div class="w-100 d-flex justify-content-between align-items-center">
-            <div class="d-flex gap-3 align-items-center">
-                <img [src]="user.avatar ? user.avatar : '../../../assets/user.png'" alt="Avatar">
-                <div class="user-info">
-                    <h3>{{ user.name }}</h3>
-                    <p class="mb-0">{{ user.lastMessage }}</p>
+            <div class="admin-message" *ngIf="message.sendBy === 'admin'">
+              <p>{{ message.content }}<span class="message-time">{{ message.created_at | date:'short' }}</span></p>
+            </div>
+          </ng-container>
+          <ng-container *ngIf="isMediaMessage(message)">
+            <div class="user-message" *ngIf="message.sendBy === 'auth'">
+              <ng-container *ngIf="!message.attachment">
+                <div class="loading-spinner">Loading...</div> <!-- Show loader while fetching -->
+              </ng-container>
+              <ng-container *ngIf="message.attachment">
+                <div class="message-box">
+                  <img *ngIf="message.attachment.endsWith('.jpg') || message.attachment.endsWith('.png')" [src]="getImageUrl(message.attachment)" class="message-image" style="height: 230px; width: auto;" />
+                  <video *ngIf="message.attachment.endsWith('.mp4')" [src]="getImageUrl(message.attachment)" controls class="message-video" style="height: 230px; width: auto;"></video>
+                  <a *ngIf="message.attachment.endsWith('.pdf')" [href]="getImageUrl(message.attachment)" target="_blank">{{ message.attachment }}</a>
+                  <button *ngIf="getImageUrl(message.attachment)" (click)="downloadFile(getImageUrl(message.attachment))" class="btn btn-link"><i class="fa fa-download"></i></button>
+                  <span class="message-time">{{ message.created_at | date:'short' }}</span>
                 </div>
+              </ng-container>
             </div>
-            <div class="count-new-msg text-white">5</div>
-        </div>
-        </div>
-    </div>
-    <div class="chat">
-        <div *ngIf="selectedUser; else noUserSelected" class="chat-content">
-        <div class="chat-header">
-            <img [src]="selectedUser.avatar ? selectedUser.avatar : '../../../assets/user.png'" alt="Avatar">
-            <h2>{{ selectedUser.name }}</h2>
-        </div>
-        <div class="chat-messages">
-            <div *ngIf="messages.length === 0" class="no-messages">No messages to display</div>
-            <div *ngFor="let message of messages" [ngClass]="{'user-message': message.sender === 'user', 'admin-message': message.sender === 'admin'}">
-            <p>{{ message.text }}<span class="message-time">{{ message.time | date:'short' }}</span></p>
+            <div class="admin-message" *ngIf="message.sendBy === 'admin'">
+              <ng-container *ngIf="!message.attachment">
+                <div class="loading-spinner">Loading...</div> <!-- Show loader while fetching -->
+              </ng-container>
+              <ng-container *ngIf="message.attachment">
+                <div class="message-box">
+                  <button *ngIf="getImageUrl(message.attachment)" (click)="downloadFile(getImageUrl(message.attachment))" class="btn btn-link"><i class="fa fa-download"></i></button>
+                  <img *ngIf="message.attachment.endsWith('.jpg') || message.attachment.endsWith('.png')" [src]="getImageUrl(message.attachment)" class="message-image" style="height: 230px; width: auto;" />
+                  <video *ngIf="message.attachment.endsWith('.mp4')" [src]="getImageUrl(message.attachment)" controls class="message-video" style="height: 230px; width: auto;"></video>
+                  <a *ngIf="message.attachment.endsWith('.pdf')" [href]="getImageUrl(message.attachment)" target="_blank">{{ message.attachment }}</a>
+                  <span class="message-time">{{ message.created_at | date:'short' }}</span>
+                </div>
+              </ng-container>
             </div>
+          </ng-container>
         </div>
-        <div class="chat-input">
-            <input type="text" [(ngModel)]="newMessage" placeholder="Type a message">
-            <button (click)="sendMessage()">Send</button>
-        </div>
-        </div>
-        <ng-template #noUserSelected>
-        <div class="no-user-selected">
-            <img class="noUserSelectedImage" src="../../../assets/2842499.jpg" alt="Chat Display Image">
-            <p>Select a user to start chatting</p>
-        </div>
-        </ng-template>
+      </div>
+      <div class="chat-input">
+        <input type="text" [(ngModel)]="newMessage" placeholder="Type a message">
+        <input type="file" id="fileInput" (change)="handleFileInput($event)" style="display: none;">
+        <button class="sent-btn" (click)="sendMessage()">Send</button>
+        <button class="sent-btn" (click)="triggerFileInput()">
+          <svg height="20px" width="20px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 280.067 280.067" xml:space="preserve" fill="#000000"><g id="SVGRepo_bgCarrier" stroke-width="0"></g><g id="SVGRepo_tracerCarrier" stroke-linecap="round" stroke-linejoin="round"></g><g id="SVGRepo_iconCarrier"> <g> <path style="fill:#000000;" d="M149.823,257.142c-31.398,30.698-81.882,30.576-113.105-0.429 c-31.214-30.987-31.337-81.129-0.42-112.308l-0.026-0.018L149.841,31.615l14.203-14.098c23.522-23.356,61.65-23.356,85.172,0 s23.522,61.221,0,84.586l-125.19,123.02l-0.044-0.035c-15.428,14.771-40.018,14.666-55.262-0.394 c-15.244-15.069-15.34-39.361-0.394-54.588l-0.044-0.053l13.94-13.756l69.701-68.843l13.931,13.774l-83.632,82.599 c-7.701,7.596-7.701,19.926,0,27.53s20.188,7.604,27.88,0L235.02,87.987l-0.035-0.026l0.473-0.403 c15.682-15.568,15.682-40.823,0-56.39s-41.094-15.568-56.776,0l-0.42,0.473l-0.026-0.018l-14.194,14.089L50.466,158.485 c-23.522,23.356-23.522,61.221,0,84.577s61.659,23.356,85.163,0l99.375-98.675l14.194-14.089l14.194,14.089l-14.194,14.098 l-99.357,98.675C149.841,257.159,149.823,257.142,149.823,257.142z"></path> </g> </g></svg>
+        </button>
+      </div>
     </div>
-</div> -->
+    <ng-template #noUserSelected>
+      <div class="no-user-selected">
+        <img class="noUserSelectedImage" src="../../../assets/2842499.jpg" alt="Chat Display Image">
+        <p>Select a user to start chatting</p>
+      </div>
+    </ng-template>
+  </div>
+</div>

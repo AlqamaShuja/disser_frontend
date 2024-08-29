@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { OrderService } from '../services/order.service';
 import { Router } from '@angular/router';
+import { ServicesService } from '../services/services.service';
+import { SocketService } from '../services/socket.service';
 
 @Component({
   selector: 'app-profile-management',
@@ -18,16 +20,21 @@ export class ProfileManagementComponent implements OnInit {
   showCompleted:boolean=false;
   showEditUser:boolean=false;
   showChangePassword:boolean=false;
+  showChat:boolean=false;
+  newMsgCounts: any = {};
 
   constructor(
     private authService: AuthService,
     private orderService: OrderService,
-    private router:Router
+    private fileUploadService: ServicesService,
+    private router:Router,
+    private socketService: SocketService,
   ) {}
 
   ngOnInit(): void {
-    this.user = JSON.parse(localStorage.getItem('user') || '');
-    if (this.user) {
+    const userInfo = localStorage.getItem('user');
+    if (userInfo) {
+      this.user = JSON.parse(userInfo);
       console.log("user presednt")
       this.orderService
         .getOrderByEmail(this.user.email)
@@ -47,46 +54,29 @@ export class ProfileManagementComponent implements OnInit {
             console.log("orders",this.invoices)
           }
         });
+
+      this.fileUploadService.getNewMessagesCounts(this.user.uid).subscribe(res => {
+        console.log(res, '+=acmakcakca:newMsgggCounttssssss');
+        // this.newMsgCounts = Object.keys(res).length;
+        this.newMsgCounts = res;
+      });
+
+      this.socketService.onMessage('newMessage').subscribe((message: any) => {
+        console.log(this.newMsgCounts, "=====newMsgCountssss");
+        
+        let msgCount = { ...this.newMsgCounts };
+        msgCount[message.senderId] = (msgCount[message.senderId] || 0) + 1;
+        this.newMsgCounts = msgCount; 
+        console.log('Received new message:', message);
+      });
     }else{
       window.location.href = "/";
     }
   }
 
-  // showComponent(flag:any){
-  //   if(flag === 'showOrder'){
-  //     this.showOrder =true;
-  //     this.showInvoices =false;
-  //     this.showCompleted =false;
-  //     this.showEditUser =false;
-  //     this.showChangePassword =false;
-  //   }else if(flag === 'showInvoices'){
-  //     this.showOrder =false;
-  //     this.showInvoices =true;
-  //     this.showCompleted =false;
-  //     this.showEditUser =false;
-  //     this.showChangePassword =false;
-  //   }else if(flag === 'showCompleted'){
-  //     this.showOrder =false;
-  //     this.showInvoices =false;
-  //     this.showCompleted =true;
-  //     this.showEditUser =false;
-  //     this.showChangePassword =false;
-  //   }else if(flag === 'showEditUser'){
-  //     this.showOrder =false;
-  //     this.showInvoices =false;
-  //     this.showCompleted =false;
-  //     this.showEditUser =true;
-  //     this.showChangePassword =false;
-  //   }else if(flag === 'showChangePassword'){
-  //     this.showOrder =false;
-  //     this.showInvoices =false;
-  //     this.showCompleted =false;
-  //     this.showEditUser =false;
-  //     this.showChangePassword =true;
-  //   }else{
-
-  //   }
-  // }
+  getObjectKeysLength(obj: any): number {
+    return Object.keys(obj).length;
+  }
 
   updateProfile(event: any): void {
     this.authService.updateUser(event).subscribe((res) => {
@@ -128,6 +118,7 @@ export class ProfileManagementComponent implements OnInit {
     this.showCompleted = false;
     this.showEditUser = false;
     this.showChangePassword = false;
+    this.showChat = false;
   
     if (flag === 'showOrder') {
       this.showOrder = true;
@@ -139,6 +130,8 @@ export class ProfileManagementComponent implements OnInit {
       this.showEditUser = true;
     } else if (flag === 'showChangePassword') {
       this.showChangePassword = true;
+    } else if (flag === 'showChat') {
+      this.showChat = true;
     }
   }
   

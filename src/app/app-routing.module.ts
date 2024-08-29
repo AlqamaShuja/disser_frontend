@@ -47,6 +47,9 @@ import { AdminCouponPageComponent } from './admin/admin-coupon-page/admin-coupon
 import { AdminWriterPageComponent } from './admin/admin-manage-writer-profile/admin-manage-writer-profile.component';
 import { AcademicLevelComponent } from './admin/academic-level/academic-level.component';
 import { AdminSubjectAreaComponent } from './admin/admin-subject-area/admin-subject-area.component';
+import { AdminInquiriesComponent } from './admin/admin-inquiries/admin-inquiries.component';
+import { AdminOrderPriceByDateComponent } from './admin/admin-order-price-by-date/admin-order-price-by-date.component';
+import { AdminOrderFormManageComponent } from './admin-order-form-manage/admin-order-form-manage.component';
 
 
 const routes: Routes = [
@@ -95,6 +98,10 @@ const routes: Routes = [
     component: AdminSubjectAreaComponent,
   },
   {
+    path: 'admin/order-form-manage',
+    component: AdminOrderFormManageComponent,
+  },
+  {
     path: 'admin/text-pages/data/edit',
     component: AdminFaqInputComponent,
   },
@@ -119,6 +126,10 @@ const routes: Routes = [
     component: AdminTestimonialComponent,
   },
   {
+    path: 'admin/inquiries',
+    component: AdminInquiriesComponent,
+  },
+  {
     path: 'admin/manage-client',
     component: AdminClientsComponent,
   },
@@ -139,9 +150,13 @@ const routes: Routes = [
     component: ChangePasswordComponent,
   },
   {
-    path: 'admin/inquiries',
-    component: AdminContactComponent,
+    path: 'admin/price-by-date',
+    component: AdminOrderPriceByDateComponent,
   },
+  // {
+  //   path: 'admin/inquiries',
+  //   component: AdminContactComponent,
+  // },
   {
     path: '',
     component: HomeComponent,

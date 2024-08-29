@@ -1,7 +1,8 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpEventType, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { BASEURL } from 'src/globals';
+import { map, filter } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -179,4 +180,96 @@ export class ServicesService {
     return this.http.delete<any>(`${this.apiUrl}subject-area/${id}`);
   }
 
+  // Inquiries
+  getAllInquiries(): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}inquiries`);
+  }
+  
+  createInquiries(data: any): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}inquiries`, data);
+  }
+
+  deleteInquiry(id: number): Observable<any> {
+    return this.http.delete<any>(`${this.apiUrl}inquiries/${id}`);
+  }
+
+
+  // OrderPriceByDateOrTimeDIff
+  getAllOrderPrices(): Observable<any> {
+    return this.http.get<any>(`${this.apiUrl}order-price-by-date`);
+  }
+
+  addOrderPrice(orderPrice: any): Observable<any> {
+    return this.http.post<any>(`${this.apiUrl}order-price-by-date`, orderPrice);
+  }
+
+  updateOrderPrice(orderPrice: any): Observable<any> {
+    return this.http.put<any>(`${this.apiUrl}order-price-by-date/${orderPrice.id}`, orderPrice);
+  }
+
+  deleteOrderPrice(id: number): Observable<any> {
+    return this.http.delete<any>(`${this.apiUrl}order-price-by-date/${id}`);
+  }
+
+  // Desire Grades
+  getAllGrades(): Observable<any> {
+    return this.http.get(`${this.apiUrl}desired-grade`);
+  }
+
+  addGrade(grade: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}desired-grade`, grade);
+  }
+
+  updateGrade(grade: any): Observable<any> {
+    return this.http.put(`${this.apiUrl}desired-grade/${grade.id}`, grade);
+  }
+
+  deleteGrade(id: number): Observable<any> {
+    return this.http.delete(`${this.apiUrl}desired-grade/${id}`);
+  }
+
+  // Refrence Style
+  getAllStyles(): Observable<any> {
+    return this.http.get(`${this.apiUrl}referencing-style`);
+  }
+
+  addStyle(style: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}referencing-style`, style);
+  }
+
+  updateStyle(style: any): Observable<any> {
+    return this.http.put(`${this.apiUrl}referencing-style/${style.id}`, style);
+  }
+
+  deleteStyle(id: number): Observable<any> {
+    return this.http.delete(`${this.apiUrl}referencing-style/${id}`);
+  }
+
+  // get user message
+  getUserMessages(id: string, otherId: string): Observable<any> {
+    return this.http.get(`${this.apiUrl}message/${id}/${otherId}`);
+  }
+  
+  updateMsgStatus(id: string, otherId: string): Observable<any> {
+    return this.http.patch(`${this.apiUrl}message/${id}/${otherId}`, {});
+  }
+
+  // get new Msg Counts 
+  getNewMessagesCounts(id: string): Observable<any> {
+    return this.http.get(`${this.apiUrl}message/${id}`);
+  }
+
+  // Upload file 
+  uploadFile(file: File) {
+    const formData = new FormData();
+    formData.append('file', file);
+
+    return this.http.post(`${this.apiUrl}uploads`, formData, {
+      reportProgress: true,
+      observe: 'events'
+    }).pipe(
+      filter(event => event.type === HttpEventType.Response),
+      map((event: any) => event.body)
+    );
+  }
 }

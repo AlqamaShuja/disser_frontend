@@ -10,6 +10,124 @@
     [responsiveOptions]="responsiveOptions">
 
     <ng-template pTemplate="item" let-testimonial>
+      <div class="testimonial-content" style="display: flex; align-items: center; justify-content: center;">
+        <!-- Left Box: User Avatar -->
+        <div class="testimonial-avatar" style="flex: 1; display: flex; justify-content: center;">
+          <img [src]="getImageUrl('user.png')" alt="Avatar" style="border-radius: 50%; width: 150px; height: 150px;">
+        </div>
+
+        <!-- Right Box: Testimonial Details -->
+        <div class="testimonial-details" style="flex: 2; padding-left: 20px; text-align: left;">
+          <h4 class="testimonial-name" style="font-size: 22px; margin-bottom: 10px; color: beige;">{{ testimonial.name }}</h4>
+          <p class="testimonial-review" style="font-size: 18px; font-style: italic; margin-bottom: 20px;">
+            "{{ testimonial.description.length > 100 ? (testimonial.description | slice:0:100) + '...' : testimonial.description }}"
+          </p>
+          <div class="testimonial-location" style="font-size: 16px; color: #cccccc; margin-bottom: 10px;">{{ testimonial.location }}</div>
+
+          <!-- Star Rating -->
+          <div class="stars" style="font-size: 18px; color: #f5c518;">
+            <ng-container *ngFor="let star of [].constructor(testimonial.rating); let i = index">
+              &#9733;
+            </ng-container>
+            <ng-container *ngFor="let star of [].constructor(5 - testimonial.rating); let i = index">
+              &#9734;
+            </ng-container>
+          </div>
+        </div>
+      </div>
+    </ng-template>
+  </p-carousel>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div class="testimonial-section" style="background-color: #0f0e68; color: white; padding: 50px 0; text-align: center;">
+  <h2 class="section-title" style="font-size: 52px; margin-bottom: 30px;">What Our Clients Say</h2>
+  <p-carousel 
+    [value]="testimonials" 
+    [numVisible]="1" 
+    [numScroll]="1" 
+    [circular]="true" 
+    [autoplayInterval]="3000"
+    [style]="{width: '60%', margin: '0 auto'}"
+    [responsiveOptions]="responsiveOptions">
+
+    <ng-template pTemplate="item" let-testimonial>
+      <div class="testimonial-content" style="display: flex; align-items: center; justify-content: center;">
+        <div class="testimonial-avatar" style="flex: 1; display: flex; justify-content: center;">
+          <img [src]="getImageUrl('user.png')" alt="Avatar" style="border-radius: 50%; width: 150px; height: 150px;">
+        </div>
+
+        <div class="testimonial-details" style="flex: 2; padding-left: 20px; text-align: left;">
+          <h4 class="testimonial-name" style="font-size: 22px; margin-bottom: 10px; color: beige;">{{ testimonial.name }}</h4>
+          <p class="testimonial-review" style="font-size: 18px; font-style: italic; margin-bottom: 20px;">
+            "{{ testimonial.description.length > 100 ? (testimonial.description | slice:0:100) + '...' : testimonial.description }}"
+          </p>
+          <div class="testimonial-location" style="font-size: 16px; color: #cccccc;">{{ testimonial.location }}</div>
+        </div>
+      </div>
+    </ng-template>
+  </p-carousel>
+</div> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div class="testimonial-section" style="background-color: #0f0e68; color: white; padding: 50px 0; text-align: center;">
+  <h2 class="section-title" style="font-size: 52px; margin-bottom: 30px;">What Our Clients Say</h2>
+  <p-carousel 
+    [value]="testimonials" 
+    [numVisible]="1" 
+    [numScroll]="1" 
+    [circular]="true" 
+    [autoplayInterval]="3000"
+    [style]="{width: '60%', margin: '0 auto'}"
+    [responsiveOptions]="responsiveOptions">
+
+    <ng-template pTemplate="item" let-testimonial>
       <div class="testimonial-content" style="display: flex; flex-direction: column; align-items: center;">
         <img [src]="getImageUrl('user.png')" alt="Avatar" style="border-radius: 50%; width: 150px; height: 150px; margin-bottom: 20px;">
         <p class="testimonial-review" style="font-size: 18px; font-style: italic;">"{{ testimonial.description }}"</p>
@@ -18,7 +136,7 @@
       </div>
     </ng-template>
   </p-carousel>
-</div>
+</div> -->
 
 
 

@@ -55,8 +55,8 @@
           <hr style="border-top: 1px solid #ccc; width: 100%; margin: 0;">
           <li style="margin-bottom: 5px; padding: 0;">
             <i class="fa fa-envelope mr-2"></i>
-            <a
-                class="text-decoration-none ms-2 "
+            <a  style="color: #000 !important;"
+                class="text-decoration-none ms-2 text-black"
                 href="https://mail.google.com/mail/u/0/#search/info%40smartedultd.co.uk"
               >
               {{ contactInfo.email }}
@@ -65,8 +65,7 @@
           <hr style="border-top: 1px solid #ccc; width: 100%; margin: 0;">
           <li style="margin-bottom: 5px; padding: 0;">
             <i class="fa fa-phone mr-2"></i>
-            <a
-            
+            <a style="color: #000 !important;"
                 class="text-decoration-none ms-2 text-black"
                 href="https://api.whatsapp.com/send?phone=447586654894&amp;text=Hi%E2%80%9A%20Pro%20Assignments"
               >
@@ -74,8 +73,7 @@
               </a>
           </li>
           <hr style="border-top: 1px solid #ccc; width: 100%; margin: 0;">
-          <li style="margin-bottom: 5px; padding: 0;">
-            <!-- <i class="fi fi-rr-briefcase"></i> -->
+          <!-- <li style="margin-bottom: 5px; padding: 0;">
             <svg width="15" height="15" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M21 15.002c0 1.103-.897 2-2 2h-3.586L12 21.416l-3.414-4.414H5c-1.103 0-2-.897-2-2v-10c0-1.103.897-2 2-2h14c1.103 0 2 .897 2 2v10zM7 9h10v2H7V9zm0 4h7v2H7v-2z" fill="#3A4A56"/>
             </svg>
@@ -84,7 +82,7 @@
               >
                 Samples
               </a>
-          </li>
+          </li> -->
         </ul>
         
         
@@ -104,6 +102,17 @@
               <hr style="border-top: 1px solid #ccc; width: 100%; margin: 0;">
             </a>
           </li>
+          <li style="margin-bottom: 5px; padding: 0;">
+            <!-- <svg width="15" height="15" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M21 15.002c0 1.103-.897 2-2 2h-3.586L12 21.416l-3.414-4.414H5c-1.103 0-2-.897-2-2v-10c0-1.103.897-2 2-2h14c1.103 0 2 .897 2 2v10zM7 9h10v2H7V9zm0 4h7v2H7v-2z" fill="#3A4A56"/>
+            </svg> -->
+            <a class="text-decoration-none text-black" style="color: #000; font-size: 13px; font-weight: 600;"
+              href="/samples"
+              >
+              Samples
+            </a>
+          </li>
+          <hr style="border-top: 1px solid #ccc; width: 100%; margin: 0;">
         </ul>
       </div>
       
@@ -117,7 +126,7 @@
           <li *ngFor="let service of getSevenServices(0, 9)"
           class="footerContent" 
           style="margin-bottom: 5px; padding: 0; font-size: 12px; font-weight: 500;">
-            <a routerLink="/services/{{service.id}}"
+            <a [routerLink]="'/samples'" [queryParams]="{ service: service.id }"
              class="text-dark " 
              style="text-decoration: none; display: block; padding: 0;">
               <span class="underline-on-hover">
@@ -185,9 +194,10 @@
 
   <!-- Payment Methods -->
   <div class="text-right p-3" style="background-color: rgba(0, 0, 0, 0.2);">
-    <div class="payment-methods">
-      <img 
+    <div class="payment-methods d-flex align-items-center justify-content-end gap-1">
+      <img style="margin-top: 5px;"
       src="https://www.assignmentexperts.co.uk/images/apple-pay-google-pay-master-card-bank-min.png" width="350" height="65" class="lazyloaded pb-2 text-center" alt="payment accepting method" />
+      <img src="../../../assets/images/paypal.png" style="height: 57px; border: 1px solid #000; border-radius: 8px;" />
     </div>
   </div>
 </footer>

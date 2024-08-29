@@ -1,13 +1,13 @@
 <div class="container my-4">
     <div class="row">
         <div class="col-12">
-            <h2 class="text-center mb-4">Manage Academic Levels</h2>
+            <!-- <h2 class="text-center mb-4">Manage Academic Levels</h2>
             <nav aria-label="breadcrumb">
                 <ol class="breadcrumb">
                     <li class="breadcrumb-item"><a href="/admin">Home</a></li>
                     <li class="breadcrumb-item active" aria-current="page">Manage Academic Levels</li>
                 </ol>
-            </nav>
+            </nav> -->
             <div class="d-flex justify-content-between mb-3">
                 <button class="btn" style="background-color: rgb(37, 67, 54); color: #FFF; border-radius: 8px; padding: 8px 16px;" (click)="openLevelModal(levelTemplate)">Insert New Academic Level</button>
             </div>
@@ -28,10 +28,10 @@
                             <td>{{ level.price | currency:'GBP' }}</td>
                             <td>
                                 <button class="btn btn-outline-secondary btn-sm me-2" (click)="openLevelModal(levelTemplate, level)">
-                                    <i class="bi bi-pencil-square"></i> Edit
+                                    <i class="fa fa-pencil-square"></i>
                                 </button>
                                 <button class="btn btn-outline-danger btn-sm" (click)="openDeleteModal(deleteTemplate, level)">
-                                    <i class="bi bi-trash"></i> Delete
+                                    <i class="fa fa-trash"></i>
                                 </button>
                             </td>
                         </tr>

@@ -1,0 +1,11 @@
+.nav-tabs .nav-link {
+    cursor: pointer;
+    color: rgb(37, 67, 54);
+}
+  
+.nav-tabs .nav-link.active {
+    background-color: rgb(37, 67, 54);
+    color: white;
+    border: 1px solid rgb(37, 67, 54);
+}
+  

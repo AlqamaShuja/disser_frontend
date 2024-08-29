@@ -1,0 +1,30 @@
+<div class="chat-widget-container" [ngClass]="{'chat-open': isOpen}">
+    <div *ngIf="isOpen" class="chat-modal">
+      <div class="chat-header">
+        <span>Leave a message</span>
+        <button class="close-btn" (click)="toggleChat()">×</button>
+      </div>
+      <div class="chat-body">
+        <div class="d-flex justify-content-center">
+            <img src="../../assets/images/chat_9866307.png" style="width: 70px;" alt="Support" class="chat-banner">
+        </div>
+        <p class="text-center" style="line-height: 1.2;">There are no agents available right now to take your call. Please leave a message and we will reply by email.</p>
+        <form (ngSubmit)="sendMessage()">
+          <div class="form-group">
+            <input style="height: 50px;" type="text" [(ngModel)]="user.name" name="name" class="form-control" placeholder="Name" required>
+          </div>
+          <div class="form-group">
+            <input style="height: 50px;" type="email" [(ngModel)]="user.email" name="email" class="form-control" placeholder="Email" required>
+          </div>
+          <div class="form-group">
+            <textarea [(ngModel)]="message" rows="3" style="padding: 5px;" name="message" class="form-control" placeholder="Type your message" required></textarea>
+          </div>
+          <button type="submit" class="btn btn-primary d-flex justify-content-center">Send</button>
+        </form>
+      </div>
+    </div>
+    <div class="chat-icon" (click)="toggleChat()">
+      <i class="fa fa-comments"></i>
+    </div>
+  </div>
+  

@@ -4,6 +4,7 @@ import { AuthService } from '../services/auth.service';
 import { GlobalService } from '../services/global.service';
 import { Router } from '@angular/router';
 import { SocialAuthService } from '@abacritt/angularx-social-login';
+import { SocketService } from '../services/socket.service';
 
 @Component({
   selector: 'app-login',
@@ -20,7 +21,8 @@ export class LoginComponent {
     private authService: AuthService,
     private globalService: GlobalService,
     private router: Router,
-    private socialAuthService: SocialAuthService
+    private socialAuthService: SocialAuthService,
+    private socketService: SocketService,
   ) {
     this.loginForm = this.formBuilder.group({
       email: ['', [Validators.required, Validators.email]],
@@ -37,9 +39,11 @@ export class LoginComponent {
         console.log(res, "===res:loginnnnn");
         
         if (res.user && res.token) {
+          this.socketService.reconnect();
           localStorage.setItem('user', JSON.stringify(res.user));
-          localStorage.setItem('token', JSON.stringify(res.token));
+          localStorage.setItem('token', `Bearer ${res.token}`);
           this.globalService.loggedIn$.next(res.user);
+          this.socketService.reconnect();
           this.router.navigate(['/user-details']);
         } else {
           this.loginError = true;

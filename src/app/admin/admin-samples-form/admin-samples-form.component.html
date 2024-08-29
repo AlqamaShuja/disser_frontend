@@ -1,0 +1,94 @@
+<div class="container-fluid" style="width: 90%;">
+    <div class="card p-3 my-2">
+      <div class="panel panel-default _panel p-4">
+        <a href="javascript:;" style="width: 100px;" (click)="closeForm()">
+          <i class="fa fa-arrow-left" style="font-size: 27px;"></i>
+        </a>
+        <!-- <div class="bg-light">
+          <a href="" class="navbar-brand">
+            <strong>Home</strong>/
+            SAMPLES
+          </a>
+        </div> -->
+        <div class="panel-heading pt-3">
+          <h3 class="panel-title">Sample</h3>
+        </div>
+        <div>
+          <form [formGroup]="samplesForm">
+            <label class="fw-lighter p-2">Title</label>
+            <input
+              class="form-control"
+              type="text"
+              formControlName="Title"
+              placeholder="Title"
+              style="height: 45px; border: 1px solid rgb(77, 75, 75);"
+            />
+            <label class="fw-lighter p-2">Slug</label>
+            <input
+              class="form-control"
+              type="text"
+              formControlName="Slug"
+              placeholder="Slug"
+              style="height: 45px; border: 1px solid rgb(77, 75, 75);"
+            />
+            <label class="fw-lighter p-2">Meta Title</label>
+            <input
+              class="form-control"
+              type="text"
+              formControlName="metaTitle"
+              placeholder="Meta Title"
+              style="height: 45px; border: 1px solid rgb(77, 75, 75);"
+            />
+            <label class="fw-lighter p-2">Meta Keyword</label>
+            <input
+              class="form-control"
+              type="text"
+              formControlName="keywords"
+              placeholder="Meta Keyword"
+              style="height: 45px; border: 1px solid rgb(77, 75, 75);"
+            />
+            <label class="fw-lighter p-2">Meta Description</label>
+            <input
+              class="form-control"
+              type="text"
+              formControlName="metaDescription"
+              placeholder="Meta Description"
+              style="height: 45px; border: 1px solid rgb(77, 75, 75);"
+            />
+            <label class="fw-lighter p-2">Price</label>
+            <input
+              class="form-control"
+              type="number"
+              formControlName="price"
+              placeholder="Price"
+              style="height: 45px; border: 1px solid rgb(77, 75, 75);"
+            />
+            <label class="fw-lighter p-2">Discount Price</label>
+            <input
+              class="form-control"
+              type="number"
+              formControlName="discount"
+              placeholder="Discount Price"
+              style="height: 45px; border: 1px solid rgb(77, 75, 75);"
+            />
+            <label class="fw-lighter p-2">Select Topic</label>
+            <select class="form-control" formControlName="researchId" style="height: 45px; border: 1px solid rgb(77, 75, 75);">
+              <option *ngFor="let topic of topics" [value]="topic.id">{{ topic.title }}</option>
+            </select>
+            <label class="fw-lighter p-2">Description</label>
+            <angular-editor
+              [placeholder]="'Enter text here...'"
+              [config]="editorConfig"
+              formControlName="description"
+            ></angular-editor>
+          </form>
+        </div>
+  
+        <div class="d-flex justify-content-center">
+          <button (click)="submitForm('add')" *ngIf="!selectedSample" class="btn submit-or-update-btn">Submit</button>
+          <button (click)="submitForm('update')" *ngIf="selectedSample" class="btn submit-or-update-btn">Update</button>
+        </div>
+      </div>
+    </div>
+</div>
+  

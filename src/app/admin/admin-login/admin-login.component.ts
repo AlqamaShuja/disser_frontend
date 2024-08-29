@@ -31,7 +31,7 @@ export class AdminLoginComponent {
       (res: any) => {
         if (res.admin && res.token) {
           localStorage.setItem('admin', JSON.stringify(res.admin));
-          localStorage.setItem('accessToken', 'Bearer ' + res.token);
+          localStorage.setItem('token', `Bearer ${res.token}`);
           this.router.navigate(['/admin']);
           this.toastr.success('Login successful', 'Welcome');
         } else {

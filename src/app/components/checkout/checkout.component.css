@@ -1,0 +1,17 @@
+.detail-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 10px;
+}
+  
+.label {
+    font-size: 18px;
+    font-weight: 600;
+    flex: 0 0 40%; /* Adjust the width as needed */
+}
+  
+.value {
+    font-size: 18px;
+    flex: 1;
+    text-align: right;
+}

@@ -32,15 +32,15 @@
         <div class="form-group">
           <input type="date" class="form-control" name="deadline" ngModel required>
         </div>
-        <button type="submit" class="btn check-price-btn" >Check Price</button>
         <div *ngIf="errorMessage" class="alert alert-danger mt-3">{{ errorMessage }}</div>
-        <div *ngIf="totalPrice != 0" class="alert alert-success mt-3">Total Price is: {{ totalPrice }}</div>
+        <div *ngIf="totalPrice != 0" class="alert alert-success mt-3">Total Price is: £{{ totalPrice }}</div>
+        <button type="submit" class="btn check-price-btn d-flex justify-content-center">Check Price</button>
       </form>
     </div>
     <div class="blue-section">
       <div class="position-relative d-flex justify-content-center">
         <div class="d-flex justify-content-center align-items-center gap-2">
-          <img src="../../assets/chat-gpt.png" style="width: 50px;" alt="Chat GPT Icon" />
+          <img src="../../assets/images/chat-gpt.png" style="width: 50px;" alt="Chat GPT Icon" />
           <span style="font-size: 30px;">ChatGPT</span>
         </div>
         <p style="font-size: 50px; color: red; position: absolute; top: 5px; opacity: 0.6;">X</p>
@@ -75,19 +75,23 @@
         No available topics with that alphabet.
       </div>
       <div class="topic-box" *ngFor="let topic of sortedTopics; let i = index">
-        <div (click)="toggle(i)" class="topic-header">
-          <svg *ngIf="expandedIndex !== i" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right" viewBox="0 0 16 16">
+        <div (click)="toggle(i)" class="topic-header" [ngClass]="{'highlighted': expandedIndex === i}">
+          <svg *ngIf="expandedIndex !== i" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-right ms-2" viewBox="0 0 16 16">
             <path fill-rule="evenodd" d="M6.646 12.354a.5.5 0 0 1-.708-.708L9.793 8 5.938 4.354a.5.5 0 1 1 .708-.708l4 4a.5.5 0 0 1 0 .708l-4 4z"/>
           </svg>
-          <svg *ngIf="expandedIndex === i" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-down" viewBox="0 0 16 16">
+          <svg *ngIf="expandedIndex === i" xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="currentColor" class="bi bi-chevron-down ms-2" viewBox="0 0 16 16">
             <path fill-rule="evenodd" d="M1.646 4.646a.5.5 0 0 1 .708 0L8 10.293l5.646-5.647a.5.5 0 0 1 .708.708l-6 6a.5.5 0 0 1-.708 0l-6-6a.5.5 0 0 1 0-.708z"/>
           </svg>
-          <span style="margin-left: 8px;">{{ topic.title }}</span>
+          <span style="margin-left: 8px; margin: 10px;">{{ topic.title }}</span>
           <span></span>
         </div>
         <div [ngClass]="{'collapse': true, 'show': expandedIndex === i}" class="topic-content">
-          <p>{{ topic.description }}</p>
-          <p><strong>Price:</strong> {{ topic.price }}</p>
+          <!-- <div>{{ topic.description }}</div> -->
+           <h3>Description</h3>
+           <div [innerHTML]="topic.description"></div>
+           <h3 *ngIf="topic.research_aim" class="mt-2">Research Aim</h3>
+           <div [innerHTML]="topic.research_aim"></div>
+          <!-- <p><strong>Price:</strong> {{ topic.price }}</p> -->
         </div>
       </div>
     </div>

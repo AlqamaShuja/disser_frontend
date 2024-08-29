@@ -3,18 +3,22 @@
   *ngIf="!updateOrder"
 >
   <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <button (click)="goBack()" class="back-btn">
+        <!-- <span class="navbar-toggler-icon"></span> -->
+        <i class="fa fa-arrow-left" style="font-size: 27px;"></i>
+      </button>
     <div class="container-fluid">
       <div class="navbar-brand" style="cursor: pointer;">
         <strong (click)="navigateToOrderPage()">Order </strong>/ ORDER DETAILS
       </div>
-      <button
-        type="button"
-        class="navbar-toggler"
-        data-bs-toggle="collapse"
-        data-bs-target="#navbarCollapse"
-      >
+      <!-- type="button"
+      class="navbar-toggler"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarCollapse" -->
+      <!-- <button (click)="goBack()">
         <span class="navbar-toggler-icon"></span>
-      </button>
+        <i class="fa fa-arrow-left" style="font-size: 27px;"></i>
+      </button> -->
     </div>
   </nav>
 

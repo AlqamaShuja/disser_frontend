@@ -1,27 +1,21 @@
+// src/app/admin/admin.component.ts
 import { Component, OnInit } from '@angular/core';
-// import { io, Socket } from 'socket.io-client';
+import { AuthService } from 'src/app/services/auth.service';
+import { ServicesService } from 'src/app/services/services.service';
+import { SocketService } from 'src/app/services/socket.service';
+import { BASEURL } from 'src/globals';
 
-interface TextMessage {
+export interface Message {
+  id: number | null;
+  content: string | null;
+  attachment: string | null;
   senderId: string;
   receiverId: string;
-  text: string;
-  sendBy: string;
-  time: Date;
-  isRead: boolean;
+  sendBy: 'auth' | 'admin';
+  isReceiverRead: boolean;
+  created_at: Date;
+  updated_at: Date;
 }
-
-interface MediaMessage {
-  senderId: string;
-  receiverId: string;
-  type: 'image' | 'video' | 'document';
-  content: any;
-  filename: string;
-  time: Date;
-  isRead: boolean;
-  sendBy: string;
-}
-
-type Message = TextMessage | MediaMessage;
 
 @Component({
   selector: 'app-chat-interface',
@@ -29,51 +23,97 @@ type Message = TextMessage | MediaMessage;
   styleUrls: ['./chat-interface.component.css']
 })
 export class ChatInterfaceComponent implements OnInit {
-  users = [
-    { name: 'User1', lastMessage: 'Hello', avatar: "../../../assets/user.png", id: 'user1_id' },
-    { name: 'User2', lastMessage: 'Hi', avatar: "../../../assets/user.png", id: 'user2_id' },
-    // Add more users here
-  ];
-
+  admin: any;
+  users: any = [];
   selectedUser: any;
   newMessage: string = '';
-  messages: Message[] = [ 
-    // Example messages
-    { senderId: 'user1_id', receiverId: 'admin_id', text: 'Hello, how are you?', time: new Date(), isRead: false, sendBy: 'user' },
-    { senderId: 'admin_id', receiverId: 'user1_id', text: 'I am fine, thank you!', time: new Date(), isRead: true, sendBy: 'admin' },
-    // Add more example messages here
-  ];
+  messages: Message[] = [];
+  loadingMessages: boolean = false; // Flag to indicate loading state
+  newMsgCounts: any = {};
 
-  // socket: Socket;
-  socket: string = '';
-
-  constructor() {
-    // this.socket = io('http://localhost:3000'); // Replace with your backend URL
-  }
+  constructor(private socketService: SocketService, private authService: AuthService, private fileUploadService: ServicesService) {}
 
   ngOnInit() {
-  //   this.socket.on('message', (message: Message) => {
-  //     this.messages.push(message);
-  //   });
+    if (localStorage) {
+      const admin = JSON.parse(localStorage.getItem("admin") || "{}");
+      this.admin = admin;
+    }
+
+    this.authService.getAllUsers().subscribe(res => {
+      console.log(res, '+=acmakcakca:userList');
+      this.users = res.data;
+    });
+    
+    this.fileUploadService.getNewMessagesCounts(this.admin.uid).subscribe(res => {
+      console.log(res, '+=acmakcakca:newMsgggCounttssssss');
+      this.newMsgCounts = res;
+    });
+
+    this.socketService.getConnectionStatus().subscribe((isConnected) => {
+      console.log('Socket connection status:', isConnected);
+    });
+
+    // Listen for new messages
+    this.socketService.onMessage('newMessage').subscribe((message: Message) => {
+      this.messages.push(message);
+      console.log(this.newMsgCounts, "=====newMsgCountssss");
+      
+      let msgCount = { ...this.newMsgCounts };
+      msgCount[message.senderId] = (msgCount[message.senderId] || 0) + 1;
+      this.newMsgCounts = msgCount;
+      console.log('Received new message:', message);
+    });
+
+    // Optionally, listen for read receipts or other events
+    this.socketService.onMessage('messageRead').subscribe((data) => {
+      console.log('Message read status updated:', data);
+    });
   }
 
   selectUser(user: any) {
     this.selectedUser = user;
-    // Fetch messages for the selected user here
+    this.loadingMessages = true; // Set loading state to true
+    this.fileUploadService.getUserMessages(this.admin.uid, user.uid).subscribe(res => {
+      console.log(res, "==messagesssssssssssss");
+      this.messages = res;
+      this.loadingMessages = false; // Set loading state to false after messages are loaded
+    }, error => {
+      console.error('Error fetching messages:', error);
+      this.loadingMessages = false; // Set loading state to false on error
+    });
+
+    this.fileUploadService.updateMsgStatus(this.admin.uid, user.uid).subscribe(res => {
+      console.log(res, "=====res,msgStatusUpdatedddd");
+    })
+
+    const msgCount = { ...this.newMsgCounts };
+    delete msgCount[user.uid];
+    this.newMsgCounts = msgCount;
+  }
+
+  getImageUrl(imageKey: string | null): string {
+    if (!imageKey) {
+      return ''; // Return an empty string if the image key is null
+    }
+    return `${BASEURL}files/${imageKey}`;
   }
 
   sendMessage() {
+    const admin = JSON.parse(localStorage.getItem("admin") || "{}");
     if (this.newMessage.trim() !== '') {
-      const message: TextMessage = {
-        senderId: 'current_user_id', // Replace with actual sender ID
-        receiverId: this.selectedUser.id,
-        text: this.newMessage,
-        time: new Date(),
-        isRead: false,
+      const message: Message = {
+        id: 0,
+        senderId: admin.uid,
+        receiverId: this.selectedUser.uid,
+        content: this.newMessage,
+        attachment: null,
+        created_at: new Date(),
+        updated_at: new Date(),
+        isReceiverRead: false,
         sendBy: 'admin',
       };
       this.messages.push(message);
-      // this.socket.emit('message', message);
+      this.socketService.emitMessage('newMessage', message); // Emit message through socket
       this.newMessage = '';
     }
   }
@@ -86,37 +126,71 @@ export class ChatInterfaceComponent implements OnInit {
   handleFileInput(event: any) {
     const file = event.target.files[0];
     if (file) {
-      const reader = new FileReader();
-      reader.onload = (e: any) => {
-        const content = e.target.result;
-        let type: 'image' | 'video' | 'document' = 'document';
-        if (file.type.startsWith('image/')) {
-          type = 'image';
-        } else if (file.type.startsWith('video/')) {
-          type = 'video';
-        }
-        const message: MediaMessage = {
-          senderId: 'current_user_id', // Replace with actual sender ID
-          receiverId: this.selectedUser.id,
-          type: type,
-          content: content,
-          filename: file.name,
-          time: new Date(),
-          isRead: false,
-          sendBy: 'admin'
-        };
-        this.messages.push(message);
-        // this.socket.emit('message', message);
+      const admin = JSON.parse(localStorage.getItem("admin") || "{}");
+
+      // Create a temporary message object to display immediately
+      const tempMessage: Message = {
+        id: 0,
+        senderId: admin.uid,
+        receiverId: this.selectedUser.uid,
+        content: null,
+        attachment: file.name,
+        created_at: new Date(),
+        updated_at: new Date(),
+        isReceiverRead: false,
+        sendBy: 'admin',
       };
-      reader.readAsDataURL(file);
+
+      // Add the temporary message to the chat interface immediately
+      this.messages.push(tempMessage);
+
+      // Start uploading the file in the background
+      this.fileUploadService.uploadFile(file).subscribe(
+        (response: any) => {
+          if (response && response.filename) {
+            // Find the index of the tempMessage in the messages array
+            const tempIndex = this.messages.findIndex(msg => msg === tempMessage);
+
+            if (tempIndex !== -1) {
+              // Update the message in the chat interface with the response data
+              this.messages[tempIndex] = {
+                ...tempMessage,
+                id: response.id, // Assuming response contains a unique id for the message
+                attachment: response.filename, // Update with the uploaded filename
+                updated_at: new Date(),
+              };
+
+              // Emit the message through socket after upload success
+              this.socketService.emitMessage('newMessage', this.messages[tempIndex]);
+            }
+          }
+        },
+        (error) => {
+          console.error('File upload error:', error);
+          // Optional: Remove or update the temporary message to indicate failure
+        }
+      );
     }
   }
 
-  isTextMessage(message: Message): message is TextMessage {
-    return (message as TextMessage).text !== undefined;
+  isTextMessage(message: Message): boolean {
+    return message.content !== null && message.attachment === null;
   }
 
-  isMediaMessage(message: Message): message is MediaMessage {
-    return (message as MediaMessage).type !== undefined;
+  isMediaMessage(message: Message): boolean {
+    return message.content === null && message.attachment !== null;
+  }
+
+  downloadFile(fileUrl: string) {
+    if (!fileUrl) {
+      console.error('Invalid file URL for download.');
+      return;
+    }
+  
+    const link = document.createElement('a');
+    link.href = fileUrl;
+    link.target = '_blank';
+    link.download = fileUrl.split('/').pop() || 'download';
+    link.click();
   }
 }

@@ -1,11 +1,58 @@
-<div class=" container-fluid" style="width: 90%">
+<app-admin-samples-list
+  (addSample)="onAddSample($event)"
+  (editSample)="onEditSample($event)"
+  *ngIf="!showForm"
+></app-admin-samples-list>
+
+<app-admin-samples-form
+  *ngIf="showForm"
+  [selectedSample]="selectedSample"
+  (close)="closeForm()"
+></app-admin-samples-form>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div class=" container-fluid" style="width: 90%">
     <div class="">
 
 
     <div class="card p-3">
-        
-        
-        <!-- insert sample form start -->
         
         <div class="panel panel-default _panel p-4" *ngIf="addSamples">
             <a href="javascript:;" style="width: 100px;" (click)="addSamples=!addSamples"><i class="fa fa-arrow-left" style="font-size: 27px;"></i></a>
@@ -105,7 +152,6 @@
                     "
                     />
                     <label class="fw-lighter p-2">Description</label>
-                        <!-- <quill-editor [placeholder]="'Enter text here...'"   formControlName="description" [modules]="editorConfig" /> -->
                     <angular-editor [placeholder]="'Enter text here...'" [config]="editorConfig" formControlName="description" ></angular-editor>
                 </form>
             </div>
@@ -116,7 +162,6 @@
             </div>
         </div>
 
-        <!-- insert sample form end -->
      <div class=" mt-5" *ngIf="!addSamples">
 
             <div class="bg-light">
@@ -161,7 +206,7 @@
                                     </p>
                                 </td>
                                 <td>
-                                    <a href="https://proassignments.co.uk/{{sample.Slug}}" target="_blank">{{sample.Slug}}</a>
+                                    <a href="https://dissertationwriting.help/{{sample.Slug}}" target="_blank">{{sample.Slug}}</a>
                                 </td>
                                 <td>{{sample.Price}}</td>
 
@@ -201,4 +246,4 @@
         </div>
     </div>
 </div>
-</div>
+</div> -->

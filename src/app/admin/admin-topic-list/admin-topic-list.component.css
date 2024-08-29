@@ -1,5 +1,97 @@
 /* Admin Topic List Styles */
 .container {
+  margin-top: 20px;
+}
+
+.table {
+  width: 100%;
+  margin-bottom: 20px;
+}
+
+.insert-topic-btn {
+  background-color: rgb(37, 67, 54);
+  color: #FFF;
+}
+
+.insert-topic-btn:hover {
+  background-color: rgb(23, 43, 34);
+}
+
+.custom-modal {
+  position: fixed;
+  z-index: 1050;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  min-width: 500px;
+  max-width: 65%;
+  max-height: 90vh; /* Set a maximum height for the modal */
+  background-color: #fff;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
+  border-radius: 5px;
+  display: flex;
+  flex-direction: column; /* To separate header and body */
+}
+
+.custom-modal-content {
+  flex: 1; /* Allow the content to grow and shrink */
+  overflow-y: auto; /* Enable scrolling for the content area */
+  padding: 20px;
+}
+
+.custom-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 1px solid #dee2e6;
+  padding-bottom: 10px;
+  flex-shrink: 0; /* Prevent header from shrinking */
+}
+
+.custom-modal-body {
+  margin-top: 10px;
+  flex: 1; /* Allow the body to grow and shrink */
+}
+
+.custom-modal-footer {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+  flex-shrink: 0; /* Prevent footer from shrinking */
+}
+
+.custom-modal-backdrop {
+  position: fixed;
+  z-index: 1040;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+/*
+.container {
     margin-top: 20px;
   }
   
@@ -8,6 +100,15 @@
     margin-bottom: 20px;
   }
   
+  .insert-topic-btn {
+    background-color: rgb(37, 67, 54);
+    color: #FFF;
+  }
+
+  .insert-topic-btn:hover {
+    background-color: rgb(23, 43, 34);
+  }
+
   .custom-modal {
     position: fixed;
     z-index: 1050;
@@ -18,7 +119,7 @@
     background-color: #fff;
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3);
     border-radius: 5px;
-    overflow: hidden;
+    overflow-y: auto;
   }
   
   .custom-modal-content {
@@ -52,4 +153,4 @@
     height: 100%;
     background-color: rgba(0, 0, 0, 0.5);
 }
-  
+   */

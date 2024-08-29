@@ -163,7 +163,7 @@
 }
 
 .topic-box {
-  padding: 10px;
+  /* padding: 10px; */
   border: 1px solid #242961;
   border-radius: 5px;
   cursor: pointer;
@@ -176,7 +176,7 @@
   justify-content: center;
 }
 
-.topic-box:hover {
+.topic-header:hover {
   background-color: #242961;
   color: #FFF;
 }
@@ -192,6 +192,7 @@
   display: none;
   text-align: left;
   margin-top: 10px;
+  padding: 5px 12px 12px 12px;
 }
 
 .topic-content.show {
@@ -213,4 +214,12 @@
 
 .check-price-btn:hover {
   background-color: #232b7a !important; 
+}
+
+
+.highlighted {
+  background-color: #232b7a; /* or any color you prefer */
+  color: #FFF;
+  font-size: 20px;
+  font-weight: 600;
 }

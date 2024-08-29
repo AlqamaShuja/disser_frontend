@@ -2,32 +2,32 @@
     <div class="container mb-5" style="margin-top: 100px;">
         <div class="row">
             <div class="col-md-4">
-                <h2>Contact Us</h2>
-                <div class="row proboxy" style="margin-bottom: 0em;">
+                <h1 style="font-size: 40px;">Contact Us</h1>
+                <!-- <div class="row proboxy" style="margin-bottom: 0em;">
                     <div class="col-md-2">
                         <i class="fa fa-whatsapp fa-3x proccessicon"></i>
                     </div>
                     <div class="col-md-10">
                         <p class="procontent pt-10">	+4564654654</p>
                     </div>
-                </div>
-                <div class="row proboxy" style="margin-bottom: 0em;">
+                </div> -->
+                <div class="row proboxy d-flex align-items-center" style="margin-bottom: 0em; margin-top: 20px;">
                     <div class="col-md-2">
-                        <i class="fa fa-phone fa-3x proccessicon"></i>
+                        <i class="fa fa-phone fa-2x proccessicon"></i>
                     </div>
 
                     <div class="col-md-10">
-                        <p class="procontent pt-10">	+4564654654 </p>
+                        <p class="procontent pt-10 mt-2 fw-bold">+44 73021548485454</p>
                     </div>
 
                 </div>
-                <div class="row proboxy" style="margin-bottom: 0em;">
+                <div class="row proboxy d-flex align-items-center" style="margin-bottom: 0em;">
                     <div class="col-md-2">
-                        <i class="fa fa-envelope fa-3x proccessicon"></i>
+                        <i class="fa fa-envelope fa-2x proccessicon"></i>
                     </div>
 
                     <div class="col-md-10">
-                        <p class="procontent pt-10">support@dissertationwriting.co</p>
+                        <p class="procontent pt-10 mt-2 fw-bold">support@dissertationwriting.help</p>
                     </div>
 
 
@@ -37,21 +37,44 @@
                 <img src="https://www.assignmentbank.co.uk/images/qrcode.png" width="100%">
             </div>
             <div class="col-md-5">
-                <span style="font-size:18px;font-weight:600;">Order ID:</span>
-                <span style="padding-left: 23%; font-size:18px;">PA - {{orderDetails?.id}}</span>
+                <div class="detail-row">
+                  <span class="label">Order ID:</span>
+                  <span class="value">PA - {{orderDetails?.id}}</span>
+                </div>
+                <hr *ngIf="!orderDetails.isSample">
+                <div class="detail-row" *ngIf="!orderDetails.isSample">
+                  <span class="label">Topic:</span>
+                  <span class="value">{{orderDetails?.Topic}}</span>
+                </div>
+                <hr *ngIf="!orderDetails.isSample">
+                <div class="detail-row" *ngIf="!orderDetails.isSample">
+                  <span class="label">Subject Area:</span>
+                  <span class="value">{{orderDetails?.TopicCategory}}</span>
+                </div>
                 <hr>
-                <span style="font-size:18px;font-weight:600;"># of Words/Pages:</span>
-                <span style="padding-left: 5%; font-size:18px;">{{orderDetails?.NumberOfWordsPages}}</span>
+                <div class="detail-row">
+                  <span class="label"># of Words/Pages:</span>
+                  <span class="value">{{orderDetails?.NumberOfWordsPages}}</span>
+                </div>
                 <hr>
-                <!-- <span style="font-size:18px;font-weight:600;">Details:</span>
-                <span style="padding-left: 27%; font-size:18px;">{{orderDetails?.DetailInstructions}}</span>
-                <hr> -->
-                <span style="font-size:18px;font-weight:600;">Total:</span>
-                <span style="padding-left: 31%; font-size:18px;">£{{orderDetails?.GrossAmount}}</span>
+                <div class="detail-row">
+                  <span class="label">DeadLine:</span>
+                  <span class="value">{{orderDetails?.DeadLine}}</span>
+                </div>
+                <hr>
+                <div class="detail-row">
+                  <span class="label">Paid Status:</span>
+                  <span class="value">{{orderDetails?.PaidStatus}}</span>
+                </div>
+                <hr>
+                <div class="detail-row">
+                  <span class="label">Total:</span>
+                  <span class="value">£{{orderDetails?.GrossAmount}}</span>
+                </div>
                 <hr>
                 <br>
                 <div style="display: flex; justify-content: center;">
-                    <ngx-paypal [config]="payPalConfig"></ngx-paypal>
+                  <ngx-paypal [config]="payPalConfig"></ngx-paypal>
                 </div>
             </div>
         </div>

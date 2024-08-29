@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChildren, QueryList, ViewChild } from '@angular/
 import { NgForm } from '@angular/forms';
 import { ServicesService } from '../services/services.service';
 import { AcademicLevelData } from './topic.model';
+import { getDiffInDays } from 'src/globals';
 
 @Component({
   selector: 'app-research-topics',
@@ -12,6 +13,7 @@ export class ResearchTopicsComponent implements OnInit {
   alphabet: string[] = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
   topics: any[] = [];
   sortedTopics: any[] = [];
+  orderPriceByDate: any[] = [];
   selectedTopic: any;
   errorMessage: string = '';
   expandedIndex: number | null = null;
@@ -46,6 +48,9 @@ export class ResearchTopicsComponent implements OnInit {
     });
     this.serviceService.getAllServices().subscribe(res => {
       this.serviceType = res;
+    });
+    this.serviceService.getAllOrderPrices().subscribe(res => {
+      this.orderPriceByDate = res;
     });
   }
 
@@ -84,10 +89,18 @@ export class ResearchTopicsComponent implements OnInit {
     const selectedAcadLevelObj = this.academicLevels.find(topic => topic.title === selectedAcademicLevel);
     const priceForAcadLevel = selectedAcadLevelObj ? selectedAcadLevelObj.price : 0;
 
-    this.totalPrice = Number(priceOfTopic) + Number(priceForAcadLevel) + Number(priceOfService);
+    // get diff in days
+    const diffInDays = getDiffInDays(selectedDeadline);
 
-    console.log(selectedDeadline, "==deadlineeeee");
-    console.log(priceOfTopic, " = ", priceForAcadLevel, " = ", priceOfService, "==deadlineeeee");
+    const matchingOrderPrice = this.orderPriceByDate.find(priceRange => 
+      diffInDays >= priceRange.min_day && diffInDays <= priceRange.max_day
+    );
+
+    
+    let priceByDeadline = matchingOrderPrice ? Number(matchingOrderPrice.price): 0
+    console.log({ diffInDays, matchingOrderPrice, priceOfTopic, priceForAcadLevel, priceOfService, });
+    
+    this.totalPrice = Math.floor(Number(priceOfTopic) + Number(priceForAcadLevel) + Number(priceOfService) + priceByDeadline);
   }
 }
 

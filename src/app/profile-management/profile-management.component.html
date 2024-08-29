@@ -59,6 +59,14 @@
           </li>
           <li
             class="pt-2 pb-2"
+            [class.selected]="showChat"
+            (click)="showComponent('showChat')"
+            style="cursor: pointer; border-bottom: 1px solid lightgrey;"
+          >
+            <span class="fw-bold">></span> Conversation <span>({{ getObjectKeysLength(newMsgCounts) }})</span>
+          </li>
+          <li
+            class="pt-2 pb-2"
             [class.selected]="showEditUser"
             (click)="showComponent('showEditUser')"
             style="cursor: pointer; border-bottom: 1px solid lightgrey;"
@@ -73,7 +81,7 @@
           >
             <span class="fw-bold">></span> Change Password
           </li>
-          <li (click)="logout()" style="cursor: pointer;">
+          <li (click)="logout()" style="cursor: pointer;" class="pt-2 pb-2">
             <span class="fw-bold">></span> Logout
           </li>
         </ul>
@@ -82,6 +90,7 @@
     <app-user-orders [orders]="orders" *ngIf="showOrder"></app-user-orders>
     <app-user-orders [orders]="completedOrders" *ngIf="showCompleted"></app-user-orders>
     <app-my-invoices [invoices]="invoices" *ngIf="showInvoices"></app-my-invoices>
+    <app-user-chat *ngIf="showChat"></app-user-chat>
     <app-edit-profile [user]="user" (emitUpdateForm)="updateProfile($event)" *ngIf="showEditUser"></app-edit-profile>
     <app-user-change-password *ngIf="showChangePassword" (passUpdateForm)="updatePassword($event)"></app-user-change-password>
 </div>

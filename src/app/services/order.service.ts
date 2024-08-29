@@ -72,6 +72,12 @@ export class OrderService {
   deleteCategory(id:number):Observable<any>{
     return this.http.delete(`${this.apiUrl}catogery/${id}`);
   }
+
+  updatePaymentMethod(orderId: number, paymentMethod: string): Observable<any> {
+    const url = `${this.apiUrl}order/updatePaymentMethod/${orderId}`;
+    const body = { PaymentMethod: paymentMethod };
+    return this.http.put<any>(url, body);
+  }
   
   
   sideBarNotification():Observable<any>{

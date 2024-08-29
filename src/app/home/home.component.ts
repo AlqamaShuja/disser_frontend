@@ -6,7 +6,8 @@ import { NgForm } from '@angular/forms';
 import { AcademicLevelData } from './home.model';
 import * as Aos from 'aos';
 import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
-import { BASEURL } from 'src/globals';
+import { BASEURL, getDiffInDays } from 'src/globals';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -20,6 +21,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
   alphabet: string[] = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ'.split('');
   topics: any[] = [];
   sortedTopics: any[] = [];
+  orderPriceByDate: any[] = [];
   selectedTopic: any;
   errorMessage: string = '';
   calcSectBg: string = '';
@@ -54,7 +56,7 @@ export class HomeComponent implements OnInit, AfterViewInit {
   @ViewChild('dynamicContent', { static: true }) dynamicContent!: ElementRef;
   @ViewChild('ourMissionLeftDynamicContent', { static: true }) ourMissionLeftDynamicContent!: ElementRef;
 
-  constructor(private servicesService: ServicesService, private sanitizer: DomSanitizer,) { }
+  constructor(private servicesService: ServicesService, private sanitizer: DomSanitizer, private router: Router) { }
 
   // ngOnInit(): void {
   //   Aos.init();
@@ -183,7 +185,20 @@ export class HomeComponent implements OnInit, AfterViewInit {
     this.servicesService.getAllAcademicLevels().subscribe(res => {
       console.log(res, "getAllAcademicLevels:home");
       this.academicLevels = res;
-    })
+    });
+    this.servicesService.getAllOrderPrices().subscribe(res => {
+      this.orderPriceByDate = res;
+    });
+
+    setTimeout(() => {
+      Aos.refreshHard();
+    }, 0);
+  }
+
+  gotoOrderPage(){
+    console.log("asncjancacnancjncjsajnsajcjcnsja:aaa");
+    
+    this.router.navigate(['/about']);
   }
 
   ngAfterViewInit(): void {
@@ -256,7 +271,17 @@ export class HomeComponent implements OnInit, AfterViewInit {
     const selectedAcadLevelObj = this.academicLevels.find(academic => academic.title === selectedAcademicLevel);
     const priceForAcadLevel = selectedAcadLevelObj ? selectedAcadLevelObj.price : 0;
 
-    this.costPerPage = Number(priceOfTopic) + Number(priceForAcadLevel) + Number(priceOfService);
+    const diffInDays = getDiffInDays(selectedDeadline);
+
+    const matchingOrderPrice = this.orderPriceByDate.find(priceRange => 
+      diffInDays >= priceRange.min_day && diffInDays <= priceRange.max_day
+    );
+
+    console.log(matchingOrderPrice, "==matchingOrderPrice:home");
+    
+    let priceByDeadline = matchingOrderPrice ? Number(matchingOrderPrice.price): 0
+
+    this.costPerPage = Number(priceOfTopic) + Number(priceForAcadLevel) + Number(priceOfService) + priceByDeadline;
     this.totalPrice = Math.round(this.costPerPage * numberOfPages);
 
     console.log(selectedDeadline, "==deadlineeeee, ", this.totalPrice);

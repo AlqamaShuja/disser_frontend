@@ -102,6 +102,15 @@ import { AdminCouponPageComponent } from './admin/admin-coupon-page/admin-coupon
 import { AdminWriterPageComponent } from './admin/admin-manage-writer-profile/admin-manage-writer-profile.component';
 import { AcademicLevelComponent } from './admin/academic-level/academic-level.component';
 import { AdminSubjectAreaComponent } from './admin/admin-subject-area/admin-subject-area.component';
+import { ChatWidgetComponent } from './chat-widget/chat-widget.component';
+import { AdminInquiriesComponent } from './admin/admin-inquiries/admin-inquiries.component';
+import { AdminOrderPriceByDateComponent } from './admin/admin-order-price-by-date/admin-order-price-by-date.component';
+import { AdminOrderFormManageComponent } from './admin-order-form-manage/admin-order-form-manage.component';
+import { AdminDesiredGradeComponent } from './admin/admin-desire-grade/admin-desire-grade.component';
+import { AdminRefrenceStyleComponent } from './admin/admin-refrence-style/admin-refrence-style.component';
+import { AdminSamplesFormComponent } from './admin/admin-samples-form/admin-samples-form.component';
+import { AdminSamplesListComponent } from './admin/admin-samples-list/admin-samples-list.component';
+import { UserChatComponent } from './user-chat/user-chat.component';
 
 
 library.add(fas);
@@ -185,6 +194,15 @@ const modules = {};
     AdminWriterPageComponent,
     AcademicLevelComponent,
     AdminSubjectAreaComponent,
+    ChatWidgetComponent,
+    AdminInquiriesComponent,
+    AdminOrderPriceByDateComponent,
+    AdminOrderFormManageComponent,
+    AdminDesiredGradeComponent,
+    AdminRefrenceStyleComponent,
+    AdminSamplesFormComponent,
+    AdminSamplesListComponent,
+    UserChatComponent,
   ],
   imports: [
     BrowserAnimationsModule,

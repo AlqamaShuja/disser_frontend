@@ -24,8 +24,6 @@
 </section>
 
 <div class="samples-section" style="background: #f1f1f1 " *ngIf="selectedSample">
-  
-  
   <div class="wrapper _wrapper">
     <div class="row" style="justify-content: space-between">
       <div class="col-lg-9 col-sm-12 col-md-8">
@@ -134,7 +132,157 @@
 </div>
 
 <!-- Modal -->
-<div
+
+<!-- Modal Wrapper -->
+<div *ngIf="showModal" class="custom-modal-wrapper">
+  <!-- Modal Content -->
+  <div class="custom-modal">
+    <!-- Modal Header -->
+    <div class="custom-modal-header">
+      <h5 class="modal-title">
+        We write, we don’t plagiarise! Every answer is different no matter how
+        many orders we get for the same assignment. Your answer will be 100%
+        plagiarism-free, custom written, unique and different from every other
+        student.
+      </h5>
+      <button type="button" class="custom-close-btn" (click)="showModal=false">×</button>
+    </div>
+
+    <!-- Modal Body -->
+    <form [formGroup]="orderForm">
+      <div class="custom-modal-body">
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label><i class="fa fa-user"></i> Full Name</label>
+            <input
+              formControlName="firstName"
+              type="text"
+              placeholder="Full Name*"
+              class="form-control"
+              [ngClass]="{'is-invalid': orderForm.get('firstName')?.invalid && orderForm.get('firstName')?.touched}"
+            />
+          </div>
+          <div class="form-group col-md-6">
+            <label><i class="fa fa-envelope"></i> Email address</label>
+            <input
+              formControlName="email"
+              type="email"
+              placeholder="Email*"
+              class="form-control"
+              [ngClass]="{'is-invalid': orderForm.get('email')?.invalid && orderForm.get('email')?.touched}"
+            />
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label><i class="fa fa-phone"></i> Phone Number</label>
+            <input
+              formControlName="contactPhone"
+              type="tel"
+              placeholder="Phone Number*"
+              class="form-control"
+              [ngClass]="{'is-invalid': orderForm.get('contactPhone')?.invalid && orderForm.get('contactPhone')?.touched}"
+            />
+          </div>
+          <div class="form-group col-md-3">
+            <label><i class="fa fa-file-word-o"></i> No. of Words</label>
+            <input
+              formControlName="pageWords"
+              type="number"
+              placeholder="No. Of Words*"
+              class="form-control"
+              [ngClass]="{'is-invalid': orderForm.get('pageWords')?.invalid && orderForm.get('pageWords')?.touched}"
+            />
+          </div>
+          <div class="form-group col-md-3">
+            <label><i class="fa fa-calendar"></i> Deadline</label>
+            <select formControlName="deadline" class="form-control">
+              <option value="24 Hours delivery">24 Hours Delivery</option>
+              <option value="2 days delivery">2 days delivery</option>
+              <option value="3 days delivery">3 days delivery</option>
+              <option value="4 days delivery">4 days delivery</option>
+              <option value="5 days delivery">5 days delivery</option>
+              <option value="6 days delivery">6 days delivery</option>
+              <option value="7 days delivery">7 days delivery</option>
+              <option value="8 days delivery">8 days delivery</option>
+              <option value="9 days delivery">9 days delivery</option>
+              <option value="10 days delivery">10 days delivery</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label>Supporting Documents</label>
+            <input
+              type="file"
+              formControlName="fileUrl"
+              (change)="onFileSelected($event)"
+              class="form-control"
+            />
+          </div>
+          <div class="form-group col-md-6">
+            <p>Receive calls at night in case of emergency?</p>
+            <div class="d-flex align-items-center">
+              <label class="mr-3">
+                <input
+                  type="radio"
+                  formControlName="terms"
+                  value="yes"
+                /> Yes
+              </label>
+              <label>
+                <input
+                  type="radio"
+                  formControlName="terms"
+                  value="no"
+                /> No
+              </label>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label>Total Cost:</label>
+            <div class="total-price">£ {{ selectedSample?.Price }}</div>
+          </div>
+          <div class="form-group col-md-6">
+            <label>Discounted Price:</label>
+            <div class="discounted-price">
+              £ {{ selectedSample?.DiscountPrice }}
+              <span class="text-muted">(Inc. all taxes)</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="form-group mt-3">
+          <p>
+            Share your assignment brief and supporting material via email here at:
+            <a href="mailto:support@dissertationwriting.co" class="linkoo">{{'support@dissertationwriting.co'}}</a>
+            after completing this order process.
+          </p>
+        </div>
+      </div>
+
+      <!-- Modal Footer -->
+      <div class="custom-modal-footer">
+        <button type="button" class="custom-btn custom-btn-secondary" (click)="showModal=false">Cancel</button>
+        <button type="submit" class="custom-btn custom-btn-primary" (click)="submitOrder($event)">Submit Order & Checkout</button>
+      </div>
+    </form>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+<!-- <div
   class="modal show fade"
   id="exampleModal"
   tabindex="-1"
@@ -165,7 +313,6 @@
           <div class="col-md-6">
             <div class="form-group">
               <label><i class="fa fa-user"></i> Full Name</label>
-              <!-- formControlName="firstName" -->
               <input
                 [ngClass]="{'is-invalid': orderForm.get('firstName')?.invalid && orderForm.get('firstName')?.touched}"
                 formControlName="firstName" [ngClass]="{'is-invalid': orderForm.get('firstName')?.invalid && orderForm.get('firstName')?.touched}"
@@ -187,7 +334,6 @@
           <div class="col-md-6">
             <div class="form-group">
               <label><i class="fa fa-envelope"></i> Email address</label>
-              <!-- formControlName="email" -->
               <input
                 type="email"
                 class="form-control"
@@ -208,7 +354,6 @@
           <div class="col-md-6">
             <div class="form-group">
               <label><i class="fa fa-phone"></i> Phone Number </label>
-              <!-- formControlName="contactPhone" -->
               <input
                 type="tel"
                 class="form-control"
@@ -236,7 +381,6 @@
           <div class="col-md-3">
             <div class="form-group">
               <label><i class="fa fa-file-word-o"> </i> No. of Words </label>
-              <!-- formControlName="pageWords" -->
               <input
                 type="tel"
                 class="form-control"
@@ -387,4 +531,4 @@
     </form>
     </div>
   </div>
-</div>
+</div> -->

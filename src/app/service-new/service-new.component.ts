@@ -13,9 +13,9 @@ export class ServiceNewComponent implements OnInit {
   constructor(private serviceService: ServicesService) { }
 
   ngOnInit(): void {
-    this.serviceService.getAllServices().subscribe((res) => {
-      console.log(res.data, "====res.data:serviceeeesss");
-      this.services = res.data;
-    });
+    // this.serviceService.getAllServices().subscribe((res) => {
+    //   console.log(res, "====res.data:serviceeeesss");
+    //   this.services = res;
+    // });
   }
 }

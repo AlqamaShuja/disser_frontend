@@ -28,16 +28,15 @@
     </div>
   </div>
 
-  <!-- Change -->
-  <!-- <div class="container">
-    <div class="card mb-3" *ngFor="let order of filteredOrders; let i = index" style="padding: 8px; margin: 10px;">
+  
+  <div class="container">
+    <div class="card mb-3" *ngFor="let order of filteredOrders; let i = index">
       <div class="card-header" [ngStyle]="{ borderLeft: order.writer_assigned_status === 1 ? '5px solid #b6b5e5' : '5px solid #999' }">
         <div class="d-flex justify-content-between align-items-center">
           <div>
             <strong>Balance:</strong>
-            <form class="d-flex align-items-center" (submit)="updateBalance(order.Id, order.Balance)">
-              <input type="text" class="form-control me-2" placeholder="Update Balance" aria-invalid="false" aria-required="true" name="balance" required="" [(ngModel)]="order.Balance" />
-              <input name="shopID" type="hidden" value="1128" />
+            <form class="d-flex align-items-center" (submit)="updateBalance(order.id, order.Balance)">
+              <input type="text" class="form-control me-2" style="border: 1px solid rgb(156, 231, 199); height: 44px;" placeholder="Update Balance" name="balance" required [(ngModel)]="order.Balance" />
               <button type="submit" class="btn btn-primary btn-submit rounded-1">Submit</button>
             </form>
           </div>
@@ -46,85 +45,266 @@
           </div>
         </div>
       </div>
-      <div class="card-body">
-        <div class="row mb-3">
-          <div class="col-md-6">
-            <div class="d-flex align-items-center gap-3">
-              <strong>Status</strong>
-              <form class="d-flex align-items-center" (submit)="updateOrderStatus(order.Id, order.Status)">
-                <select name="statuss" class="form-select me-2" [(ngModel)]="order.Status">
-                  <option value="New">New</option>
-                  <option value="Revision">Revision</option>
-                  <option value="Completed">Completed</option>
-                  <option value="Cancel">Cancelled</option>
-                </select>
-                <input name="shopID" type="hidden" value="1128" />
-                <button type="submit" class="btn btn-primary btn-submit">Submit</button>
-              </form>
-            </div>
-          </div>
-          <div class="col-md-6">
-            <strong>Writers</strong>
-            <form>
-              <select name="writerID" class="form-select" (change)="updateOrderStatusWriter(order.Id,1)">
-                <option selected="selected">Please Assign Writer</option>
+      <div class="card-body d-flex flex-wrap">
+        <div class="d-flex flex-column flex-grow-1">
+          <div class="mb-3">
+            <strong>Status</strong>
+            <form class="d-flex align-items-center" (submit)="updateOrderStatus(order.id, order.Status)">
+              <select name="statuss" class="form-select me-2" [(ngModel)]="order.Status">
+                <option value="New">New</option>
+                <option value="Revision">Revision</option>
+                <option value="Completed">Completed</option>
+                <option value="Cancel">Cancelled</option>
               </select>
-            </form>
-            <a href="javascript:;" class="btn btn-link" (click)="updateOrderStatusWriter(order.Id,1)">Assigned to writer </a>
-          </div>
-        </div>
-        <div class="row mb-3">
-          <div class="col-md-6">
-            <strong>Paid Status</strong>
-            <form class="d-flex align-items-center" (submit)="updateOrderPaidStatusChanged(order.Id, order.PaidStatus)">
-              <select class="form-select me-2" name="PaidStatus" [(ngModel)]="order.PaidStatus">
-                <option value="Paid">Paid</option>
-                <option value="Partial-Paid">Partial-Paid</option>
-                <option value="UnPaid">UnPaid</option>
-              </select>
-              <input name="shopID" type="hidden" value="1128" />
               <button type="submit" class="btn btn-primary btn-submit">Submit</button>
             </form>
           </div>
-          <div class="col-md-6">
-            <strong style="margin-right: 10px;">Order By:</strong> <a href="#">{{ order.Email }}</a>
-            <br />
-            <div class="d-flex gap-2 align-items-center">
+          <div class="mb-3">
+            <strong>Paid Status</strong>
+            <form class="d-flex align-items-center" (submit)="updateOrderPaidStatusChanged(order.id, order.PaidStatus)">
+              <select class="form-select me-2" name="PaidStatus" [(ngModel)]="order.PaidStatus">
+                <option value="Paid">Paid</option>
+                <option value="Partial-Paid">Partial-Paid</option>
+                <option value="Unpaid">Unpaid</option>
+              </select>
+              <button type="submit" class="btn btn-primary btn-submit">Submit</button>
+            </form>
+          </div>
+          <div class="mb-3">
+            <strong>Payment Method</strong>
+            <form class="d-flex align-items-center" (submit)="updatePaymentMethod(order.id, order.PaymentMethod)">
+              <select class="form-select me-2" name="PaymentMethod" [(ngModel)]="order.PaymentMethod">
+                <option value="PayPal">PayPal</option>
+                <option value="Stripe">Stripe</option>
+                <option value="Bank Transfer">Bank Transfer</option>
+              </select>
+              <button type="submit" class="btn btn-primary btn-submit">Submit</button>
+            </form>
+          </div>
+        </div>
+        <div class="d-flex flex-column flex-grow-1">
+          <div class="mb-3 d-flex align-items-center gap-3">
+            <strong>Writers</strong>
+            <form (ngSubmit)="updateOrderStatusWriter(order.id, order.selectedWriterId)">
+              <select name="writerID" class="form-select" [(ngModel)]="order.selectedWriterId" required>
+                <option [value]="null" disabled>Select Writer</option>
+                <option *ngFor="let writer of writers" [value]="writer.id">{{ writer.name }}</option>
+              </select>
+              <button type="submit" class="ms-2 btn btn-submit">Assign to Writer</button>
+            </form>
+          </div>
+          <div class="mb-3 mt-2">
+            <strong>Order By:</strong> <a href="#" style="margin-left: 10px;">{{ order.Email }}</a>
+          </div>
+          <div class="mb-3">
+            <div class="d-flex gap-3 align-items-center mb-1 mt-2">
               <strong>Grand Total:</strong>
-              <form class="d-flex align-items-center" (submit)="updateGrossAmount(order.Id, order.GrossAmount)">
-                <input type="text" class="form-control me-2" style="padding-top: 0; padding-bottom: 0;" placeholder="Update Balance" aria-invalid="false" aria-required="true" name="grossAmount" [(ngModel)]="order.GrossAmount" required="" />
-                <input name="shopID" type="hidden" value="1128" />
+              <form class="d-flex align-items-center" (submit)="updateGrossAmount(order.id, order.GrossAmount)">
+                <input type="text" class="form-control me-2" style="padding-top: 0; padding-bottom: 0; height: 44px;" placeholder="Update Gross Amount" name="grossAmount" [(ngModel)]="order.GrossAmount" required />
+                <button type="submit" class="btn btn-primary btn-submit">Submit</button>
+              </form>
+            </div>
+            <strong class="mt-2">Amount Received:</strong> GBP {{ order.GrossAmount - order.Balance }}
+          </div>
+        </div>
+        <!-- <div class="w-100 d-flex gap-5 align-items-center flex-wrap">
+          <a href="javascript:;" class="btn btn-outline-info mb-2" (click)="showOrderDetails(order)">Details</a>
+          <a href="/admin/chat" class="btn btn-outline-secondary mb-2">
+            Conversation 
+          </a>
+          <a href="javascript:;" class="btn btn-outline-warning mb-2" (click)="sendInvoice(order,'reminder_email_count')"><i class="fa fa-envelope"></i> Reminder Email ({{order.reminder_email_count}})</a>
+          <a href="javascript:;" class="btn btn-outline-warning mb-2" (click)="sendInvoice(order,'reminder_email_count')"><i class="fa fa-envelope"></i> Revised Email ({{order.reminder_email_count}})</a>
+          <form class="d-flex align-items-center mb-2" (submit)="deleteOrder(pin, order.id)">
+            <input name="pin" type="password" class="form-control me-2" placeholder="PIN" size="20" [(ngModel)]="pin" />
+            <button type="submit" class="btn btn-danger">Delete Order</button>
+          </form>
+          <a href="javascript:;" class="btn btn-outline-success mb-2" (click)="sendInvoice(order,'invoice_sent_count')"><i class="fa fa-envelope"></i> Send Invoice ({{order.invoice_sent_count}})</a>
+        </div> -->
+        <div style="height: 2px; width: 100%; background: #cccccc; margin: 15px 0px;"></div>
+        <div class="mt-2 w-100 d-flex gap-3 align-items-center justify-content-center flex-wrap">
+          <a href="javascript:;" class="btn custom-btn mb-2" (click)="showOrderDetails(order)">
+            Details
+          </a>
+          <a href="/admin/chat" class="btn custom-btn mb-2">
+            Conversation
+          </a>
+          <a href="javascript:;" class="btn custom-btn mb-2" (click)="sendInvoice(order,'reminder_email_count')">
+            <i class="fa fa-envelope"></i> Reminder Email 
+            ({{order.reminder_email_count}})
+          </a>
+          <!-- <a href="javascript:;" class="btn custom-btn mb-2" (click)="sendInvoice(order,'reminder_email_count')">
+            <i class="fa fa-envelope"></i> Revised Email 
+            ({{order.reminder_email_count}})
+          </a> -->
+          <a href="javascript:;" class="btn custom-btn mb-2" (click)="sendInvoice(order,'invoice_sent_count')">
+            <i class="fa fa-envelope"></i> Send Invoice 
+            ({{order.invoice_sent_count}})
+          </a>
+          <br />
+          <form class="d-flex align-items-center mb-2" (submit)="deleteOrder(pin, order.id)">
+            <input name="pin" type="password" class="form-control me-2" style="height: 44px;" placeholder="PIN" size="20" [(ngModel)]="pin" />
+            <button type="submit" class="btn btn-danger custom-btn">Delete Order</button>
+          </form>
+        </div>
+        
+      </div>
+    </div>
+    <p *ngIf="filteredOrders.length === 0" class="d-flex justify-content-center mt-3">No Order Available</p>
+  </div>  
+
+
+  
+
+  <!-- <div class="container">
+    <div class="card mb-3" *ngFor="let order of filteredOrders; let i = index">
+      <div class="card-header" [ngStyle]="{ borderLeft: order.writer_assigned_status === 1 ? '5px solid #b6b5e5' : '5px solid #999' }">
+        <div class="d-flex justify-content-between align-items-center">
+          <div>
+            <strong>Balance:</strong>
+            <form class="d-flex align-items-center" (submit)="updateBalance(order.id, order.Balance)">
+              <input type="text" class="form-control me-2" placeholder="Update Balance" name="balance" required [(ngModel)]="order.Balance" />
+              <button type="submit" class="btn btn-primary btn-submit rounded-1">Submit</button>
+            </form>
+          </div>
+          <div>
+            <strong>Order Date:</strong> {{ formatDatabaseTimestamp(order.created_at) }}
+          </div>
+        </div>
+      </div>
+      <div class="card-body d-flex flex-wrap">
+        <div class="d-flex flex-column flex-grow-1">
+          <div class="mb-3">
+            <strong>Status</strong>
+            <form class="d-flex align-items-center" (submit)="updateOrderStatus(order.id, order.Status)">
+              <select name="statuss" class="form-select me-2" [(ngModel)]="order.Status">
+                <option value="New">New</option>
+                <option value="Revision">Revision</option>
+                <option value="Completed">Completed</option>
+                <option value="Cancel">Cancelled</option>
+              </select>
+              <button type="submit" class="btn btn-primary btn-submit">Submit</button>
+            </form>
+          </div>
+          <div class="mb-3">
+            <strong>Paid Status</strong>
+            <form class="d-flex align-items-center" (submit)="updateOrderPaidStatusChanged(order.id, order.PaidStatus)">
+              <select class="form-select me-2" name="PaidStatus" [(ngModel)]="order.PaidStatus">
+                <option value="Paid">Paid</option>
+                <option value="Partial-Paid">Partial-Paid</option>
+                <option value="Unpaid">Unpaid</option>
+              </select>
+              <button type="submit" class="btn btn-primary btn-submit">Submit</button>
+            </form>
+          </div>
+          <div class="mb-3">
+            <strong>Payment Method</strong>
+            <form class="d-flex align-items-center" (submit)="updatePaymentMethod(order.id, order.PaymentMethod)">
+              <select class="form-select me-2" name="PaymentMethod" [(ngModel)]="order.PaymentMethod">
+                <option value="PayPal">PayPal</option>
+                <option value="Stripe">Stripe</option>
+                <option value="Bank Transfer">Bank Transfer</option>
+              </select>
+              <button type="submit" class="btn btn-primary btn-submit">Submit</button>
+            </form>
+          </div>
+        </div>
+        <div class="d-flex flex-column flex-grow-1">
+          <div class="mb-3 d-flex align-items-center gap-3">
+            <strong>Writers</strong>
+            <form (ngSubmit)="updateOrderStatusWriter(order.id, selectedWriterId)">
+              <select name="writerID" class="form-select" [(ngModel)]="selectedWriterId" required>
+                <option [value]="null" disabled selected>Select Writer</option>
+                <option *ngFor="let writer of writers" [value]="writer.id">{{ writer.name }}</option>
+              </select>
+              <button type="submit" class="btn btn-link">Assign to Writer</button>
+            </form>
+          </div>
+          <div class="mb-3">
+            <strong>Order By:</strong> <a href="#" style="margin-left: 10px;">{{ order.Email }}</a>
+          </div>
+          <div class="mb-3">
+            <div class="d-flex gap-3 align-items-center mb-1">
+              <strong>Grand Total:</strong>
+              <form class="d-flex align-items-center" (submit)="updateGrossAmount(order.id, order.GrossAmount)">
+                <input type="text" class="form-control me-2" style="padding-top: 0; padding-bottom: 0;" placeholder="Update Gross Amount" name="grossAmount" [(ngModel)]="order.GrossAmount" required />
                 <button type="submit" class="btn btn-primary btn-submit">Submit</button>
               </form>
             </div>
             <strong>Amount Received:</strong> GBP {{ order.GrossAmount - order.Balance }}
           </div>
         </div>
-        <div class="row">
-          <div class="col-md-12 d-flex justify-content-between align-items-center">
-            <a href="javascript:;" class="btn btn-outline-info" (click)="showOrderDetails(order)">Details</a>
-            <a href="#" class="btn btn-outline-secondary">Conversation <span class="badge bg-info text-dark">Writer: 0 | User: 0</span></a>
-            <a href="javascript:;" class="btn btn-outline-warning" (click)="sendInvoice(order,'reminder_email_count')"><i class="fa fa-envelope"></i> Reminder Email ({{order.reminder_email_count}})</a>
-            <a href="javascript:;" class="btn btn-outline-warning" (click)="sendInvoice(order,'reminder_email_count')"><i class="fa fa-envelope"></i> Revised Email ({{order.reminder_email_count}})</a>
-            <form class="d-flex align-items-center" (submit)="deleteOrder(pin, order.Id)">
-              <input name="pin" type="password" class="form-control me-2" placeholder="PIN" size="20" [(ngModel)]="pin" />
-              <button type="submit" class="btn btn-danger btn-danger">Delete Order</button>
-            </form>
-            <a href="javascript:;" class="btn btn-outline-success" (click)="sendInvoice(order,'invoice_sent_count')"><i class="fa fa-envelope"></i> Send Invoice ({{order.invoice_sent_count}})</a>
-          </div>
+        <div class="w-100 d-flex gap-5 align-items-center flex-wrap">
+          <a href="javascript:;" class="btn btn-outline-info mb-2" (click)="showOrderDetails(order)">Details</a>
+          <a href="/admin/orders/conversation" class="btn btn-outline-secondary mb-2">Conversation <span class="badge bg-info text-dark">Writer: 0 | User: 0</span></a>
+          <a href="javascript:;" class="btn btn-outline-warning mb-2" (click)="sendInvoice(order,'reminder_email_count')"><i class="fa fa-envelope"></i> Reminder Email ({{order.reminder_email_count}})</a>
+          <a href="javascript:;" class="btn btn-outline-warning mb-2" (click)="sendInvoice(order,'reminder_email_count')"><i class="fa fa-envelope"></i> Revised Email ({{order.reminder_email_count}})</a>
+          <form class="d-flex align-items-center mb-2" (submit)="deleteOrder(pin, order.id)">
+            <input name="pin" type="password" class="form-control me-2" placeholder="PIN" size="20" [(ngModel)]="pin" />
+            <button type="submit" class="btn btn-danger">Delete Order</button>
+          </form>
+          <a href="javascript:;" class="btn btn-outline-success mb-2" (click)="sendInvoice(order,'invoice_sent_count')"><i class="fa fa-envelope"></i> Send Invoice ({{order.invoice_sent_count}})</a>
         </div>
       </div>
     </div>
+    <p *ngIf="filteredOrders.length === 0" class="d-flex justify-content-center mt-3">No Order Available</p>
   </div> -->
+</div>
 
-<!-- Change 2 -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div class="wrapper" style="background-color: #f8f9fad1; padding: 15px">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+      <div href="#" class="navbar-brand">
+        <h3>{{ currentOrderSelection }}</h3>
+        <strong>Home</strong>/ MANAGE ORDERS
+      </div>
+    </div>
+  </nav>
+
+  <div class="container" style="margin-bottom: 5px; padding: 5px; width: 90%;">
+    <div class="status_btn_row d-flex flex-wrap justify-content-between">
+      <div class="flex-grow-1 p-1">
+        <button class="btn btn-primary w-100 rounded-1" (click)="changeOrderFilterStatus(1)">Current</button>
+      </div>
+      <div class="flex-grow-1 p-1">
+        <button class="btn btn-success w-100 rounded-1" (click)="changeOrderFilterStatus(2)">Completed</button>
+      </div>
+      <div class="flex-grow-1 p-1">
+        <button class="btn btn-secondary w-100 rounded-1" (click)="changeOrderFilterStatus(3)">Revision</button>
+      </div>
+      <div class="flex-grow-1 p-1">
+        <button class="btn btn-danger w-100 rounded-1" (click)="changeOrderFilterStatus(4)">Cancelled</button>
+      </div>
+      <div class="flex-grow-1 p-1">
+        <button class="btn btn-warning w-100 rounded-1" (click)="changeOrderFilterStatus(5)">Unpaid</button>
+      </div>
+    </div>
+  </div>
+
 <div class="container">
   <div class="card mb-3" *ngFor="let order of filteredOrders; let i = index">
       <div class="card-header" [ngStyle]="{ borderLeft: order.writer_assigned_status === 1 ? '5px solid #b6b5e5' : '5px solid #999' }">
           <div class="d-flex justify-content-between align-items-center">
               <div>
                   <strong>Balance:</strong>
-                  <form class="d-flex align-items-center" (submit)="updateBalance(order.Id, order.Balance)">
+                  <form class="d-flex align-items-center" (submit)="updateBalance(order.id, order.Balance)">
                       <input type="text" class="form-control me-2" placeholder="Update Balance" aria-invalid="false" aria-required="true" name="balance" required [(ngModel)]="order.Balance" />
                       <input name="shopID" type="hidden" value="1128" />
                       <button type="submit" class="btn btn-primary btn-submit rounded-1">Submit</button>
@@ -139,7 +319,7 @@
           <div class="d-flex flex-column flex-grow-1">
               <div class="mb-3">
                   <strong>Status</strong>
-                  <form class="d-flex align-items-center" (submit)="updateOrderStatus(order.Id, order.Status)">
+                  <form class="d-flex align-items-center" (submit)="updateOrderStatus(order.id, order.Status)">
                       <select name="statuss" class="form-select me-2" [(ngModel)]="order.Status">
                           <option value="New">New</option>
                           <option value="Revision">Revision</option>
@@ -152,11 +332,11 @@
               </div>
               <div class="mb-3">
                   <strong>Paid Status</strong>
-                  <form class="d-flex align-items-center" (submit)="updateOrderPaidStatusChanged(order.Id, order.PaidStatus)">
+                  <form class="d-flex align-items-center" (submit)="updateOrderPaidStatusChanged(order.id, order.PaidStatus)">
                       <select class="form-select me-2" name="PaidStatus" [(ngModel)]="order.PaidStatus">
                           <option value="Paid">Paid</option>
                           <option value="Partial-Paid">Partial-Paid</option>
-                          <option value="UnPaid">UnPaid</option>
+                          <option value="Unpaid">Unpaid</option>
                       </select>
                       <input name="shopID" type="hidden" value="1128" />
                       <button type="submit" class="btn btn-primary btn-submit">Submit</button>
@@ -164,7 +344,7 @@
               </div>
               <div class="mb-3">
                   <strong>Payment Method</strong>
-                  <form class="d-flex align-items-center" (submit)="updatePaymentMethod(order.Id, order.PaymentMethod)">
+                  <form class="d-flex align-items-center" (submit)="updatePaymentMethod(order.id, order.PaymentMethod)">
                       <select class="form-select me-2" name="PaymentMethod" [(ngModel)]="order.PaymentMethod">
                           <option value="PayPal">PayPal</option>
                           <option value="Stripe">Stripe</option>
@@ -177,13 +357,19 @@
           </div>
           <div class="d-flex flex-column flex-grow-1">
               <div class="mb-3 d-flex align-items-center gap-3">
-                  <strong>Writers</strong>
-                  <form>
-                      <select name="writerID" class="form-select" (change)="updateOrderStatusWriter(order.Id,1)">
-                          <option selected="selected">Please Assign Writer</option>
-                      </select>
-                  </form>
-                  <a href="javascript:;" class="btn btn-link" (click)="updateOrderStatusWriter(order.Id,1)">Assigned to writer</a>
+                <strong>Writers</strong>
+                <form (ngSubmit)="updateOrderStatusWriter(order.id, selectedWriterId)">
+                  <select
+                    name="writerID"
+                    class="form-select"
+                    [(ngModel)]="selectedWriterId"
+                    required
+                  >
+                    <option [value]="null" disabled selected>Select Writer</option>
+                    <option *ngFor="let writer of writers" [value]="writer.id">{{ writer.name }}</option>
+                  </select>
+                  <button type="submit" class="btn btn-link">Assign to Writer</button>
+                </form>
               </div>
               <div class="mb-3">
                   <strong>Order By:</strong> <a href="#" style="margin-left: 10px;">{{ order.Email }}</a>
@@ -191,7 +377,7 @@
               <div class="mb-3">
                 <div class="d-flex gap-3 align-items-center mb-1">
                   <strong>Grand Total:</strong>
-                  <form class="d-flex align-items-center" (submit)="updateGrossAmount(order.Id, order.GrossAmount)">
+                  <form class="d-flex align-items-center" (submit)="updateGrossAmount(order.id, order.GrossAmount)">
                       <input type="text" class="form-control me-2" style="padding-top: 0; padding-bottom: 0;" placeholder="Update Balance" aria-invalid="false" aria-required="true" name="grossAmount" [(ngModel)]="order.GrossAmount" required />
                       <input name="shopID" type="hidden" value="1128" />
                       <button type="submit" class="btn btn-primary btn-submit">Submit</button>
@@ -205,7 +391,7 @@
               <a href="/admin/orders/conversation" class="btn btn-outline-secondary mb-2">Conversation <span class="badge bg-info text-dark">Writer: 0 | User: 0</span></a>
               <a href="javascript:;" class="btn btn-outline-warning mb-2" (click)="sendInvoice(order,'reminder_email_count')"><i class="fa fa-envelope"></i> Reminder Email ({{order.reminder_email_count}})</a>
               <a href="javascript:;" class="btn btn-outline-warning mb-2" (click)="sendInvoice(order,'reminder_email_count')"><i class="fa fa-envelope"></i> Revised Email ({{order.reminder_email_count}})</a>
-              <form class="d-flex align-items-center mb-2" (submit)="deleteOrder(pin, order.Id)">
+              <form class="d-flex align-items-center mb-2" (submit)="deleteOrder(pin, order.id)">
                   <input name="pin" type="password" class="form-control me-2" placeholder="PIN" size="20" [(ngModel)]="pin" />
                   <button type="submit" class="btn btn-danger">Delete Order</button>
               </form>
@@ -213,109 +399,6 @@
           </div>
       </div>
   </div>
+  <p *ngIf="filteredOrders.length === 0" class="d-flex justify-content-center mt-3">No Order Available</p>
 </div>
-
-  <!-- <div class="container">
-    <div class="card" *ngFor="let order of filteredOrders; let i = index" style="padding: 8px; margin: 10px;">
-      <div class="table-responsive">
-        <table class="table">
-          <thead class="panel panel-success" [ngStyle]="{ border: order.writer_assigned_status === 1 ? '5px solid #b6b5e5' : '5px solid #999' }">
-            <tr>
-              <th>
-                Balance:
-                <form style="display: flex; justify-content: space-around">
-                  <input type="text" class="" placeholder="Update Balance" aria-invalid="false" aria-required="true" name="balance" required="" [(ngModel)]="order.Balance" />
-                  <input name="shopID" type="hidden" value="1128" />
-                  <input name="Submit" type="submit" value="Submit" class="" (click)="updateBalance(order.Id, order.Balance)" />
-                </form>
-              </th>
-              <th>Order Date: {{ formatDatabaseTimestamp(order.created_at) }}</th>
-              <th>
-                Order Date: {{ formatDatabaseTimestamp(order.created_at) }}
-                <form style="display: flex">
-                  <select name="examy" class="">
-                    <option value="Select One" selected="selected">Select One</option>
-                    <option value="Exam">Exam</option>
-                    <option value="Returning-New">Returning / New</option>
-                    <option value="Fresh-Answer">Fresh Answer</option>
-                  </select>
-                  <input name="Submit" class="" type="submit" value="Submit" />
-                </form>
-              </th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr class="gradeX">
-              <td>
-                Status
-                <form style="display: flex">
-                  <select name="statuss" class="" [(ngModel)]="order.Status">
-                    <option value="New">New</option>
-                    <option value="Revision">Revision</option>
-                    <option value="Completed">Completed</option>
-                    <option value="Cancel">Cancelled</option>
-                  </select>
-                  <input name="shopID" type="hidden" value="1128" />
-                  <input name="Submit" class="" type="submit" value="Submit" (click)="updateOrderStatus(order.Id, order.Status)" />
-                </form>
-              </td>
-              <td>
-                Writers
-                <form>
-                  <select name="writerID" class="" (change)="updateOrderStatusWriter(order.Id,1)">
-                    <option selected="selected">Please Assign Writer</option>
-                  </select>
-                </form>
-                -
-                <a href="javascript:;" (click)="updateOrderStatusWriter(order.Id,1)">Assigned to writer </a>
-              </td>
-              <td>
-                <a href="javascript:;" (click)="showOrderDetails(order)">Details</a>
-                -
-                <a href="#">Conversation <span style="color:#fff; background-color: #02bcb2;">(Writer: 0 | User: 0)</span></a>
-                -
-                <br />
-                <a (click)="sendInvoice(order,'reminder_email_count')" class="sendInvoice"> <i class="fa fa-envelope"></i> Reminder Email ({{order.reminder_email_count}})</a>
-                  <br />
-                <a (click)="sendInvoice(order,'reminder_email_count')" class="sendInvoice"> <i class="fa fa-envelope"></i> Revised Email ({{order.reminder_email_count}})</a>
-
-                <form style="display: flex">
-                  <input name="pin" type="password" class="" placeholder="PIN" size="20" [(ngModel)]="pin" />
-                  <input type="submit" class="" name="Delete Order" value="Delete Order" (click)="deleteOrder(pin, order.Id)" />
-                </form>
-                <a href="javascript:;" (click)="sendInvoice(order,'invoice_sent_count')" class="sendInvoice"><i class="fa fa-envelope"></i> Send Invoice ({{order.invoice_sent_count}})</a>
-                <i class="fa fa-check-circle"></i>
-              </td>
-            </tr>
-            <tr>
-              <td>
-                Paid Status
-                <form style="display: flex">
-                  <select class="" name="PaidStatus" [(ngModel)]="order.PaidStatus" >
-                    <option value="Paid">Paid</option>
-                    <option value="Partial-Paid">Partial-Paid</option>
-                    <option value="UnPaid">UnPaid</option>
-                  </select>
-                  <input name="shopID" type="hidden" value="1128" />
-                  <input name="Submit" type="submit" value="Submit" class="" (click)="updateOrderPaidStatusChanged(order.Id,order.PaidStatus);" />
-                </form>
-              </td>
-              <td>
-                Order By:<a href="#">{{ order.Email }}</a>
-                Grand Total:
-                <form style="display: flex">
-                  <input type="text" class="" placeholder="Update Balance" aria-invalid="false" aria-required="true" size="20" name="grossAmount" value="{{ order.GrossAmount }}" [(ngModel)]="order.GrossAmount" required="" />
-                  <input name="shopID" type="hidden" value="1128" />
-                  <input name="Submit" type="submit" value="Submit" class="" (click)="updateGrossAmount(order.Id, order.GrossAmount);" />
-                </form>
-                Amount Received:
-                <strong> GBP {{ order.GrossAmount - order.Balance }} </strong>
-              </td>
-              <td>OrderID: &nbsp; PA - {{ order.Id }}</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
-    </div>
-  </div> -->
-</div>
+</div> -->

@@ -1,0 +1,90 @@
+<div class="container my-4">
+    <div class="row">
+        <div class="col-12">
+            <div class="d-flex justify-content-between mb-3">
+                <button class="btn" style="background-color: rgb(37, 67, 54); color: #FFF; border-radius: 8px; padding: 8px 16px;" (click)="openGradeModal(gradeTemplate)">Insert New Desired Grade</button>
+            </div>
+            <div class="table-responsive">
+                <table *ngIf="grades.length > 0" class="table table-striped table-hover align-middle">
+                    <thead class="" style="background-color: rgb(37, 67, 54); color: #FFF;">
+                        <tr>
+                            <th scope="col">#</th>
+                            <th scope="col">Grade Title</th>
+                            <th scope="col">Description</th>
+                            <th scope="col">Price</th>
+                            <th scope="col">Options</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let grade of grades; let i = index">
+                            <td>{{ i + 1 }}</td>
+                            <td>{{ grade.title }}</td>
+                            <td>{{ grade.description }}</td>
+                            <td>{{ grade.price | currency:'GBP' }}</td>
+                            <td>
+                                <button class="btn btn-outline-secondary btn-sm me-2" (click)="openGradeModal(gradeTemplate, grade)">
+                                    <i class="fa fa-pencil-square"></i>
+                                </button>
+                                <button class="btn btn-outline-danger btn-sm" (click)="openDeleteModal(deleteTemplate, grade)">
+                                    <i class="fa fa-trash"></i>
+                                </button>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+                <div *ngIf="grades.length === 0" class="d-flex justify-content-center my-4">No Grades Created</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<ng-template #gradeTemplate>
+    <div class="custom-modal-wrapper">
+        <div class="custom-modal-backdrop"></div>
+        <div class="custom-modal">
+            <div class="custom-modal-header">
+                <h5>{{ isEditMode ? 'Edit Grade' : 'Insert New Grade' }}</h5>
+                <button type="button" class="custom-close-btn" aria-label="Close" (click)="gradeModalRef?.hide()">×</button>
+            </div>
+            <div class="custom-modal-body">
+                <form>
+                    <div class="custom-form-group">
+                        <label for="gradeTitle" class="custom-form-label">Grade Title</label>
+                        <input type="text" class="custom-form-control w-100" id="gradeTitle" [(ngModel)]="selectedGrade.title" name="gradeTitle" required placeholder="Enter Grade Title">
+                    </div>
+                    <div class="custom-form-group">
+                        <label for="description" class="custom-form-label">Description</label>
+                        <input type="text" class="custom-form-control w-100" id="description" [(ngModel)]="selectedGrade.description" name="description" required placeholder="Enter Description">
+                    </div>
+                    <div class="custom-form-group">
+                        <label for="price" class="custom-form-label">Price (£)</label>
+                        <input type="number" class="custom-form-control w-100" id="price" [(ngModel)]="selectedGrade.price" name="price" required placeholder="Enter Price">
+                    </div>
+                </form>
+            </div>
+            <div class="custom-modal-footer d-flex gap-2">
+                <button type="button" class="custom-btn custom-btn-secondary" (click)="gradeModalRef?.hide()">Close</button>
+                <button type="button" class="custom-btn custom-btn-primary" (click)="saveGrade()">Save Grade</button>
+            </div>
+        </div>
+    </div>
+</ng-template>
+
+<!-- Delete Modal -->
+<ng-template #deleteTemplate>
+    <div class="custom-modal-wrapper">
+        <div class="custom-modal">
+            <div class="custom-modal-header">
+                <h5>Confirm Deletion</h5>
+                <button type="button" class="custom-close-btn" aria-label="Close" (click)="deleteModalRef?.hide()">×</button>
+            </div>
+            <div class="custom-modal-body">
+                <p>Are you sure you want to delete the grade <strong>{{ selectedGrade?.title }}</strong>?</p>
+            </div>
+            <div class="custom-modal-footer d-flex gap-2">
+                <button type="button" class="custom-btn custom-btn-secondary" (click)="deleteModalRef?.hide()">Cancel</button>
+                <button type="button" class="custom-btn custom-btn-danger" (click)="confirmDelete()">Delete</button>
+            </div>
+        </div>
+    </div>
+</ng-template>

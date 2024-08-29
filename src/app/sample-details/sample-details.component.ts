@@ -123,6 +123,7 @@ export class SampleDetailsComponent {
     console.log('in sjpw');
     this.showModal = true;
   }
+
   submitOrder(event: any): void {
     if (this.orderForm.invalid) {
       return;
@@ -132,16 +133,16 @@ export class SampleDetailsComponent {
       Name: this.orderForm.value?.firstName,
       Phone: this.orderForm.value?.contactPhone,
       Email: this.orderForm.value?.email,
-      WordsORPages: this.orderForm.value.softService,
+      WordsORPages: this.orderForm.value.pageWords,
       NumberOfWordsPages: this.orderForm.value.pageWords,
       Topic: this.orderForm.value.topic,
       DetailInstructions: this.orderForm.value.detailInstructions,
       TypeofHelpRequire: '',
       LineSpacing: this.orderForm.value.lineSpace,
-      SoftwareService: this.payload.softwareAsService,
-      TopicCategory: this.payload.topicCatogery,
-      PresentationSlides: this.payload.numberOfPresentationSlides,
-      SourceReferences: this.orderForm.value.sourcesRef,
+      SoftwareService: this.selectedSample.softwareAsService,
+      TopicCategory: this.selectedSample.topicCatogery,
+      PresentationSlides: this.selectedSample.numberOfPresentationSlides,
+      SourceReferences: this.selectedSample.id,
       WritingStyle: this.orderForm.value.writingStyle,
       PreferredLanguageLevel: this.orderForm.value.languageStyle,
       EducationLevel: this.orderForm.value.eduLevel,
@@ -152,15 +153,54 @@ export class SampleDetailsComponent {
       GrossAmount: this.selectedSample.DiscountPrice,
       Status: 'New',
       PaidStatus: 'Unpaid',
-      suportingDoc:this.fileUrl,
-      isSample:true
+      suportingDoc: this.fileUrl,
+      isSample: true
     };
     this.orderService.createOrder(orderPayload).subscribe((res) => {
-      console.log(res.data);
+      console.log(res, "acsmascascacj");
       this.globalService.dataSubject$.next(res.data);
-      this.router.navigate(['/order']);
+      this.router.navigate([`/order/${res.insertId}`]);
     });
   }
+
+  // submitOrder(event: any): void {
+  //   if (this.orderForm.invalid) {
+  //     return;
+  //   }
+  //   this.showModal = false;
+  //   const orderPayload = {
+  //     Name: this.orderForm.value?.firstName,
+  //     Phone: this.orderForm.value?.contactPhone,
+  //     Email: this.orderForm.value?.email,
+  //     WordsORPages: this.orderForm.value.softService,
+  //     NumberOfWordsPages: this.orderForm.value.pageWords,
+  //     Topic: this.orderForm.value.topic,
+  //     DetailInstructions: this.orderForm.value.detailInstructions,
+  //     TypeofHelpRequire: '',
+  //     LineSpacing: this.orderForm.value.lineSpace,
+  //     SoftwareService: this.payload.softwareAsService,
+  //     TopicCategory: this.payload.topicCatogery,
+  //     PresentationSlides: this.payload.numberOfPresentationSlides,
+  //     SourceReferences: this.orderForm.value.sourcesRef,
+  //     WritingStyle: this.orderForm.value.writingStyle,
+  //     PreferredLanguageLevel: this.orderForm.value.languageStyle,
+  //     EducationLevel: this.orderForm.value.eduLevel,
+  //     PaperStandard: this.orderForm.value.paperStnd,
+  //     DeadLine: this.orderForm.value.deadline,
+  //     BeforeDiscount: 0,
+  //     DiscountCode: '',
+  //     GrossAmount: this.selectedSample.DiscountPrice,
+  //     Status: 'New',
+  //     PaidStatus: 'Unpaid',
+  //     suportingDoc:this.fileUrl,
+  //     isSample:true
+  //   };
+  //   this.orderService.createOrder(orderPayload).subscribe((res) => {
+  //     console.log(res.data);
+  //     this.globalService.dataSubject$.next(res.data);
+  //     this.router.navigate(['/order']);
+  //   });
+  // }
 
   onFileSelected(event: any): void {
     const selectedFile: File = event.target.files[0];

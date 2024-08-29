@@ -1,48 +1,81 @@
-import { Component } from '@angular/core';
-import { Router } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { Router, ActivatedRoute } from '@angular/router';
 import { GlobalService } from 'src/app/services/global.service';
 import { OrderService } from 'src/app/services/order.service';
+import { ServicesService } from 'src/app/services/services.service';
 
 @Component({
   selector: 'app-orders',
   templateUrl: './admin-orders.component.html',
   styleUrls: ['./admin-orders.component.css'],
 })
-export class AdminOrdersComponent {
+export class AdminOrdersComponent implements OnInit {
   orders: any[] = [];
+  writers: any[] = [];
   filteredOrders: any[] = [];
   orderStatus: any;
   orderBalance: any;
   pin: string = '';
   isSample: boolean = false;
   currentOrderSelection: string = 'Current';
+
   constructor(
     private orderService: OrderService,
     private globalService: GlobalService,
-    private router: Router
+    private router: Router,
+    private activatedRoute: ActivatedRoute,
+    private serviceService: ServicesService
   ) {
     if (this.router.url.includes('sample-orders')) {
       this.isSample = true;
     }
   }
-  ngOnInit(): void {
-    this.orderService.getAllOrders().subscribe((res) => {
-      if (this.isSample) {
-        // res.data.reverse()
-        this.orders = res.data.filter(
-          (element: any) => element.isSample === 1
-        );
-      } else {
-        this.orders = res.data.filter(
-          (element: any) => element.isSample === 0
-        );
-      }
-      this.changeOrderFilterStatus(1);
-    });
 
+  ngOnInit(): void {
+    this.activatedRoute.queryParams.subscribe((params) => {
+      const status = params['status'];
+      this.currentOrderSelection = status || 'Current';
+      this.fetchOrders();
+    });
+    this.clearNotifications();
+    this.fetchWriters();
+  }
+
+  fetchOrders(): void {
+    this.orderService.getAllOrders().subscribe((res) => {
+      this.orders = res.data;
+      console.log(res.data, '===res.datares.data');
+
+      if (this.isSample) {
+        this.orders = this.orders.filter((element: any) => element.isSample === 1);
+      } else {
+        this.orders = this.orders.filter((element: any) => element.isSample === 0);
+      }
+      this.initializeSelectedWriters(); // Initialize selected writer for each order
+      this.applyFilterBasedOnSelection();
+    });
+  }
+
+  initializeSelectedWriters(): void {
+    // Initialize selectedWriterId for each order based on writer_id
+    this.orders.forEach(order => {
+      order.selectedWriterId = order.writer_id || null; // Set initial selected writer
+    });
+  }
+
+  fetchWriters(): void {
+    this.serviceService.getAllWriters().subscribe((res) => {
+      console.log(res, 'Fetched writers');
+      this.writers = res.filter(
+        (writer: any) => writer.role === 'Writer' && writer.status === 'Active'
+      );
+    });
+  }
+
+  clearNotifications(): void {
     this.orderService.deteletsideBarNotification('orders').subscribe((res) => {
-      console.log(res)
-    })
+      console.log(res);
+    });
   }
 
   showOrderDetails(order: any): void {
@@ -51,13 +84,13 @@ export class AdminOrdersComponent {
   }
 
   sendInvoice(order: any, flag: any): void {
-    this.orderService.sendInvoice(order.Id, flag).subscribe(
+    this.orderService.sendInvoice(order.id, flag).subscribe(
       (res) => {
         console.log(res);
         alert('Email sent');
       },
       (error) => {
-        alert('Email sent');
+        alert('Email not sent');
       }
     );
   }
@@ -65,22 +98,37 @@ export class AdminOrdersComponent {
   updateOrderStatus(id: number, status: any): void {
     const payload = { id: id, Status: status };
     this.orderService.updateOrderStatus(payload).subscribe((res) => {
-      console.log(res);
+      this.updateOrderInList(res.data);
+      alert('Order status updated successfully.');
     });
   }
 
-  updateOrderStatusWriter(id: number, writerID: any): void {
-    const payload = { id: id, writer: writerID };
-    this.orderService.updateOrderStatusWriter(payload).subscribe((res) => {
-      console.log(res);
-    });
+  updateOrderStatusWriter(orderId: number, writerId: any): void {
+    if (!writerId) {
+      alert('Please select a writer before assigning.');
+      return;
+    }
+
+    const payload = { id: orderId, writer: writerId };
+    this.orderService.updateOrderStatusWriter(payload).subscribe(
+      (res) => {
+        this.updateOrderInList(res.data);
+        alert('Writer assigned successfully.');
+      },
+      (error) => {
+        console.error('Error assigning writer:', error);
+        alert('An error occurred while assigning the writer.');
+      }
+    );
   }
 
   deleteOrder(pin: string, id: number): void {
     if (pin === 'Office123') {
       this.pin = '';
       this.orderService.deleteOrder(id).subscribe((res) => {
-        window.location.reload();
+        this.orders = this.orders.filter(order => order.id !== id);
+        this.applyFilterBasedOnSelection();
+        alert('Order deleted successfully.');
       });
     } else {
       alert('Wrong pin');
@@ -92,57 +140,94 @@ export class AdminOrdersComponent {
       Id: id,
       Balance: balance,
     };
-    this.orderService.updateOrder(id, payload).subscribe((res) => {
-      console.log(res);
-    });
+
+    this.orderService.updateOrder(id, payload).subscribe(
+      (res) => {
+        this.updateOrderInList(res.data);
+        alert('Balance updated successfully.');
+      },
+      (error) => {
+        console.error(error);
+        if (error.status === 404 && error.error.message === 'Balance cannot be greater than GrossAmount') {
+          alert('Error: Balance cannot be greater than GrossAmount.');
+        } else {
+          alert('An error occurred while updating the balance.');
+        }
+      }
+    );
   }
-  changeOrderFilterStatus(status: any): void {
-    switch (status) {
-      case 1:
-        this.filteredOrders = this.orders.filter(
-          (element) => element.Status === 'New'
-        );
-        this.currentOrderSelection = 'Current';
+
+  updateOrderInList(updatedOrder: any): void {
+    const index = this.orders.findIndex(order => order.id === updatedOrder.id);
+    if (index !== -1) {
+      this.orders[index] = updatedOrder;
+      this.orders[index].selectedWriterId = updatedOrder.writer_id; // Keep the writer updated
+      this.applyFilterBasedOnSelection();  // Refresh the filtered view
+    }
+  }
+
+  applyFilterBasedOnSelection(): void {
+    switch (this.currentOrderSelection) {
+      case 'Current':
+        this.filteredOrders = this.orders.filter(element => element.Status === 'New');
         break;
-      case 2:
-        this.filteredOrders = this.orders.filter(
-          (element) => element.Status === 'Completed'
-        );
-        this.currentOrderSelection = 'Completed';
+      case 'Completed':
+        this.filteredOrders = this.orders.filter(element => element.Status === 'Completed');
         break;
-      case 3:
-        this.filteredOrders = this.orders.filter(
-          (element) => element.Status === 'Revision'
-        );
-        this.currentOrderSelection = 'Revision';
+      case 'Revision':
+        this.filteredOrders = this.orders.filter(element => element.Status === 'Revision');
         break;
-      case 4:
-        this.filteredOrders = this.orders.filter(
-          (element) => element.Status === 'Cancel'
-        );
-        this.currentOrderSelection = 'Cancel';
+      case 'Cancelled':
+        this.filteredOrders = this.orders.filter(element => element.Status === 'Cancel');
         break;
-      case 5:
-        this.filteredOrders = this.orders.filter(
-          (element) => element.PaidStatus === 'Unpaid'
-        );
-        this.currentOrderSelection = 'Unpaid';
+      case 'Unpaid':
+        this.filteredOrders = this.orders.filter(element => element.PaidStatus === 'Unpaid');
         break;
       default:
-        this.filteredOrders = this.orders.filter(
-          (element) => element.Status === 'New'
-        );
+        this.filteredOrders = this.orders.filter(element => element.Status === 'New');
         this.currentOrderSelection = 'Current';
         break;
     }
-    this.filteredOrders;
+  }
+
+  changeOrderFilterStatus(status: number): void {
+    switch (status) {
+      case 1:
+        this.currentOrderSelection = 'Current';
+        this.filteredOrders = this.orders.filter(element => element.Status === 'New');
+        break;
+      case 2:
+        this.currentOrderSelection = 'Completed';
+        this.filteredOrders = this.orders.filter(element => element.Status === 'Completed');
+        break;
+      case 3:
+        this.currentOrderSelection = 'Revision';
+        this.filteredOrders = this.orders.filter(element => element.Status === 'Revision');
+        break;
+      case 4:
+        this.currentOrderSelection = 'Cancelled';
+        this.filteredOrders = this.orders.filter(element => element.Status === 'Cancel');
+        break;
+      case 5:
+        this.currentOrderSelection = 'Unpaid';
+        this.filteredOrders = this.orders.filter(element => element.PaidStatus === 'Unpaid');
+        break;
+      default:
+        this.currentOrderSelection = 'Current';
+        this.filteredOrders = this.orders.filter(element => element.Status === 'New');
+        break;
+    }
+
+    // Update the URL with the new filter status
+    this.router.navigate([], {
+      relativeTo: this.activatedRoute,
+      queryParams: { status: this.currentOrderSelection },
+      queryParamsHandling: 'merge',
+    });
   }
 
   formatDatabaseTimestamp(databaseTimestamp: string): string {
-    // Convert the database timestamp to a JavaScript Date object
     const date = new Date(databaseTimestamp);
-
-    // Options for formatting the date and time
     const options: Intl.DateTimeFormatOptions = {
       year: 'numeric',
       month: 'long',
@@ -150,13 +235,11 @@ export class AdminOrdersComponent {
       hour: '2-digit',
       minute: '2-digit',
       second: '2-digit',
-      hour12: true, // Use 12-hour format with AM/PM
+      hour12: true,
     };
 
-    // Format the date using Intl.DateTimeFormat
     const formattedDate = new Intl.DateTimeFormat('en-US', options).format(date);
 
-    // Extract the day of the month and add "th," "st," or "nd" as appropriate
     const day = date.getDate();
     let daySuffix = 'th';
 
@@ -168,26 +251,38 @@ export class AdminOrdersComponent {
       daySuffix = 'rd';
     }
 
-    // Replace 'th' in the formatted date with the appropriate suffix
     const formattedDateWithSuffix = formattedDate.replace(/th/g, daySuffix);
 
     return formattedDateWithSuffix;
   }
+
   updateOrderPaidStatusChanged(id: any, status: any): void {
     const payload = { id: id, PaidStatus: status };
     this.orderService.updateOrderPaidStatus(payload).subscribe((res) => {
-      console.log(res);
+      this.updateOrderInList(res.data);
+      alert('Paid status updated successfully.');
     });
   }
 
   updateGrossAmount(id: any, amount: any): void {
     const payload = { id: id, GrossAmount: amount };
     this.orderService.updateGrossAmount(payload).subscribe((res) => {
-      console.log(res);
+      this.updateOrderInList(res.data);
+      alert('Gross amount updated successfully.');
     });
   }
 
-  updatePaymentMethod(orderId: number, paymentMethod: string) {
-    // Implement the logic to update the payment method
+  updatePaymentMethod(orderId: number, paymentMethod: string): void {
+    this.orderService.updatePaymentMethod(orderId, paymentMethod).subscribe(
+      (res) => {
+        this.updateOrderInList(res.data);
+        alert('Payment method updated successfully.');
+      },
+      (error) => {
+        console.error('Error updating payment method:', error);
+        alert('An error occurred while updating the payment method.');
+      }
+    );
   }
 }
+
