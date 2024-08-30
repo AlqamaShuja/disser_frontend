@@ -1,20 +1,178 @@
-<!-- <section class="page-header">
-  <div class="container-fluid" style="max-width:80%;margin:0 auto">
-    <div class="row justify-content-center">
-      <div class="col-lg-8 col-xl-8">
-        <div class="title-block">
-          <h1>Contact Us</h1>
-          <ul class="header-bradcrumb justify-content-center">
-            <li><a href="/">Home</a></li>
-            <li class="active" aria-current="page">Contact</li>
-          </ul>
+<div class="contact-us-banner">
+  <div class="contact-us-banner-overlay">
+    <h1>Contact Us</h1>
+    <p>Reach Out to Little Feet for Support and Information!</p>
+  </div>
+</div>
+
+<div class="contact-us-content">
+  <div class="contact-us-info">
+    <h2>Contact Us For Further Information</h2>
+    <p>
+      Feel free to contact us for any further information or inquiries. Our team at Little Feet is here to assist you with any questions you may have. Reach out to us via phone, email, or by filling out the contact form below, and we will be happy to help.
+    </p>
+
+    <div class="contact-info-box">
+      <div class="info-card">
+        <div class="info-icon">
+          <i class="fas fa-map-marker-alt"></i>
+        </div>
+        <div class="info-details">
+          <h3 style="color: #FFF;">Location Address</h3>
+          <p>Office No.101, Station Road, North Harrow, Harrow, England, HA2 7SE</p>
+        </div>
+      </div>
+
+      <div class="info-card">
+        <div class="info-icon">
+          <i class="fas fa-envelope"></i>
+        </div>
+        <div class="info-details">
+          <h3 style="color: #FFF;">Email Address</h3>
+          <p>info@dissertationwriting.help<br>career@dissertationwriting.help<br>referrer@dissertationwriting.help</p>
+        </div>
+      </div>
+
+      <div class="info-card">
+        <div class="info-icon">
+          <i class="fas fa-phone-alt"></i>
+        </div>
+        <div class="info-details">
+          <h3 style="color: #FFF;">Phone Number</h3>
+          <p>Phone: 02038591470</p>
         </div>
       </div>
     </div>
   </div>
-</section> -->
 
-<section style="margin: 0 auto; width: 80%;">
+  <div class="contact-us-form">
+    <form [formGroup]="contactUs" (ngSubmit)="submit()">
+      <div class="form-row">
+        <input type="text" formControlName="name" placeholder="Name*" class="contact-input" />
+        <div *ngIf="contactUs.get('name')?.invalid && contactUs.get('name')?.touched" class="text-danger">Name is required.</div>
+      </div>
+      <div class="form-row">
+        <input type="email" formControlName="email" placeholder="Email*" class="contact-input" />
+        <div *ngIf="contactUs.get('email')?.invalid && contactUs.get('email')?.touched" class="text-danger">Valid Email is required.</div>
+      </div>
+      <div class="form-row">
+        <input type="text" formControlName="phoneNumber" placeholder="Phone*" class="contact-input" />
+        <div *ngIf="contactUs.get('phoneNumber')?.invalid && contactUs.get('phoneNumber')?.touched" class="text-danger">Phone number is required.</div>
+      </div>
+      <div class="form-row">
+        <input type="text" formControlName="subject" placeholder="Subject*" class="contact-input" />
+        <div *ngIf="contactUs.get('subject')?.invalid && contactUs.get('subject')?.touched" class="text-danger">Subject is required.</div>
+      </div>
+      <div class="form-row">
+        <textarea formControlName="message" placeholder="Enter Your Enquiry" class="contact-textarea"></textarea>
+        <div *ngIf="contactUs.get('message')?.invalid && contactUs.get('message')?.touched" class="text-danger">Message is required.</div>
+      </div>
+      <button type="submit" class="submit-button">Send Message</button>
+    </form>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div class="contact-us-banner">
+  <div class="contact-us-banner-overlay">
+    <h1>Contact Us</h1>
+    <p>Reach Out to Little Feet for Support and Information!</p>
+  </div>
+</div>
+
+<div class="contact-us-content">
+  <div class="contact-us-info">
+    <h2>Contact Us For Further Information</h2>
+    <p>
+      Feel free to contact us for any further information or inquiries. Our team at Little Feet is here to assist you with any questions you may have. Reach out to us via phone, email, or by filling out the contact form below, and we will be happy to help.
+    </p>
+
+    <div class="contact-info-box">
+      <div class="info-card">
+        <div class="info-icon">
+          <i class="fas fa-map-marker-alt"></i>
+        </div>
+        <div class="info-details">
+          <h3 style="color: #FFF;">Location Address</h3>
+          <p>Office No.101, Station Road, North Harrow, Harrow, England, HA2 7SE</p>
+        </div>
+      </div>
+
+      <div class="info-card">
+        <div class="info-icon">
+          <i class="fas fa-envelope"></i>
+        </div>
+        <div class="info-details">
+          <h3 style="color: #FFF;">Email Address</h3>
+          <p>info@dissertationwriting.help<br>career@dissertationwriting.help<br>referrer@dissertationwriting.help</p>
+        </div>
+      </div>
+
+      <div class="info-card">
+        <div class="info-icon">
+          <i class="fas fa-phone-alt"></i>
+        </div>
+        <div class="info-details">
+          <h3 style="color: #FFF;">Phone Number</h3>
+          <p>Phone: 02038591470</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div class="contact-us-form">
+    <form>
+      <div class="form-row">
+        <input type="text" placeholder="Name*" class="contact-input" />
+      </div>
+      <div class="form-row">
+        <input type="email" placeholder="Email*" class="contact-input" />
+      </div>
+      <div class="form-row">
+        <input type="text" placeholder="Subject*" class="contact-input" />
+      </div>
+      <div class="form-row">
+        <input type="text" placeholder="Subject*" class="contact-input" />
+      </div>
+      <div class="form-row">
+        <textarea placeholder="Enter Your Enquiry" class="contact-textarea"></textarea>
+      </div>
+      <button type="submit" class="submit-button">Send Message</button>
+    </form>
+  </div>
+</div> -->
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <section style="margin: 0 auto; width: 80%;">
   <nav aria-label="">
     <ol class="breadcrumb justify-content-lefy" style="background-color: transparent;" >
       <li class="breadcrumb-item"><a href="/">Home</a></li>
@@ -23,7 +181,6 @@
   </nav>
 </section>
 
-<!-- Contact section start -->
 <section class="contact section-padding">
   <div class="container-fluid" style="max-width:80%;margin:0 auto">
     <div class="row justify-content-between">
@@ -872,4 +1029,4 @@
       </div>
     </div>
   </div>
-</section>
+</section> -->

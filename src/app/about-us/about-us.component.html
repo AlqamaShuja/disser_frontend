@@ -21,7 +21,39 @@
 }
 
 </style>
-<app-slider [aboutUs]="true"></app-slider>
+<!-- <app-slider [aboutUs]="true"></app-slider> -->
+
+<div class="banner-about-us" 
+  [ngStyle]="{
+      'background-image': 'url(' + slides.imageUrl + ')',
+      'background-size': 'cover',
+      'background-position': 'center',
+      'height': '450px',
+      'display': 'flex',
+      'justify-content': 'center',
+      'align-items': 'center',
+      'width': '100%'
+  }"
+>
+  <!-- <div class="banner-overlay"></div> -->
+  <div class="banner-content-container d-flex justify-content-center w-90">
+      <div class="banner-content d-flex justify-content-center">
+          <div class="banner-title">
+              <h1 class="banner-heading">{{ slides.heading }}</h1>
+              <div class="banner-text" [innerHTML]="slides.text"></div>
+              <div class="banner-buttons mt-2 d-flex justify-content-center">
+                  <button (click)="navigateToOrder()" class="banner-order-now">ORDER NOW</button>
+              </div>
+          </div> 
+      </div>
+  </div>
+</div>
+
+
+
+
+
+
 <!-- InstructorsSection Start -->
 
 <!-- <section class="instructors section-padding">
@@ -202,7 +234,7 @@
 <!-- Testimonial section start -->
 
 
-<section class="counter-section4 section-padding mt-4">
+<section class="counter-section4 section-padding mt-4 mb-4">
   <div class="container-fluid" style="max-width: 70%; margin: 0 auto;">
       <h1  style="margin: 0 auto; padding: 20px; text-align: center; color: #242961; word-spacing: 25;" >Don't Just Take Our World and Have a Look at Our Top Features</h1>
     <app-accordion [items]="accordionData"></app-accordion>
@@ -211,7 +243,7 @@
   
   
   
-<section
+<!-- <section
   class="testimonial-3 section-padding"
   style="background-color: #242961"
 >
@@ -220,7 +252,7 @@
       <div class="col-xl-6">
         <div class="section-heading text-center">
           <h2 class="font-lg" style="color: #fff">Our Students Says</h2>
-          <p style="color: #fff">
+          <p style="color: #fff; text-align: center;">
             Discover Your Perfect Program In Our Courses.
           </p>
         </div>
@@ -230,13 +262,17 @@
       <app-testimonials [aboutUs]="true"></app-testimonials>
     </div>
   </div>
-</section>
+</section> -->
+
+<app-home-testimonial-section></app-home-testimonial-section>
 
 
 
 <!-- Testimonial section End -->
 <!-- Work Process Section Start -->
-<section class="work-process section-padding" [innerHTML]="ourGoalOrMainObjectivesSection">
+<section class="work-process section-padding" 
+[innerHTML]="ourGoalOrMainObjectivesSection"
+>
   <!-- <div class="container-fluid" style="max-width: 80%; margin: 0 auto">
     <div class="row mb-70 justify-content-between">
       <div class="col-xl-12 col-lg-12">

@@ -2,6 +2,15 @@ import { Component, OnInit } from '@angular/core';
 import { SafeHtml } from '@angular/platform-browser';
 import { ServicesService } from '../services/services.service';
 import { BASEURL } from 'src/globals';
+import { Router } from '@angular/router';
+
+interface Slide {
+  imageUrl: string;
+  heading: string;
+  text: string;
+  showAboutUs: boolean;
+}
+
 
 @Component({
   selector: 'app-about-us',
@@ -14,8 +23,9 @@ export class AboutUsComponent implements OnInit {
   aboutUsSectionBelowSlider: SafeHtml = '';
   accordionData: any;
   ourGoalOrMainObjectivesSection: SafeHtml = '';
+  slides: any = {};
 
-  constructor(private serviceService: ServicesService){}
+  constructor(private serviceService: ServicesService, private router: Router){}
 
   parseDescription(data: string): any {
     try {
@@ -26,6 +36,11 @@ export class AboutUsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.serviceService.getSectionDataById(12).subscribe((res) => {
+      this.slides = JSON.parse(res.description).map((sliderData: Slide) => ({ ...sliderData, imageUrl: `${BASEURL}files/${sliderData.imageUrl}` }))[0];
+      console.log(this.slides, 'sli:scmkacacackaskc:sliderData');
+    });
+
     this.serviceService.getSectionDataById(13).subscribe(res => {
       let { extra_data, description } = this.parseDescription(res);
       Object.keys(extra_data).forEach((key, i) => {
@@ -53,6 +68,10 @@ export class AboutUsComponent implements OnInit {
       });
       this.ourGoalOrMainObjectivesSection = description;
     });
+  }
+
+  navigateToOrder(){
+    this.router.navigate(["/order"])
   }
 
 }

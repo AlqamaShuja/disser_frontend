@@ -16,6 +16,7 @@
     align-items: center;
     cursor: pointer;
     font-size: 24px;
+    border: 2px solid #FFF;
   }
   
   .chat-modal {

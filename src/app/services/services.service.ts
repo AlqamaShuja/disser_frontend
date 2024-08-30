@@ -126,8 +126,14 @@ export class ServicesService {
   getAllCoupons():Observable<any>{
     return this.http.get<any>(`${this.apiUrl}coupon`);
   }
+  getAllActieCoupons():Observable<any>{
+    return this.http.get<any>(`${this.apiUrl}coupon/active`);
+  }
   addCoupon(data: any):Observable<any>{
     return this.http.post<any>(`${this.apiUrl}coupon`, data);
+  }
+  updateCoupon(id: number, data: any):Observable<any>{
+    return this.http.put<any>(`${this.apiUrl}coupon/${id}`, data);
   }
   
   
@@ -191,6 +197,10 @@ export class ServicesService {
 
   deleteInquiry(id: number): Observable<any> {
     return this.http.delete<any>(`${this.apiUrl}inquiries/${id}`);
+  }
+  
+  updateInquiryStatus(id: number, data: any): Observable<any> {
+    return this.http.patch<any>(`${this.apiUrl}inquiries/${id}`, data);
   }
 
 

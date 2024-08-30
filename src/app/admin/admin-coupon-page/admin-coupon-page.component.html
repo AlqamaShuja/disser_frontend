@@ -33,9 +33,9 @@
                 <td>{{ coupon.discount }}%</td>
                 <td>{{ coupon.duration }}</td>
                 <td>
-                  <select [(ngModel)]="coupon.status" class="form-select">
-                    <option value="Assigned">Assigned</option>
-                    <option value="Unassigned">Unassigned</option>
+                  <select [(ngModel)]="coupon.status" class="form-select" (change)="onStatusChange(coupon)">
+                    <option value="Active">Active</option>
+                    <option value="Inactive">Inactive</option>
                   </select>
                 </td>
                 <td>

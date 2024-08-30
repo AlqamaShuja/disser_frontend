@@ -19,9 +19,7 @@ export class SliderComponent implements OnInit {
   @Input()
   aboutUs: boolean = false;
 
-  slides: Slide[] = []; // Define the type of slides
-  // BASE_URL: string = 'https://dissertationbackend.dissertationwriting.help/api/v1/'
-  // BASEURL: string = 'http://localhost:3000/api/v1/'
+  slides: Slide[] = [];
   currentIndex: number = 0;
 
   constructor(private serviceService: ServicesService) {}

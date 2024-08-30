@@ -36,4 +36,11 @@ export class AdminInquiriesComponent implements OnInit {
       }
     );
   }
+
+  onStatusChange(inquiry: any): void {
+    console.log('Status changed to:', inquiry);
+    this.inquiryService.updateInquiryStatus(inquiry.id, { status: inquiry.status }).subscribe(res => {
+      alert("Updated");
+    })
+  }
 }

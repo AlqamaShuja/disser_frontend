@@ -53,17 +53,19 @@
     </span>
   </div>
   <div class="d-flex gap-4">
-    <div class="dropdown" (mouseenter)="showDropdown()" (mouseleave)="hideDropdown()">
+    <div class="dropdown" *ngIf="coupons.length > 0" (mouseenter)="showDropdown()" (mouseleave)="hideDropdown()">
       <span class="dropdown-toggle" id="notificationDropdown" data-bs-toggle="dropdown" aria-expanded="false" style="cursor: pointer;">
         <i class="fa fa-ticket text-green"></i>
         Coupons
       </span>
       <ul class="dropdown-menu" [class.show]="isDropdownOpen" aria-labelledby="notificationDropdown" style="background-color: white; color: #242961;">
         <li *ngFor="let coupon of coupons">
-          <div class="dropdown-item d-flex justify-content-between">
-            <span>{{ coupon.code }}</span>
-            <span>{{ coupon.discount | number:'1.0-0' }}%</span>
-          </div>
+          <a [routerLink]="['/order']" [queryParams]="{ coupon: coupon.id }">
+            <div class="dropdown-item d-flex justify-content-between">
+              <span>{{ coupon.code }}</span>
+              <span>{{ coupon.discount | number:'1.0-0' }}%</span>
+            </div>
+          </a>
         </li>
       </ul>
     </div>

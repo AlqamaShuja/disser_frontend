@@ -30,7 +30,7 @@ export class AdminCouponPageComponent implements OnInit {
       this.selectedCoupon = { ...coupon }; // Clone the coupon object
     } else {
       this.isEditMode = false;
-      this.selectedCoupon = { code: '', currency: 'GBP', discount: '', duration: 'Lifetime', status: 'Unassigned' };
+      this.selectedCoupon = { code: '', currency: 'GBP', discount: '', duration: 'Lifetime', status: 'Active' };
     }
     this.couponModalRef = this.modalService.show(template);
   }
@@ -59,6 +59,13 @@ export class AdminCouponPageComponent implements OnInit {
         }
       );
     }
+  }
+
+  onStatusChange(coupon: any): void {
+    console.log('Status changed to:', coupon);
+    this.serviceService.updateCoupon(coupon.id, coupon).subscribe(res => {
+      alert("Updated");
+    })
   }
 
   openDeleteModal(template: TemplateRef<any>, coupon: any): void {

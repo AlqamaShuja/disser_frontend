@@ -118,9 +118,19 @@
   </div>
 
   <div class="form-row">
+    <!-- Coupon Dropdown -->
+    <div class="form-group col-md-4" *ngIf="coupons.length > 0">
+      <label for="coupon">Apply Coupon</label>
+      <select class="form-control" formControlName="coupon" (change)="calculateTotalPrice()">
+        <option value="" disabled selected>Select a Coupon</option>
+        <option *ngFor="let coupon of coupons" [value]="coupon.id">{{ coupon.code }}</option>
+      </select>
+    </div>
+
+    <!-- Turnitin Report Available Radio Buttons -->
     <div class="form-group col-md-4">
       <label for="turnitin">Turnitin Report Available*</label>
-      <div class="d-flex gap-4">
+      <div class="d-flex align-items-center gap-4 mt-1">
         <label class="radio-inline" style="display: flex; gap: 14px;">
           <input type="radio" formControlName="turnitin" value="Yes" required /> Yes
         </label>
@@ -134,6 +144,7 @@
     </div>
   </div>
 
+
   <div class="form-row">
     <div class="form-group col-md-12">
       <label for="detailInstructions">Detail Instructions*</label>
@@ -144,9 +155,24 @@
     </div>
   </div>
 
-  <div class="total-price-box mb-3">
+  
+  <div class="total-price-box mb-3 d-flex flex-column align-items-center gap-2">
+    <!-- Total Price before discount -->
     <h4>Total Price: £{{ gbpTotalCost | number: '1.0-0' }}</h4>
+    
+    <!-- Discount message and percentage -->
+    <div *ngIf="selectedCoupon" class="text-success small">
+      Discount Applied: {{ selectedCoupon.discount }}%
+    </div>
+    
+    <!-- Total Price after discount -->
+    <h4 *ngIf="discountedTotalCost !== gbpTotalCost" class="mt-1">
+      Total After Discount: £{{ discountedTotalCost | number: '1.0-0' }}
+    </h4>
   </div>
+  <!-- <div class="total-price-box mb-3 d-flex justify-content-center gap-2">
+    <h4>Total Price: £{{ gbpTotalCost | number: '1.0-0' }}</h4>
+  </div> -->
   <button type="submit" class="btn btn-primary btn-block bg-my-color d-flex justify-content-center">Submit Order</button>
 </form>
 

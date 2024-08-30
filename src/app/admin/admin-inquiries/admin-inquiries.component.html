@@ -10,20 +10,28 @@
                 <th scope="col">Name</th>
                 <th scope="col">Email</th>
                 <th scope="col">Message</th>
+                <th scope="col">Status</th>
                 <th scope="col">Created At</th>
                 <th scope="col">Options</th>
               </tr>
             </thead>
             <tbody>
-              <tr *ngFor="let inquiry of inquiries">
-                <td>{{ inquiry.id }}</td>
+              <tr *ngFor="let inquiry of inquiries; let i = index">
+                <td>{{ i + 1 }}</td>
                 <td>{{ inquiry.name }}</td>
                 <td>{{ inquiry.email }}</td>
                 <td>{{ inquiry.message }}</td>
+                <td>
+                  <select [(ngModel)]="inquiry.status" class="form-select" (change)="onStatusChange(inquiry)">
+                    <option value="pending">pending</option>
+                    <option value="in progress">in progress</option>
+                    <option value="resolved">resolved</option>
+                  </select>
+                </td>
                 <td>{{ inquiry.created_at | date: 'short' }}</td>
                 <td>
                   <button class="btn btn-outline-danger btn-sm" (click)="openDeleteModal(deleteTemplate, inquiry)">
-                    <i class="bi bi-trash"></i> Delete
+                    <i class="fa fa-trash"></i>
                   </button>
                 </td>
               </tr>
