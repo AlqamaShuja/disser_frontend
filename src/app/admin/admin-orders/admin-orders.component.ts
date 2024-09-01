@@ -83,14 +83,20 @@ export class AdminOrdersComponent implements OnInit {
     this.router.navigate(['/admin/order-details']);
   }
 
-  sendInvoice(order: any, flag: any): void {
+  sendInvoice(order: any, flag: any, msg: string): void {
+    console.log(this.filteredOrders, " ====, this.filteredOrders, ", this.orders);
+    
     this.orderService.sendInvoice(order.id, flag).subscribe(
       (res) => {
-        console.log(res);
-        alert('Email sent');
+        this.filteredOrders = this.filteredOrders.map(o => {
+          if(o.id === order.id) return { ...o, [flag]: (o[flag] || 0) + 1 };
+          return o;
+        });
+        console.log(res, " ====, this.filteredOrders, ", this.filteredOrders);
+        alert(`${msg} send`);
       },
       (error) => {
-        alert('Email not sent');
+        alert(`${msg} not sent`);
       }
     );
   }
@@ -123,7 +129,7 @@ export class AdminOrdersComponent implements OnInit {
   }
 
   deleteOrder(pin: string, id: number): void {
-    if (pin === 'Office123') {
+    if (pin === '2205') {
       this.pin = '';
       this.orderService.deleteOrder(id).subscribe((res) => {
         this.orders = this.orders.filter(order => order.id !== id);

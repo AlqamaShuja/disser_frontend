@@ -119,13 +119,31 @@
 
   <div class="form-row">
     <!-- Coupon Dropdown -->
-    <div class="form-group col-md-4" *ngIf="coupons.length > 0">
+    <!-- <div class="form-group col-md-4" *ngIf="coupons.length > 0">
       <label for="coupon">Apply Coupon</label>
       <select class="form-control" formControlName="coupon" (change)="calculateTotalPrice()">
         <option value="" disabled selected>Select a Coupon</option>
         <option *ngFor="let coupon of coupons" [value]="coupon.id">{{ coupon.code }}</option>
       </select>
+    </div> -->
+    <div class="form-group col-md-4" *ngIf="coupons.length > 0">
+      <label for="coupon">Apply Coupon</label>
+      <input
+        list="couponList"
+        class="form-control"
+        formControlName="coupon"
+        (input)="onCouponChange($event)"
+        placeholder="Select or Enter a Coupon"
+      />
+      <datalist id="couponList">
+        <option *ngFor="let coupon of coupons" [value]="coupon.code">{{ coupon.code }}</option>
+      </datalist>
+      <!-- Validation message for the coupon -->
+      <div *ngIf="customCouponMessage" [ngStyle]="{'color': customCouponMessage === 'Coupon does not exist.' ? 'red' : 'green'}" class="mt-1">
+        {{ customCouponMessage }}
+      </div>
     </div>
+    
 
     <!-- Turnitin Report Available Radio Buttons -->
     <div class="form-group col-md-4">

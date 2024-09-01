@@ -1,5 +1,6 @@
 // src/app/admin/admin.component.ts
 import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { AuthService } from 'src/app/services/auth.service';
 import { ServicesService } from 'src/app/services/services.service';
 import { SocketService } from 'src/app/services/socket.service';
@@ -30,8 +31,14 @@ export class ChatInterfaceComponent implements OnInit {
   messages: Message[] = [];
   loadingMessages: boolean = false; // Flag to indicate loading state
   newMsgCounts: any = {};
+  convEmail: string = '';
 
-  constructor(private socketService: SocketService, private authService: AuthService, private fileUploadService: ServicesService) {}
+  constructor(
+    private socketService: SocketService, 
+    private authService: AuthService, 
+    private fileUploadService: ServicesService,
+    private route: ActivatedRoute,
+  ) {}
 
   ngOnInit() {
     if (localStorage) {
@@ -39,9 +46,22 @@ export class ChatInterfaceComponent implements OnInit {
       this.admin = admin;
     }
 
+    this.route.queryParams.subscribe(params => {
+      this.convEmail = params['email'];
+      console.log(this.convEmail, "===athis.convEmail");
+      if(this.users.length > 0){
+        const user = this.users.find((user: any) => user.email === this.convEmail);
+        this.selectUser(user);
+      }
+    });
+
     this.authService.getAllUsers().subscribe(res => {
       console.log(res, '+=acmakcakca:userList');
       this.users = res.data;
+      if(this.convEmail){
+        const user = res.data.find((user: any) => user.email === this.convEmail);
+        this.selectUser(user);
+      }
     });
     
     this.fileUploadService.getNewMessagesCounts(this.admin.uid).subscribe(res => {

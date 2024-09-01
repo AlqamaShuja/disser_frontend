@@ -69,15 +69,17 @@ export class FooterComponent {
     { title: 'Our Services', url: '/services' },
     // sitemap
     { title: 'Sitemap', url: '/' },
+    { title: 'Samples', url: '/samples' },
+    { title: 'Privacy Policy', url: '/privacy-policy' },
     // Add more links as needed
   ];
 
   // address: `Smart Edu LTD, International House, 12
   // Constance Street, Royal Docks, London, E16 2DQ, United Kingdom`,
   contactInfo = {
-    address:'UK',
-    email: 'support@dissertationwriting.help',
-    phone: '+4473021548485454',
+    address:'Smart Edu Ltd, Internation House, 12 Constance Street, London E16 2DQ',
+    email: 'support@dissertation.help',
+    phone: '+447867530372',
   };
 
   paymentMethods = [

@@ -16,7 +16,7 @@ export class AppComponent implements OnInit {
   isAdmin: boolean = false;
   isSidebarOpen = true;
   showFooter: boolean = true;
-  whatsappNumber: string = '4473021548485454';
+  whatsappNumber: string = '447867530372';
 
   constructor(
     private router: Router,

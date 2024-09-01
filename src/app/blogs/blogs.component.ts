@@ -62,7 +62,10 @@ export class BlogsComponent implements OnInit {
 
   // Handle search input changes
   onSearchChange(): void {
-    this.filteredBlogs = this.blogs.filter(blog => blog.pageTitle.toLowerCase().includes(this.searchTerm.toLowerCase()));
+    this.filteredBlogs = this.blogs.filter(blog => 
+      blog.pageTitle.toLowerCase().includes(this.searchTerm.toLowerCase()) ||
+      blog.pageTilte.toLowerCase().includes(this.searchTerm.toLowerCase())
+    );
   }
 
   // Trigger search action

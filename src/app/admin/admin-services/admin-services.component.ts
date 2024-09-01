@@ -42,7 +42,7 @@ export class AdminServicesComponent implements OnInit {
       if (index !== -1) {
         this.services[index] = { ...this.selectedService };
         this.servicesService.updateService(this.selectedService).subscribe(
-          () => {
+          (res) => {
             alert('Service updated successfully');
             this.serviceModalRef?.hide();
           },
@@ -60,6 +60,7 @@ export class AdminServicesComponent implements OnInit {
           this.selectedService.id = response.id; // Assuming the response includes the new service ID
           this.services.push({ ...this.selectedService });
           this.serviceModalRef?.hide();
+          alert('Service Added Successfully');
         },
         error => {
           console.error('Error adding service:', error);

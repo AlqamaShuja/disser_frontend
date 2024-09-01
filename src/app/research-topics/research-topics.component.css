@@ -4,11 +4,20 @@
   padding: 20px;
 }
 
-.left-section {
-  /* min-width: 40%; */
+/* .left-section {
   max-width: 450px;
   padding: 20px;
   box-sizing: border-box;
+} */
+.left-section {
+  max-width: 450px;
+  padding: 20px;
+  box-sizing: border-box;
+  position: sticky; /* Makes the element sticky */
+  top: 0; /* Sticks to the top of the viewport */
+  align-self: flex-start; /* Aligns the sticky element to the start of the container */
+  height: fit-content; /* Ensures the height does not affect the sticky behavior */
+  background-color: white; /* Background to ensure no content behind it is visible */
 }
 
 .form-section, .blue-section {
@@ -18,6 +27,7 @@
   border-radius: 5px;
   background-color: white;
 }
+
 
 .form-section h2 {
   font-size: 18px;

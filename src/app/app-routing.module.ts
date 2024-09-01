@@ -50,6 +50,7 @@ import { AdminSubjectAreaComponent } from './admin/admin-subject-area/admin-subj
 import { AdminInquiriesComponent } from './admin/admin-inquiries/admin-inquiries.component';
 import { AdminOrderPriceByDateComponent } from './admin/admin-order-price-by-date/admin-order-price-by-date.component';
 import { AdminOrderFormManageComponent } from './admin-order-form-manage/admin-order-form-manage.component';
+import { DissertationSampleAcademicLevelComponent } from './admin/dissertation-sample-academic-level/dissertation-sample-academic-level.component';
 
 
 const routes: Routes = [
@@ -140,6 +141,10 @@ const routes: Routes = [
   {
     path: 'admin/samples',
     component: AdminSamplesComponent,
+  },
+  {
+    path: 'admin/dissertation-samples',
+    component: DissertationSampleAcademicLevelComponent,
   },
   {
     path: 'admin/text-page',

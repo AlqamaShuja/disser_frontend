@@ -44,9 +44,11 @@ export class AdminOrderPriceByDateComponent implements OnInit {
         () => {
           this.loadOrderPrices();
           this.orderPriceModalRef?.hide();
+          alert("Order Price Data Successfully Updated")
         },
         error => {
           console.error('Error updating order price:', error);
+          alert("Error in updating Order Price Data " + error.message)
         }
       );
     } else {
@@ -55,9 +57,11 @@ export class AdminOrderPriceByDateComponent implements OnInit {
         () => {
           this.loadOrderPrices();
           this.orderPriceModalRef?.hide();
+          alert("Order Price Data Successfully Updated");
         },
         error => {
           console.error('Error adding order price:', error);
+          alert("Error in adding Order Price Data " + error.message);
         }
       );
     }

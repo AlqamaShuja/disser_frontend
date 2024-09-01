@@ -45,7 +45,7 @@
     <div class="blue-section">
       <div class="position-relative d-flex justify-content-center">
         <div class="d-flex justify-content-center align-items-center gap-2">
-          <img src="../../assets/chat-gpt.png" style="width: 50px;" alt="Chat GPT Icon" />
+          <img src="../../assets/images/chat-gpt.png" style="width: 50px;" alt="Chat GPT Icon" />
           <span style="font-size: 30px;">ChatGPT</span>
         </div>
         <p style="font-size: 50px; color: red; position: absolute; top: 5px; opacity: 0.6;">X</p>
@@ -55,7 +55,9 @@
         We never use any paraphrasing tool, any software to generate content for e.g., Chat GPT and all other content writing tools.
         We ensure that the work produced by our writers is self-written and 100% plagiarism-free.
       </p>
-      <button>DISCOVER MORE</button>
+      <div class="d-flex justify-content-center">
+        <p class="px-5 py-2 fw-bold" style="border: 1px solid gainsboro; border-radius: 8px;">DISCOVER MORE</p>
+      </div>
     </div>
     <app-sample-topic-list (topicSelected)="onTopicSelected($event)"></app-sample-topic-list>
   </div>

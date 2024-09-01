@@ -58,6 +58,7 @@ export class AdminRefrenceStyleComponent implements OnInit {
           this.selectedStyle.id = response.id; // Assuming the response includes the new style ID
           this.styles.push({ ...this.selectedStyle });
           this.styleModalRef?.hide();
+          alert('Style added successfully');
         },
         error => {
           console.error('Error adding style:', error);

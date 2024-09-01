@@ -41,4 +41,25 @@ export class SamplesService {
     
     return this.http.get<any>(`${this.apiUrlOurSamples}level-samples/${level}/${type}/${topic}/${catPoint}`);
   }
+  
+  getSampleByLevelType(level: string, type: string): Observable<any> {
+    return this.http.get<any>(`${this.apiUrlOurSamples}level-samples/${level}/${type}`);
+  }
+  
+  getAllSampleByLevel(): Observable<any> {
+    return this.http.get<any>(`${this.apiUrlOurSamples}level-samples`);
+  }
+  
+  addSampleLevel(data: any): Observable<any> {
+    return this.http.post<any>(`${this.apiUrlOurSamples}level-samples`, data);
+  }
+
+  updateSampleLevelById(id: number, data: any): Observable<any> {
+    return this.http.put<any>(`${this.apiUrlOurSamples}level-samples/${id}`, data);
+  }
+
+  deleteSampleLevelById(id: number): Observable<any> {
+    return this.http.delete<any>(`${this.apiUrlOurSamples}level-samples/${id}`);
+  }
+  
 }

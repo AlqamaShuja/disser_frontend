@@ -27,7 +27,7 @@ export class HeaderComponent {
 
     this.serviceService.getAllActieCoupons().subscribe(res => {
       console.log(res, "====res:couponssssssssssssss");
-      this.coupons = res;
+      this.coupons = res.filter((cou: any) => cou.isShowToAll == true);;
     })
   }
 

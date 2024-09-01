@@ -1,5 +1,5 @@
 
-import { Component } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { TestimonialService } from '../services/testimonial.service';
 import { Router } from '@angular/router';
@@ -10,9 +10,10 @@ import { ServicesService } from '../services/services.service';
   templateUrl: './contact-us.component.html',
   styleUrls: ['./contact-us.component.css']
 })
-export class ContactUsComponent {
+export class ContactUsComponent implements OnInit {
   country: any = '';  // Initialize with a default value or bind it to a select input if needed
   contactUs: FormGroup;
+  @Input() showBanner: string = 'no';
 
   constructor(
     private formBuilder: FormBuilder,
@@ -27,6 +28,10 @@ export class ContactUsComponent {
       phoneNumber: ['', Validators.required],
       message: ['', Validators.required],
     });
+  }
+  
+  ngOnInit(): void {
+    console.log(this.showBanner, "====showBannershowBanner");
   }
 
   submit(): void {

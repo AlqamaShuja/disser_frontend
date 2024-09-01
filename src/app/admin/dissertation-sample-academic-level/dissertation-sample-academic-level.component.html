@@ -1,0 +1,138 @@
+<div class="container-fluid" style="width: 90%; max-width: 1200px; margin: auto;">
+    <div class="card p-4 shadow-sm">
+      <nav aria-label="breadcrumb">
+        <ol class="breadcrumb bg-light p-2">
+          <li class="breadcrumb-item">
+            <a href="/" class="text-dark"><strong>Home</strong></a>
+          </li>
+          <li class="breadcrumb-item active" aria-current="page">Samples</li>
+        </ol>
+      </nav>
+  
+      <div class="d-flex justify-content-between align-items-center mb-4">
+        <h3 class="mb-0">Manage Samples</h3>
+        <button class="btn btn-primary" (click)="onClickAddSamples()" style="background-color: rgb(37, 67, 54); border-color: rgb(37, 67, 54);">
+          Insert Sample
+        </button>
+      </div>
+  
+      <div class="card mt-4 shadow-sm">
+        <div class="card-body">
+          <table class="table table-bordered table-hover">
+            <thead style="background-color: rgb(37, 67, 54); color: white;">
+              <tr>
+                <th>Sr No.</th>
+                <th>Title</th>
+                <th>Topic</th>
+                <th>Type</th>
+                <th>Level</th>
+                <th>Point</th>
+                <th>Description</th>
+                <th>Operations</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr *ngFor="let sample of displayData; let index = index">
+                <td>{{ index + 1 }}</td>
+                <td>{{ truncateDescription(sample.title) }}</td>
+                <td>{{ sample.topic }}</td>
+                <td>{{ sample.type }}</td>
+                <td>{{ sample.level }}</td>
+                <td>{{ sample.cat_point }}</td>
+                <td>{{ truncateDescription(sample.description) }}</td>
+                <td>
+                  <button class="btn btn-sm btn-primary m-1" (click)="onClickEditSample(sample)" style="background-color: rgb(37, 67, 54); border-color: rgb(37, 67, 54);">
+                    <i class="fa fa-pencil-square"></i>
+                  </button>
+                  <button class="btn btn-sm btn-danger m-1" (click)="openDeleteModal(sample)">
+                    <i class="fa fa-trash"></i>
+                  </button>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+  
+          <nav aria-label="Page navigation" class="d-flex justify-content-center mt-4">
+            <ul class="pagination">
+              <li class="page-item" [class.disabled]="currentPage == 1">
+                <a class="page-link" href="javascript:;" (click)="changePage(currentPage - 1)">Previous</a>
+              </li>
+              <li class="page-item" *ngFor="let i of getRange(noOfPages); let index = index" [class.active]="currentPage === index + 1">
+                <a class="page-link" href="javascript:;" (click)="changePage(index + 1)">{{ index + 1 }}</a>
+              </li>
+              <li class="page-item" [class.disabled]="currentPage == noOfPages">
+                <a class="page-link" href="javascript:;" (click)="changePage(currentPage + 1)">Next</a>
+              </li>
+            </ul>
+          </nav>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Delete Modal -->
+    <div class="custom-modal-wrapper" *ngIf="isDeleteModalVisible">
+      <div class="custom-modal">
+        <div class="custom-modal-header">
+          <h5>Confirm Deletion</h5>
+          <button type="button" class="custom-close-btn" aria-label="Close" (click)="hideDeleteModal()">×</button>
+        </div>
+        <div class="custom-modal-body">
+          <p>Are you sure you want to delete the sample <strong>{{ selectedSample?.title }}</strong>?</p>
+        </div>
+        <div class="custom-modal-footer d-flex justify-content-end gap-2">
+          <button type="button" class="custom-btn custom-btn-secondary" (click)="hideDeleteModal()">Cancel</button>
+          <button type="button" class="custom-btn custom-btn-danger" (click)="confirmDelete()">Delete</button>
+        </div>
+      </div>
+    </div>
+  
+    <!-- Edit/Add Modal -->
+    <div class="custom-modal-wrapper" *ngIf="isEditModalVisible">
+      <div class="custom-modal">
+        <div class="custom-modal-header">
+          <h5>{{ isEditMode ? 'Edit Sample' : 'Add Sample' }}</h5>
+          <button type="button" class="custom-close-btn" aria-label="Close" (click)="hideEditModal()">×</button>
+        </div>
+        <div class="custom-modal-body">
+          <form [formGroup]="editForm">
+            <div class="form-group">
+              <label for="title">Title</label>
+              <angular-editor formControlName="title" [config]="editorConfig"></angular-editor>
+            </div>
+            <div class="form-group">
+              <label for="description">Description</label>
+              <angular-editor formControlName="description" [config]="editorConfig"></angular-editor>
+            </div>
+            <div class="form-group">
+              <label for="cat_point">Cat Point</label>
+              <select class="form-control" formControlName="cat_point">
+                <option *ngFor="let point of catPoints" [value]="point">{{ point }}</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="type">Type</label>
+              <select class="form-control" formControlName="type">
+                <option *ngFor="let t of types" [value]="t">{{ t }}</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="level">Level</label>
+              <select class="form-control" formControlName="level">
+                <option *ngFor="let l of levels" [value]="l">{{ l }}</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="topic">Topic</label>
+              <select class="form-control" formControlName="topic">
+                <option *ngFor="let topic of topics" [value]="topic.title">{{ topic.title }}</option>
+              </select>
+            </div>
+          </form>
+        </div>
+        <div class="custom-modal-footer d-flex justify-content-end gap-2">
+          <button type="button" class="custom-btn custom-btn-secondary" (click)="hideEditModal()">Cancel</button>
+          <button type="button" class="custom-btn custom-btn-danger" (click)="saveChanges()">{{ isEditMode ? 'Save' : 'Add' }}</button>
+        </div>
+      </div>
+    </div>
+</div>  

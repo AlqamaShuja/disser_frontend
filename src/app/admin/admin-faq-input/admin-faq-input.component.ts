@@ -25,10 +25,12 @@ interface Slide {
 export class AdminFaqInputComponent implements OnInit {
   faqs: FAQs[] = [];
   aboutUsSlider: Slide[] = [];
+  // dissTopicSlider: Slide[] = [];
   uploadedImages: File[] = [];
   allData: any;
   aboutUsAccordion: any;
   isAboutUsSlider: boolean = false;
+  // isDissTopicSlider: boolean = false;
   isAboutUsAccordion: boolean = false;
   isFaq: boolean = false;
 
@@ -82,7 +84,12 @@ export class AdminFaqInputComponent implements OnInit {
       } else if (parsedData.unique_slug?.toLowerCase() === 'dont_just_take_our_world_about_us_page' || parsedData.extra_data?.slug?.toLowerCase() === "accordion_about_us") {
         this.aboutUsAccordion = this.parseDescription(parsedData.description || []);
         this.isAboutUsAccordion = true;
-      } 
+      } else if (parsedData.unique_slug?.toLowerCase() === 'slider_data_dissertation_topic_page' || parsedData.extra_data?.slug?.toLowerCase() === 'dissertation_topic_slider') {
+        this.aboutUsSlider = this.parseDescription(parsedData.description || []);
+        console.log(this.aboutUsSlider, "dissTopicSlider:");
+        
+        this.isAboutUsSlider = true;
+      }
     });
   }
 

@@ -95,11 +95,13 @@ export class AdminTopicListComponent implements OnInit {
       this.topicService.updateTopic(this.selectedTopic.id, topicData).subscribe(() => {
         this.loadTopics();
         this.closeModal();
+        alert("Successfully Updated");
       });
     } else {
       this.topicService.createTopic(topicData).subscribe(() => {
         this.loadTopics();
         this.closeModal();
+        alert("Successfully Added");
       });
     }
   }

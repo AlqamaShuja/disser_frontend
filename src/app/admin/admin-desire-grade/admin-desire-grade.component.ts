@@ -58,6 +58,7 @@ export class AdminDesiredGradeComponent implements OnInit {
           this.selectedGrade.id = response.id; // Assuming the response includes the new grade ID
           this.grades.push({ ...this.selectedGrade });
           this.gradeModalRef?.hide();
+          alert('Grade added successfully');
         },
         error => {
           console.error('Error adding grade:', error);

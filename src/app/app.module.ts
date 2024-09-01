@@ -111,6 +111,7 @@ import { AdminRefrenceStyleComponent } from './admin/admin-refrence-style/admin-
 import { AdminSamplesFormComponent } from './admin/admin-samples-form/admin-samples-form.component';
 import { AdminSamplesListComponent } from './admin/admin-samples-list/admin-samples-list.component';
 import { UserChatComponent } from './user-chat/user-chat.component';
+import { DissertationSampleAcademicLevelComponent } from './admin/dissertation-sample-academic-level/dissertation-sample-academic-level.component';
 
 
 library.add(fas);
@@ -203,6 +204,7 @@ const modules = {};
     AdminSamplesFormComponent,
     AdminSamplesListComponent,
     UserChatComponent,
+    DissertationSampleAcademicLevelComponent,
   ],
   imports: [
     BrowserAnimationsModule,

@@ -1,12 +1,27 @@
 <div class="samples-container">
-    <div class="breadcrumb-container">
+    <!-- <div class="breadcrumb-container">
       <ul class="breadcrumb" style="padding: 4px 15px;">
         <li><a routerLink="/">Home</a></li>
         <li><a routerLink="/our-samples">Our Sample</a></li>
       </ul>
-    </div>
+    </div> -->
+    <section class="page-header">
+      <div class="container">
+        <div class="row justify-content-center">
+          <div class="col-lg-8 col-xl-8">
+            <div class="title-block">
+              <h1>Our Samples</h1>
+              <ul class="header-bradcrumb justify-content-center">
+                <li><a href="/">Home</a></li>
+                <li class="active" aria-current="page">Our Samples</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
   
-    <div class="content-container">
+    <div class="content-container mt-3">
       <h2 class="title">Select Your Academic Level</h2>
       <div class="levels">
         <div class="level">
@@ -15,8 +30,8 @@
           </div>
           <h3 class="level-title">UNDER GRADUATE</h3>
           <ul class="level-options">
-            <li (click)="navigateToLevel('undergraduate', 'essay')">➤ Essays</li>
-            <li (click)="navigateToLevel('undergraduate', 'coursework')">➤ Coursework</li>
+            <!-- <li (click)="navigateToLevel('undergraduate', 'essay')">➤ Essays</li> -->
+            <!-- <li (click)="navigateToLevel('undergraduate', 'coursework')">➤ Coursework</li> -->
             <li (click)="navigateToLevel('undergraduate', 'dissertations')">➤ Dissertations</li>
           </ul>
         </div>
@@ -26,8 +41,8 @@
           </div>
           <h3 class="level-title">MASTERS</h3>
           <ul class="level-options">
-            <li (click)="navigateToLevel('masters', 'essay')">➤ Essays</li>
-            <li (click)="navigateToLevel('masters', 'coursework')">➤ Coursework</li>
+            <!-- <li (click)="navigateToLevel('masters', 'essay')">➤ Essays</li> -->
+            <!-- <li (click)="navigateToLevel('masters', 'coursework')">➤ Coursework</li> -->
             <li (click)="navigateToLevel('masters', 'dissertations')">➤ Dissertations</li>
           </ul>
         </div>
@@ -37,7 +52,7 @@
           </div>
           <h3 class="level-title">PhD</h3>
           <ul class="level-options">
-            <li (click)="navigateToLevel('phd', 'essay')">➤ Essays</li>
+            <!-- <li (click)="navigateToLevel('phd', 'essay')">➤ Essays</li> -->
             <li (click)="navigateToLevel('phd', 'dissertations')">➤ Dissertations</li>
           </ul>
         </div>

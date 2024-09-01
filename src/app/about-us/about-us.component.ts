@@ -43,6 +43,9 @@ export class AboutUsComponent implements OnInit {
 
     this.serviceService.getSectionDataById(13).subscribe(res => {
       let { extra_data, description } = this.parseDescription(res);
+      extra_data = this.parseDescription(extra_data);
+      console.log({ extra_data, description });
+      
       Object.keys(extra_data).forEach((key, i) => {
         const imageUrl = `${BASEURL}files/${encodeURIComponent(extra_data[key])}`;
         description = description.replace(`{{${key}}}`, imageUrl);
@@ -62,6 +65,7 @@ export class AboutUsComponent implements OnInit {
     this.serviceService.getSectionDataById(15).subscribe(res => {
       let { extra_data, description } = this.parseDescription(res);
       description = this.parseDescription(description);
+      extra_data = this.parseDescription(extra_data);
       Object.keys(extra_data).forEach((key, i) => {
         const imageUrl = `${BASEURL}files/${encodeURIComponent(extra_data[key])}`;
         description = description.replace(`{{${key}}}`, imageUrl);

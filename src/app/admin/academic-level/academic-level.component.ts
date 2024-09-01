@@ -58,6 +58,7 @@ export class AcademicLevelComponent implements OnInit {
           this.selectedLevel.id = response.id; // Assuming the response includes the new academic level ID
           this.levels.push({ ...this.selectedLevel });
           this.levelModalRef?.hide();
+          alert('Academic level added successfully');
         },
         error => {
           console.error('Error adding academic level:', error);

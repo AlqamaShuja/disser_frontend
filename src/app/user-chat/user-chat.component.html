@@ -5,7 +5,7 @@
           <div class="d-flex gap-3 align-items-center">
             <img [src]="user.avatar ? user.avatar : '../../../assets/user.png'" alt="Avatar">
             <div class="user-info">
-              <h3>{{ user.name }}</h3>
+              <h3 style="color: #000;">{{ user.name }}</h3>
             </div>
           </div>
           <div class="count-new-msg text-white" *ngIf="newMsgCounts[user.uid]">{{ newMsgCounts[user.uid] }}</div>

@@ -19,8 +19,10 @@ export class OrderFormComponent implements OnInit {
   topics: any[] = [];
   academicLevel: any[] = [];
   coupons: any[] = [];
+  allCoupons: any[] = [];
   selectedCoupon: any = null;
-  couponAppliedMessage: string = ''; // Message to display when a coupon is applied
+  customCouponMessage: string = ''; // Message for custom coupon validation
+  currentUser: any = {};
 
   typeOfServices: Array<{ title: string, price: string, id: number }> = [];
   subjectAreas: Array<{ title: string, price: number, id: number }> = [];
@@ -67,11 +69,17 @@ export class OrderFormComponent implements OnInit {
       contactNumber: ['', Validators.required],
       universityName: ['', Validators.required],
       turnitin: ['', Validators.required],
-      coupon: [''], // Add the coupon form control
+      coupon: [''] // This is the only input field we will use for both selection and typing
     });
   }
 
   ngOnInit(): void {
+    if(localStorage){
+      this.currentUser = JSON.parse(localStorage.getItem("user") || "{}");
+      this.orderForm.patchValue({ email: this.currentUser.email });
+      this.orderForm.patchValue({ contactNumber: this.currentUser.phone_number });
+    }
+
     // Fetch data for dropdowns and other fields
     this.serviceService.getAllTopic().subscribe((res) => {
       this.topics = res;
@@ -92,28 +100,46 @@ export class OrderFormComponent implements OnInit {
       this.deadlinePrice = res;
     });
     this.serviceService.getAllActieCoupons().subscribe((res) => {
-      this.coupons = res;
+      this.allCoupons = res;
+      this.coupons = res.filter((cou: any) => cou.isShowToAll == true);
       console.log(res, "====res:activecouponss");
-      
 
       // Check for coupon query parameter and set coupon
       this.route.queryParams.subscribe(params => {
-        const couponId = params['coupon'];
+        const couponId = this.coupons.find((cou: any) => cou.id == params['coupon']);;
         if (couponId) {
-          this.orderForm.patchValue({ coupon: couponId });
-          this.applyCoupon(couponId);
+          this.orderForm.patchValue({ coupon: couponId.code });
+          this.applyCoupon(couponId.id);
         }
       });
     });
   }
 
+  onCouponChange(event: any): void {
+    const input = event.target.value.trim();
+    if (input) {
+      const matchedCoupon = this.allCoupons.find(coupon => coupon.code.toLowerCase() === input.toLowerCase());
+      if (matchedCoupon) {
+        this.selectedCoupon = matchedCoupon;
+        this.customCouponMessage = `${matchedCoupon.code} applied`;
+        this.calculateTotalPrice();
+      } else {
+        this.selectedCoupon = null;
+        this.customCouponMessage = 'Coupon does not exist.';
+      }
+    } else {
+      this.selectedCoupon = null;
+      this.customCouponMessage = '';
+    }
+  }
+
   applyCoupon(couponId: string): void {
     this.selectedCoupon = this.coupons.find(coupon => coupon.id === parseInt(couponId, 10));
     if (this.selectedCoupon) {
-      this.couponAppliedMessage = `${this.selectedCoupon.code} applied`;
+      this.customCouponMessage = `${this.selectedCoupon.code} applied`;
       this.calculateTotalPrice();
     } else {
-      this.couponAppliedMessage = '';
+      this.customCouponMessage = '';
     }
   }
 
@@ -174,12 +200,13 @@ export class OrderFormComponent implements OnInit {
       PaperStandard: this.orderForm.value.desiredGrade,
       DeadLine: this.orderForm.value.deadline,
       BeforeDiscount: this.gbpTotalCost,
-      DiscountCode: this.selectedCoupon.code || '',
+      DiscountCode: this.selectedCoupon?.code || this.orderForm.value.coupon || '', // Include custom coupon if any
       GrossAmount: this.discountedTotalCost,
       Status: 'New',
       PaidStatus: 'Unpaid',
       suportingDoc: '',
-      isSample: false
+      isSample: false,
+      Balance: this.discountedTotalCost,
     };
 
     console.log(orderPayload, "===orderPayloadorderPayload");
@@ -202,19 +229,10 @@ export class OrderFormComponent implements OnInit {
     this.orderForm.reset(); 
     this.gbpTotalCost = 0;
     this.discountedTotalCost = 0;
-    this.couponAppliedMessage = '';
+    this.customCouponMessage = '';
     this.selectedCoupon = null;
   }
 }
-
-
-
-
-
-
-
-
-
 
 
 
@@ -252,6 +270,7 @@ export class OrderFormComponent implements OnInit {
 // import { OrderService } from 'src/app/services/order.service';
 // import { ServicesService } from 'src/app/services/services.service';
 // import { ToastrService } from 'ngx-toastr';
+// import { ActivatedRoute } from '@angular/router';
 
 // @Component({
 //   selector: 'app-order-form',
@@ -262,36 +281,20 @@ export class OrderFormComponent implements OnInit {
 //   @Input() categories: any;
 //   @Output() orderEvent = new EventEmitter();
 //   orderForm: FormGroup;
-//   gbpTotalCost: number = 0;
+//   gbpTotalCost: number = 0; // Total price before discount
+//   discountedTotalCost: number = 0; // Total price after discount
 //   topics: any[] = [];
 //   academicLevel: any[] = [];
 //   coupons: any[] = [];
+//   allCoupons: any[] = [];
+//   selectedCoupon: any = null;
+//   couponAppliedMessage: string = ''; // Message to display when a coupon is applied
+//   currentUser: any = {};
 
-//   typeOfServices: Array<{ title: string, price: string, id: number, }> = []
-//   // [
-//   //   { title: 'Dissertation Writing', price: 50 },
-//   //   { title: 'Research Proposal Writing', price: 40 },
-//   //   { title: 'Dissertation Proofreading & Editing', price: 30 }
-//   // ];
-
-//   subjectAreas: Array<{ title: string, price: number, id: number }> = []
-//   // [
-//   //   { title: 'Business', price: 10 },
-//   //   { title: 'Engineering', price: 15 },
-//   //   { title: 'Law', price: 20 },
-//   //   { title: 'Medicine', price: 25 },
-//   //   { title: 'Science', price: 12 },
-//   //   { title: 'Arts', price: 8 }
-//   // ];
-
-//   desiredGrades: any = [];
-//   deadlinePrice: any = [];
-//   // [
-//   //   { title: '1st Class Standard (80%+)', price: 70 },
-//   //   { title: '2:1 Standard (70%+)', price: 60 },
-//   //   { title: '2:2 Standard (50%-60%+)', price: 50 }
-//   // ];
-
+//   typeOfServices: Array<{ title: string, price: string, id: number }> = [];
+//   subjectAreas: Array<{ title: string, price: number, id: number }> = [];
+//   desiredGrades: any[] = [];
+//   deadlinePrice: any[] = [];
 //   deadlines: Array<{ title: string, price: number }> = [
 //     { title: '2 Days Urgent Delivery', price: 100 },
 //     { title: '3 Days Urgent Delivery', price: 80 },
@@ -299,23 +302,23 @@ export class OrderFormComponent implements OnInit {
 //     { title: '10 Days Delivery', price: 40 },
 //     { title: '15 Days Delivery', price: 20 },
 //     { title: '25 Days Delivery', price: 10 },
-//     { title: '30 Days Delivery', price: 5 }
+//     { title: '30 Days Delivery', price: 5 },
 //   ];
-
 //   referencingStyles: Array<{ title: string, price: number }> = [
 //     { title: 'Harvard', price: 0 },
 //     { title: 'APA', price: 0 },
 //     { title: 'MLA', price: 0 },
 //     { title: 'OSCOLA', price: 0 },
 //     { title: 'Oxford', price: 0 },
-//     { title: 'Other', price: 0 }
+//     { title: 'Other', price: 0 },
 //   ];
 
 //   constructor(
 //     private formBuilder: FormBuilder,
 //     private orderService: OrderService,
 //     private serviceService: ServicesService,
-//     private toastr: ToastrService
+//     private toastr: ToastrService,
+//     private route: ActivatedRoute
 //   ) {
 //     this.orderForm = this.formBuilder.group({
 //       typeOfService: ['', Validators.required],
@@ -333,10 +336,17 @@ export class OrderFormComponent implements OnInit {
 //       contactNumber: ['', Validators.required],
 //       universityName: ['', Validators.required],
 //       turnitin: ['', Validators.required],
+//       coupon: [''], // Add the coupon form control
 //     });
 //   }
 
 //   ngOnInit(): void {
+//     if(localStorage){
+//       this.currentUser = JSON.parse(localStorage.getItem("user") || "{}");
+//       this.orderForm.patchValue({ email: this.currentUser.email });
+//       this.orderForm.patchValue({ contactNumber: this.currentUser.phone_number });
+//     }
+//     // Fetch data for dropdowns and other fields
 //     this.serviceService.getAllTopic().subscribe((res) => {
 //       this.topics = res;
 //     });
@@ -355,9 +365,31 @@ export class OrderFormComponent implements OnInit {
 //     this.serviceService.getAllOrderPrices().subscribe((res) => {
 //       this.deadlinePrice = res;
 //     });
-//     this.serviceService.getAllCoupons().subscribe((res) => {
-//       this.coupons = res;
+//     this.serviceService.getAllActieCoupons().subscribe((res) => {
+//       this.allCoupons = res;
+//       this.coupons = res.filter((cou: any) => cou.isShowToAll == true);
+//       console.log(res, "====res:activecouponss");
+      
+
+//       // Check for coupon query parameter and set coupon
+//       this.route.queryParams.subscribe(params => {
+//         const couponId = params['coupon'];
+//         if (couponId) {
+//           this.orderForm.patchValue({ coupon: couponId });
+//           this.applyCoupon(couponId);
+//         }
+//       });
 //     });
+//   }
+
+//   applyCoupon(couponId: string): void {
+//     this.selectedCoupon = this.coupons.find(coupon => coupon.id === parseInt(couponId, 10));
+//     if (this.selectedCoupon) {
+//       this.couponAppliedMessage = `${this.selectedCoupon.code} applied`;
+//       this.calculateTotalPrice();
+//     } else {
+//       this.couponAppliedMessage = '';
+//     }
 //   }
 
 //   calculateTotalPrice(): void {
@@ -378,38 +410,25 @@ export class OrderFormComponent implements OnInit {
 
 //     this.gbpTotalCost = Math.round((Number(typeOfServicePrice) + Number(subjectAreaPrice) + Number(academicLevelPrice) + Number(desiredGradePrice) + priceByDeadline + Number(topicPrice)) * numberOfPages);
 
-//     console.log({ 
-//         typeOfServicePrice, 
-//         subjectAreaPrice, 
-//         academicLevelPrice, 
-//         desiredGradePrice, 
-//         total: this.gbpTotalCost, 
-//         priceByDeadline, 
-//         wordCount, 
-//         numberOfPages,
-//         topicPrice,
-//     }, "===Final calculation");
+//     // Calculate discount if a coupon is applied
+//     if (this.selectedCoupon) {
+//       const discountPercentage = Number(this.selectedCoupon.discount);
+//       const discountAmount = (this.gbpTotalCost * discountPercentage) / 100;
+//       this.discountedTotalCost = Math.round(this.gbpTotalCost - discountAmount);
+//     } else {
+//       this.discountedTotalCost = this.gbpTotalCost; // No discount applied
+//     }
 
-//     this.orderForm.patchValue({ totalPrice: this.gbpTotalCost });
+//     this.orderForm.patchValue({ totalPrice: this.discountedTotalCost });
 //   }
-
 
 //   onSubmit(): void {
 //     if (this.orderForm.invalid) {
 //       // Mark all controls as touched to trigger validation messages
 //       this.orderForm.markAllAsTouched();
-  
-//       // Handle form validation errors
-//       Object.keys(this.orderForm.controls).forEach(field => {
-//         const control = this.orderForm.get(field);
-//         if (control && control.invalid) {
-//           // const fieldName = field.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase());
-//           // this.toastr.error(`Please correct the ${fieldName} field`, 'Form Invalid');
-//         }
-//       });
 //       return;
 //     }
-  
+
 //     const orderPayload = {
 //       Name: this.orderForm.value.email.split("@")[0],
 //       Email: this.orderForm.value.email,
@@ -419,36 +438,36 @@ export class OrderFormComponent implements OnInit {
 //       Topic: this.orderForm.value.topic,
 //       DetailInstructions: this.orderForm.value.detailInstructions,
 //       TypeofHelpRequire: this.orderForm.value.typeOfService,
-//       LineSpacing: 2, // Assuming a default value for now
-//       SoftwareService: 'N/A', // Assuming a default value for now
+//       LineSpacing: 2,
+//       SoftwareService: 'N/A',
 //       TopicCategory: this.orderForm.value.subjectArea,
-//       PresentationSlides: 0, // Assuming a default value for now
+//       PresentationSlides: 0,
 //       SourceReferences: this.orderForm.value.numberOfReferences,
 //       WritingStyle: this.orderForm.value.referencingStyle,
-//       PreferredLanguageLevel: 'English', // Assuming a default value for now
+//       PreferredLanguageLevel: 'English',
 //       EducationLevel: this.orderForm.value.level,
 //       PaperStandard: this.orderForm.value.desiredGrade,
 //       DeadLine: this.orderForm.value.deadline,
-//       BeforeDiscount: 0,
-//       DiscountCode: '',
-//       // GrossAmount: this.orderForm.value.totalPrice,
-//       GrossAmount: this.gbpTotalCost,
+//       BeforeDiscount: this.gbpTotalCost,
+//       DiscountCode: this.selectedCoupon.code || '',
+//       GrossAmount: this.discountedTotalCost,
 //       Status: 'New',
 //       PaidStatus: 'Unpaid',
 //       suportingDoc: '',
 //       isSample: false
 //     };
-  
+
 //     console.log(orderPayload, "===orderPayloadorderPayload");
-  
+
 //     this.orderEvent.emit(orderPayload); // Emit the event on success
+
 //     // this.orderService.createOrder(orderPayload).subscribe(
 //     //   response => {
-//     //     // this.toastr.success('Order created successfully', 'Success');
+//     //     this.toastr.success('Order created successfully', 'Success');
 //     //     this.orderEvent.emit(orderPayload); // Emit the event on success
 //     //   },
 //     //   error => {
-//     //     // this.toastr.error('Error creating order', 'Error');
+//     //     this.toastr.error('Error creating order', 'Error');
 //     //     alert('Error creating order');
 //     //   }
 //     // );
@@ -457,5 +476,8 @@ export class OrderFormComponent implements OnInit {
 //   resetForm(): void {
 //     this.orderForm.reset(); 
 //     this.gbpTotalCost = 0;
+//     this.discountedTotalCost = 0;
+//     this.couponAppliedMessage = '';
+//     this.selectedCoupon = null;
 //   }
 // }

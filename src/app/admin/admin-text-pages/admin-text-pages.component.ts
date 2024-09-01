@@ -77,6 +77,7 @@ export class AdminTextPagesComponent implements OnInit, OnDestroy {
     if(
       data?.title === 'FAQs' || data?.extra_data?.slug === 'faqs' || 
       data?.title === 'About Us Slider' || data?.extra_data?.slug === 'about_use_slider' ||
+      data?.unique_slug === 'slider_data_dissertation_topic_page' || data?.extra_data?.slug === 'dissertation_topic_slider' ||
       data?.unique_slug === 'dont_just_take_our_world_about_us_page' || data?.extra_data?.slug === 'accordion_about_us'
       // data?.unique_slug === 'all_dissertation_topics' || data?.extra_data?.slug === 'dissertation_topics'
     ){
