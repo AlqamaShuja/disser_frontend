@@ -89,7 +89,10 @@ export class AdminOrdersComponent implements OnInit {
     this.orderService.sendInvoice(order.id, flag).subscribe(
       (res) => {
         this.filteredOrders = this.filteredOrders.map(o => {
-          if(o.id === order.id) return { ...o, [flag]: (o[flag] || 0) + 1 };
+          if(o.id === order.id) {
+            const padSt = flag === 'invoice_sent_count' ? o.PaidStatus : o.last_invoice
+            return { ...o, [flag]: (o[flag] || 0) + 1, last_invoice: padSt, };
+          }
           return o;
         });
         console.log(res, " ====, this.filteredOrders, ", this.filteredOrders);

@@ -28,6 +28,180 @@
     </div>
   </div>
 
+  <div class="container">
+    <div class="card mb-3" *ngFor="let order of filteredOrders; let i = index">
+      <div class="card-header" [ngStyle]="{ borderLeft: order.writer_assigned_status === 1 ? '5px solid #b6b5e5' : '5px solid #999' }">
+        <div class="d-flex justify-content-between align-items-center">
+          <div>
+            <strong>Balance:</strong>
+            <form class="d-flex align-items-center" (submit)="updateBalance(order.id, order.Balance)">
+              <input type="text" class="form-control me-2" style="border: 1px solid rgb(156, 231, 199); height: 44px;" placeholder="Update Balance" name="balance" required [(ngModel)]="order.Balance" />
+              <button type="submit" class="btn btn-primary btn-submit rounded-1">Submit</button>
+            </form>
+          </div>
+          <div>
+            <strong>Order Date:</strong> {{ formatDatabaseTimestamp(order.created_at) }}
+          </div>
+        </div>
+      </div>
+      <div class="card-body d-flex flex-wrap">
+        <div class="d-flex flex-column flex-grow-1">
+          <div class="mb-3">
+            <strong>Status</strong>
+            <form class="d-flex align-items-center" (submit)="updateOrderStatus(order.id, order.Status)">
+              <select name="statuss" class="form-select me-2" [(ngModel)]="order.Status">
+                <option value="New">New</option>
+                <option value="Revision">Revision</option>
+                <option value="Completed">Completed</option>
+                <option value="Cancel">Cancelled</option>
+              </select>
+              <button type="submit" class="btn btn-primary btn-submit">Submit</button>
+            </form>
+          </div>
+          <div class="mb-3">
+            <strong>Paid Status</strong>
+            <form class="d-flex align-items-center" (submit)="updateOrderPaidStatusChanged(order.id, order.PaidStatus)">
+              <select class="form-select me-2" name="PaidStatus" [(ngModel)]="order.PaidStatus">
+                <option value="Paid">Paid</option>
+                <option value="Partial-Paid">Partial-Paid</option>
+                <option value="Unpaid">Unpaid</option>
+              </select>
+              <button type="submit" class="btn btn-primary btn-submit">Submit</button>
+            </form>
+          </div>
+          <div class="mb-3">
+            <strong>Payment Method</strong>
+            <form class="d-flex align-items-center" (submit)="updatePaymentMethod(order.id, order.PaymentMethod)">
+              <select class="form-select me-2" name="PaymentMethod" [(ngModel)]="order.PaymentMethod">
+                <option value="PayPal">PayPal</option>
+                <option value="Stripe">Stripe</option>
+                <option value="Bank Transfer">Bank Transfer</option>
+              </select>
+              <button type="submit" class="btn btn-primary btn-submit">Submit</button>
+            </form>
+          </div>
+        </div>
+        <div class="d-flex flex-column flex-grow-1">
+          <div class="mb-3 d-flex align-items-center gap-3">
+            <strong>Writers</strong>
+            <form (ngSubmit)="updateOrderStatusWriter(order.id, order.selectedWriterId)">
+              <select name="writerID" class="form-select" [(ngModel)]="order.selectedWriterId" required>
+                <option [value]="null" disabled>Select Writer</option>
+                <option *ngFor="let writer of writers" [value]="writer.id">{{ writer.name }}</option>
+              </select>
+              <button type="submit" class="ms-2 btn btn-submit">Assign to Writer</button>
+            </form>
+          </div>
+          <div class="mb-3 mt-2">
+            <strong>Order By:</strong> <a href="#" style="margin-left: 10px;">{{ order.Email }}</a>
+          </div>
+          <div class="mb-3">
+            <div class="d-flex gap-3 align-items-center mb-1 mt-2">
+              <strong>Grand Total:</strong>
+              <form class="d-flex align-items-center" (submit)="updateGrossAmount(order.id, order.GrossAmount)">
+                <input type="text" class="form-control me-2" style="padding-top: 0; padding-bottom: 0; height: 44px;" placeholder="Update Gross Amount" name="grossAmount" [(ngModel)]="order.GrossAmount" required />
+                <button type="submit" class="btn btn-primary btn-submit">Submit</button>
+              </form>
+            </div>
+            <strong class="mt-2">Amount Received:</strong> GBP {{ order.GrossAmount - order.Balance }}
+          </div>
+        </div>
+        <div style="height: 2px; width: 100%; background: #cccccc; margin: 15px 0px;"></div>
+        <div class="mt-2 w-100 d-flex gap-3 align-items-center justify-content-center flex-wrap">
+          <a href="javascript:;" class="btn custom-btn mb-2" (click)="showOrderDetails(order)">
+            Details
+          </a>
+          <a [attr.href]="'/admin/chat?email=' + order.Email" class="btn custom-btn mb-2">
+            Conversation
+          </a>
+          <a href="javascript:;" class="btn custom-btn mb-2" (click)="sendInvoice(order,'reminder_email_count', 'Reminder Email')">
+            <i class="fa fa-envelope"></i> Reminder Email 
+            ({{order.reminder_email_count}})
+          </a>
+          <a href="javascript:;" class="btn custom-btn mb-2" (click)="sendInvoice(order,'revised_email_count', 'Revised Email')">
+            <i class="fa fa-envelope"></i> Revised Email 
+            ({{order.revised_email_count}})
+          </a>
+          <!-- Flex container to align button and message -->
+          <div class="d-flex flex-column align-items-center" [ngStyle]="{'margin-top': order.invoice_sent_count > 0 ? '30px' : '0px'}">
+            <a href="javascript:;" class="btn custom-btn mb-2 sendInvoice" (click)="sendInvoice(order,'invoice_sent_count', 'Invoice Email')">
+              <i class="fa fa-envelope"></i> Send Invoice 
+              ({{order.invoice_sent_count}})
+            </a>
+            <!-- Conditional message display -->
+            <div *ngIf="order.invoice_sent_count > 0" class="text-success" style="font-size: 12px;">
+              {{ order.last_invoice }} Invoice Sent
+            </div>
+          </div>
+          <br />
+          <form class="d-flex align-items-center mb-2" (submit)="deleteOrder(pin, order.id)">
+            <input name="pin" type="password" class="form-control me-2" style="height: 44px;" placeholder="PIN" size="20" [(ngModel)]="pin" />
+            <button type="submit" class="btn btn-danger custom-btn">Delete Order</button>
+          </form>
+        </div>
+      </div>
+    </div>
+    <p *ngIf="filteredOrders.length === 0" class="d-flex justify-content-center mt-3">No Order Available</p>
+  </div>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- <div class="wrapper" style="background-color: #f8f9fad1; padding: 15px">
+  <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <div class="container-fluid">
+      <div href="#" class="navbar-brand">
+        <h3>{{ currentOrderSelection }}</h3>
+        <strong>Home</strong>/ MANAGE ORDERS
+      </div>
+    </div>
+  </nav>
+
+  <div class="container" style="margin-bottom: 5px; padding: 5px; width: 90%;">
+    <div class="status_btn_row d-flex flex-wrap justify-content-between">
+      <div class="flex-grow-1 p-1">
+        <button class="btn btn-primary w-100 rounded-1" (click)="changeOrderFilterStatus(1)">Current</button>
+      </div>
+      <div class="flex-grow-1 p-1">
+        <button class="btn btn-success w-100 rounded-1" (click)="changeOrderFilterStatus(2)">Completed</button>
+      </div>
+      <div class="flex-grow-1 p-1">
+        <button class="btn btn-secondary w-100 rounded-1" (click)="changeOrderFilterStatus(3)">Revision</button>
+      </div>
+      <div class="flex-grow-1 p-1">
+        <button class="btn btn-danger w-100 rounded-1" (click)="changeOrderFilterStatus(4)">Cancelled</button>
+      </div>
+      <div class="flex-grow-1 p-1">
+        <button class="btn btn-warning w-100 rounded-1" (click)="changeOrderFilterStatus(5)">Unpaid</button>
+      </div>
+    </div>
+  </div>
+
   
 <div class="container">
     <div class="card mb-3" *ngFor="let order of filteredOrders; let i = index">
@@ -139,4 +313,4 @@
       </div>
     </div>
     <p *ngIf="filteredOrders.length === 0" class="d-flex justify-content-center mt-3">No Order Available</p>
-</div>
+</div> -->

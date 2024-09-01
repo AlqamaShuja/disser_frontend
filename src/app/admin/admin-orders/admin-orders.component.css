@@ -148,4 +148,12 @@ button, input, optgroup, select, textarea{
 }
 
 
+/* Add this to your existing CSS file */
+.d-flex.flex-column.align-items-center {
+  align-items: flex-start; /* Align items to the start */
+  justify-content: center; /* Center items vertically */
+}
 
+.sendInvoice {
+  margin-bottom: 0; /* Remove margin-bottom to keep the button aligned with other buttons */
+}
