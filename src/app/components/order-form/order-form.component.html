@@ -1,17 +1,26 @@
-
 <form [formGroup]="orderForm" (ngSubmit)="onSubmit()">
   <div class="form-row">
-    <div class="form-group col-md-4">
+    <div class="form-group">
       <label for="typeOfService">Type of Service*</label>
-      <select class="form-control" formControlName="typeOfService" required (change)="calculateTotalPrice()">
+      <select class="form-control" formControlName="typeOfService" required (change)="onServiceChange($event)">
         <option value="" disabled selected>Select One</option>
-        <option *ngFor="let service of typeOfServices" [value]="service.title">{{ service.title }}</option>
+        <option *ngFor="let service of typeOfServices" [ngValue]="service">{{ service.title }}</option>
       </select>
       <div *ngIf="orderForm.get('typeOfService')?.invalid && orderForm.get('typeOfService')?.touched" class="text-danger">
         Type of Service is required.
       </div>
     </div>
-    <div class="form-group col-md-4">
+
+    <!-- Sub-Service Dropdown (Shown if sub-services exist for the selected service) -->
+    <div *ngIf="subServices.length > 0" class="form-group">
+      <label for="subService">Sub-Service</label>
+      <select class="form-control" formControlName="subService" (change)="calculateTotalPrice()">
+        <option value="" disabled selected>Select One</option>
+        <option *ngFor="let subService of subServices" [ngValue]="subService">{{ subService.title }}</option>
+      </select>
+    </div>
+
+    <div class="form-group">
       <label for="subjectArea">Subject Area*</label>
       <select class="form-control" formControlName="subjectArea" required (change)="calculateTotalPrice()">
         <option value="" disabled selected>Select One</option>
@@ -21,7 +30,8 @@
         Subject Area is required.
       </div>
     </div>
-    <div class="form-group col-md-4">
+
+    <div class="form-group">
       <label for="level">Level*</label>
       <select class="form-control" formControlName="level" required (change)="calculateTotalPrice()">
         <option value="" disabled selected>Select One</option>
@@ -31,17 +41,16 @@
         Level is required.
       </div>
     </div>
-  </div>
 
-  <div class="form-row">
-    <div class="form-group col-md-4">
+    <div class="form-group">
       <label for="requiredWordCount">Required Word Count*</label>
       <input type="number" class="form-control" formControlName="requiredWordCount" required (input)="calculateTotalPrice()" />
       <div *ngIf="orderForm.get('requiredWordCount')?.invalid && orderForm.get('requiredWordCount')?.touched" class="text-danger">
         Required Word Count is required.
       </div>
     </div>
-    <div class="form-group col-md-4">
+
+    <div class="form-group">
       <label for="desiredGrade">Desired Grade*</label>
       <select class="form-control" formControlName="desiredGrade" required (change)="calculateTotalPrice()">
         <option value="" disabled selected>Select One</option>
@@ -51,7 +60,8 @@
         Desired Grade is required.
       </div>
     </div>
-    <div class="form-group col-md-4">
+
+    <div class="form-group">
       <label for="deadline">Deadline*</label>
       <select class="form-control" formControlName="deadline" required (change)="calculateTotalPrice()">
         <option value="" disabled selected>Select One</option>
@@ -61,10 +71,8 @@
         Deadline is required.
       </div>
     </div>
-  </div>
 
-  <div class="form-row">
-    <div class="form-group col-md-4">
+    <div class="form-group">
       <label for="topic">Topic*</label>
       <select class="form-control" formControlName="topic" required (change)="calculateTotalPrice()">
         <option value="" disabled selected>Select One</option>
@@ -74,7 +82,8 @@
         Topic is required.
       </div>
     </div>
-    <div class="form-group col-md-4">
+
+    <div class="form-group">
       <label for="referencingStyle">Referencing Style*</label>
       <select class="form-control" formControlName="referencingStyle" required (change)="calculateTotalPrice()">
         <option value="" disabled selected>Select One</option>
@@ -84,69 +93,51 @@
         Referencing Style is required.
       </div>
     </div>
-    <div class="form-group col-md-4">
+
+    <div class="form-group">
       <label for="numberOfReferences">Number of References*</label>
       <input type="number" class="form-control" formControlName="numberOfReferences" required (input)="calculateTotalPrice()" />
       <div *ngIf="orderForm.get('numberOfReferences')?.invalid && orderForm.get('numberOfReferences')?.touched" class="text-danger">
         Number of References is required.
       </div>
     </div>
-  </div>
 
-  <div class="form-row">
-    <div class="form-group col-md-4">
+    <div class="form-group">
       <label for="email">Email*</label>
       <input type="email" class="form-control" formControlName="email" required />
       <div *ngIf="orderForm.get('email')?.invalid && orderForm.get('email')?.touched" class="text-danger">
         Valid email is required.
       </div>
     </div>
-    <div class="form-group col-md-4">
+
+    <div class="form-group">
       <label for="contactNumber">Contact Number*</label>
       <input type="tel" class="form-control" formControlName="contactNumber" required />
       <div *ngIf="orderForm.get('contactNumber')?.invalid && orderForm.get('contactNumber')?.touched" class="text-danger">
         Contact Number is required.
       </div>
     </div>
-    <div class="form-group col-md-4">
+
+    <div class="form-group">
       <label for="universityName">University Name*</label>
       <input type="text" class="form-control" formControlName="universityName" required />
       <div *ngIf="orderForm.get('universityName')?.invalid && orderForm.get('universityName')?.touched" class="text-danger">
         University Name is required.
       </div>
     </div>
-  </div>
 
-  <div class="form-row">
-    <!-- Coupon Dropdown -->
-    <!-- <div class="form-group col-md-4" *ngIf="coupons.length > 0">
+    <div class="form-group" *ngIf="coupons.length > 0">
       <label for="coupon">Apply Coupon</label>
-      <select class="form-control" formControlName="coupon" (change)="calculateTotalPrice()">
-        <option value="" disabled selected>Select a Coupon</option>
-        <option *ngFor="let coupon of coupons" [value]="coupon.id">{{ coupon.code }}</option>
-      </select>
-    </div> -->
-    <div class="form-group col-md-4" *ngIf="coupons.length > 0">
-      <label for="coupon">Apply Coupon</label>
-      <input
-        list="couponList"
-        class="form-control"
-        formControlName="coupon"
-        (input)="onCouponChange($event)"
-        placeholder="Select or Enter a Coupon"
-      />
+      <input list="couponList" class="form-control" formControlName="coupon" (input)="onCouponChange($event)" placeholder="Select or Enter a Coupon" />
       <datalist id="couponList">
         <option *ngFor="let coupon of coupons" [value]="coupon.code">{{ coupon.code }}</option>
       </datalist>
-      <!-- Validation message for the coupon -->
       <div *ngIf="customCouponMessage" [ngStyle]="{'color': customCouponMessage === 'Coupon does not exist.' ? 'red' : 'green'}" class="mt-1">
         {{ customCouponMessage }}
       </div>
     </div>
-    
 
-    <!-- Turnitin Report Available Radio Buttons -->
-    <div class="form-group col-md-4">
+    <div class="form-group">
       <label for="turnitin">Turnitin Report Available*</label>
       <div class="d-flex align-items-center gap-4 mt-1">
         <label class="radio-inline" style="display: flex; gap: 14px;">
@@ -161,36 +152,27 @@
       </div>
     </div>
   </div>
-
-
-  <div class="form-row">
-    <div class="form-group col-md-12">
-      <label for="detailInstructions">Detail Instructions*</label>
-      <textarea class="form-control" formControlName="detailInstructions" rows="10" required style="height: 200px; overflow: auto;"></textarea>
-      <div *ngIf="orderForm.get('detailInstructions')?.invalid && orderForm.get('detailInstructions')?.touched" class="text-danger">
-        Detail Instructions are required.
-      </div>
+  <div class="form-group" style="width: 100%;">
+    <label for="detailInstructions">Detail Instructions*</label>
+    <textarea class="form-control" formControlName="detailInstructions" rows="10" required style="height: 200px; overflow: auto;"></textarea>
+    <div *ngIf="orderForm.get('detailInstructions')?.invalid && orderForm.get('detailInstructions')?.touched" class="text-danger">
+      Detail Instructions are required.
     </div>
   </div>
 
-  
   <div class="total-price-box mb-3 d-flex flex-column align-items-center gap-2">
-    <!-- Total Price before discount -->
     <h4>Total Price: £{{ gbpTotalCost | number: '1.0-0' }}</h4>
-    
-    <!-- Discount message and percentage -->
-    <div *ngIf="selectedCoupon" class="text-success small">
-      Discount Applied: {{ selectedCoupon.discount }}%
-    </div>
-    
-    <!-- Total Price after discount -->
-    <h4 *ngIf="discountedTotalCost !== gbpTotalCost" class="mt-1">
-      Total After Discount: £{{ discountedTotalCost | number: '1.0-0' }}
-    </h4>
+    <div *ngIf="selectedCoupon" class="text-success small">Discount Applied: {{ selectedCoupon.discount }}%</div>
+    <h4 *ngIf="discountedTotalCost !== gbpTotalCost" class="mt-1">Total After Discount: £{{ discountedTotalCost | number: '1.0-0' }}</h4>
   </div>
-  <!-- <div class="total-price-box mb-3 d-flex justify-content-center gap-2">
-    <h4>Total Price: £{{ gbpTotalCost | number: '1.0-0' }}</h4>
-  </div> -->
+
+  <!-- Privacy Policy Agreement -->
+  <div class="mt-3">
+    <label>
+      <input type="checkbox" [(ngModel)]="isPrivacyPolicyAgreed" />
+      I agree to the
+      <a routerLink="/privacy-policy" target="_blank">Terms & Conditions*</a>
+    </label>
+  </div>
   <button type="submit" class="btn btn-primary btn-block bg-my-color d-flex justify-content-center">Submit Order</button>
 </form>
-

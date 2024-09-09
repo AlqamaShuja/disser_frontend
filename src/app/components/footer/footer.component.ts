@@ -11,6 +11,7 @@ import { ServicesService } from 'src/app/services/services.service';
 export class FooterComponent {
   @Input() services: any[] = [];
   topics: any[] = [];
+  allServices: any[] = [];
   constructor(
     private router: Router,
     private globalService: GlobalService,
@@ -29,11 +30,16 @@ export class FooterComponent {
     getServices(): void {
       this.serviceService.getAllTopic().subscribe((res: any) => {
         console.log(res, "===res:app.service");
-        
+
         this.topics = res;
       });
+
+      this.serviceService.getAllServices().subscribe((res: any) => {
+        console.log(res, "===res:app.service:main");
+        this.allServices = res;
+      });
     }
-  
+
   getSevenServices(start: number, end: number): any[] {
     var topicsBrakdown: any[] = [];
     if (start < this.topics.length) {

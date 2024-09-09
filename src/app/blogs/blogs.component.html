@@ -19,7 +19,7 @@
         </div>
       </div>
     </section>
-  
+
     <div class="row" style="padding: 40px; min-height: 70vh;">
       <!-- Blog List View -->
       <div *ngIf="!selectedBlog" class="col-lg-8 col-md-8">
@@ -31,7 +31,7 @@
               <img *ngIf="blog.images && blog.images.length" [src]="getImageUrl(blog.images[0])" alt="{{ blog.pageTitle }}"
                 style="width: 100%; height: auto; max-height: 350px;">
             </div>
-  
+
             <!-- Content Section -->
             <div class="blog-content" style="padding: 15px;">
               <h3 class="blog-title" style="font-size: 20px; margin-bottom: 10px; color: #0f0e68;">{{ blog.pageTilte }}</h3>
@@ -45,27 +45,27 @@
           </div>
         </div>
       </div>
-  
+
       <!-- Blog Details View -->
       <div *ngIf="selectedBlog" class="col-lg-8 col-md-8">
         <!-- Slider for multiple images -->
         <div *ngIf="selectedBlog.images && selectedBlog.images.length > 0" class="slider">
           <div *ngFor="let image of selectedBlog.images">
-            <img [src]="getImageUrl(image)" alt="{{ selectedBlog.pageTilte }}" style="width: 100%; height: auto; margin-bottom: 10px;">
+            <img [src]="getImageUrl(image)" alt="{{ selectedBlog.pageTilte }}" style="width: 100%; height: auto; max-height: 400px; margin-bottom: 10px; object-fit: cover;">
           </div>
         </div>
-        
+
         <!-- Blog Details Content -->
         <h2>{{ selectedBlog.pageTilte }}</h2>
         <div class="blog-info" style="display: flex; margin-bottom: 20px; color: #888;">
           <span style="margin-right: 10px;">📅 {{ selectedBlog.updatedAt | date: 'dd MMM yyyy' }}</span>
           <span style="background-color: beige; color: #000; border-radius: 8px; padding: 2px 8px; margin-right: 30px;">{{ selectedBlog.tagLine }}</span>
-          <span style="color: #0f0e68;">Admin</span>
+          <span style="color: #ffffff; padding: 0px 8px; background-color: #242A60; border-radius: 8px;">Admin</span>
         </div>
         <!-- <p>{{ selectedBlog.pageDescription }}</p> -->
          <div [innerHTML]="selectedBlog.pageDescription"></div>
       </div>
-  
+
       <!-- Sidebar Section -->
       <div class="col-lg-4 col-md-4">
         <!-- Categories are always visible -->
@@ -73,10 +73,10 @@
           <!-- Search Box -->
           <div class="search-box d-flex align-items-center gap-2" style="" *ngIf="!selectedBlog">
             <input type="text" [(ngModel)]="searchTerm" (input)="onSearchChange()" class="form-control"
-              placeholder="Search..." style="">
-            <button class="btn btn-primary" (click)="onSearchClick()">Search</button>
+              placeholder="Search..." style="max-width: 350px;">
+            <!-- <button class="btn btn-primary" (click)="onSearchClick()"></button> -->
           </div>
-  
+
           <!-- Categories -->
           <div class="categories" style="margin-bottom: 20px;">
             <h4 style="font-size: 22px; margin-bottom: 10px;">Categories</h4>
@@ -89,7 +89,7 @@
             </ul>
           </div>
         </div>
-  
+
         <!-- Latest Posts -->
         <div class="latest-posts">
           <h4 style="font-size: 22px; margin-bottom: 10px;">Latest Posts</h4>
@@ -106,7 +106,7 @@
       </div>
     </div>
 </div>
-  
+
 
 
 
@@ -159,7 +159,7 @@
         </div>
       </div>
     </section>
-  
+
     <div class="row" style="padding: 20px;">
       <div *ngIf="!selectedBlog" class="col-lg-8 col-md-8">
         <div class="blog-section" style="display: flex; flex-wrap: wrap; gap: 20px;">
@@ -169,7 +169,7 @@
               <img *ngIf="blog.images && blog.images.length" [src]="getImageUrl(blog.images[0])" alt="{{ blog.pageTitle }}"
                 style="width: 100%; height: auto;">
             </div>
-  
+
             <div class="blog-content" style="padding: 15px;">
               <h3 class="blog-title" style="font-size: 20px; margin-bottom: 10px; color: #0f0e68;">{{ blog.pageTitle }}</h3>
               <div class="blog-info"
@@ -182,14 +182,14 @@
           </div>
         </div>
       </div>
-  
+
       <div *ngIf="selectedBlog" class="col-lg-8 col-md-8">
         <div *ngIf="selectedBlog.images && selectedBlog.images.length > 0" class="slider">
           <div *ngFor="let image of selectedBlog.images">
             <img [src]="getImageUrl(image)" alt="{{ selectedBlog.pageTitle }}" style="width: 100%; height: auto; margin-bottom: 10px;">
           </div>
         </div>
-        
+
         <h2>{{ selectedBlog.pageTitle }}</h2>
         <div class="blog-info" style="display: flex; align-items: center; margin-bottom: 20px; color: #888;">
           <span style="margin-right: 10px;">📅 {{ selectedBlog.updatedAt | date: 'dd MMM yyyy' }}</span>
@@ -198,7 +198,7 @@
         </div>
         <p>{{ selectedBlog.pageDescription }}</p>
       </div>
-  
+
       <div class="col-lg-4 col-md-4">
         <div *ngIf="!selectedBlog">
           <div class="search-box" style="margin-bottom: 20px;">
@@ -206,7 +206,7 @@
               placeholder="Search..." style="margin-bottom: 10px;">
             <button class="btn btn-primary" (click)="onSearchClick()">Search</button>
           </div>
-  
+
           <div class="categories" style="margin-bottom: 20px;">
             <h4 style="font-size: 22px; margin-bottom: 10px;">Categories</h4>
             <ul class="list-unstyled">
@@ -218,7 +218,7 @@
             </ul>
           </div>
         </div>
-  
+
         <div class="latest-posts">
           <h4 style="font-size: 22px; margin-bottom: 10px;">Latest Posts</h4>
           <div *ngFor="let blog of latestBlogs" class="latest-post-item" (click)="showBlogDetails(blog)"

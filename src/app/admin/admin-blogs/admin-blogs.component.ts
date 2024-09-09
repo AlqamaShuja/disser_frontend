@@ -37,7 +37,7 @@ export class AdminBlogsComponent implements OnInit {
     this.addService = !this.addService;
 
     // Reset image preview when editing an existing blog
-    this.imagePreview = null; 
+    this.imagePreview = null;
   }
 
   onFileChange(event: any): void {
@@ -75,7 +75,7 @@ export class AdminBlogsComponent implements OnInit {
     if (this.selectedFile) {
       formData.append('images', this.selectedFile, this.selectedFile.name);
     } else if (this.selectedBlogs?.images) {
-      formData.append('existingImage', this.selectedBlogs.images[0]); // If editing and no new image selected
+      formData.append('images', this.selectedBlogs.images[0]); // If editing and no new image selected
     }
 
     if (action === 'add') {

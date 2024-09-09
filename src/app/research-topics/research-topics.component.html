@@ -1,5 +1,5 @@
 <!--  -->
-<div class="banner-about-us" 
+<div class="banner-about-us"
   [ngStyle]="{
       'background-image': 'url(' + slides.imageUrl + ')',
       'background-size': 'cover',
@@ -20,7 +20,7 @@
               <div class="banner-buttons mt-2 d-flex justify-content-center">
                   <button (click)="navigateToOrder()" class="banner-order-now">ORDER NOW</button>
               </div>
-          </div> 
+          </div>
       </div>
   </div>
 </div>
@@ -118,6 +118,13 @@
            <div [innerHTML]="topic.description"></div>
            <h3 *ngIf="topic.research_aim" class="mt-2">Research Aim</h3>
            <div [innerHTML]="topic.research_aim"></div>
+           <div class="d-flex justify-content-center mt-2">
+            <a [routerLink]="'/samples'" [queryParams]="{ service: topic.id }"
+             class="text-dark"
+             style="text-decoration: none; display: block; padding: 0;">
+              <span class="underline-on-hover" style="color: #242961;">See Samples</span>
+            </a>
+           </div>
           <!-- <p><strong>Price:</strong> {{ topic.price }}</p> -->
         </div>
       </div>

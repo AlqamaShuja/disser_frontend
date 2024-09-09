@@ -11,19 +11,19 @@
   <div class="container" style="margin-bottom: 5px; padding: 5px; width: 90%;">
     <div class="status_btn_row d-flex flex-wrap justify-content-between">
       <div class="flex-grow-1 p-1">
-        <button class="btn btn-primary w-100 rounded-1" (click)="changeOrderFilterStatus(1)">Current</button>
+        <button class="btn btn-primary w-100 rounded-1" (click)="changeOrderFilterStatus(1)">Current <span style="margin-left: 15px;">({{ orderCounts["New"] || 0 }})</span></button>
       </div>
       <div class="flex-grow-1 p-1">
-        <button class="btn btn-success w-100 rounded-1" (click)="changeOrderFilterStatus(2)">Completed</button>
+        <button class="btn btn-success w-100 rounded-1" (click)="changeOrderFilterStatus(2)">Completed <span style="margin-left: 15px;">({{ orderCounts["Completed"] || 0 }})</span></button>
       </div>
       <div class="flex-grow-1 p-1">
-        <button class="btn btn-secondary w-100 rounded-1" (click)="changeOrderFilterStatus(3)">Revision</button>
+        <button class="btn btn-secondary w-100 rounded-1" (click)="changeOrderFilterStatus(3)">Revision <span style="margin-left: 15px;">({{ orderCounts["Revision"] || 0 }})</span></button>
       </div>
       <div class="flex-grow-1 p-1">
-        <button class="btn btn-danger w-100 rounded-1" (click)="changeOrderFilterStatus(4)">Cancelled</button>
+        <button class="btn btn-danger w-100 rounded-1" (click)="changeOrderFilterStatus(4)">Cancelled <span style="margin-left: 15px;">({{ orderCounts["Cancelled"] || 0 }})</span></button>
       </div>
       <div class="flex-grow-1 p-1">
-        <button class="btn btn-warning w-100 rounded-1" (click)="changeOrderFilterStatus(5)">Unpaid</button>
+        <button class="btn btn-warning w-100 rounded-1" (click)="changeOrderFilterStatus(5)">Unpaid <span style="margin-left: 15px;">({{ orderCounts["Unpaid"] || 0 }})</span></button>
       </div>
     </div>
   </div>
@@ -115,17 +115,17 @@
             Conversation
           </a>
           <a href="javascript:;" class="btn custom-btn mb-2" (click)="sendInvoice(order,'reminder_email_count', 'Reminder Email')">
-            <i class="fa fa-envelope"></i> Reminder Email 
+            <i class="fa fa-envelope"></i> Reminder Email
             ({{order.reminder_email_count}})
           </a>
           <a href="javascript:;" class="btn custom-btn mb-2" (click)="sendInvoice(order,'revised_email_count', 'Revised Email')">
-            <i class="fa fa-envelope"></i> Revised Email 
+            <i class="fa fa-envelope"></i> Revised Email
             ({{order.revised_email_count}})
           </a>
           <!-- Flex container to align button and message -->
           <div class="d-flex flex-column align-items-center" [ngStyle]="{'margin-top': order.invoice_sent_count > 0 ? '30px' : '0px'}">
             <a href="javascript:;" class="btn custom-btn mb-2 sendInvoice" (click)="sendInvoice(order,'invoice_sent_count', 'Invoice Email')">
-              <i class="fa fa-envelope"></i> Send Invoice 
+              <i class="fa fa-envelope"></i> Send Invoice
               ({{order.invoice_sent_count}})
             </a>
             <!-- Conditional message display -->
@@ -202,7 +202,7 @@
     </div>
   </div>
 
-  
+
 <div class="container">
     <div class="card mb-3" *ngFor="let order of filteredOrders; let i = index">
       <div class="card-header" [ngStyle]="{ borderLeft: order.writer_assigned_status === 1 ? '5px solid #b6b5e5' : '5px solid #999' }">
@@ -290,16 +290,16 @@
             Conversation
           </a>
           <a href="javascript:;" class="btn custom-btn mb-2" (click)="sendInvoice(order,'reminder_email_count', 'Reminder Email')">
-            <i class="fa fa-envelope"></i> Reminder Email 
+            <i class="fa fa-envelope"></i> Reminder Email
             ({{order.reminder_email_count}})
           </a>
           <a href="javascript:;" class="btn custom-btn mb-2" (click)="sendInvoice(order,'revised_email_count', 'Revised Email')">
-            <i class="fa fa-envelope"></i> Revised Email 
+            <i class="fa fa-envelope"></i> Revised Email
             ({{order.revised_email_count}})
           </a>
           <div class="d-flex flex-column align-items-center">
             <a href="javascript:;" class="btn custom-btn mb-2" (click)="sendInvoice(order,'invoice_sent_count', 'Invoice Email')">
-              <i class="fa fa-envelope"></i> Send Invoice 
+              <i class="fa fa-envelope"></i> Send Invoice
               ({{order.invoice_sent_count}})
             </a>
           </div>
@@ -309,7 +309,7 @@
             <button type="submit" class="btn btn-danger custom-btn">Delete Order</button>
           </form>
         </div>
-        
+
       </div>
     </div>
     <p *ngIf="filteredOrders.length === 0" class="d-flex justify-content-center mt-3">No Order Available</p>

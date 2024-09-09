@@ -112,6 +112,9 @@ import { AdminSamplesFormComponent } from './admin/admin-samples-form/admin-samp
 import { AdminSamplesListComponent } from './admin/admin-samples-list/admin-samples-list.component';
 import { UserChatComponent } from './user-chat/user-chat.component';
 import { DissertationSampleAcademicLevelComponent } from './admin/dissertation-sample-academic-level/dissertation-sample-academic-level.component';
+import { GiveawaysComponent } from './giveaways/giveaways.component';
+import { SubServicesComponent } from './sub-services/sub-services.component';
+import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
 
 
 library.add(fas);
@@ -205,6 +208,9 @@ const modules = {};
     AdminSamplesListComponent,
     UserChatComponent,
     DissertationSampleAcademicLevelComponent,
+    GiveawaysComponent,
+    SubServicesComponent,
+    PrivacyPolicyComponent,
   ],
   imports: [
     BrowserAnimationsModule,

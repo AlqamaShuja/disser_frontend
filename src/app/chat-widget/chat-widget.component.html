@@ -9,6 +9,7 @@
             <img src="../../assets/images/chat_9866307.png" style="width: 70px;" alt="Support" class="chat-banner">
         </div>
         <p class="text-center" style="line-height: 1.2;">There are no agents available right now to take your call. Please leave a message and we will reply by email.</p>
+        <p class="text-center" style="line-height: 1.2;"><a style="color: rgb(0, 0, 179);font-weight: 700;" href="/login">Login</a> for Live Conversation</p>
         <form (ngSubmit)="sendMessage()">
           <div class="form-group">
             <input style="height: 50px;" type="text" [(ngModel)]="user.name" name="name" class="form-control" placeholder="Name" required>
@@ -27,4 +28,3 @@
       <i class="fa fa-comments"></i>
     </div>
   </div>
-  

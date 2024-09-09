@@ -1,0 +1,98 @@
+<div class="container my-4">
+  <div class="row">
+      <div class="col-12">
+          <div class="d-flex justify-content-between mb-3">
+              <button class="btn" style="background-color: rgb(37, 67, 54); color: #FFF; border-radius: 8px; padding: 8px 16px;" (click)="openSubServiceModal(subServiceTemplate)">
+                  Insert New Sub-Service
+              </button>
+          </div>
+          <div class="table-responsive">
+              <table *ngIf="subServices.length > 0" class="table table-striped table-hover align-middle">
+                  <thead class="" style="background-color: rgb(37, 67, 54); color: #FFF;">
+                      <tr>
+                          <th scope="col">#</th>
+                          <th scope="col">Sub-Service Title</th>
+                          <th scope="col">Service</th>
+                          <th scope="col">Price</th>
+                          <th scope="col">Options</th>
+                      </tr>
+                  </thead>
+                  <tbody>
+                      <tr *ngFor="let subService of subServices; let i = index">
+                          <td>{{ i + 1 }}</td>
+                          <td>{{ subService.title }}</td>
+                          <td>{{ subService.service?.title }}</td>
+                          <td>{{ subService.price | currency:'GBP' }}</td>
+                          <td>
+                              <button class="btn btn-outline-secondary btn-sm me-2" (click)="openSubServiceModal(subServiceTemplate, subService)">
+                                  <i class="fa fa-pencil-square"></i>
+                              </button>
+                              <button class="btn btn-outline-danger btn-sm" (click)="openDeleteModal(deleteTemplate, subService)">
+                                  <i class="fa fa-trash"></i>
+                              </button>
+                          </td>
+                      </tr>
+                  </tbody>
+              </table>
+              <div *ngIf="subServices.length === 0" class="d-flex justify-content-center my-4">No Sub-Services Created</div>
+          </div>
+      </div>
+  </div>
+</div>
+
+<ng-template #subServiceTemplate>
+  <div class="custom-modal-wrapper">
+      <div class="custom-modal-backdrop"></div>
+      <div class="custom-modal">
+          <div class="custom-modal-header">
+              <h5>{{ isEditMode ? 'Edit Sub-Service' : 'Insert New Sub-Service' }}</h5>
+              <button type="button" class="custom-close-btn" aria-label="Close" (click)="subServiceModalRef?.hide()">×</button>
+          </div>
+          <div class="custom-modal-body">
+              <form>
+                  <div class="custom-form-group">
+                      <label for="subServiceTitle" class="custom-form-label">Sub-Service Title</label>
+                      <input type="text" class="custom-form-control w-100" id="subServiceTitle" [(ngModel)]="selectedSubService.title" name="subServiceTitle" required placeholder="Enter Sub-Service Title">
+                  </div>
+                  <div class="custom-form-group">
+                      <label for="service" class="custom-form-label">Service</label>
+                      <select class="custom-form-control w-100" [(ngModel)]="selectedSubService.service_id" name="service" required>
+                          <option *ngFor="let service of services" [value]="service.id">{{ service.title }}</option>
+                      </select>
+                  </div>
+                  <div class="custom-form-group">
+                      <label for="price" class="custom-form-label">Price (£)</label>
+                      <input type="number" class="custom-form-control w-100" id="price" [(ngModel)]="selectedSubService.price" name="price" required placeholder="Enter Price">
+                  </div>
+                  <div class="custom-form-group">
+                      <label for="description" class="custom-form-label">Description</label>
+                      <angular-editor [config]="editorConfig" [placeholder]="'Enter Description (Sample)'" [(ngModel)]="selectedSubService.description" name="description"></angular-editor>
+                  </div>
+              </form>
+          </div>
+          <div class="custom-modal-footer d-flex gap-2">
+              <button type="button" class="custom-btn custom-btn-secondary" (click)="subServiceModalRef?.hide()">Close</button>
+              <button type="button" class="custom-btn custom-btn-primary" (click)="saveSubService()">Save Sub-Service</button>
+          </div>
+      </div>
+  </div>
+</ng-template>
+
+<!-- Delete Modal -->
+<ng-template #deleteTemplate>
+  <div class="custom-modal-wrapper">
+      <div class="custom-modal">
+          <div class="custom-modal-header">
+              <h5>Confirm Deletion</h5>
+              <button type="button" class="custom-close-btn" aria-label="Close" (click)="deleteModalRef?.hide()">×</button>
+          </div>
+          <div class="custom-modal-body">
+              <p>Are you sure you want to delete the sub-service <strong>{{ selectedSubService?.title }}</strong>?</p>
+          </div>
+          <div class="custom-modal-footer d-flex gap-2">
+              <button type="button" class="custom-btn custom-btn-secondary" (click)="deleteModalRef?.hide()">Cancel</button>
+              <button type="button" class="custom-btn custom-btn-danger" (click)="confirmDelete()">Delete</button>
+          </div>
+      </div>
+  </div>
+</ng-template>

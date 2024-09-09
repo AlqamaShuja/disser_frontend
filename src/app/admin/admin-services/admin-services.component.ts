@@ -1,6 +1,8 @@
 import { Component, OnInit, TemplateRef } from '@angular/core';
+import { AngularEditorConfig } from '@kolkov/angular-editor';
 import { BsModalRef, BsModalService } from 'ngx-bootstrap/modal';
 import { ServicesService } from 'src/app/services/services.service';
+import { BASEURL } from 'src/globals';
 
 @Component({
   selector: 'app-admin-services-page',
@@ -8,12 +10,33 @@ import { ServicesService } from 'src/app/services/services.service';
   styleUrls: ['./admin-services.component.css']
 })
 export class AdminServicesComponent implements OnInit {
-  services: any = []; 
+  services: any = [];
 
   selectedService: any = {};
   isEditMode: boolean = false;
   serviceModalRef?: BsModalRef;
   deleteModalRef?: BsModalRef;
+
+  editorConfig: AngularEditorConfig = {
+    editable: true,
+    spellcheck: true,
+    minHeight: '5rem',
+    maxHeight: '15rem',
+    width: 'auto',
+    minWidth: '0',
+    translate: 'yes',
+    enableToolbar: true,
+    showToolbar: true,
+    placeholder: 'Enter text here...',
+    uploadUrl: `${BASEURL}upload/fileuploadAdmin`,
+    customClasses: [],
+    fonts: [
+      { class: 'arial', name: 'Arial' },
+      { class: 'times-new-roman', name: 'Times New Roman' },
+      { class: 'calibri', name: 'Calibri' },
+      { class: 'comic-sans-ms', name: 'Comic Sans MS' },
+    ]
+  };
 
   constructor(private modalService: BsModalService, private servicesService: ServicesService) { }
 
@@ -25,12 +48,13 @@ export class AdminServicesComponent implements OnInit {
    }
 
   openServiceModal(template: TemplateRef<any>, service: any = null): void {
+    console.log(template, " === template, ", service);
     if (service) {
       this.isEditMode = true;
       this.selectedService = { ...service }; // Clone the service object
     } else {
       this.isEditMode = false;
-      this.selectedService = { title: '', price: '' };
+      this.selectedService = { title: '', price: '', description: '', };
     }
     this.serviceModalRef = this.modalService.show(template);
   }

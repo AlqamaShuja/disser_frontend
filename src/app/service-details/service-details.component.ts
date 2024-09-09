@@ -19,7 +19,7 @@ export class ServiceDetailsComponent implements OnInit {
     private serviceService: ServicesService,
     private route: ActivatedRoute
   ) {
-   
+
   }
 
   ngOnInit(): void {

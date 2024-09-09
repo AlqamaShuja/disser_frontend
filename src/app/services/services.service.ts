@@ -1,8 +1,8 @@
-import { HttpClient, HttpEventType, HttpHeaders } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpEventType, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Observable, throwError } from 'rxjs';
 import { BASEURL } from 'src/globals';
-import { map, filter } from 'rxjs/operators';
+import { map, filter, catchError } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -31,19 +31,19 @@ export class ServicesService {
     return this.http.delete<any>(`${this.apiUrl}services/${id}`);
   }
 
-  // Pages data 
+  // Pages data
   getAllSingleServices(slug:any):Observable<any>{
     return this.http.get<any>(`${this.apiUrl}pages/${slug}`);
   }
-  
+
   create(payload:any):Observable<any>{
     return this.http.post<any>(`${this.apiUrl}pages`,payload);
   }
-  
+
   update(payload:any,id:number):Observable<any>{
     return this.http.put<any>(`${this.apiUrl}pages/${id}`,payload);
   }
-  
+
   delete(id:number):Observable<any>{
     return this.http.delete<any>(`${this.apiUrl}pages/${id}`);
   }
@@ -52,7 +52,7 @@ export class ServicesService {
   getAllBlogs():Observable<any>{
     return this.http.get<any>(`${this.apiUrl}blogs`);
   }
-  
+
   getSitemap():Observable<any>{
     return this.http.get<any>(`${this.apiUrl}blogs/sitemap`);
   }
@@ -71,15 +71,15 @@ export class ServicesService {
   getAllTopic():Observable<any>{
     return this.http.get<any>(`${this.apiUrl}topic`);
   }
-  
+
   updateTopic(id: number, payload: any):Observable<any>{
     return this.http.put<any>(`${this.apiUrl}topic/${id}`, payload);
   }
-  
+
   createTopic(payload: any):Observable<any>{
     return this.http.post<any>(`${this.apiUrl}topic`, payload);
   }
-  
+
   deleteTopic(id: number):Observable<any>{
     return this.http.delete<any>(`${this.apiUrl}topic/${id}`);
   }
@@ -97,7 +97,7 @@ export class ServicesService {
     return this.http.get<any>(`${this.apiUrl}section`);
   }
 
-  // Get by id 
+  // Get by id
   getSectionDataById(id: number):Observable<any>{
     return this.http.get<any>(`${this.apiUrl}section/${id}`);
   }
@@ -106,22 +106,22 @@ export class ServicesService {
   getAllFAQs():Observable<any>{
     return this.http.get<any>(`${this.apiUrl}faqs`);
   }
-  
+
   updateMultiple(data: any):Observable<any>{
     return this.http.put<any>(`${this.apiUrl}faqs/update/multiple`, data);
   }
-  
-  
+
+
   // Update Sliders
   updateSlides(id: number, data: any):Observable<any>{
     return this.http.put<any>(`${this.apiUrl}section/slider/${id}`, data);
   }
-  
+
   // Update Accordion
   updateAboutUsAccordion(id: number, data: any):Observable<any>{
     return this.http.put<any>(`${this.apiUrl}section/accordion/${id}`, data);
   }
-  
+
   // COupons
   getAllCoupons():Observable<any>{
     return this.http.get<any>(`${this.apiUrl}coupon`);
@@ -135,8 +135,8 @@ export class ServicesService {
   updateCoupon(id: number, data: any):Observable<any>{
     return this.http.put<any>(`${this.apiUrl}coupon/${id}`, data);
   }
-  
-  
+
+
   // Writer
   getAllWriters():Observable<any>{
     return this.http.get<any>(`${this.apiUrl}writer`);
@@ -190,7 +190,7 @@ export class ServicesService {
   getAllInquiries(): Observable<any> {
     return this.http.get<any>(`${this.apiUrl}inquiries`);
   }
-  
+
   createInquiries(data: any): Observable<any> {
     return this.http.post<any>(`${this.apiUrl}inquiries`, data);
   }
@@ -198,7 +198,7 @@ export class ServicesService {
   deleteInquiry(id: number): Observable<any> {
     return this.http.delete<any>(`${this.apiUrl}inquiries/${id}`);
   }
-  
+
   updateInquiryStatus(id: number, data: any): Observable<any> {
     return this.http.patch<any>(`${this.apiUrl}inquiries/${id}`, data);
   }
@@ -259,17 +259,17 @@ export class ServicesService {
   getUserMessages(id: string, otherId: string): Observable<any> {
     return this.http.get(`${this.apiUrl}message/${id}/${otherId}`);
   }
-  
+
   updateMsgStatus(id: string, otherId: string): Observable<any> {
     return this.http.patch(`${this.apiUrl}message/${id}/${otherId}`, {});
   }
 
-  // get new Msg Counts 
+  // get new Msg Counts
   getNewMessagesCounts(id: string): Observable<any> {
     return this.http.get(`${this.apiUrl}message/${id}`);
   }
 
-  // Upload file 
+  // Upload file
   uploadFile(file: File) {
     const formData = new FormData();
     formData.append('file', file);
@@ -281,5 +281,46 @@ export class ServicesService {
       filter(event => event.type === HttpEventType.Response),
       map((event: any) => event.body)
     );
+  }
+
+
+  // Sub Services
+  // Get all sub-services
+  getAllSubServices(): Observable<any> {
+    return this.http.get(`${this.apiUrl}subServices`)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  // Add a new sub-service
+  addSubService(subServiceData: any): Observable<any> {
+    return this.http.post(`${this.apiUrl}subServices`, subServiceData)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  // Update an existing sub-service
+  updateSubService(subServiceData: any): Observable<any> {
+    const url = `${this.apiUrl}subServices/${subServiceData.id}`;
+    return this.http.put(url, subServiceData)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  // Delete a sub-service
+  deleteSubService(subServiceId: number): Observable<any> {
+    return this.http.delete(`${this.apiUrl}subServices/${subServiceId}`)
+      .pipe(
+        catchError(this.handleError)
+      );
+  }
+
+  // Error handling
+  private handleError(error: HttpErrorResponse) {
+    console.error('Server Error:', error);
+    return throwError(error.message || 'Server error');
   }
 }

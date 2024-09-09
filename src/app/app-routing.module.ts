@@ -51,6 +51,7 @@ import { AdminInquiriesComponent } from './admin/admin-inquiries/admin-inquiries
 import { AdminOrderPriceByDateComponent } from './admin/admin-order-price-by-date/admin-order-price-by-date.component';
 import { AdminOrderFormManageComponent } from './admin-order-form-manage/admin-order-form-manage.component';
 import { DissertationSampleAcademicLevelComponent } from './admin/dissertation-sample-academic-level/dissertation-sample-academic-level.component';
+import { PrivacyPolicyComponent } from './privacy-policy/privacy-policy.component';
 
 
 const routes: Routes = [
@@ -258,6 +259,10 @@ const routes: Routes = [
   {
     path: 'our-samples/:level/:type/:cat_point',
     component: OurSampleLevelTypeDetailsComponent,
+  },
+  {
+    path: 'privacy-policy',
+    component: PrivacyPolicyComponent,
   },
   {
     path:'not-found',

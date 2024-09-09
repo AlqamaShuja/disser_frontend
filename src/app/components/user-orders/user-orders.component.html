@@ -24,11 +24,11 @@
             <td>{{formatDatabaseTimestamp(order.created_at)}}</td>
             <td>{{order.PaidStatus}}</td>
             <td>
-                <span class="odr-detail">
-                    <i class="fa fa-info-circle" style="cursor: pointer;" aria-hidden="true" (click)="showOrderDetails(order)"></i>
+                <span class="odr-detail" (click)="showOrderDetails(order)">
+                    <i class="fa fa-info-circle" style="cursor: pointer;" aria-hidden="true"></i>
                     Order Details
                 </span>
-               
+
                 <!-- <i style="display: block;" class="fa fa-commenting" aria-hidden="true">
                 <span class="ms-1">Conversation</span>
 

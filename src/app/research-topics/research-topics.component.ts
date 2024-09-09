@@ -19,18 +19,18 @@ export class ResearchTopicsComponent implements OnInit {
   errorMessage: string = '';
   expandedIndex: number | null = null;
   slides: any = {};
-  
+
   academicLevels: AcademicLevelData[] = []
   // [
-  //   { title: 'Undergraduate', price: 5, }, 
-  //   { title: 'Graduate', price: 10, }, 
-  //   { title: 'PhD', price: 15, }, 
+  //   { title: 'Undergraduate', price: 5, },
+  //   { title: 'Graduate', price: 10, },
+  //   { title: 'PhD', price: 15, },
   // ];
 
   serviceType: AcademicLevelData[] = []
   // [
-  //   { title: 'Dissertation Full', price: 15, }, 
-  //   { title: 'Dissertation Proposal', price: 30, }, 
+  //   { title: 'Dissertation Full', price: 15, },
+  //   { title: 'Dissertation Proposal', price: 30, },
   // ];
 
   totalPrice: number = 0;
@@ -63,6 +63,7 @@ export class ResearchTopicsComponent implements OnInit {
 
   sortTopics(letter: string) {
     this.sortedTopics = this.topics.filter(topic => topic.title?.toLowerCase()?.startsWith(letter?.toLowerCase()));
+    this.expandedIndex = null;
   }
 
   clearTopic() {
@@ -89,7 +90,7 @@ export class ResearchTopicsComponent implements OnInit {
 
     const selectedTopic = this.sortedTopics.find(topic => topic.title === selectedService);
     const priceOfTopic = selectedTopic ? selectedTopic.price : 0;
-    
+
     const selectedservice = this.serviceType.find(service => service.title === selectedServiceType);
     const priceOfService = selectedservice ? selectedservice.price : 0;
 
@@ -99,14 +100,14 @@ export class ResearchTopicsComponent implements OnInit {
     // get diff in days
     const diffInDays = getDiffInDays(selectedDeadline);
 
-    const matchingOrderPrice = this.orderPriceByDate.find(priceRange => 
+    const matchingOrderPrice = this.orderPriceByDate.find(priceRange =>
       diffInDays >= priceRange.min_day && diffInDays <= priceRange.max_day
     );
 
-    
+
     let priceByDeadline = matchingOrderPrice ? Number(matchingOrderPrice.price): 0
     console.log({ diffInDays, matchingOrderPrice, priceOfTopic, priceForAcadLevel, priceOfService, });
-    
+
     this.totalPrice = Math.floor(Number(priceOfTopic) + Number(priceForAcadLevel) + Number(priceOfService) + priceByDeadline);
   }
 

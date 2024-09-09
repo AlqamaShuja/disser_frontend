@@ -18,6 +18,7 @@ export class AdminOrdersComponent implements OnInit {
   pin: string = '';
   isSample: boolean = false;
   currentOrderSelection: string = 'Current';
+  orderCounts: any = {}
 
   constructor(
     private orderService: OrderService,
@@ -53,6 +54,7 @@ export class AdminOrdersComponent implements OnInit {
       }
       this.initializeSelectedWriters(); // Initialize selected writer for each order
       this.applyFilterBasedOnSelection();
+      this.countOfOrderBasedOnStatus()
     });
   }
 
@@ -85,7 +87,7 @@ export class AdminOrdersComponent implements OnInit {
 
   sendInvoice(order: any, flag: any, msg: string): void {
     console.log(this.filteredOrders, " ====, this.filteredOrders, ", this.orders);
-    
+
     this.orderService.sendInvoice(order.id, flag).subscribe(
       (res) => {
         this.filteredOrders = this.filteredOrders.map(o => {
@@ -197,6 +199,21 @@ export class AdminOrdersComponent implements OnInit {
         this.currentOrderSelection = 'Current';
         break;
     }
+  }
+
+  countOfOrderBasedOnStatus(): void {
+    const data: any = {}
+    this.orders.forEach(order => {
+      if(data[order.Status]){
+        data[order.Status] = data[order.Status]++
+      }
+      else {
+        data[order.Status] = 1;
+      }
+    })
+    console.log(data, "order:statuswise");
+    this.orderCounts = data;
+
   }
 
   changeOrderFilterStatus(status: number): void {

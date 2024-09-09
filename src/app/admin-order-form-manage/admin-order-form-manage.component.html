@@ -2,11 +2,14 @@
     <div class="row">
       <div class="col-12">
         <h2 class="text-center mb-4">Manage Order Form Data</h2>
-  
+
         <!-- Tab Navigation -->
         <ul class="nav nav-tabs">
           <li class="nav-item">
-            <a class="nav-link" [ngClass]="{ active: selectedTab === 'service-tab' }" (click)="selectTab('service-tab')">Service Types</a>
+            <a class="nav-link" [ngClass]="{ active: selectedTab === 'service-tab' }" (click)="selectTab('service-tab')">Service</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" [ngClass]="{ active: selectedTab === 'sub-service-tab' }" (click)="selectTab('sub-service-tab')">Sub Service</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" [ngClass]="{ active: selectedTab === 'academic-level' }" (click)="selectTab('academic-level')">Academic Level</a>
@@ -24,17 +27,20 @@
             <a class="nav-link" [ngClass]="{ active: selectedTab === 'refrence-style' }" (click)="selectTab('refrence-style')">Refrence Style</a>
           </li>
         </ul>
-  
+
         <!-- Tab Content -->
         <div class="tab-content mt-4">
             <div *ngIf="selectedTab === 'service-tab'">
                 <app-admin-services-page></app-admin-services-page>
             </div>
-          
+            <div *ngIf="selectedTab === 'sub-service-tab'">
+                <app-sub-services></app-sub-services>
+            </div>
+
             <div *ngIf="selectedTab === 'academic-level'">
                 <app-academic-level></app-academic-level>
             </div>
-            
+
             <div *ngIf="selectedTab === 'subject-area'">
                 <app-admin-subject-area></app-admin-subject-area>
             </div>
@@ -46,7 +52,7 @@
             <div *ngIf="selectedTab === 'desire-grade'">
               <app-admin-desired-grade-page></app-admin-desired-grade-page>
             </div>
-            
+
             <div *ngIf="selectedTab === 'refrence-style'">
               <app-admin-refrence-style></app-admin-refrence-style>
             </div>
@@ -54,4 +60,3 @@
       </div>
     </div>
 </div>
-  

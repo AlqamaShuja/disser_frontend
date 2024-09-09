@@ -61,6 +61,10 @@
                         <label for="price" class="custom-form-label">Price (£)</label>
                         <input type="number" class="custom-form-control w-100" id="price" [(ngModel)]="selectedService.price" name="price" required placeholder="Enter Price">
                     </div>
+                    <div class="custom-form-group">
+                        <label for="price" class="custom-form-label">Description (Sample)</label>
+                        <angular-editor [config]="editorConfig" [placeholder]="'Enter Description (Sample)'" [(ngModel)]="selectedService.description" name="description"></angular-editor>
+                    </div>
                 </form>
             </div>
             <div class="custom-modal-footer d-flex gap-2">
