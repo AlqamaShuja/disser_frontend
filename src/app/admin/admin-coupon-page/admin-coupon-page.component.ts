@@ -36,11 +36,25 @@ export class AdminCouponPageComponent implements OnInit {
   }
 
   saveCoupon(): void {
+    
     if (this.isEditMode) {
       // Find the coupon and update it
-      const index = this.coupons.findIndex((c: any) => c.code === this.selectedCoupon.code);
+      const index = this.coupons.findIndex((c: any) => c.id === this.selectedCoupon.id);
+      console.log(this.selectedCoupon, "this.selectedCoupon, ", index);
       if (index !== -1) {
         this.coupons[index] = { ...this.selectedCoupon };
+        this.serviceService.updateCoupon(this.selectedCoupon?.id, this.selectedCoupon).subscribe(
+          response => {
+            console.log('Content saved successfully:', response);
+            alert("Successfully Added");
+            this.coupons.push({ ...this.selectedCoupon });
+            this.couponModalRef?.hide();
+          },
+          error => {
+            console.error('Error saving content:', error);
+            alert("Error Updating Content: " + error.message);
+          }
+        );
       }
     } else {
       // Add a new coupon

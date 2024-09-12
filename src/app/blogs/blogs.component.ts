@@ -29,7 +29,7 @@ export class BlogsComponent implements OnInit {
 
   ngOnInit(): void {
     this.serviceService.getAllBlogs().subscribe((res: any) => {
-      console.log(res.data, '======res:bloooggggggssssssssss');
+      console.log(res.data, '======res:blogs');
       
       this.blogs = res.data;
       this.filteredBlogs = this.blogs; // Initialize with all blogs
@@ -39,11 +39,21 @@ export class BlogsComponent implements OnInit {
         const slug = params['slug'];
         if (slug) {
           this.selectedBlog = this.blogs.find(blog => blog.pageSlug === slug);
+          if (this.selectedBlog) {
+            this.selectedBlog.pageDescription = this.decodeHtml(this.selectedBlog.pageDescription); // Decode the HTML
+          }
         } else {
           this.selectedBlog = null;
         }
       });
     });
+  }
+
+  // Decode HTML entities
+  decodeHtml(html: string): string {
+    const textArea = document.createElement('textarea');
+    textArea.innerHTML = html;
+    return textArea.value;
   }
 
   // Extract unique categories from blogs (tagLine)
@@ -146,124 +156,3 @@ export class BlogsComponent implements OnInit {
     });
   }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// import { Component, OnInit } from '@angular/core';
-// import { ActivatedRoute, Router } from '@angular/router';
-// import { ServicesService } from '../services/services.service';
-// import { GlobalService } from '../services/global.service';
-// import { BASEURL } from 'src/globals';
-
-// @Component({
-//   selector: 'app-blogs',
-//   templateUrl: './blogs.component.html',
-//   styleUrls: ['./blogs.component.css']
-// })
-// export class BlogsComponent implements OnInit {
-//   blogs: any[] = [];
-//   filteredBlogs: any[] = [];
-//   categories: string[] = [];
-//   latestBlogs: any[] = [];
-//   searchTerm: string = '';
-//   selectedCategory: string = '';
-//   selectedBlog: any = null;
-
-//   constructor(
-//     private serviceService: ServicesService,
-//     private router: Router,
-//     private route: ActivatedRoute,
-//     private globalService: GlobalService
-//   ) {}
-
-//   ngOnInit(): void {
-//     this.serviceService.getAllBlogs().subscribe((res: any) => {
-//       console.log(res.data, '======res:bloooggggggssssssssss');
-      
-//       this.blogs = res.data;
-//       this.filteredBlogs = this.blogs; // Initialize with all blogs
-//       this.extractCategories();
-//       this.getLatestBlogs();
-//       this.route.queryParams.subscribe(params => {
-//         const slug = params['slug'];
-//         if (slug) {
-//           this.selectedBlog = this.blogs.find(blog => blog.pageSlug === slug);
-//         } else {
-//           this.selectedBlog = null;
-//         }
-//       });
-//     });
-//   }
-
-//   // Extract unique categories from blogs (tagLine)
-//   extractCategories(): void {
-//     const tags = this.blogs.map(blog => blog.tagLine).filter(tag => tag);
-//     this.categories = Array.from(new Set(tags));
-//   }
-
-//   // Filter blogs by category
-//   filterByCategory(category: string): void {
-//     this.selectedCategory = category;
-//     this.selectedBlog = null; // Clear selected blog
-//     this.filteredBlogs = this.blogs.filter(blog => blog.tagLine === category);
-//     this.router.navigate([], { queryParams: { slug: null }, queryParamsHandling: 'merge' });
-//   }
-
-//   // Handle search input changes
-//   onSearchChange(): void {
-//     this.filteredBlogs = this.blogs.filter(blog => blog.pageTitle.toLowerCase().includes(this.searchTerm.toLowerCase()));
-//   }
-
-//   // Trigger search action
-//   onSearchClick(): void {
-//     this.onSearchChange();
-//   }
-
-//   // Show blog details and update query params
-//   showBlogDetails(blog: any): void {
-//     this.selectedBlog = blog;
-//     this.router.navigate([], { queryParams: { slug: blog.pageSlug }, queryParamsHandling: 'merge' });
-//   }
-
-//   // Clear selection and remove query params
-//   clearSelection(): void {
-//     this.selectedBlog = null;
-//     this.selectedCategory = '';
-//     this.filteredBlogs = this.blogs;
-//     this.router.navigate([], { queryParams: { slug: null }, queryParamsHandling: 'merge' });
-//   }
-
-//   // Get latest blogs (slice to show top 3)
-//   getLatestBlogs(): void {
-//     this.latestBlogs = this.blogs.slice(0, 3);
-//   }
-
-//   // Construct the image URL
-//   getImageUrl(imageName: string): string {
-//     return `${BASEURL}files/${imageName}`;
-//   }
-// }

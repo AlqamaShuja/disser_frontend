@@ -1,7 +1,31 @@
+
+<section class="pt-2" style="margin: 0 auto; background-color: whitesmoke;"></section>
+  <section class="page-header">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-8 col-xl-8">
+          <div class="title-block">
+            <h1>Service</h1>
+            <ul class="header-bradcrumb justify-content-center">
+              <li><a href="/">Home</a></li>
+              <li class="active" *ngIf="!showDescription" aria-current="page">Service</li>
+              <li *ngIf="showDescription" class="active" aria-current="page">
+                <a href="/services">Service</a>
+              </li>
+              <li *ngIf="showDescription" class="active" aria-current="page">
+                {{ selectedService.title }}
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
 <div class="main-container">
   <div *ngIf="!showDescription" class="header-container">
-    <h1>{{ services.length }} Service{{ services.length > 1 ? 's' : '' }} Available</h1>
-    <hr />
+    <!-- <h1>{{ services.length }} Service{{ services.length > 1 ? 's' : '' }} Available</h1>
+    <hr /> -->
     <p class="px-4 text-center">
       If you're at the start of your research journey and are trying to figure out which <strong>Service</strong> you want to focus on, you've come to the right place.
     </p>
@@ -19,8 +43,8 @@
 
       <!-- Sub Services -->
       <div *ngIf="service.subServices.length > 0" class="sub-services-container">
+        <h6>Sub Services: </h6>
         <div class="d-flex gap-2 align-items-center">
-          <h6>Sub Services: </h6>
           <ul class="sub-service-list d-flex gap-4 align-items-center mt-2">
             <li *ngFor="let subService of service.subServices" class="sub-service-item" (click)="goToSubService(subService.id, $event)">
               <div class="sub-service-title">{{ subService.title }}</div>
@@ -28,6 +52,54 @@
           </ul>
         </div>
       </div>
+      <div *ngIf="service.subServices.length === 0">
+        No Sub Service Available
+      </div>
+    </div>
+  </div>
+
+  <div *ngIf="!showDescription" class="how-does-it-work-container" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; background-color: white; border-radius: 8px; padding: 30px; box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1); max-width: 100%; margin: 30px 0; background-color: #242961;">
+    <!-- Left Section: Heading and Description -->
+    <div class="how-does-it-work-content" style="flex: 1; padding: 20px; max-width: 50%; color: #242961;">
+      <h2 style="font-size: 2.5em; margin-bottom: 20px; color: white;">How Does It Work</h2>
+      <p style="font-size: 1.2em; line-height: 1.6; color: white;">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla convallis pulvinar vestibulum. Learn how our process works to give you the best experience possible.
+      </p>
+    </div>
+    
+    <!-- Right Section: Image -->
+    <div class="how-does-it-work-image" style="flex: 1; max-width: 50%; text-align: center; display: block;">
+      <img src="../../assets/images/order-form.jpg" alt="How it works" style="max-width: 100%; border-radius: 8px; min-width: 500px; min-height: 400px;" />
+    </div>
+  </div>
+  
+  <div *ngIf="!showDescription" class="how-does-it-work-container" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; background-color: white; border-radius: 8px; padding: 30px; box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1); max-width: 100%; margin: 30px 0;">
+    <!-- Right Section: Image -->
+    <div class="how-does-it-work-image" style="flex: 1; max-width: 50%; text-align: center; display: block;">
+      <img src="../../assets/images/oursamples-business.jpg" alt="How it works" style="max-width: 100%; border-radius: 8px; min-width: 500px; min-height: 400px;" />
+    </div>
+
+    <!-- Left Section: Heading and Description -->
+    <div class="how-does-it-work-content" style="flex: 1; padding: 20px; max-width: 50%; color: #242961;">
+      <h2 style="font-size: 2.5em; margin-bottom: 20px;">Why Do We Stand Out</h2>
+      <p style="font-size: 1.2em; line-height: 1.6;">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla convallis pulvinar vestibulum. Learn how our process works to give you the best experience possible.
+      </p>
+    </div>
+  </div>
+
+  <div *ngIf="!showDescription" class="how-does-it-work-container" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; background-color: white; border-radius: 8px; padding: 30px; box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1); max-width: 100%; margin: 30px 0; background-color: #242961;">
+    <!-- Left Section: Heading and Description -->
+    <div class="how-does-it-work-content" style="flex: 1; padding: 20px; max-width: 50%; color: #242961;">
+      <h2 style="font-size: 2.5em; margin-bottom: 20px; color: white;">Steps We Take In Crafting A Compelling Dissertation</h2>
+      <p style="font-size: 1.2em; line-height: 1.6; color: white;">
+        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla convallis pulvinar vestibulum. Learn how our process works to give you the best experience possible.
+      </p>
+    </div>
+    
+    <!-- Right Section: Image -->
+    <div class="how-does-it-work-image" style="flex: 1; max-width: 50%; text-align: center; display: block;">
+      <img src="../../assets/images/make-us-best-2.jpg" alt="How it works" style="max-width: 100%; border-radius: 8px; min-width: 500px; min-height: 400px;" />
     </div>
   </div>
 
@@ -43,7 +115,7 @@
   </div>
 </div>
 
-<div class="">
+<div *ngIf="!showDescription" class="">
   <app-home-testimonial-section></app-home-testimonial-section>
   <app-faq-section></app-faq-section>
 </div>

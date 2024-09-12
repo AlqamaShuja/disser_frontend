@@ -51,15 +51,15 @@
         </div> -->
         </div>
         <section class="sample-details"  >
-          <div style="background-color: #242961; display: flex; justify-content: center; padding: 15px 2px; margin-bottom: 5px;">
-            <h1 style="color: #FFF;">Custom-Written, AI & Plagiarism-Free with Passing <span class="text-danger">"Guaranteed"</span></h1>
+          <div style="background-color: #242961; border-radius: 7px; display: flex; justify-content: center; padding: 15px 2px; margin-bottom: 5px;">
+            <h1 style="color: #FFF; text-align: center;">Custom-Written, AI & Plagiarism-Free with Passing <span class="text-danger">"Guaranteed"</span></h1>
           </div>
-          <div style="display: flex; justify-content: center; align-items: center; flex-direction: column;" >
-            <a
+          <div style="display: flex; justify-content: center; flex-direction: column;" >
+            <a style="display: flex; justify-content: center; gap: 10px;"
               href="javascript:;"
               class="btn btn-quote"
               (click)="handleShowModal()"
-              >Order this Assignment Now:
+              >Order this Assignment Now: 
               <span class="price" style="text-decoration: line-through;">£{{ selectedSample?.Price }}</span></a
             >
             <p  class="parchi">100% Pass and No Plagiarism Guaranteed</p>
@@ -77,10 +77,11 @@
         </div>
         
 
-        <div style="text-align: left; display: flex; justify-content: center; align-items: center; flex-direction: column;">
-          <a href="javascript:;" class="btn btn-quote" (click)="handleShowModal()" style="left: 0; padding-left: 10px;">
-              Get Fresh Answer Now: &nbsp;&nbsp;&nbsp;
-              <span class="price" style="text-decoration: line-through;">£{{ selectedSample?.Price }}</span>
+        <div style="text-align: left; display: flex; justify-content: center; flex-direction: column;">
+          <a href="javascript:;" class="btn btn-quote" (click)="handleShowModal()" 
+            style="display: flex; justify-content: center; gap: 10px;">
+            Get Fresh Answer Now: 
+            <span class="price" style="text-decoration: line-through;">£{{ selectedSample?.Price }}</span>
           </a>
           <p class="parchi" style="text-align: left;">100% Pass and No Plagiarism Guaranteed</p>
       </div>

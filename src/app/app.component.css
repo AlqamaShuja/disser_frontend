@@ -36,3 +36,23 @@
     100% {-webkit-transform: scale(1, 1);opacity:0;}
  }
  
+
+.whatsapp-btn-main {
+   position: fixed; 
+   bottom: 25px; 
+   left: 25px; 
+   z-index: 9999; 
+   border-radius: 100%; 
+   background-color: green; 
+   padding: 15px;
+   transition: all 0.2s ease-in-out;
+}
+
+.whatsapp-btn-main svg {
+   transition: all 0.2s ease-in-out;
+}
+
+.whatsapp-btn-main:hover svg {
+   height: 22px;
+   width: 22px;
+}

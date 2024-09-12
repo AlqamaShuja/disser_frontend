@@ -56,13 +56,14 @@
         </div>
 
         <!-- Blog Details Content -->
-        <h2>{{ selectedBlog.pageTilte }}</h2>
-        <div class="blog-info" style="display: flex; margin-bottom: 20px; color: #888;">
+        <h2 style="margin-top: 10px; text-align: center; font-size: 40px;">{{ selectedBlog.pageTilte }}</h2>
+        <div class="blog-info" style="display: flex; justify-content: start; gap: 40px; margin-bottom: 20px; color: #888;">
           <span style="margin-right: 10px;">📅 {{ selectedBlog.updatedAt | date: 'dd MMM yyyy' }}</span>
           <span style="background-color: beige; color: #000; border-radius: 8px; padding: 2px 8px; margin-right: 30px;">{{ selectedBlog.tagLine }}</span>
           <span style="color: #ffffff; padding: 0px 8px; background-color: #242A60; border-radius: 8px;">Admin</span>
         </div>
         <!-- <p>{{ selectedBlog.pageDescription }}</p> -->
+         <!-- <div [innerHTML]="selectedBlog.pageDescription"></div> -->
          <div [innerHTML]="selectedBlog.pageDescription"></div>
       </div>
 

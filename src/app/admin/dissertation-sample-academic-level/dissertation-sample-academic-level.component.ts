@@ -20,7 +20,7 @@ export class DissertationSampleAcademicLevelComponent implements OnInit {
   topics: any[] = [];
   catPoints: string[] = ['2:1', '2:2'];
   types: string[] = ['dissertations'];
-  levels: string[] = ['undergraduate', 'masters', 'phd'];
+  levels: string[] = ['undergraduate', 'masters', 'phd', 'm-phill', 'post-graduate'];
   isEditMode: boolean = false; // New variable to track if we're editing or adding
 
   editorConfig: AngularEditorConfig = {

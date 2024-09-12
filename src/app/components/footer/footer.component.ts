@@ -66,7 +66,7 @@ export class FooterComponent {
     // blogs
     { title: 'Blogs', url: '/blogs' },
     // categories
-    { title: 'Categories', url: '/categories' },
+    // { title: 'Categories', url: '/categories' },
     // contactus
     { title: 'Contact Us', url: '/contactus' },
     // samples
@@ -84,7 +84,7 @@ export class FooterComponent {
   // Constance Street, Royal Docks, London, E16 2DQ, United Kingdom`,
   contactInfo = {
     address:'Smart Edu Ltd, Internation House, 12 Constance Street, London E16 2DQ',
-    email: 'support@dissertation.help',
+    email: 'support@dissertationwriting.help',
     phone: '+447867530372',
   };
 

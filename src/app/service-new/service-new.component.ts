@@ -11,6 +11,7 @@ import { ServiceData } from './service.model'; // Adjust the import path as nece
 export class ServiceNewComponent implements OnInit {
   services: ServiceData[] = [];
   selectedDescription: string = ''; // To display the description dynamically
+  selectedService: any = {}; // To display the description dynamically
   showDescription: boolean = false; // To control whether to show the description or not
 
   constructor(
@@ -26,6 +27,8 @@ export class ServiceNewComponent implements OnInit {
     this.serviceService.getAllServices().subscribe((res) => {
       this.services = res;
 
+      console.log(this.services,"=servicesservices");
+      
       // Now check if there are query parameters on initialization
       this.route.queryParams.subscribe((params) => {
         const serviceId = params['serviceId'];
@@ -69,6 +72,7 @@ export class ServiceNewComponent implements OnInit {
   // Show service description based on serviceId
   showServiceDescription(serviceId: string): void {
     const service = this.services.find((s) => s.id === parseInt(serviceId, 10)); // Convert string to number for comparison
+    this.selectedService = service;
     if (service) {
       this.selectedDescription = service.description; // Assign full description
       this.addImageAfterH1(); // Dynamically add images after each <h1>
@@ -82,6 +86,7 @@ export class ServiceNewComponent implements OnInit {
         (s) => s.id === parseInt(subServiceId, 10) // Convert string to number for comparison
       );
       if (subService) {
+        this.selectedService = subService
         this.selectedDescription = subService.description; // Assign full description
         this.addImageAfterH1(); // Dynamically add images after each <h1>
         break;
