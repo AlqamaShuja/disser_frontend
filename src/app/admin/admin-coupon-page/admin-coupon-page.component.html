@@ -94,6 +94,17 @@
                 <option value="EUR">EUR</option>
               </select>
             </div>
+            <div class="custom-form-group">
+              <label class="custom-form-label d-flex gap-3">Show To All</label>
+              <div class="d-flex">
+                <label class="custom-form-check-label me-3">
+                  <input type="radio" class="custom-form-check-input" [(ngModel)]="selectedCoupon.isShowToAll" name="isShowToAll" [value]="1"> Yes
+                </label>
+                <label class="custom-form-check-label">
+                  <input type="radio" class="custom-form-check-input" [(ngModel)]="selectedCoupon.isShowToAll" name="isShowToAll" [value]="0"> No
+                </label>
+              </div>
+            </div>
           </form>
         </div>
         <div class="custom-modal-footer d-flex gap-2">
