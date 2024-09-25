@@ -98,21 +98,42 @@
                 <input type="radio" class="custom-form-check-input" [(ngModel)]="selectedCoupon.isShowToAll" name="isShowToAll" [value]="false"> No
               </label>
             </div>
-          </div>
-
-          <div class="custom-form-group">
-            <label for="currency" class="custom-form-label">Currency</label>
-            <select class="custom-form-select w-100" style="height: 56px; border: 1px solid rgb(218, 217, 217); border-radius: 6px; padding: 010px;" [(ngModel)]="selectedCoupon.currency" name="currency" id="currency">
-              <option value="GBP">GBP</option>
-              <option value="USD">USD</option>
-              <option value="EUR">EUR</option>
-            </select>
-          </div>
-        </form>
-      </div>
-      <div class="custom-modal-footer d-flex gap-2">
-        <button type="button" class="custom-btn custom-btn-secondary" (click)="couponModalRef?.hide()">Close</button>
-        <button type="button" class="custom-btn custom-btn-primary" (click)="saveCoupon()">Save Coupon</button>
+            <div class="custom-form-group">
+              <label class="custom-form-label d-flex gap-3">Duration</label>
+              <div class="d-flex">
+                <label class="custom-form-check-label me-3">
+                  <input type="radio" class="custom-form-check-input" [(ngModel)]="selectedCoupon.duration" name="duration" value="One time Use"> One time Use
+                </label>
+                <label class="custom-form-check-label">
+                  <input type="radio" class="custom-form-check-input" [(ngModel)]="selectedCoupon.duration" name="duration" value="Lifetime"> Lifetime
+                </label>
+              </div>
+            </div>
+            <div class="custom-form-group">
+              <label for="currency" class="custom-form-label">Currency</label>
+              <select class="custom-form-select w-100" style="height: 56px; border: 1px solid rgb(218, 217, 217); border-radius: 6px; padding: 010px;" [(ngModel)]="selectedCoupon.currency" name="currency" id="currency">
+                <option value="GBP">GBP</option>
+                <option value="USD">USD</option>
+                <option value="EUR">EUR</option>
+              </select>
+            </div>
+            <div class="custom-form-group">
+              <label class="custom-form-label d-flex gap-3">Show To All</label>
+              <div class="d-flex">
+                <label class="custom-form-check-label me-3">
+                  <input type="radio" class="custom-form-check-input" [(ngModel)]="selectedCoupon.isShowToAll" name="isShowToAll" [value]="1"> Yes
+                </label>
+                <label class="custom-form-check-label">
+                  <input type="radio" class="custom-form-check-input" [(ngModel)]="selectedCoupon.isShowToAll" name="isShowToAll" [value]="0"> No
+                </label>
+              </div>
+            </div>
+          </form>
+        </div>
+        <div class="custom-modal-footer d-flex gap-2">
+          <button type="button" class="custom-btn custom-btn-secondary" (click)="couponModalRef?.hide()">Close</button>
+          <button type="button" class="custom-btn custom-btn-primary" (click)="saveCoupon()">Save Coupon</button>
+        </div>
       </div>
     </div>
   </div>
