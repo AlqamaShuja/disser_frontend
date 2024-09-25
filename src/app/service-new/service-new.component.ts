@@ -13,6 +13,7 @@ export class ServiceNewComponent implements OnInit {
   selectedDescription: string = ''; // To display the description dynamically
   selectedService: any = {}; // To display the description dynamically
   showDescription: boolean = false; // To control whether to show the description or not
+  imageHeight: string = '400px'
 
   constructor(
     private serviceService: ServicesService,

@@ -58,53 +58,68 @@
 
 
 <ng-template #couponTemplate>
-    <div class="custom-modal-wrapper">
-      <div class="custom-modal-backdrop"></div>
-      <div class="custom-modal">
-        <div class="custom-modal-header">
-          <h5>{{ isEditMode ? 'Edit Coupon' : 'Insert New Coupon Code' }}</h5>
-          <button type="button" class="custom-close-btn" aria-label="Close" (click)="couponModalRef?.hide()">×</button>
-        </div>
-        <div class="custom-modal-body">
-          <form>
-            <div class="custom-form-group">
-              <label for="couponCode" class="custom-form-label">Coupon Code</label>
-              <input type="text" class="custom-form-control w-100" id="couponCode" [(ngModel)]="selectedCoupon.code" name="couponCode" required placeholder="Enter Coupon Code">
+  <div class="custom-modal-wrapper">
+    <div class="custom-modal-backdrop"></div>
+    <div class="custom-modal">
+      <div class="custom-modal-header">
+        <h5>{{ isEditMode ? 'Edit Coupon' : 'Insert New Coupon Code' }}</h5>
+        <button type="button" class="custom-close-btn" aria-label="Close" (click)="couponModalRef?.hide()">×</button>
+      </div>
+      <div class="custom-modal-body">
+        <form>
+          <div class="custom-form-group">
+            <label for="couponCode" class="custom-form-label">Coupon Code</label>
+            <input type="text" class="custom-form-control w-100" id="couponCode" [(ngModel)]="selectedCoupon.code" name="couponCode" required placeholder="Enter Coupon Code">
+          </div>
+          <div class="custom-form-group">
+            <label for="price" class="custom-form-label">Discount (%)</label>
+            <input type="number" class="custom-form-control w-100" id="price" [(ngModel)]="selectedCoupon.discount" name="price" required placeholder="Enter Discount Percent">
+          </div>
+          <div class="custom-form-group">
+            <label class="custom-form-label d-flex gap-3">Duration</label>
+            <div class="d-flex">
+              <label class="custom-form-check-label me-3">
+                <input type="radio" class="custom-form-check-input" [(ngModel)]="selectedCoupon.duration" name="duration" value="One time Use"> One time Use
+              </label>
+              <label class="custom-form-check-label">
+                <input type="radio" class="custom-form-check-input" [(ngModel)]="selectedCoupon.duration" name="duration" value="Lifetime"> Lifetime
+              </label>
             </div>
-            <div class="custom-form-group">
-              <label for="price" class="custom-form-label">Discount (%)</label>
-              <input type="number" class="custom-form-control w-100" id="price" [(ngModel)]="selectedCoupon.discount" name="price" required placeholder="Enter Discount Percent">
+          </div>
+
+          <!-- New radio button for Is Show to All -->
+          <div class="custom-form-group">
+            <label class="custom-form-label d-flex gap-3">Is show to all</label>
+            <div class="d-flex">
+              <label class="custom-form-check-label me-3">
+                <input type="radio" class="custom-form-check-input" [(ngModel)]="selectedCoupon.isShowToAll" name="isShowToAll" [value]="true"> Yes
+              </label>
+              <label class="custom-form-check-label">
+                <input type="radio" class="custom-form-check-input" [(ngModel)]="selectedCoupon.isShowToAll" name="isShowToAll" [value]="false"> No
+              </label>
             </div>
-            <div class="custom-form-group">
-              <label class="custom-form-label d-flex gap-3">Duration</label>
-              <div class="d-flex">
-                <label class="custom-form-check-label me-3">
-                  <input type="radio" class="custom-form-check-input" [(ngModel)]="selectedCoupon.duration" name="duration" value="One time Use"> One time Use
-                </label>
-                <label class="custom-form-check-label">
-                  <input type="radio" class="custom-form-check-input" [(ngModel)]="selectedCoupon.duration" name="duration" value="Lifetime"> Lifetime
-                </label>
-              </div>
-            </div>
-            <div class="custom-form-group">
-              <label for="currency" class="custom-form-label">Currency</label>
-              <select class="custom-form-select w-100" style="height: 56px; border: 1px solid rgb(218, 217, 217); border-radius: 6px; padding: 010px;" [(ngModel)]="selectedCoupon.currency" name="currency" id="currency">
-                <option value="GBP">GBP</option>
-                <option value="USD">USD</option>
-                <option value="EUR">EUR</option>
-              </select>
-            </div>
-          </form>
-        </div>
-        <div class="custom-modal-footer d-flex gap-2">
-          <button type="button" class="custom-btn custom-btn-secondary" (click)="couponModalRef?.hide()">Close</button>
-          <button type="button" class="custom-btn custom-btn-primary" (click)="saveCoupon()">Save Coupon</button>
-        </div>
+          </div>
+
+          <div class="custom-form-group">
+            <label for="currency" class="custom-form-label">Currency</label>
+            <select class="custom-form-select w-100" style="height: 56px; border: 1px solid rgb(218, 217, 217); border-radius: 6px; padding: 010px;" [(ngModel)]="selectedCoupon.currency" name="currency" id="currency">
+              <option value="GBP">GBP</option>
+              <option value="USD">USD</option>
+              <option value="EUR">EUR</option>
+            </select>
+          </div>
+        </form>
+      </div>
+      <div class="custom-modal-footer d-flex gap-2">
+        <button type="button" class="custom-btn custom-btn-secondary" (click)="couponModalRef?.hide()">Close</button>
+        <button type="button" class="custom-btn custom-btn-primary" (click)="saveCoupon()">Save Coupon</button>
       </div>
     </div>
+  </div>
 </ng-template>
-  
-  <!-- Delete Modal -->
+
+
+<!-- Delete Modal -->
 <ng-template #deleteTemplate>
     <div class="custom-modal-wrapper">
       <div class="custom-modal">

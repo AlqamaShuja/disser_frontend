@@ -10,4 +10,4 @@ export const getDiffInDays = (date: string) => {
     const timeDifference = deadlineDate.getTime() - today.getTime();
     const dayDifference = Math.ceil(timeDifference / (1000 * 3600 * 24));
     return dayDifference;
-}
+} 

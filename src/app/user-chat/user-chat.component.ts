@@ -99,6 +99,8 @@ export class UserChatComponent implements OnInit {
 
   sendMessage() {
     // const admin = JSON.parse(localStorage.getItem("admin") || "{}");
+    console.log(this.newMessage, "===njnjnjnjnj");
+    
     if (this.newMessage.trim() !== '') {
       const message: Message = {
         id: 0,

@@ -8,8 +8,8 @@ import { BACKEND_BASEURL } from 'src/globals';
 })
 export class SocketService {
   private socket!: Socket; // Use definite assignment assertion
-  // private readonly SOCKET_URL: string = BACKEND_BASEURL; // Replace with your server URL
-  private readonly SOCKET_URL: string = 'http://localhost:3000'; // Replace with your server URL
+  private readonly SOCKET_URL: string = BACKEND_BASEURL; // Replace with your server URL
+  // private readonly SOCKET_URL: string = 'http://localhost:3000'; // Replace with your server URL
   private isConnected: boolean = false; // To track connection status
   private connectionStatus$ = new BehaviorSubject<boolean>(false); // Observable to emit connection status changes
 

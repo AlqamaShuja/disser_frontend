@@ -87,15 +87,43 @@ export class AdminSamplesFormComponent implements OnInit {
       DiscountPrice: this.samplesForm.value?.discount,
       researchId: this.samplesForm.value?.researchId // Include researchId in payload
     };
+    // if (flag === 'add') {
+    //   this.samplesService.create(payload).subscribe(() => {
+    //     this.close.emit();
+    //     alert("Successfully Added")
+    //   });
+    // } else {
+    //   this.samplesService.update(payload, this.selectedSample.Id).subscribe(() => {
+    //     this.close.emit();
+    //     alert("Successfully Updated")
+    //   });
+    // }
     if (flag === 'add') {
-      this.samplesService.create(payload).subscribe(() => {
-        this.close.emit();
-      });
+      this.samplesService.create(payload).subscribe(
+        () => {
+          this.close.emit();
+          alert("Successfully Added");
+        },
+        (error) => {
+          console.log(error.error.message, "=caskncsajcnjnsjsna");
+          // Handle the error here, e.g., display an error message
+          alert(`Error: ${error.error.message}`);
+        }
+      );
     } else {
-      this.samplesService.update(payload, this.selectedSample.Id).subscribe(() => {
-        this.close.emit();
-      });
+      this.samplesService.update(payload, this.selectedSample.Id).subscribe(
+        () => {
+          this.close.emit();
+          alert("Successfully Updated");
+        },
+        (error) => {
+          console.log(error, "=caskncsajcnjnsjsna");
+          // Handle the error here, e.g., display an error message
+          alert(`Error: ${error.error.message}`);
+        }
+      );
     }
+    
   }
 
   closeForm(): void {
