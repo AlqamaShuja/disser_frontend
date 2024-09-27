@@ -129,6 +129,7 @@ export class OrderFormComponent implements OnInit {
       } else {
         this.selectedCoupon = null;
         this.customCouponMessage = 'Coupon does not exist.';
+        this.calculateTotalPrice();
       }
     } else {
       this.selectedCoupon = null;
