@@ -1,5 +1,5 @@
 <!--  -->
-<div class="banner-about-us"
+<!-- <div class="banner-about-us"
   [ngStyle]="{
       'background-image': 'url(' + slides.imageUrl + ')',
       'background-size': 'cover',
@@ -11,7 +11,6 @@
       'width': '100%'
   }"
 >
-  <!-- <div class="banner-overlay"></div> -->
   <div class="banner-content-container d-flex justify-content-center w-90">
       <div class="banner-content d-flex justify-content-center">
           <div class="banner-title">
@@ -23,7 +22,22 @@
           </div>
       </div>
   </div>
-</div>
+</div> -->
+<section class="page-header" style="background-image: url(../../assets/images/banner/banner-3.jpg);">
+  <div class="container">
+    <div class="row justify-content-center">
+      <div class="col-lg-8 col-xl-8">
+        <div class="title-block">
+          <h1 class="banner-heading">{{ slides.heading }}</h1>
+          <div class="banner-text" [innerHTML]="slides.text"></div>
+          <div class="banner-buttons mt-2 d-flex justify-content-center">
+            <button (click)="navigateToOrder()" class="banner-order-now">ORDER NOW</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 <!--  -->
 <div class="main-container">
   <div class="left-section">

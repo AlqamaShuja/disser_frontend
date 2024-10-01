@@ -23,19 +23,13 @@
 </style>
 <!-- <app-slider [aboutUs]="true"></app-slider> -->
 
-<div class="banner-about-us" 
-  [ngStyle]="{
-      'background-image': 'url(' + slides.imageUrl + ')',
-      'background-size': 'cover',
-      'background-position': 'center',
-      'height': '450px',
-      'display': 'flex',
-      'justify-content': 'center',
-      'align-items': 'center',
-      'width': '100%'
-  }"
+<!-- 'background-image': 'url(' + slides.imageUrl + ')', -->
+<!-- <div class="banner-about-us" 
+[ngStyle]="{
+    'height': '450px',
+}"
 >
-  <!-- <div class="banner-overlay"></div> -->
+  <div class="banner-overlay"></div>
   <div class="banner-content-container d-flex justify-content-center w-90">
       <div class="banner-content d-flex justify-content-center">
           <div class="banner-title">
@@ -47,7 +41,23 @@
           </div> 
       </div>
   </div>
-</div>
+</div> -->
+<!-- <section class="pt-2" style="margin: 0 auto; background-color: whitesmoke;"></section> -->
+  <section class="page-header">
+    <div class="container">
+      <div class="row justify-content-center">
+        <div class="col-lg-8 col-xl-8">
+          <div class="title-block">
+            <h1 class="banner-heading">{{ slides.heading }}</h1>
+            <div class="banner-text" [innerHTML]="slides.text"></div>
+            <div class="banner-buttons mt-2 d-flex justify-content-center">
+              <button (click)="navigateToOrder()" class="banner-order-now">ORDER NOW</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
 
 

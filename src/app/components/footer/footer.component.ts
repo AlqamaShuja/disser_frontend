@@ -74,9 +74,10 @@ export class FooterComponent {
     // services
     { title: 'Our Services', url: '/services' },
     // sitemap
-    { title: 'Sitemap', url: '/' },
+    { title: 'Sitemap', url: '/sitemap' },
     { title: 'Samples', url: '/samples' },
     { title: 'Privacy Policy', url: '/privacy-policy' },
+    // { title: 'Sitemap', url: '/' },
     // Add more links as needed
   ];
 

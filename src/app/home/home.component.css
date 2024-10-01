@@ -219,6 +219,7 @@
   justify-content: space-between;
   align-items: center;
   padding: 40px;
+  /* background-image: url('../../assets/images/calc-laptop.jpeg'); */
   background-image: url('../../assets/images/calc-laptop.jpg');
   background-size: cover;
   background-position: center;
